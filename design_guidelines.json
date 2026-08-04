@@ -1,153 +1,110 @@
 {
-  "theme": "dark",
+  "theme_strategy": "Dark Theme Default. High contrast, luxury corporate aesthetic suitable for international asset holdings.",
+  "colors": {
+    "background": "#050505",
+    "surface": "#121212",
+    "surface_glass": "rgba(18, 18, 18, 0.6)",
+    "primary": "#C5A059",
+    "secondary": "#991B1B",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#A3A3A3",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "overlay_heavy": "rgba(5, 5, 5, 0.8)",
+    "overlay_medium": "rgba(5, 5, 5, 0.5)"
+  },
   "typography": {
     "headings": {
-      "family": "Outfit, sans-serif",
-      "import_url": "https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap",
-      "tailwind_class": "font-heading",
-      "rules": "H1 must be fluid (text-5xl md:text-7xl). Tracking-tighter is MANDATORY for all headings above text-2xl. Use uppercase with wide tracking for overlines."
+      "font_family": "Playfair Display",
+      "style": "Elegant, serif, luxury",
+      "weight": "600",
+      "tracking": "tracking-tight"
     },
     "body": {
-      "family": "Inter, sans-serif",
-      "import_url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap",
-      "tailwind_class": "font-sans",
-      "rules": "Text should be muted (#A3A3A3) by default, #EDEDED for emphasis. Leading-relaxed."
+      "font_family": "Inter",
+      "style": "Clean, readable, modern sans-serif",
+      "weight": "400",
+      "tracking": "tracking-normal"
+    },
+    "labels": {
+      "font_family": "Inter",
+      "style": "Uppercase, wide tracking for premium feel",
+      "weight": "500",
+      "tracking": "tracking-[0.2em]"
     }
-  },
-  "colors": {
-    "background": {
-      "base": "#050505",
-      "surface": "#0A0A0A",
-      "surface_elevated": "#111111"
-    },
-    "text": {
-      "primary": "#F5F5F5",
-      "secondary": "#A3A3A3",
-      "muted": "#737373"
-    },
-    "accent": {
-      "crimson": "#991B1B",
-      "crimson_glow": "rgba(153, 27, 27, 0.5)",
-      "gold": "#C5A059",
-      "gold_glow": "rgba(197, 160, 89, 0.3)"
-    },
-    "border": {
-      "default": "rgba(255, 255, 255, 0.08)",
-      "hover": "rgba(255, 255, 255, 0.15)"
-    }
-  },
-  "visual_enhancers": {
-    "gradients": "NO flat gradients. Use radial gradients for subtle background glows behind charts or heroes. Example: radial-gradient(circle at 50% 50%, rgba(153,27,27,0.1) 0%, transparent 50%).",
-    "borders": "1px solid borders heavily used to create 'Bento' and architectural strictness. Border collapse strategies for features.",
-    "shadows": "Minimal outer shadows. Use inner glow/shadows on cards to create depth. shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]."
-  },
-  "custom_components": {
-    "kinetic_hero": "Use framer-motion. Wrapper has overflow-hidden. Text items animate `y` from '100%' to '0%' with a slow ease-out (e.g., [0.22, 1, 0.36, 1]) duration 1.2s. Staggered reveal.",
-    "floating_nav": "Fixed top-0, z-50, framer-motion useScroll to hide at very top and reveal when scrolling down. Glassmorphism: backdrop-blur-xl, bg-[#050505]/80, border-b border-white/10.",
-    "custom_svg_charts": {
-      "donut": "SVG <circle> with stroke-dasharray. Use framer-motion to animate stroke-dashoffset from total length to the target percentage. Use crimson, gold, and white/20 for segments.",
-      "bar_chart": "SVG <rect> animating 'height' and 'y' properties. Muted bars for minority stakes, crimson/gold for controlling stakes.",
-      "line_chart": "SVG <path>. Set stroke-dasharray and animate stroke-dashoffset from pathLength to 0 for a drawing effect.",
-      "control_spectrum": "Horizontal stacked bar chart made of simple flex divs with varying width percentages, animating width on load."
-    },
-    "asset_cards": "Dark cards, border-white/5. On hover: border-white/20, subtle translation Y (-2px), and a radial gradient background that follows the mouse (or just a CSS hover glow using box-shadow: 0 0 30px rgba(197, 160, 89, 0.1)).",
-    "marquee": "Use react-fast-marquee. Very slow speed (speed={20}). Content: 'DELAWARE C-CORP • INTERNATIONAL ASSET HOLDINGS • STRATEGIC CONTROL • LONG-TERM OWNERSHIP •'. Font: mono or sans uppercase, muted text."
   },
   "layouts": {
-    "hero": "100vh, content bottom-left or center. Massive text. Minimal padding top. High negative space.",
-    "bento_grid": "Use grid-cols-1 md:grid-cols-12 gap-px bg-white/10 (border collapse hack). Fill cells with bg-[#0A0A0A] to create 1px borders everywhere.",
-    "strategy_timeline": "Vertical left border (border-l border-white/10) with nodes (absolute circles). Text content on the right, fading in on scroll."
+    "spacing": "Generous spacing. Use p-12, p-16, p-24 for main sections. High breathing room.",
+    "grid": "Bento Grid Protocol. Asymmetrical grids for visual tension. No purely symmetrical 'Bootstrap' layouts.",
+    "alignment": "Optical alignment over strict geometrical alignment."
+  },
+  "grids": {
+    "bento": "grid-cols-1 md:grid-cols-12 gap-8. Dominant elements span 8 cols, secondary span 4.",
+    "features": "grid-cols-1 md:grid-cols-3 gap-6 with varying heights"
+  },
+  "visual enhancers": {
+    "borders": "1px delicate inner stroke on glass surfaces (border-white/10).",
+    "shadows": "Ambient diffuse shadows for depth without muddiness. shadow-[0_8px_32px_rgba(0,0,0,0.5)].",
+    "textures": "Subtle noise overlay on solid dark backgrounds to prevent flatness.",
+    "glassmorphism": "backdrop-blur-xl or 2xl with saturated colors underneath."
   },
   "motion": {
-    "scroll": "MANDATORY: Use @studio-freight/react-lenis for momentum scrolling.",
-    "reveal": "Use framer-motion whileInView. y: 20 to y: 0, opacity 0 to 1. Duration 0.8s.",
-    "micro_interactions": "Buttons: relative, overflow-hidden. Hover creates a sweeping background or scaling text. Use group-hover for arrow translations (translate-x-1)."
+    "hover": "Smooth color and opacity transitions. duration-300 ease-out.",
+    "scroll": "Parallax effects on hero images and skyline backgrounds. Use Framer Motion for scroll-triggered fades (opacity 0 to 1, y: 20 to 0).",
+    "interactions": "Slight scale down on click (scale-95). Glow effects on primary CTA hover."
   },
-  "pages": [
-    {
-      "name": "Home",
-      "path": "/",
-      "sections": [
-        "Kinetic Hero: Huge 'OKI Inc.', line-by-line reveal.",
-        "Marquee: Slow editorial ticker.",
-        "Brief Introduction: 'We acquire, structure, and hold...'",
-        "Asset Preview: Bento grid linking to Holdings."
-      ]
-    },
-    {
-      "name": "Holdings & Assets",
-      "path": "/holdings",
-      "sections": [
-        "Header: 'Strategic Assets'.",
-        "Dashboard Grid: Custom SVG Donut (42% Equity, 28% Real Assets, 18% IP, 12% Private Credit).",
-        "Geographic Control SVG Bar Chart.",
-        "Asset Growth SVG Line Chart.",
-        "Asset Class Cards with hover glow."
-      ]
-    },
-    {
-      "name": "Strategy",
-      "path": "/strategy",
-      "sections": [
-        "Header: 'Ownership is the Strategy'.",
-        "Timeline/3-Column layout: Identify, Structure, Hold.",
-        "Control Spectrum Horizontal Bar."
-      ]
-    },
-    {
-      "name": "About / Architecture",
-      "path": "/about",
-      "sections": [
-        "Header: 'Corporate Architecture'.",
-        "Delaware C-Corp Statement.",
-        "Restrained Leadership section (Titles only, no photos).",
-        "Address block: 16192 Coastal Highway."
-      ]
-    },
-    {
-      "name": "Contact",
-      "path": "/contact",
-      "sections": [
-        "Minimal Form: 'Serious capital conversations only'.",
-        "Frontend only (no backend hooks).",
-        "Encrypted inquiry motif (monospaced labels, strict borders)."
-      ]
-    }
-  ],
+  "accessibility": {
+    "contrast": "Ensure minimum 4.5:1 for normal text. Use text-shadow over images.",
+    "focus": "Clear focus rings (ring-1 ring-primary/50) on interactive elements.",
+    "motion": "Respect prefers-reduced-motion media query.",
+    "testing": "All interactive and key informational elements MUST include a data-testid attribute."
+  },
+  "media": {
+    "images": "High contrast, dark-toned luxury corporate aesthetics. No bright daylight.",
+    "overlays": "Mandatory background overlays on images with text to preserve readability (bg-black/60)."
+  },
+  "3d libraries": {
+    "usage": "Minimal, optional. Spline for subtle dark architectural elements if needed, but prioritize high-quality photography as per instructions."
+  },
+  "component name": {
+    "strategy": "Use Shadcn components heavily customized. Avoid default look. Cards should be flat or glass with subtle borders."
+  },
   "image_urls": {
     "hero_background": {
-      "url": "https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwzfHxkYXJrJTIwbW9kZXJuJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4NTgxMTM1N3ww&ixlib=rb-4.1.0&q=85",
-      "description": "Low angle modern gray building, dark and imposing. Use with heavy black overlay (bg-black/60) to ensure text contrast."
+      "url": "https://images.unsplash.com/photo-1565043534426-8a67ac8671e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwyfHxkYXJrJTIwc2t5c2NyYXBlciUyMGxvb2tpbmclMjB1cCUyMG5pZ2h0fGVufDB8fHx8MTc4NTgxMjYyM3ww&ixlib=rb-4.1.0&q=85",
+      "description": "Tall luxury skyscrapers shot from below at night, dark and imposing.",
+      "recommended_overlay": "bg-black/70 or bg-black/80 for text readability"
     },
-    "strategy_bg": {
-      "url": "https://images.unsplash.com/photo-1517241034903-9a4c3ab12f00?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRhcmslMjBnZW9tZXRyaWMlMjBsdXh1cnl8ZW58MHx8fHwxNzg1ODExMzU3fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark geometric abstract shapes, useful for a subtle background in the strategy timeline section."
+    "home_position_image": {
+      "url": "https://images.unsplash.com/photo-1723023505659-fde32810e0d1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjBkYXJrJTIwdG93ZXIlMjBmYWNhZGUlMjBkZXRhaWx8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85",
+      "description": "A single dramatic dark tower facade detail, vertical composition.",
+      "recommended_overlay": "bg-transparent to bg-black/30"
     },
-    "global_map": {
-      "url": "https://images.unsplash.com/photo-1727610542348-9636c3b65d2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w7NDk1ODB8MHwxfHNlYXJjaHwzfHxkYXJrJTIwZ2xvYmFsJTIwYnVzaW5lc3MlMjBtYXB8ZW58MHx8fHwxNzg1ODExMzU3fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark aesthetic world map, use as a texture in the Geographic Control section."
+    "holdings_header_image": {
+      "url": "https://images.unsplash.com/photo-1755790973149-9efcb5740efd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHw0fHxkYXJrJTIwY2l0eSUyMHNreWxpbmUlMjBwYW5vcmFtYSUyMG5pZ2h0fGVufDB8fHx8MTc4NTgxMjYyM3ww&ixlib=rb-4.1.0&q=85",
+      "description": "Dark city skyline at night, wide panorama.",
+      "recommended_overlay": "bg-black/60 to maintain mood and text contrast"
     },
-    "architecture_accent": {
-      "url": "https://images.pexels.com/photos/2971104/pexels-photo-2971104.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "description": "Striking modern building at night. Use in the About/Architecture section."
+    "strategy_image": {
+      "url": "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxkYXJrJTIwZ2VvbWV0cmljJTIwYXJjaGl0ZWN0dXJlJTIwZ2xhc3MlMjB0b3dlcnxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Dark geometric architecture / glass tower detail.",
+      "recommended_overlay": "bg-black/40"
+    },
+    "about_governance_image": {
+      "url": "https://images.unsplash.com/photo-1703639948834-342fc34900f8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHw0fHxtb29keSUyMHRhbGwlMjBkYXJrJTIwdG93ZXIlMjBsb29raW5nJTIwdXB8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Dark, moody imposing building shot from below.",
+      "recommended_overlay": "bg-black/50"
+    },
+    "contact_side_image": {
+      "url": "https://images.unsplash.com/photo-1712567604499-08f207054260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxtb29keSUyMHRhbGwlMjBkYXJrJTIwdG93ZXIlMjBsb29raW5nJTIwdXB8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Tall dark tower looking up, moody, for a side panel.",
+      "recommended_overlay": "bg-black/30"
+    },
+    "home_cta_background": {
+      "url": "https://images.unsplash.com/photo-1588312744377-2adfb7b8578a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwxfHxkYXJrJTIwc2t5bGluZSUyMHNpbGhvdWV0dGUlMjBuaWdodHxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Wide dark skyline silhouette for a closing CTA band.",
+      "recommended_overlay": "bg-black/70"
     }
   },
-  "instructions_to_main_agent": [
-    "INSTALL DEPENDENCIES: `yarn add framer-motion @studio-freight/react-lenis react-router-dom lucide-react react-fast-marquee clsx tailwind-merge`",
-    "NO CHART LIBRARIES: You must build the charts using pure SVG elements within React components, animating them with framer-motion. Do NOT use recharts or chart.js.",
-    "STYLING CSS: Add the Google Fonts imports to the main index.css file. Set `.App { background-color: #050505; color: #EDEDED; }`.",
-    "APP STRUCTURE: Use react-router-dom to set up the 5 pages. Implement the floating nav to be present across all routes.",
-    "KINETIC HERO: Use an array of strings for the headline. Map over them, wrapping each in a `<div className='overflow-hidden'>` and animating the inner `motion.span` from y: '100%' to y: '0%'.",
-    "SVG CHARTS: For the Donut chart, calculate the stroke-dasharray (Math.PI * 2 * r), set stroke-dashoffset to the array length, and animate to the correct offset based on percentage. For line charts, animate the path's length.",
-    "BORDERS & PADDING: Use generous padding (p-12, p-24). Use 1px borders (border-white/10) to define structural containers.",
-    "TESTING: Add data-testid attributes to all navigation links, buttons, and form inputs (e.g., data-testid='nav-holdings-link', data-testid='contact-submit').",
-    "ACCESSIBILITY: Ensure text contrast over images using dark gradients or solid black overlays (bg-black/70)."
-  ],
-  "universal_guidelines": [
-    "Do not center-align the app container. Respect optical alignment.",
-    "Do not use generic transitions like 'transition: all'. Use specific transitions (e.g., 'transition-colors duration-300').",
-    "Never use pure black without text contrast. Use #050505 for base backgrounds.",
-    "Create depth using z-index hierarchy and subtle inner shadows, not massive outer drop shadows.",
-    "Forms should not use native HTML styling. Style inputs completely with Tailwind (bg-transparent border-b border-white/20 focus:border-white focus:outline-none)."
-  ]
+  "instructions_to_main_agent": "Ensure the application follows the dark corporate theme (#050505). Incorporate the provided Unsplash URLs in their respective sections, ensuring overlays are strictly followed for maximum legibility of white and gold (#C5A059) text over images. CRITICAL: DO NOT use complete transparent background in headers, overlays, or any surface that has content under it. Add data-testid to all interactive components.",
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": "Do not make generic centered layouts. Create depth through layered design elements. Use modern sharp or pill-shaped buttons with hover animations. Ensure all micro-interactions are present. The UI must look like an elite Delaware C-Corp international asset holdings page."
 }
