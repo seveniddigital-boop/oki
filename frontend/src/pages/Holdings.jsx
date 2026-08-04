@@ -32,7 +32,7 @@ export default function Holdings() {
       <section className="relative overflow-hidden pb-20 pt-40">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1755790973149-9efcb5740efd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHw0fHxkYXJrJTIwY2l0eSUyMHNreWxpbmUlMjBwYW5vcmFtYSUyMG5pZ2h0fGVufDB8fHx8MTc4NTgxMjYyM3ww&ixlib=rb-4.1.0&q=85)" }}
+          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1664353655151-9d94a9170eb0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmUlMjBuaWdodCUyMGRhcmt8ZW58MHx8fHwxNzg1ODEyODQyfDA&ixlib=rb-4.1.0&q=85)" }}
         />
         <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 bg-[linear-gradient(to_top,#050505_2%,transparent_55%)]" />
