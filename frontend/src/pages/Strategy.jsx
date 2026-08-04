@@ -48,8 +48,9 @@ export default function Strategy() {
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: "url(https://images.unsplash.com/photo-1517241034903-9a4c3ab12f00?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRhcmslMjBnZW9tZXRyaWMlMjBsdXh1cnl8ZW58MHx8fHwxNzg1ODExMzU3fDA&ixlib=rb-4.1.0&q=85)",
+            backgroundImage: "url(https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxkYXJrJTIwZ2VvbWV0cmljJTIwYXJjaGl0ZWN0dXJlJTIwZ2xhc3MlMjB0b3dlcnxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85)",
             backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
         <div className="relative ml-2 border-l border-white/10 md:ml-6">

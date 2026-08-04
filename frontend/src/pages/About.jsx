@@ -66,7 +66,7 @@ export default function About() {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: "url(https://images.pexels.com/photos/2971104/pexels-photo-2971104.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
+            backgroundImage: "url(https://images.unsplash.com/photo-1703639948834-342fc34900f8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHw0fHxtb29keSUyMHRhbGwlMjBkYXJrJTIwdG93ZXIlMjBsb29raW5nJTIwdXB8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

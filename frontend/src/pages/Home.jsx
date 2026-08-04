@@ -65,6 +65,11 @@ function Hero() {
       style={{ perspective: 1200 }}
     >
       <motion.div style={{ y: bgY }} className="absolute inset-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1565043534426-8a67ac8671e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwyfHxkYXJrJTIwc2t5c2NyYXBlciUyMGxvb2tpbmclMjB1cCUyMG5pZ2h0fGVufDB8fHx8MTc4NTgxMjYyM3ww&ixlib=rb-4.1.0&q=85)" }}
+        />
+        <div className="absolute inset-0 bg-black/70" />
         <div className="hero-grid animate-grid-drift absolute inset-0" />
         <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(153,27,27,0.18)_0%,transparent_60%)]" />
         <div className="absolute -bottom-60 -left-40 h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(197,160,89,0.08)_0%,transparent_60%)]" />
@@ -183,11 +188,30 @@ export default function Home() {
 
       <section className="mx-auto max-w-[1600px] px-6 py-32 md:px-12 md:py-44">
         <SectionTag index="01" label="The Position" />
-        <KineticLines
-          animate={false}
-          lines={["A next-generation global holding company,", "engineered to control high-value assets", "across continents."]}
-          lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
-        />
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
+          <div className="md:col-span-7">
+            <KineticLines
+              animate={false}
+              lines={["A next-generation global holding company,", "engineered to control high-value assets", "across continents."]}
+              lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
+            />
+            <Reveal delay={0.3} className="mt-10 max-w-xl">
+              <p className="text-sm leading-relaxed text-oki-muted md:text-base">
+                OKI Inc. is a Delaware C-Corporation organized for the acquisition, structuring, and long-duration ownership of strategic assets across international markets. The corporation operates under a single mandate: disciplined control that compounds across generations.
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-5">
+            <Reveal delay={0.2} className="group relative overflow-hidden border border-white/10">
+              <div
+                className="aspect-[3/4] w-full bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+                style={{ backgroundImage: "url(https://images.unsplash.com/photo-1723023505659-fde32810e0d1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjBkYXJrJTIwdG93ZXIlMjBmYWNhZGUlMjBkZXRhaWx8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85)" }}
+              />
+              <div className="absolute inset-0 bg-black/20" />
+              <p className="absolute bottom-4 left-4 font-mono text-[9px] uppercase tracking-[0.35em] text-white/60">Fig. 01 — Vertical Dominance</p>
+            </Reveal>
+          </div>
+        </div>
         <div className="mt-16 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-3">
           {[
             { k: "Continents", v: "04" },
@@ -260,6 +284,11 @@ export default function Home() {
       </section>
 
       <section className="relative overflow-hidden border-t border-white/10">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1588312744377-2adfb7b8578a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwxfHxkYXJrJTIwc2t5bGluZSUyMHNpbGhvdWV0dGUlMjBuaWdodHxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85)" }}
+        />
+        <div className="absolute inset-0 bg-black/70" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(153,27,27,0.15)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-[1600px] px-6 py-36 text-center md:px-12">
           <KineticLines

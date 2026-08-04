@@ -28,18 +28,26 @@ const assetClasses = [
 
 export default function Holdings() {
   return (
-    <main data-testid="holdings-page" className="pt-32">
-      <section className="mx-auto max-w-[1600px] px-6 md:px-12">
-        <SectionTag index="H/01" label="Holdings & Assets" />
-        <KineticLines
-          lines={["Strategic", "Assets."]}
-          lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
+    <main data-testid="holdings-page">
+      <section className="relative overflow-hidden pb-20 pt-40">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1755790973149-9efcb5740efd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHw0fHxkYXJrJTIwY2l0eSUyMHNreWxpbmUlMjBwYW5vcmFtYSUyMG5pZ2h0fGVufDB8fHx8MTc4NTgxMjYyM3ww&ixlib=rb-4.1.0&q=85)" }}
         />
-        <Reveal delay={0.4} className="mt-10 max-w-xl">
-          <p className="text-sm leading-relaxed text-oki-muted">
-            A consolidated view of the OKI Inc. portfolio. Every position is structured for control, insulated by architecture, and held on a generational horizon.
-          </p>
-        </Reveal>
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,#050505_2%,transparent_55%)]" />
+        <div className="relative mx-auto max-w-[1600px] px-6 md:px-12">
+          <SectionTag index="H/01" label="Holdings & Assets" />
+          <KineticLines
+            lines={["Strategic", "Assets."]}
+            lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
+          />
+          <Reveal delay={0.4} className="mt-10 max-w-xl">
+            <p className="text-sm leading-relaxed text-oki-muted">
+              A consolidated view of the OKI Inc. portfolio. Every position is structured for control, insulated by architecture, and held on a generational horizon.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12">

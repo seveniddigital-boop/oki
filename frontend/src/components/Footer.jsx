@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
         <div className="mt-20 flex flex-col justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">© 2026 OKI Inc. All rights reserved.</p>
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Delaware C-Corporation · Est. for permanence</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Delaware C-Corporation · Established for Permanence</p>
         </div>
       </div>
     </footer>

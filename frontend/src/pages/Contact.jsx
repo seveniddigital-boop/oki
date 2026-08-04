@@ -110,6 +110,14 @@ export default function Contact() {
             </AnimatePresence>
           </div>
           <div className="md:col-span-5">
+            <Reveal className="group relative mb-8 overflow-hidden border border-white/10">
+              <div
+                className="h-72 w-full bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+                style={{ backgroundImage: "url(https://images.unsplash.com/photo-1712567604499-08f207054260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxtb29keSUyMHRhbGwlMjBkYXJrJTIwdG93ZXIlMjBsb29raW5nJTIwdXB8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85)" }}
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <p className="absolute bottom-4 left-4 font-mono text-[9px] uppercase tracking-[0.35em] text-white/60">Center of Gravity — Delaware, USA</p>
+            </Reveal>
             <Reveal className="border border-white/10 bg-oki-surface p-10">
               <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Registered Office</p>
               <p className="mt-4 text-sm leading-relaxed text-oki-text">
