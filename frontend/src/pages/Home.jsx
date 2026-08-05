@@ -11,9 +11,13 @@ import EditorialMarquee from "@/components/Marquee";
 const EASE = [0.22, 1, 0.36, 1];
 
 const HERO_DARK =
-  "https://images.unsplash.com/photo-1557137200-fec234cd5740?q=85&w=2000&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1557137200-fec234cd5740?q=85&w=1600&auto=format&fit=crop";
 const HERO_LIGHT =
-  "https://images.unsplash.com/photo-1533348239637-984bae0f8a5b?q=85&w=2000&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1533348239637-984bae0f8a5b?q=85&w=1600&auto=format&fit=crop";
+const INTERLUDE_DARK =
+  "https://images.unsplash.com/photo-1506383631675-0b110111327b?q=85&w=1600&auto=format&fit=crop";
+const INTERLUDE_LIGHT =
+  "https://images.unsplash.com/photo-1490800869828-a00247402454?q=85&w=1600&auto=format&fit=crop";
 
 function Preloader({ done }) {
   return (
@@ -74,7 +78,7 @@ function Hero() {
       className="relative flex min-h-screen flex-col items-center overflow-hidden"
     >
       <div className="absolute inset-0">
-        <motion.div style={{ y: towerY }} className="absolute inset-x-0 -inset-y-[15%]">
+        <motion.div style={{ y: towerY }} className="absolute inset-x-0 -inset-y-[15%] will-change-transform">
           <motion.div
             initial={{ scale: 1.15, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -92,12 +96,12 @@ function Hero() {
           </motion.div>
         </motion.div>
         <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
-        <div className="hero-grid animate-grid-drift absolute inset-0" />
+        <div className="hero-grid animate-grid-drift absolute -inset-[120px]" />
         <div className="hero-top-fade absolute inset-0" />
         <div className="hero-bottom-fade absolute inset-0" />
       </div>
 
-      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mt-24 text-center md:mt-16">
+      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mt-24 text-center will-change-transform md:mt-16">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -202,14 +206,14 @@ function TowerInterlude() {
   return (
     <section ref={ref} data-testid="tower-interlude" className="relative h-[260vh] border-t border-white/10">
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
-        <motion.div style={{ y: bgY }} className="absolute inset-x-0 -inset-y-[10%]">
+        <motion.div style={{ y: bgY }} className="absolute inset-x-0 -inset-y-[10%] will-change-transform">
           <div
             className="tower-dark absolute inset-0 bg-cover bg-[center_30%]"
-            style={{ backgroundImage: `url(${HERO_DARK})`, filter: "brightness(0.7) saturate(0.8)" }}
+            style={{ backgroundImage: `url(${INTERLUDE_DARK})`, filter: "brightness(0.7) saturate(0.8)" }}
           />
           <div
             className="tower-light absolute inset-0 bg-cover bg-[center_30%]"
-            style={{ backgroundImage: `url(${HERO_LIGHT})` }}
+            style={{ backgroundImage: `url(${INTERLUDE_LIGHT})` }}
           />
           <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         </motion.div>

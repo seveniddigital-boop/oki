@@ -39,7 +39,7 @@ module.exports = {
       keyframes: {
         'accordion-down': { from: { height: '0' }, to: { height: 'var(--radix-accordion-content-height)' } },
         'accordion-up': { from: { height: 'var(--radix-accordion-content-height)' }, to: { height: '0' } },
-        'grid-drift': { from: { backgroundPosition: '0 0' }, to: { backgroundPosition: '120px 120px' } },
+        'grid-drift': { from: { transform: 'translate3d(0, 0, 0)' }, to: { transform: 'translate3d(120px, 120px, 0)' } },
         'pulse-slow': { '0%, 100%': { opacity: '0.5' }, '50%': { opacity: '1' } },
       },
       animation: {

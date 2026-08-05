@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import { LogoMark, LogoWordmark } from "@/components/Logo";
 import Home from "@/pages/Home";
 import Holdings from "@/pages/Holdings";
 import Strategy from "@/pages/Strategy";
@@ -48,6 +49,73 @@ function RouteMeta() {
   return null;
 }
 
+const EASE = [0.22, 1, 0.36, 1];
+
+const VEIL_BG =
+  "https://images.unsplash.com/photo-1601923112035-3e4819c82317?q=85&w=1600&auto=format&fit=crop";
+
+function TransitionVeil() {
+  const { pathname } = useLocation();
+  const [veilKey, setVeilKey] = useState(null);
+  const prev = useRef(pathname);
+
+  useEffect(() => {
+    if (prev.current !== pathname) {
+      prev.current = pathname;
+      setVeilKey(`${pathname}-${Date.now()}`);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!veilKey) return;
+    const t = setTimeout(() => setVeilKey(null), 1500);
+    return () => clearTimeout(t);
+  }, [veilKey]);
+
+  return (
+    <AnimatePresence>
+      {veilKey && (
+        <motion.div
+          key={veilKey}
+          data-testid="page-transition-veil"
+          className="pointer-events-none fixed inset-0 z-[150] overflow-hidden"
+          style={{ backgroundColor: "var(--oki-bg)" }}
+          initial={{ y: "100%" }}
+          animate={{ y: "0%" }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.55, ease: EASE }}
+        >
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${VEIL_BG})` }} />
+          <div className="absolute inset-0" style={{ backgroundColor: "var(--oki-bg-80)" }} />
+          <div className="hero-bottom-fade absolute inset-0" />
+          <div className="relative flex h-full items-center justify-center">
+            <div className="overflow-hidden">
+              <motion.div
+                initial={{ y: "110%" }}
+                animate={{ y: "0%" }}
+                transition={{ duration: 0.6, ease: EASE, delay: 0.35 }}
+                className="flex flex-col items-center gap-5"
+              >
+                <LogoMark size={52} />
+                <LogoWordmark className="text-base tracking-[0.5em]" />
+                <p className="font-mono text-[9px] uppercase tracking-[0.45em] text-oki-faint">
+                  International Asset Holdings · Strategic Investments
+                </p>
+              </motion.div>
+            </div>
+          </div>
+          <motion.div
+            className="absolute bottom-0 left-0 h-px bg-oki-gold"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1.2, ease: "easeInOut", delay: 0.2 }}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
@@ -79,6 +147,7 @@ function App() {
       <BrowserRouter>
         <RouteMeta />
         <CustomCursor />
+        <TransitionVeil />
         <SmoothScroll>
           <Nav />
           <AnimatedRoutes />

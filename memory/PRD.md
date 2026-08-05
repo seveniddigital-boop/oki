@@ -28,6 +28,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, branded transitions + perf)
+- Page transitions now show the full branded veil on every nav click: skyscraper-canyon photo, gold logo mark, OKI_INC. wordmark, tagline, gold progress line — slides up, holds, slides away (mirrors the entry preloader)
+- Tower interlude image replaced (Chrysler Building through trees at dusk / bright overcast tower for light theme) — no longer repeats the hero photo
+- Scroll performance: grid drift animation converted from background-position to GPU-composited transform, will-change on all parallax layers, hero images downscaled to w=1600
+
 ## Implemented (2026-08-05, live crypto ticker)
 - Live BTC/ETH/SOL price ticker in the Digital Asset Management section: backend GET /api/crypto-prices proxies CoinGecko public API (keyless) with 45s in-memory cache and stale-fallback; frontend polls every 60s
 - Ticker design: pulsing "Live Market" dot, monospace prices, gold/crimson 24h change with trend icons, "CoinGecko · 60s refresh" attribution. Verified live: BTC $64,340 +1.08%
