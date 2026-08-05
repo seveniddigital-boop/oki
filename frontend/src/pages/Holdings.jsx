@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
+import CryptoTicker from "@/components/CryptoTicker";
 import DonutChart from "@/components/charts/DonutChart";
 import GeoBars from "@/components/charts/GeoBars";
 import GrowthLine from "@/components/charts/GrowthLine";
@@ -110,6 +111,7 @@ export default function Holdings() {
       <section className="border-t border-white/10 bg-oki-surface">
         <div className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
           <SectionTag index="H/03" label="Digital Asset Management" />
+          <CryptoTicker />
           <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
             <div className="md:col-span-5">
               <KineticLines

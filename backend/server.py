@@ -289,6 +289,32 @@ async def corporate_deck():
     )
 
 
+_crypto_cache = {"data": None, "ts": 0.0}
+
+@api_router.get("/crypto-prices")
+async def crypto_prices():
+    import time
+    now = time.time()
+    if _crypto_cache["data"] and now - _crypto_cache["ts"] < 45:
+        return _crypto_cache["data"]
+    try:
+        async with httpx.AsyncClient(timeout=15) as http:
+            resp = await http.get(
+                "https://api.coingecko.com/api/v3/simple/price",
+                params={"ids": "bitcoin,ethereum,solana", "vs_currencies": "usd", "include_24hr_change": "true"},
+            )
+        resp.raise_for_status()
+        data = resp.json()
+        _crypto_cache["data"] = data
+        _crypto_cache["ts"] = now
+        return data
+    except Exception as e:
+        logger.error(f"CoinGecko fetch failed: {e}")
+        if _crypto_cache["data"]:
+            return _crypto_cache["data"]
+        raise HTTPException(status_code=502, detail="Price feed unavailable")
+
+
 app.include_router(api_router)
 
 app.add_middleware(

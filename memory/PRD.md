@@ -28,6 +28,10 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, live crypto ticker)
+- Live BTC/ETH/SOL price ticker in the Digital Asset Management section: backend GET /api/crypto-prices proxies CoinGecko public API (keyless) with 45s in-memory cache and stale-fallback; frontend polls every 60s
+- Ticker design: pulsing "Live Market" dot, monospace prices, gold/crimson 24h change with trend icons, "CoinGecko · 60s refresh" attribution. Verified live: BTC $64,340 +1.08%
+
 ## Implemented (2026-08-05, digital assets & crypto)
 - New asset class "Digital Assets & Crypto Holdings" (16%) across the site: allocation donut rebalanced to 36/24/16/14/10, homepage bento preview (5 cells), wide asset card with gold Bitcoin photography
 - New "Digital Asset Management" section on Holdings: institutional custody, multi-signature governance, cold-storage majority, treasury deployment + Bitcoin/Ethereum/L1 chips
