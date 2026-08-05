@@ -5,6 +5,17 @@ import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic
 
 const ESSAYS = [
   {
+    id: "digital-assets-infrastructure",
+    date: "AUG 2026",
+    category: "Capital",
+    title: "Digital Assets, Held Like Infrastructure",
+    excerpt: "Bitcoin and select networks enter the permanent portfolio — with custody, not conviction theater.",
+    body: [
+      "OKI Inc. now holds digital assets as a formal allocation: sixteen percent of the portfolio, concentrated in Bitcoin, Ethereum, and select layer-one infrastructure. The position is not a trade. It is balance-sheet architecture for a century in which value increasingly settles on open networks.",
+      "The doctrine does not bend for a new asset class. Custody is institutional, keys are multi-signature and geographically distributed, the majority of the position sits in cold storage, and nothing is leveraged. We do not watch the price. We own the network.",
+    ],
+  },
+  {
     id: "ownership-is-the-strategy",
     date: "JUL 2026",
     category: "Doctrine",

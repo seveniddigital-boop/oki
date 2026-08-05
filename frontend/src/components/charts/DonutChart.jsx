@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 
 const segments = [
-  { label: "Equity Holdings", value: 42, color: "#C5A059" },
-  { label: "Strategic Real Assets", value: 28, color: "#991B1B" },
-  { label: "IP & Intangibles", value: 18, color: "var(--chart-n1)" },
-  { label: "Private Credit & Special Situations", value: 12, color: "var(--chart-n2)" },
+  { label: "Equity Holdings", value: 36, color: "#C5A059" },
+  { label: "Strategic Real Assets", value: 24, color: "#991B1B" },
+  { label: "Digital Assets & Crypto", value: 16, color: "#E3C888" },
+  { label: "IP & Intangibles", value: 14, color: "var(--chart-n1)" },
+  { label: "Private Credit & Special Situations", value: 10, color: "var(--chart-n2)" },
 ];
 
 export default function DonutChart() {

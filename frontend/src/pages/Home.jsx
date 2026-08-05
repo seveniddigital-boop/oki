@@ -230,10 +230,11 @@ const chapters = [
 ];
 
 const allocation = [
-  { label: "Equity Holdings", value: "42%", span: "md:col-span-7" },
-  { label: "Strategic Real Assets", value: "28%", span: "md:col-span-5" },
-  { label: "IP & Intangibles", value: "18%", span: "md:col-span-5" },
-  { label: "Private Credit & Special Situations", value: "12%", span: "md:col-span-7" },
+  { label: "Equity Holdings", value: "36%", span: "md:col-span-5" },
+  { label: "Strategic Real Assets", value: "24%", span: "md:col-span-7" },
+  { label: "Digital Assets & Crypto", value: "16%", span: "md:col-span-4" },
+  { label: "IP & Intangibles", value: "14%", span: "md:col-span-4" },
+  { label: "Private Credit & Special Situations", value: "10%", span: "md:col-span-4" },
 ];
 
 export default function Home() {

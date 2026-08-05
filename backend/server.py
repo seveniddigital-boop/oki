@@ -213,8 +213,9 @@ async def corporate_deck():
     c.setFont("Helvetica", 7)
     c.drawString(56, H - 276, "01  —  GLOBAL ASSET ALLOCATION")
 
-    alloc = [("EQUITY HOLDINGS", 42, gold), ("STRATEGIC REAL ASSETS", 28, crimson),
-             ("IP & INTANGIBLES", 18, Color(0.55, 0.55, 0.55)), ("PRIVATE CREDIT & SPECIAL SITUATIONS", 12, Color(0.28, 0.28, 0.28))]
+    alloc = [("EQUITY HOLDINGS", 36, gold), ("STRATEGIC REAL ASSETS", 24, crimson),
+             ("DIGITAL ASSETS & CRYPTO", 16, Color(227/255, 200/255, 136/255)),
+             ("IP & INTANGIBLES", 14, Color(0.55, 0.55, 0.55)), ("PRIVATE CREDIT & SPECIAL SITUATIONS", 10, Color(0.28, 0.28, 0.28))]
     y = H - 306
     bar_x = 200
     bar_w = W - 56 - bar_x - 40

@@ -28,6 +28,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, digital assets & crypto)
+- New asset class "Digital Assets & Crypto Holdings" (16%) across the site: allocation donut rebalanced to 36/24/16/14/10, homepage bento preview (5 cells), wide asset card with gold Bitcoin photography
+- New "Digital Asset Management" section on Holdings: institutional custody, multi-signature governance, cold-storage majority, treasury deployment + Bitcoin/Ethereum/L1 chips
+- Corporate deck PDF updated with the 5-segment allocation; new Perspectives essay "Digital Assets, Held Like Infrastructure"
+
 ## Implemented (2026-08-05, functionality + immersion mega-release)
 - Inquiry storage + email: POST /api/inquiries saves to MongoDB and sends a branded HTML notification email via Emergent managed Resend (verified 202 Accepted). OWNER_EMAIL env var currently set to delivered@resend.dev TEST address — user must provide real email
 - Investor deck PDF: GET /api/deck generates a one-page dark/gold corporate deck (logo, allocation bars, doctrine, registered office) via reportlab; download buttons on Home CTA and About

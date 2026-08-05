@@ -8,26 +8,33 @@ const assetClasses = [
   {
     title: "Equity Holdings",
     desc: "Controlling and anchor positions in operating companies across North America, Europe, and Asia-Pacific. Acquired to be held, not traded.",
-    tag: "42% of Portfolio",
+    tag: "36% of Portfolio",
     img: "https://images.unsplash.com/photo-1526642591341-bcfc36ffae2f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwzfHxmaW5hbmNpYWwlMjBkaXN0cmljdCUyMGR1c2t8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
   {
     title: "Strategic Real Assets",
     desc: "Income-critical infrastructure, industrial land, and energy-adjacent real property in supply-constrained corridors.",
-    tag: "28% of Portfolio",
+    tag: "24% of Portfolio",
     img: "https://images.unsplash.com/photo-1558120985-abcafafcae16?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxjb25jcmV0ZSUyMGFyY2hpdGVjdHVyZSUyMGRhcmt8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
   {
     title: "Intellectual Property & Intangibles",
     desc: "Patent estates, proprietary data, and brand portfolios with durable pricing power and compounding royalty streams.",
-    tag: "18% of Portfolio",
+    tag: "14% of Portfolio",
     img: "https://images.unsplash.com/photo-1592659762303-90081d34b277?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxjaXJjdWl0JTIwYm9hcmQlMjBkYXJrfGVufDB8fHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85",
   },
   {
     title: "Private Credit & Special Situations",
     desc: "Senior-secured direct lending and dislocation-driven acquisitions where structure, not sentiment, determines return.",
-    tag: "12% of Portfolio",
+    tag: "10% of Portfolio",
     img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxiYW5rJTIwdmF1bHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
+  },
+  {
+    title: "Digital Assets & Crypto Holdings",
+    desc: "Bitcoin, Ethereum, and select L1 infrastructure held as permanent balance-sheet assets — institutional custody, multi-signature governance, cold-storage majority. No leverage. No trading desk.",
+    tag: "16% of Portfolio",
+    img: "https://images.unsplash.com/photo-1623227413711-25ee4388dae3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwxfHxkYXJrJTIwYml0Y29pbiUyMGdvbGR8ZW58MHx8fHwxNzg1ODk5MzE3fDA&ixlib=rb-4.1.0&q=85&w=1600",
+    wide: true,
   },
 ];
 
@@ -86,9 +93,9 @@ export default function Holdings() {
             <Reveal
               key={a.title}
               delay={i * 0.1}
-              className="card-glow group bg-oki-black transition-colors duration-500 hover:bg-oki-elevated"
+              className={`card-glow group bg-oki-black transition-colors duration-500 hover:bg-oki-elevated ${a.wide ? "md:col-span-2" : ""}`}
             >
-              <PhotoReveal src={a.img} alt={a.title} delay={i * 0.1} className="h-44 w-full border-b border-white/10" />
+              <PhotoReveal src={a.img} alt={a.title} delay={i * 0.1} className={`w-full border-b border-white/10 ${a.wide ? "h-56" : "h-44"}`} />
               <div className="p-10 md:p-14">
                 <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-gold">{a.tag}</p>
                 <h3 className="mt-6 font-display text-2xl font-medium tracking-tight text-oki-text md:text-3xl">{a.title}</h3>
@@ -97,6 +104,46 @@ export default function Holdings() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-oki-surface">
+        <div className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
+          <SectionTag index="H/03" label="Digital Asset Management" />
+          <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <KineticLines
+                animate={false}
+                lines={["Crypto, held like", "infrastructure."]}
+                lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-5xl"
+              />
+              <Reveal delay={0.2} className="mt-8 max-w-md">
+                <p className="text-sm leading-relaxed text-oki-muted">
+                  Digital assets are governed by the same doctrine as every OKI position: acquired with conviction, structured through the Delaware architecture, and held without a clock. Custody is institutional. Keys are distributed. The majority of the position never touches an internet-connected device.
+                </p>
+              </Reveal>
+              <Reveal delay={0.3} className="mt-8 flex flex-wrap gap-3">
+                {["Bitcoin", "Ethereum", "Select L1 Infrastructure"].map((c) => (
+                  <span key={c} className="border border-oki-gold/30 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-oki-gold">
+                    {c}
+                  </span>
+                ))}
+              </Reveal>
+            </div>
+            <div className="grid grid-cols-1 gap-px self-start border border-white/10 bg-white/10 sm:grid-cols-2 md:col-span-7">
+              {[
+                { t: "Institutional Custody", d: "Qualified custodians and audited storage arrangements. No exchange balances held overnight." },
+                { t: "Multi-Signature Governance", d: "No single keyholder can move assets. Transactions require quorum across offices and geographies." },
+                { t: "Cold-Storage Majority", d: "The dominant share of the position is held in air-gapped, geographically distributed vaults." },
+                { t: "Treasury Deployment", d: "Selective staking and protocol participation where yield is structural — never leveraged, never directional." },
+              ].map((f, i) => (
+                <Reveal key={f.t} delay={i * 0.1} className="card-glow bg-oki-black p-8 transition-colors duration-500 hover:bg-oki-elevated">
+                  <h3 className="font-display text-lg font-medium tracking-tight text-oki-gold">{f.t}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-oki-muted">{f.d}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </motion.main>
