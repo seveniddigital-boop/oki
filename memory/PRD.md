@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, chart timeframe switcher)
+- 24H / 7D / 30D buttons in the currency chart panel header — active range highlighted in gold, chart refetches and redraws per timeframe (backend days param already supported), price/change/high-low recompute per range
+
 ## Implemented (2026-08-05, UI click sounds)
 - Subtle premium click sound on every button/link press: Web Audio API-generated soft low "thock" + high tick (no audio files, ~0.07 gain), global delegated listener, AudioContext resumed on first gesture per autoplay policy
 

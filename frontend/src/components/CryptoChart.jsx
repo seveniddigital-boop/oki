@@ -13,20 +13,27 @@ const COIN_NAMES = {
 
 const W = 560, H = 200, PAD = 12;
 
+const TIMEFRAMES = [
+  { label: "24H", days: 1 },
+  { label: "7D", days: 7 },
+  { label: "30D", days: 30 },
+];
+
 export default function CryptoChart({ coin, onClose }) {
   const [data, setData] = useState(null);
+  const [days, setDays] = useState(7);
 
   useEffect(() => {
     setData(null);
     let mounted = true;
     axios
-      .get(`${API}/crypto-chart`, { params: { id: coin, days: 7 } })
+      .get(`${API}/crypto-chart`, { params: { id: coin, days } })
       .then(({ data }) => mounted && setData(data))
       .catch(() => {});
     return () => {
       mounted = false;
     };
-  }, [coin]);
+  }, [coin, days]);
 
   const chart = useMemo(() => {
     if (!data?.prices?.length) return null;
@@ -57,9 +64,22 @@ export default function CryptoChart({ coin, onClose }) {
       className="mt-6 overflow-hidden border border-white/10 bg-oki-black"
     >
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
-        <div className="flex items-baseline gap-3">
+        <div className="flex items-center gap-4">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold">{COIN_NAMES[coin]}</span>
-          <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-oki-faint">7D · USD</span>
+          <div className="flex gap-1">
+            {TIMEFRAMES.map((tf) => (
+              <button
+                key={tf.label}
+                data-testid={`timeframe-${tf.label}`}
+                onClick={() => setDays(tf.days)}
+                className={`px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.2em] transition-colors duration-200 ${
+                  days === tf.days ? "bg-oki-gold text-oki-black" : "text-oki-faint hover:text-oki-gold"
+                }`}
+              >
+                {tf.label}
+              </button>
+            ))}
+          </div>
         </div>
         <button onClick={onClose} data-testid="crypto-chart-close" aria-label="Close chart" className="text-oki-faint transition-colors duration-200 hover:text-oki-text">
           <X className="h-3.5 w-3.5" />
