@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { Lock, ArrowUpRight, ShieldCheck, ChevronDown } from "lucide-react";
 import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
 
 const inputCls =
@@ -8,14 +8,95 @@ const inputCls =
 
 const labelCls = "font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint";
 
+const RANGES = [
+  { value: "10-50", label: "$10M — $50M" },
+  { value: "50-250", label: "$50M — $250M" },
+  { value: "250-1b", label: "$250M — $1B" },
+  { value: "1b+", label: "$1B+" },
+];
+
+function CapitalSelect({ value, onChange, error }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const close = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
+  const selected = RANGES.find((r) => r.value === value);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        data-testid="contact-capital-select"
+        onClick={() => setOpen(!open)}
+        className={`flex w-full items-center justify-between border-b bg-transparent py-4 text-left text-sm transition-colors duration-300 ${
+          error ? "border-oki-crimsonbright" : "border-white/20"
+        } focus:border-oki-gold focus:outline-none`}
+      >
+        <span className={selected ? "text-oki-text" : "text-oki-faint"}>
+          {selected ? selected.label : "Select range"}
+        </span>
+        <ChevronDown className={`h-4 w-4 text-oki-faint transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            data-testid="capital-options-list"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-0 right-0 top-full z-30 mt-2 border border-white/10 bg-oki-elevated shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+          >
+            {RANGES.map((r) => (
+              <li key={r.value}>
+                <button
+                  type="button"
+                  data-testid={`capital-option-${r.value}`}
+                  onClick={() => {
+                    onChange(r.value);
+                    setOpen(false);
+                  }}
+                  className={`w-full px-5 py-3.5 text-left font-mono text-xs tracking-[0.15em] transition-colors duration-200 hover:bg-oki-gold/10 hover:text-oki-gold ${
+                    value === r.value ? "text-oki-gold" : "text-oki-muted"
+                  }`}
+                >
+                  {r.label}
+                </button>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+      {error && (
+        <p data-testid="contact-capital-error" className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-oki-crimsonbright">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [capitalError, setCapitalError] = useState("");
   const [form, setForm] = useState({ name: "", org: "", email: "", capital: "", message: "" });
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
   const submit = (e) => {
     e.preventDefault();
+    if (!form.capital) {
+      setCapitalError("Capital range required");
+      return;
+    }
+    setCapitalError("");
     setSent(true);
   };
 
@@ -90,14 +171,15 @@ export default function Contact() {
                       <input id="contact-email" data-testid="contact-email-input" type="email" required value={form.email} onChange={set("email")} className={inputCls} placeholder="—" />
                     </div>
                     <div>
-                      <label htmlFor="contact-capital" className={labelCls}>Capital Range</label>
-                      <select id="contact-capital" data-testid="contact-capital-select" required value={form.capital} onChange={set("capital")} className={`${inputCls} appearance-none bg-oki-black`}>
-                        <option value="" disabled>Select range</option>
-                        <option value="10-50">$10M — $50M</option>
-                        <option value="50-250">$50M — $250M</option>
-                        <option value="250-1b">$250M — $1B</option>
-                        <option value="1b+">$1B+</option>
-                      </select>
+                      <label className={labelCls}>Capital Range</label>
+                      <CapitalSelect
+                        value={form.capital}
+                        onChange={(v) => {
+                          setForm({ ...form, capital: v });
+                          setCapitalError("");
+                        }}
+                        error={capitalError}
+                      />
                     </div>
                   </div>
                   <div>

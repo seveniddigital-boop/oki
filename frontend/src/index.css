@@ -114,6 +114,19 @@
     ::-webkit-scrollbar-thumb {
         background: var(--oki-faint);
     }
+    select {
+        color-scheme: dark;
+    }
+    [data-theme="light"] select {
+        color-scheme: light;
+    }
+    select option {
+        background-color: var(--oki-bg);
+        color: var(--oki-text);
+    }
+    select:invalid {
+        color: var(--oki-faint);
+    }
 }
 
 @layer base {
