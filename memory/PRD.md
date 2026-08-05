@@ -29,7 +29,7 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
 ## Implemented (2026-08-05, hero photo replacement)
-- Hero background replaced per user request: dark theme now uses a twisted night tower with dotted lights (framed center-bottom), light theme a minimalist B&W high-rise against overcast sky; preload link updated
+- Hero background replaced per user request: dark theme now uses a twisted night tower with dotted lights (framed center-bottom); light theme keeps the original B&W Empire State photo (user preference); preload link updated
 
 ## Implemented (2026-08-05, copy de-duplication pass)
 - Rewrote repeated copy sitewide: Home doctrine chapters no longer duplicate Strategy phases (new distinct texts), quote band changed to "Structure is the moat. Time is the multiplier." (was repeating footer motto), Holdings intro and crypto section reworded, Insights essay retitled "The Case for Never Selling", "center of gravity" / "across continents" / "generational horizon" / "we own time" overlaps resolved across Home, Strategy, About, Contact, and Insights
