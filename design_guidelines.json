@@ -1,110 +1,36 @@
 {
-  "theme_strategy": "Dark Theme Default. High contrast, luxury corporate aesthetic suitable for international asset holdings.",
+  "project_name": "OKI Inc. Website",
+  "theme": "dark luxury corporate",
   "colors": {
-    "background": "#050505",
-    "surface": "#121212",
-    "surface_glass": "rgba(18, 18, 18, 0.6)",
-    "primary": "#C5A059",
-    "secondary": "#991B1B",
-    "text_primary": "#FFFFFF",
-    "text_secondary": "#A3A3A3",
-    "border": "rgba(255, 255, 255, 0.1)",
-    "overlay_heavy": "rgba(5, 5, 5, 0.8)",
-    "overlay_medium": "rgba(5, 5, 5, 0.5)"
+    "primary": "#050505",
+    "secondary": "#F2EFE8",
+    "accent_gold": "#C5A059",
+    "accent_crimson": "#991B1B"
   },
   "typography": {
-    "headings": {
-      "font_family": "Playfair Display",
-      "style": "Elegant, serif, luxury",
-      "weight": "600",
-      "tracking": "tracking-tight"
-    },
-    "body": {
-      "font_family": "Inter",
-      "style": "Clean, readable, modern sans-serif",
-      "weight": "400",
-      "tracking": "tracking-normal"
-    },
-    "labels": {
-      "font_family": "Inter",
-      "style": "Uppercase, wide tracking for premium feel",
-      "weight": "500",
-      "tracking": "tracking-[0.2em]"
-    }
-  },
-  "layouts": {
-    "spacing": "Generous spacing. Use p-12, p-16, p-24 for main sections. High breathing room.",
-    "grid": "Bento Grid Protocol. Asymmetrical grids for visual tension. No purely symmetrical 'Bootstrap' layouts.",
-    "alignment": "Optical alignment over strict geometrical alignment."
-  },
-  "grids": {
-    "bento": "grid-cols-1 md:grid-cols-12 gap-8. Dominant elements span 8 cols, secondary span 4.",
-    "features": "grid-cols-1 md:grid-cols-3 gap-6 with varying heights"
-  },
-  "visual enhancers": {
-    "borders": "1px delicate inner stroke on glass surfaces (border-white/10).",
-    "shadows": "Ambient diffuse shadows for depth without muddiness. shadow-[0_8px_32px_rgba(0,0,0,0.5)].",
-    "textures": "Subtle noise overlay on solid dark backgrounds to prevent flatness.",
-    "glassmorphism": "backdrop-blur-xl or 2xl with saturated colors underneath."
-  },
-  "motion": {
-    "hover": "Smooth color and opacity transitions. duration-300 ease-out.",
-    "scroll": "Parallax effects on hero images and skyline backgrounds. Use Framer Motion for scroll-triggered fades (opacity 0 to 1, y: 20 to 0).",
-    "interactions": "Slight scale down on click (scale-95). Glow effects on primary CTA hover."
-  },
-  "accessibility": {
-    "contrast": "Ensure minimum 4.5:1 for normal text. Use text-shadow over images.",
-    "focus": "Clear focus rings (ring-1 ring-primary/50) on interactive elements.",
-    "motion": "Respect prefers-reduced-motion media query.",
-    "testing": "All interactive and key informational elements MUST include a data-testid attribute."
-  },
-  "media": {
-    "images": "High contrast, dark-toned luxury corporate aesthetics. No bright daylight.",
-    "overlays": "Mandatory background overlays on images with text to preserve readability (bg-black/60)."
-  },
-  "3d libraries": {
-    "usage": "Minimal, optional. Spline for subtle dark architectural elements if needed, but prioritize high-quality photography as per instructions."
-  },
-  "component name": {
-    "strategy": "Use Shadcn components heavily customized. Avoid default look. Cards should be flat or glass with subtle borders."
+    "headings": "Playfair Display, serif",
+    "body": "Inter, sans-serif"
   },
   "image_urls": {
-    "hero_background": {
-      "url": "https://images.unsplash.com/photo-1565043534426-8a67ac8671e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwyfHxkYXJrJTIwc2t5c2NyYXBlciUyMGxvb2tpbmclMjB1cCUyMG5pZ2h0fGVufDB8fHx8MTc4NTgxMjYyM3ww&ixlib=rb-4.1.0&q=85",
-      "description": "Tall luxury skyscrapers shot from below at night, dark and imposing.",
-      "recommended_overlay": "bg-black/70 or bg-black/80 for text readability"
+    "hero_tower_dark": {
+      "url": "https://images.unsplash.com/photo-1557137200-fec234cd5740?q=85&w=1600&auto=format&fit=crop",
+      "description": "A real photograph of a single tall art-deco skyscraper at NIGHT, vertical/portrait composition, the ENTIRE building visible from base to spire, isolated against a dark/black sky."
     },
-    "home_position_image": {
-      "url": "https://images.unsplash.com/photo-1723023505659-fde32810e0d1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjBkYXJrJTIwdG93ZXIlMjBmYWNhZGUlMjBkZXRhaWx8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85",
-      "description": "A single dramatic dark tower facade detail, vertical composition.",
-      "recommended_overlay": "bg-transparent to bg-black/30"
+    "hero_tower_light": {
+      "url": "https://images.unsplash.com/photo-1533348239637-984bae0f8a5b?q=85&w=1600&auto=format&fit=crop",
+      "description": "Art-deco tower in DAYTIME against an overcast sky, vertical/portrait, entire building base-to-spire, centered."
     },
-    "holdings_header_image": {
-      "url": "https://images.unsplash.com/photo-1664353655151-9d94a9170eb0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmUlMjBuaWdodCUyMGRhcmt8ZW58MHx8fHwxNzg1ODEyODQyfDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark city skyline at night, wide panorama.",
-      "recommended_overlay": "bg-black/60 to maintain mood and text contrast"
-    },
-    "strategy_image": {
-      "url": "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxkYXJrJTIwZ2VvbWV0cmljJTIwYXJjaGl0ZWN0dXJlJTIwZ2xhc3MlMjB0b3dlcnxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark geometric architecture / glass tower detail.",
-      "recommended_overlay": "bg-black/40"
-    },
-    "about_governance_image": {
-      "url": "https://images.unsplash.com/photo-1703639948834-342fc34900f8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHw0fHxtb29keSUyMHRhbGwlMjBkYXJrJTIwdG93ZXIlMjBsb29raW5nJTIwdXB8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark, moody imposing building shot from below.",
-      "recommended_overlay": "bg-black/50"
-    },
-    "contact_side_image": {
-      "url": "https://images.unsplash.com/photo-1712567604499-08f207054260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxtb29keSUyMHRhbGwlMjBkYXJrJTIwdG93ZXIlMjBsb29raW5nJTIwdXB8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85",
-      "description": "Tall dark tower looking up, moody, for a side panel.",
-      "recommended_overlay": "bg-black/30"
-    },
-    "home_cta_background": {
-      "url": "https://images.unsplash.com/photo-1588312744377-2adfb7b8578a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwxfHxkYXJrJTIwc2t5bGluZSUyMHNpbGhvdWV0dGUlMjBuaWdodHxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85",
-      "description": "Wide dark skyline silhouette for a closing CTA band.",
-      "recommended_overlay": "bg-black/70"
+    "preloader_background": {
+      "url": "https://images.unsplash.com/photo-1601923112035-3e4819c82317?q=85&w=1600&auto=format&fit=crop",
+      "description": "A cinematic, dark, luxurious architectural photograph for a full-screen intro looking up between dark skyscrapers."
     }
   },
-  "instructions_to_main_agent": "Ensure the application follows the dark corporate theme (#050505). Incorporate the provided Unsplash URLs in their respective sections, ensuring overlays are strictly followed for maximum legibility of white and gold (#C5A059) text over images. CRITICAL: DO NOT use complete transparent background in headers, overlays, or any surface that has content under it. Add data-testid to all interactive components.",
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": "Do not make generic centered layouts. Create depth through layered design elements. Use modern sharp or pill-shaped buttons with hover animations. Ensure all micro-interactions are present. The UI must look like an elite Delaware C-Corp international asset holdings page."
+  "visual_enhancers": {
+    "overlays": "Heavy dark overlay with a gold logo appearing on top for preloader",
+    "blend_modes": "hero_tower_dark should blend into a #050505 background via feathered mask edges. hero_tower_light will be blended into an ivory #F2EFE8 background using multiply blend mode."
+  },
+  "instructions_to_main_agent": {
+    "testing": "All interactive and key informational elements MUST include a data-testid attribute to facilitate robust automated testing."
+  },
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": "Follow the E1 Anti-AI Designer persona guidelines. Maintain deep contrast, elegant transitions, and robust interactive elements. Avoid generic templates."
 }
