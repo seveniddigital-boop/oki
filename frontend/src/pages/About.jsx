@@ -15,13 +15,23 @@ const layers = [
 
 export default function About() {
   return (
-    <main data-testid="about-page" className="pt-32">
-      <section className="mx-auto max-w-[1600px] px-6 md:px-12">
-        <SectionTag index="A/01" label="About / Architecture" />
-        <KineticLines
-          lines={["Corporate", "Architecture."]}
-          lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
+    <main data-testid="about-page">
+      <section className="relative overflow-hidden pb-20 pt-40">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          role="img"
+          aria-label="Geometric concrete corporate architecture"
+          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1565626424178-c699f6601afd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBjb25jcmV0ZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85)" }}
         />
+        <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
+        <div className="hero-bottom-fade absolute inset-0" />
+        <div className="relative mx-auto max-w-[1600px] px-6 md:px-12">
+          <SectionTag index="A/01" label="About / Architecture" />
+          <KineticLines
+            lines={["Corporate", "Architecture."]}
+            lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
+          />
+        </div>
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">

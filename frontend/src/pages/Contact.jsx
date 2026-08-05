@@ -20,19 +20,29 @@ export default function Contact() {
   };
 
   return (
-    <main data-testid="contact-page" className="pt-32">
-      <section className="mx-auto max-w-[1600px] px-6 md:px-12">
-        <SectionTag index="C/01" label="Contact / Access" />
-        <KineticLines
-          lines={["Investor", "Access."]}
-          lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
+    <main data-testid="contact-page">
+      <section className="relative overflow-hidden pb-20 pt-40">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          role="img"
+          aria-label="Looking up between corporate towers"
+          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1601923112035-3e4819c82317?q=85&w=1600&auto=format&fit=crop)" }}
         />
-        <Reveal delay={0.4} className="mt-10 flex max-w-xl items-start gap-4">
-          <Lock className="mt-1 h-4 w-4 shrink-0 text-oki-gold" />
-          <p className="text-sm leading-relaxed text-oki-muted">
-            Serious capital and strategic conversations only. All inquiries are reviewed by the Chief Investment Office. Unsolicited proposals below institutional threshold are not retained.
-          </p>
-        </Reveal>
+        <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
+        <div className="hero-bottom-fade absolute inset-0" />
+        <div className="relative mx-auto max-w-[1600px] px-6 md:px-12">
+          <SectionTag index="C/01" label="Contact / Access" />
+          <KineticLines
+            lines={["Investor", "Access."]}
+            lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
+          />
+          <Reveal delay={0.4} className="mt-10 flex max-w-xl items-start gap-4">
+            <Lock className="mt-1 h-4 w-4 shrink-0 text-oki-gold" />
+            <p className="text-sm leading-relaxed text-oki-muted">
+              Serious capital and strategic conversations only. All inquiries are reviewed by the Chief Investment Office. Unsolicited proposals below institutional threshold are not retained.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12">

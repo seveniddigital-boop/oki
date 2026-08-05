@@ -48,3 +48,26 @@ export function SectionTag({ index, label }) {
     </Reveal>
   );
 }
+
+export function PhotoReveal({ src, alt, className = "", delay = 0 }) {
+  return (
+    <motion.div
+      className={`overflow-hidden ${className}`}
+      initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
+      whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
+      viewport={{ once: true, margin: "-8%" }}
+      transition={{ duration: 1.1, ease: EASE, delay }}
+    >
+      <motion.div
+        role="img"
+        aria-label={alt}
+        className="h-full w-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${src})` }}
+        initial={{ scale: 1.25 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5, ease: EASE, delay }}
+      />
+    </motion.div>
+  );
+}

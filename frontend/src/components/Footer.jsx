@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LogoMark } from "@/components/Logo";
+import { LogoMark, LogoWordmark } from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -8,9 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-6">
             <LogoMark size={64} />
-            <p className="mt-6 font-display text-2xl font-semibold tracking-[0.3em] text-oki-text">
-              OKI <span className="text-oki-gold">INC.</span>
-            </p>
+            <LogoWordmark gold className="mt-6 text-2xl tracking-[0.3em]" />
             <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.4em] text-oki-faint">
               International Asset Holdings · Strategic Investments
             </p>

@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
-import { LogoMark } from "@/components/Logo";
-import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
+import { LogoMark, LogoWordmark } from "@/components/Logo";
+import Counter from "@/components/Counter";
+import { KineticLines, Reveal, SectionTag, PhotoReveal } from "@/components/Kinetic";
 import EditorialMarquee from "@/components/Marquee";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -40,9 +41,7 @@ function Preloader({ done }) {
               className="flex flex-col items-center gap-5"
             >
               <LogoMark size={52} />
-              <p className="font-display text-base font-medium tracking-[0.5em] text-oki-text">
-                OKI <span className="text-oki-gold">INC.</span>
-              </p>
+              <LogoWordmark className="text-base tracking-[0.5em]" />
               <p className="font-mono text-[9px] uppercase tracking-[0.45em] text-oki-faint">
                 International Asset Holdings · Strategic Investments
               </p>
@@ -83,7 +82,7 @@ function Hero() {
           >
             <div
               className="tower-dark absolute inset-0 bg-cover bg-[center_25%]"
-              style={{ backgroundImage: `url(${HERO_DARK})`, filter: "brightness(0.65) saturate(0.8)" }}
+              style={{ backgroundImage: `url(${HERO_DARK})`, filter: "brightness(0.8) saturate(0.85)" }}
             />
             <div
               className="tower-light absolute inset-0 bg-cover bg-[center_25%]"
@@ -231,12 +230,16 @@ export default function Home() {
         </div>
         <div className="mt-16 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-3">
           {[
-            { k: "Continents", v: "04" },
-            { k: "Jurisdictions", v: "12" },
+            { k: "Continents", n: 4 },
+            { k: "Jurisdictions", n: 12 },
             { k: "Time Horizon", v: "Generational" },
           ].map((s, i) => (
             <Reveal key={s.k} delay={i * 0.12} className="bg-oki-surface p-10">
-              <p className="font-display text-4xl font-semibold tracking-tight text-oki-gold md:text-5xl">{s.v}</p>
+              {s.n ? (
+                <Counter to={s.n} className="font-display text-4xl font-semibold tracking-tight text-oki-gold md:text-5xl" />
+              ) : (
+                <p className="font-display text-4xl font-semibold tracking-tight text-oki-gold md:text-5xl">{s.v}</p>
+              )}
               <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">{s.k}</p>
             </Reveal>
           ))}
@@ -297,6 +300,23 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-t border-white/10">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          role="img"
+          aria-label="Global skyline at dusk — OKI Inc. international reach"
+          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1496588152823-86ff7695e68f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHwxfHxza3lsaW5lJTIwcGFub3JhbWElMjBkdXNrfGVufDB8fHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85)" }}
+        />
+        <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
+        <div className="relative mx-auto max-w-[1600px] px-6 py-32 text-center md:px-12 md:py-40">
+          <KineticLines
+            animate={false}
+            lines={["Quiet power. Long-term ownership.", "Absolute precision."]}
+            lineClassName="font-display text-3xl font-medium leading-[1.1] tracking-tighter text-oki-text md:text-5xl"
+          />
         </div>
       </section>
 

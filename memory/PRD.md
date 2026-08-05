@@ -28,6 +28,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, professional upgrade pass)
+- Hero veil lightened (dark 0.26 / light 0.42) and image brightened — building is sharper, no longer blurred out
+- New monochrome logo system per latest brand board: theme-aware mark (gold gradient on dark, black on light), "OKI_INC." underscore wordmark in nav/footer/preloader, monochrome gold favicon
+- 8 new sharp department photos: asset class cards on Holdings (financial district, concrete, circuit board, vault), Strategy phase panels (aerial city, geometric concrete, night tower), full-bleed skyline quote band on Home, photo header bands on Strategy/About/Contact
+- New animations: clip-path photo reveals with slow zoom, animated stat counters (04/12), nav link underline hovers
+- Optimization: per-route page titles + meta descriptions, OG tags, hero image preload, aria-labels/roles on all photo elements, console verified clean (no app errors)
+
 ## Implemented (2026-08-05, full-bleed hero background)
 - Hero restructured per user feedback: the building photograph is now a FULL-BLEED background behind the text (no masked card in front), with a theme-aware veil (--hero-veil) plus top/bottom fades so headline and background never interfere
 - Ken-burns entrance (scale 1.15 → 1 with fade) and scroll parallax retained on the background layer; text sits on z-10 above the image

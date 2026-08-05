@@ -1,4 +1,4 @@
-import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
+import { KineticLines, Reveal, SectionTag, PhotoReveal } from "@/components/Kinetic";
 import DonutChart from "@/components/charts/DonutChart";
 import GeoBars from "@/components/charts/GeoBars";
 import GrowthLine from "@/components/charts/GrowthLine";
@@ -8,21 +8,25 @@ const assetClasses = [
     title: "Equity Holdings",
     desc: "Controlling and anchor positions in operating companies across North America, Europe, and Asia-Pacific. Acquired to be held, not traded.",
     tag: "42% of Portfolio",
+    img: "https://images.unsplash.com/photo-1526642591341-bcfc36ffae2f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwzfHxmaW5hbmNpYWwlMjBkaXN0cmljdCUyMGR1c2t8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
   {
     title: "Strategic Real Assets",
     desc: "Income-critical infrastructure, industrial land, and energy-adjacent real property in supply-constrained corridors.",
     tag: "28% of Portfolio",
+    img: "https://images.unsplash.com/photo-1558120985-abcafafcae16?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxjb25jcmV0ZSUyMGFyY2hpdGVjdHVyZSUyMGRhcmt8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
   {
     title: "Intellectual Property & Intangibles",
     desc: "Patent estates, proprietary data, and brand portfolios with durable pricing power and compounding royalty streams.",
     tag: "18% of Portfolio",
+    img: "https://images.unsplash.com/photo-1592659762303-90081d34b277?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxjaXJjdWl0JTIwYm9hcmQlMjBkYXJrfGVufDB8fHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85",
   },
   {
     title: "Private Credit & Special Situations",
     desc: "Senior-secured direct lending and dislocation-driven acquisitions where structure, not sentiment, determines return.",
     tag: "12% of Portfolio",
+    img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxiYW5rJTIwdmF1bHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
 ];
 
@@ -81,12 +85,15 @@ export default function Holdings() {
             <Reveal
               key={a.title}
               delay={i * 0.1}
-              className="card-glow group bg-oki-black p-10 transition-colors duration-500 hover:bg-oki-elevated md:p-14"
+              className="card-glow group bg-oki-black transition-colors duration-500 hover:bg-oki-elevated"
             >
-              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-gold">{a.tag}</p>
-              <h3 className="mt-6 font-display text-2xl font-medium tracking-tight text-oki-text md:text-3xl">{a.title}</h3>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-oki-muted">{a.desc}</p>
-              <div className="mt-8 h-px w-full bg-white/5 transition-colors duration-500 group-hover:bg-oki-gold/30" />
+              <PhotoReveal src={a.img} alt={a.title} delay={i * 0.1} className="h-44 w-full border-b border-white/10" />
+              <div className="p-10 md:p-14">
+                <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-gold">{a.tag}</p>
+                <h3 className="mt-6 font-display text-2xl font-medium tracking-tight text-oki-text md:text-3xl">{a.title}</h3>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-oki-muted">{a.desc}</p>
+                <div className="mt-8 h-px w-full bg-white/5 transition-colors duration-500 group-hover:bg-oki-gold/30" />
+              </div>
             </Reveal>
           ))}
         </div>

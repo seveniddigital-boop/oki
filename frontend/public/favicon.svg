@@ -5,14 +5,10 @@
       <stop offset="55%" stop-color="#C5A059"/>
       <stop offset="100%" stop-color="#8A6D3B"/>
     </linearGradient>
-    <linearGradient id="c" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#C62828"/>
-      <stop offset="100%" stop-color="#7A1414"/>
-    </linearGradient>
   </defs>
   <rect width="120" height="60" fill="#050505"/>
   <rect x="7" y="9" width="38" height="38" stroke="url(#g)" stroke-width="7" fill="none"/>
   <path d="M45 40 L54 49 L45 49 Z" fill="url(#g)"/>
   <path d="M84 9 L60 28 L84 47" stroke="url(#g)" stroke-width="8" fill="none"/>
-  <rect x="99" y="9" width="9" height="38" fill="url(#c)"/>
+  <rect x="99" y="9" width="9" height="38" fill="url(#g)"/>
 </svg>

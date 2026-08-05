@@ -46,6 +46,7 @@ export default function Nav() {
                 }
               >
                 {l.label}
+                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-oki-gold transition-[width] duration-300 group-hover:w-full" />
               </NavLink>
             ))}
             <Link

@@ -27,7 +27,10 @@
     --tower-edge: rgba(197, 160, 89, 0.3);
     --tower-rim: rgba(227, 200, 136, 0.5);
     --tower-windows: rgba(245, 245, 245, 0.07);
-    --hero-veil: rgba(5, 5, 5, 0.42);
+    --hero-veil: rgba(5, 5, 5, 0.26);
+    --logo-1: #e3c888;
+    --logo-2: #c5a059;
+    --logo-3: #8a6d3b;
 }
 
 [data-theme="light"] {
@@ -51,7 +54,10 @@
     --tower-edge: rgba(13, 13, 13, 0.18);
     --tower-rim: rgba(154, 122, 60, 0.7);
     --tower-windows: rgba(13, 13, 13, 0.08);
-    --hero-veil: rgba(242, 239, 232, 0.6);
+    --hero-veil: rgba(242, 239, 232, 0.42);
+    --logo-1: #3a3a3a;
+    --logo-2: #141414;
+    --logo-3: #000000;
 }
 
 [data-theme="light"] .border-white\/5 { border-color: rgba(13, 13, 13, 0.06) !important; }
