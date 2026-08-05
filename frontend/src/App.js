@@ -27,8 +27,16 @@ function europeanTheme() {
   }
 }
 
+function systemTheme() {
+  try {
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  } catch {
+    return null;
+  }
+}
+
 function currentTheme() {
-  return localStorage.getItem("oki-theme") || europeanTheme();
+  return localStorage.getItem("oki-theme") || systemTheme() || europeanTheme();
 }
 
 const PAGE_META = {

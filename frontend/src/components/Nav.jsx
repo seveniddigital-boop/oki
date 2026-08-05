@@ -98,14 +98,32 @@ export default function Nav() {
               <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </nav>
-          <button
-            data-testid="nav-menu-toggle"
-            onClick={() => setOpen(!open)}
-            className="text-oki-text md:hidden"
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="flex items-center gap-3 md:hidden">
+            <button
+              onClick={toggleSound}
+              data-testid="sound-toggle-mobile"
+              aria-label="Toggle click sounds"
+              className="flex h-9 w-9 items-center justify-center border border-white/15 text-oki-muted transition-colors duration-300 hover:border-oki-gold/60 hover:text-oki-gold"
+            >
+              {sound ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
+            </button>
+            <button
+              onClick={toggleTheme}
+              data-testid="theme-toggle-mobile"
+              aria-label="Toggle dark and light theme"
+              className="flex h-9 w-9 items-center justify-center border border-white/15 text-oki-muted transition-colors duration-300 hover:border-oki-gold/60 hover:text-oki-gold"
+            >
+              {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+            </button>
+            <button
+              data-testid="nav-menu-toggle"
+              onClick={() => setOpen(!open)}
+              className="text-oki-text"
+              aria-label="Toggle menu"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
       </motion.header>
 

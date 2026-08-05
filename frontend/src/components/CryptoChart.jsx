@@ -19,7 +19,7 @@ const TIMEFRAMES = [
   { label: "30D", days: 30 },
 ];
 
-export default function CryptoChart({ coin, onClose }) {
+export default function CryptoChart({ coin, name, onClose }) {
   const [data, setData] = useState(null);
   const [days, setDays] = useState(7);
 
@@ -89,7 +89,7 @@ export default function CryptoChart({ coin, onClose }) {
     >
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
         <div className="flex items-center gap-4">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold">{COIN_NAMES[coin]}</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold">{name || COIN_NAMES[coin] || coin}</span>
           <div className="flex gap-1">
             {TIMEFRAMES.map((tf) => (
               <button

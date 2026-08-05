@@ -11,7 +11,7 @@
         <meta property="og:type" content="website" />
         <link rel="preload" as="image" href="https://images.unsplash.com/photo-1593427995298-cad6731716d8?q=85&w=1600&auto=format&fit=crop" />
         <script>
-          (function(){try{var h=parseInt(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',hour:'numeric',hour12:false}).format(new Date()),10);document.documentElement.dataset.theme=(h>=7&&h<19)?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();
+          (function(){try{var o=localStorage.getItem('oki-theme');var s=null;try{s=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}catch(e){}var h=parseInt(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',hour:'numeric',hour12:false}).format(new Date()),10);document.documentElement.dataset.theme=o||s||((h>=7&&h<19)?'light':'dark');}catch(e){document.documentElement.dataset.theme='dark';}})();
         </script>
         <title>OKI Inc. — International Asset Holdings</title>
         <!--

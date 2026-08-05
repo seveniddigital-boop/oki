@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import CryptoTicker from "@/components/CryptoTicker";
 import CryptoChart from "@/components/CryptoChart";
+import CryptoSearch from "@/components/CryptoSearch";
 
 function ChartDisclosure({ title, testid, defaultOpen = false, className = "", children }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -151,18 +152,17 @@ export default function Holdings() {
                 </p>
               </Reveal>
               <Reveal delay={0.3} className="mt-8">
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   {[
-                    { label: "Bitcoin", id: "bitcoin" },
-                    { label: "Ethereum", id: "ethereum" },
-                    { label: "Select L1 Infrastructure", id: "solana" },
+                    { label: "Bitcoin", id: "bitcoin", name: "Bitcoin" },
+                    { label: "Ethereum", id: "ethereum", name: "Ethereum" },
                   ].map((c) => (
                     <button
                       key={c.id}
                       data-testid={`chip-${c.id}`}
-                      onClick={() => setActiveCoin(activeCoin === c.id ? null : c.id)}
+                      onClick={() => setActiveCoin(activeCoin?.id === c.id ? null : c)}
                       className={`border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] transition-colors duration-300 ${
-                        activeCoin === c.id
+                        activeCoin?.id === c.id
                           ? "border-oki-gold bg-oki-gold text-oki-black"
                           : "border-oki-gold/30 text-oki-gold hover:border-oki-gold/70"
                       }`}
@@ -170,9 +170,12 @@ export default function Holdings() {
                       {c.label}
                     </button>
                   ))}
+                  <CryptoSearch onSelect={(coin) => setActiveCoin(coin)} />
                 </div>
                 <AnimatePresence>
-                  {activeCoin && <CryptoChart key={activeCoin} coin={activeCoin} onClose={() => setActiveCoin(null)} />}
+                  {activeCoin && (
+                    <CryptoChart key={activeCoin.id} coin={activeCoin.id} name={activeCoin.name} onClose={() => setActiveCoin(null)} />
+                  )}
                 </AnimatePresence>
               </Reveal>
             </div>

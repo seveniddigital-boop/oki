@@ -316,12 +316,45 @@ async def crypto_prices():
 
 
 _chart_cache = {}
+_search_cache = {}
+
+@api_router.get("/crypto-search")
+async def crypto_search(q: str = ""):
+    import time, asyncio
+    q = q.strip().lower()
+    if len(q) < 2:
+        return {"coins": []}
+    now = time.time()
+    cached = _search_cache.get(q)
+    if cached and now - cached["ts"] < 600:
+        return cached["data"]
+    data = None
+    for attempt in range(3):
+        try:
+            async with httpx.AsyncClient(timeout=15) as http:
+                resp = await http.get("https://api.coingecko.com/api/v3/search", params={"query": q})
+            resp.raise_for_status()
+            coins = [
+                {"id": c["id"], "name": c["name"], "symbol": c["symbol"], "rank": c.get("market_cap_rank")}
+                for c in resp.json().get("coins", [])[:12]
+            ]
+            data = {"coins": coins}
+            break
+        except Exception:
+            if attempt < 2:
+                await asyncio.sleep(2)
+    if data is None:
+        if cached:
+            return cached["data"]
+        raise HTTPException(status_code=502, detail="Search feed unavailable")
+    _search_cache[q] = {"data": data, "ts": now}
+    return data
 
 @api_router.get("/crypto-chart")
 async def crypto_chart(id: str = "bitcoin", days: int = 7):
     import time
-    allowed = {"bitcoin", "ethereum", "solana"}
-    if id not in allowed:
+    import re
+    if not re.fullmatch(r"[a-z0-9-]{1,50}", id):
         raise HTTPException(status_code=400, detail="Unsupported asset")
     days = min(max(days, 1), 30)
     key = f"{id}:{days}"
