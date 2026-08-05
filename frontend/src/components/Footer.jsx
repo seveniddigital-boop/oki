@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { LogoMark } from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -6,7 +7,13 @@ export default function Footer() {
       <div className="mx-auto max-w-[1600px] px-6 pb-10 pt-20 md:px-12">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-6">
-            <p className="font-display text-6xl font-semibold tracking-tighter text-outline md:text-8xl">OKI INC.</p>
+            <LogoMark size={64} />
+            <p className="mt-6 font-display text-2xl font-semibold tracking-[0.3em] text-oki-text">
+              OKI <span className="text-oki-gold">INC.</span>
+            </p>
+            <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.4em] text-oki-faint">
+              International Asset Holdings · Strategic Investments
+            </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-oki-faint">
               A Delaware C-Corporation engineered for international asset ownership. Quiet power. Long-term control. Absolute precision.
             </p>

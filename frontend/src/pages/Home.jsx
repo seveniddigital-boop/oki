@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
+import { LogoMark } from "@/components/Logo";
 import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
 import EditorialMarquee from "@/components/Marquee";
 
@@ -18,14 +19,17 @@ function Preloader({ done }) {
           transition={{ duration: 0.9, ease: EASE }}
         >
           <div className="overflow-hidden">
-            <motion.p
+            <motion.div
               initial={{ y: "110%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.8, ease: EASE }}
-              className="font-display text-2xl font-medium tracking-[0.4em] text-oki-text"
+              className="flex flex-col items-center gap-5"
             >
-              OKI<span className="text-oki-gold">.</span>
-            </motion.p>
+              <LogoMark size={44} />
+              <p className="font-display text-sm font-medium tracking-[0.5em] text-oki-text">
+                OKI <span className="text-oki-gold">INC.</span>
+              </p>
+            </motion.div>
           </div>
           <motion.div
             className="absolute bottom-0 left-0 h-px bg-oki-gold"
@@ -77,15 +81,20 @@ function Hero() {
       </motion.div>
 
       <motion.div style={{ rotateX, rotateY, opacity: fade }} className="relative z-10 mx-auto w-full max-w-[1600px] px-6 pb-24 md:px-12">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.9, duration: 1 }}
-          className="mb-8 font-mono text-[11px] uppercase tracking-[0.5em] text-oki-gold"
-          data-testid="hero-overline"
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.8, duration: 0.9, ease: EASE }}
+          className="mb-8 flex items-center gap-5"
         >
-          Delaware C-Corporation
-        </motion.p>
+          <LogoMark size={34} />
+          <p
+            className="font-mono text-[11px] uppercase tracking-[0.5em] text-oki-gold"
+            data-testid="hero-overline"
+          >
+            Delaware C-Corporation
+          </p>
+        </motion.div>
 
         <h1 className="font-display font-semibold leading-[0.82] tracking-tighter" data-testid="hero-headline">
           <KineticLines

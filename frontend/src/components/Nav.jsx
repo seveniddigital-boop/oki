@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const links = [
   { to: "/holdings", label: "Holdings", id: "nav-holdings-link" },
@@ -29,8 +30,8 @@ export default function Nav() {
         className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-oki-black/80 backdrop-blur-xl"
       >
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 md:px-12">
-          <Link to="/" data-testid="nav-logo-link" className="font-display text-lg font-semibold tracking-[0.25em] text-oki-text">
-            OKI<span className="text-oki-gold">.</span>
+          <Link to="/" data-testid="nav-logo-link" aria-label="OKI Inc. home">
+            <Logo size={22} />
           </Link>
           <nav className="hidden items-center gap-10 md:flex">
             {links.map((l) => (

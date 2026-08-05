@@ -28,6 +28,10 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, brand identity pass)
+- Recreated the official OKI Inc. logo (gold geometric square + chevron + crimson bar) as a crisp SVG component with gold/crimson gradients
+- Logo integrated: floating nav (mark + wordmark), hero overline, preloader, footer (large mark + wordmark + tagline), and SVG favicon
+
 ## Implemented (2026-08-04, photography & copy pass)
 - Tall luxury building photography integrated sitewide: night skyscraper hero background (parallax), tower facade editorial panel on Home ("Fig. 01 — Vertical Dominance"), NYC night skyline header band on Holdings, glass tower texture on Strategy, moody tower on About governance, tower side panel on Contact ("Center of Gravity — Delaware, USA"), skyline silhouette behind closing CTA
 - Copy polish: added professional corporate mandate paragraph to The Position section; footer line refined to "Established for Permanence"
