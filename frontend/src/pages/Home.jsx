@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
-import Tower from "@/components/Tower";
+import RealTower from "@/components/RealTower";
 import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
 import EditorialMarquee from "@/components/Marquee";
 
@@ -15,20 +15,32 @@ function Preloader({ done }) {
       {!done && (
         <motion.div
           data-testid="preloader"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-oki-black"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden"
           exit={{ y: "-100%" }}
           transition={{ duration: 0.9, ease: EASE }}
         >
-          <div className="overflow-hidden">
+          <motion.div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url(https://images.unsplash.com/photo-1601923112035-3e4819c82317?q=85&w=1600&auto=format&fit=crop)" }}
+            initial={{ scale: 1.12 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 2.2, ease: EASE }}
+          />
+          <div className="absolute inset-0" style={{ backgroundColor: "var(--oki-bg-80)" }} />
+          <div className="hero-bottom-fade absolute inset-0" />
+          <div className="relative overflow-hidden">
             <motion.div
               initial={{ y: "110%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.8, ease: EASE }}
               className="flex flex-col items-center gap-5"
             >
-              <LogoMark size={44} />
-              <p className="font-display text-sm font-medium tracking-[0.5em] text-oki-text">
+              <LogoMark size={52} />
+              <p className="font-display text-base font-medium tracking-[0.5em] text-oki-text">
                 OKI <span className="text-oki-gold">INC.</span>
+              </p>
+              <p className="font-mono text-[9px] uppercase tracking-[0.45em] text-oki-faint">
+                International Asset Holdings · Strategic Investments
               </p>
             </motion.div>
           </div>
@@ -100,7 +112,7 @@ function Hero() {
           transition={{ delay: 2.1, duration: 1.6, ease: EASE }}
         >
           <motion.div style={{ y: towerY }}>
-            <Tower className="h-[62vh] w-auto md:h-[74vh]" />
+            <RealTower className="aspect-[2/3] h-[66vh] md:h-[84vh]" />
           </motion.div>
         </motion.div>
       </div>
