@@ -28,6 +28,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, video-inspired hero rebuild)
+- User shared a TikTok reference (empiremetaverse-style: monumental tower rising through giant typography); frames extracted and analyzed
+- Rebuilt the homepage hero in that composition: custom art-deco SVG tower (setback blocks, window lines, gold edge light, crimson accent strip, pulsing spire beacon) rising from the bottom center IN FRONT of massive "OKI / INC." type
+- Scroll parallax: text drifts up while the tower drifts down (mirrors the reference video's scroll feel); tower rises from below on load after the preloader
+- Pill-shaped "Explore Holdings" CTA centered over the tower base (mirrors the reference "VIEW FLOORS" pill); statement + Investor Access link bottom-left
+- Fixed transform conflict (framer-motion overriding Tailwind centering) by nesting motion wrappers; verified desktop + mobile centering
+
 ## Implemented (2026-08-05, brand identity pass)
 - Recreated the official OKI Inc. logo (gold geometric square + chevron + crimson bar) as a crisp SVG component with gold/crimson gradients
 - Logo integrated: floating nav (mark + wordmark), hero overline, preloader, footer (large mark + wordmark + tagline), and SVG favicon
