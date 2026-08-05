@@ -11,9 +11,9 @@ import EditorialMarquee from "@/components/Marquee";
 const EASE = [0.22, 1, 0.36, 1];
 
 const HERO_DARK =
-  "https://images.unsplash.com/photo-1557137200-fec234cd5740?q=85&w=1600&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1593427995298-cad6731716d8?q=85&w=1600&auto=format&fit=crop";
 const HERO_LIGHT =
-  "https://images.unsplash.com/photo-1533348239637-984bae0f8a5b?q=85&w=1600&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1515937228207-a2a00c751c3d?q=85&w=1600&auto=format&fit=crop";
 const INTERLUDE_DARK =
   "https://images.unsplash.com/photo-1506383631675-0b110111327b?q=85&w=1600&auto=format&fit=crop";
 const INTERLUDE_LIGHT =
@@ -86,8 +86,8 @@ function Hero() {
             className="relative h-full w-full"
           >
             <div
-              className="tower-dark absolute inset-0 bg-cover bg-[center_25%]"
-              style={{ backgroundImage: `url(${HERO_DARK})`, filter: "brightness(0.8) saturate(0.85)" }}
+              className="tower-dark absolute inset-0 bg-cover bg-[center_bottom]"
+              style={{ backgroundImage: `url(${HERO_DARK})`, filter: "brightness(0.95) saturate(0.9)" }}
             />
             <div
               className="tower-light absolute inset-0 bg-cover bg-[center_25%]"
