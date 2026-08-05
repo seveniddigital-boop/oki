@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, copy de-duplication pass)
+- Rewrote repeated copy sitewide: Home doctrine chapters no longer duplicate Strategy phases (new distinct texts), quote band changed to "Structure is the moat. Time is the multiplier." (was repeating footer motto), Holdings intro and crypto section reworded, Insights essay retitled "The Case for Never Selling", "center of gravity" / "across continents" / "generational horizon" / "we own time" overlaps resolved across Home, Strategy, About, Contact, and Insights
+
 ## Implemented (2026-08-05, branded transitions + perf)
 - Page transitions now show the full branded veil on every nav click: skyscraper-canyon photo, gold logo mark, OKI_INC. wordmark, tagline, gold progress line — slides up, holds, slides away (mirrors the entry preloader)
 - Tower interlude image replaced (Chrysler Building through trees at dusk / bright overcast tower for light theme) — no longer repeats the hero photo

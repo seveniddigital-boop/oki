@@ -57,7 +57,7 @@ export default function Holdings() {
           />
           <Reveal delay={0.4} className="mt-10 max-w-xl">
             <p className="text-sm leading-relaxed text-oki-muted">
-              A consolidated view of the OKI Inc. portfolio. Every position is structured for control, insulated by architecture, and held on a generational horizon.
+              A consolidated view of the OKI Inc. portfolio. Every position is acquired to be owned outright — and held beyond any market cycle.
             </p>
           </Reveal>
         </div>
@@ -121,7 +121,7 @@ export default function Holdings() {
               />
               <Reveal delay={0.2} className="mt-8 max-w-md">
                 <p className="text-sm leading-relaxed text-oki-muted">
-                  Digital assets are governed by the same doctrine as every OKI position: acquired with conviction, structured through the Delaware architecture, and held without a clock. Custody is institutional. Keys are distributed. The majority of the position never touches an internet-connected device.
+                  Digital assets are governed by the same doctrine as every OKI position: acquired with conviction, structured through the Delaware architecture, and held with no intention to sell. Custody is institutional. Keys are distributed. The majority of the position never touches an internet-connected device.
                 </p>
               </Reveal>
               <Reveal delay={0.3} className="mt-8 flex flex-wrap gap-3">

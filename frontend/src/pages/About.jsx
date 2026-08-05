@@ -48,7 +48,7 @@ export default function About() {
                 OKI Inc. is incorporated in the State of Delaware — the most settled corporate legal environment in the world. Two centuries of case law, a dedicated Court of Chancery, and statutory clarity make it the jurisdiction of record for capital that intends to remain capital.
               </p>
               <p>
-                From this single center of gravity, the corporation directs holding entities across twelve jurisdictions — each position insulated, each structure deliberate. Governance is centralized. Exposure is not.
+                From this single corporate seat, the corporation directs holding entities across twelve jurisdictions — each position insulated, each structure deliberate. Governance is centralized. Exposure is not.
               </p>
             </Reveal>
           </div>

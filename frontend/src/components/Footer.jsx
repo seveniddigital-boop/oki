@@ -13,7 +13,7 @@ export default function Footer() {
               International Asset Holdings · Strategic Investments
             </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-oki-faint">
-              A Delaware C-Corporation engineered for international asset ownership. Quiet power. Long-term control. Absolute precision.
+              A Delaware C-Corporation built for international asset ownership. Quiet power. Long-term control. Absolute precision.
             </p>
           </div>
           <div className="md:col-span-3">

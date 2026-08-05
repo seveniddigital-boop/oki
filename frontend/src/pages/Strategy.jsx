@@ -7,7 +7,7 @@ const phases = [
     n: "01",
     title: "Identify",
     subtitle: "High-conviction global assets",
-    text: "We scan across continents and cycles for assets whose value is structural, not cyclical. Conviction is built slowly and acted on completely. When OKI moves, the analysis is already finished.",
+    text: "We search across markets and eras for assets whose value is structural, not cyclical. Conviction is built slowly and acted on completely. When OKI moves, the analysis is already finished.",
     img: "https://images.unsplash.com/photo-1725362364605-21960b69d981?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxhZXJpYWwlMjBjaXR5JTIwbmlnaHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
   {
@@ -21,13 +21,13 @@ const phases = [
     n: "03",
     title: "Hold",
     subtitle: "Long-duration control orientation",
-    text: "We hold with a generational horizon. No exit mandates, no fund-life pressure, no quarterly theater. Time is the one advantage that cannot be replicated — and we own it.",
+    text: "We hold with a generational horizon. No exit mandates, no fund-life pressure, no quarterly theater. Time is the one advantage that cannot be replicated.",
     img: "https://images.unsplash.com/photo-1565043534426-8a67ac8671e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxsb25nJTIwZXhwb3N1cmUlMjBza3lzY3JhcGVyJTIwbmlnaHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
 ];
 
 const principles = [
-  { title: "International Reach", text: "Assets across four continents and twelve jurisdictions, governed from a single corporate center of gravity." },
+  { title: "International Reach", text: "Positions on four continents, directed from a single corporate center of gravity." },
   { title: "Liability Insulation", text: "Compartmentalized holding structures ensure no single position can compromise the whole." },
   { title: "Generational Ownership", text: "Capital disciplined to outlast its stewards. Decisions are measured in decades." },
 ];

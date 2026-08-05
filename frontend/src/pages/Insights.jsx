@@ -19,8 +19,8 @@ const ESSAYS = [
     id: "ownership-is-the-strategy",
     date: "JUL 2026",
     category: "Doctrine",
-    title: "Ownership Is the Strategy",
-    excerpt: "Why OKI Inc. does not trade, does not exit, and does not apologize for it.",
+    title: "The Case for Never Selling",
+    excerpt: "The argument against fund lives, exit mandates, and the quarterly clock.",
     body: [
       "Most capital is managed against a clock. Fund lives expire, quarters close, and positions built with care are sold to satisfy a calendar. OKI Inc. was organized to remove the clock from the equation entirely.",
       "When an asset enters the OKI portfolio, it enters permanently. This is not passivity — it is the most aggressive posture available to capital. Every competitor must eventually sell. We never must. Over decades, that asymmetry compounds into something no quarterly model can replicate.",
@@ -34,7 +34,7 @@ const ESSAYS = [
     excerpt: "Two centuries of settled corporate law is not a detail. It is the foundation.",
     body: [
       "Every OKI position is domiciled within a Delaware C-Corporation framework. The choice is deliberate: the Delaware General Corporation Law and the Court of Chancery offer the most predictable corporate jurisprudence in the world.",
-      "Predictability is not administration. It is defense. When governance questions arise — and over generational horizons, they always arise — they are resolved against two hundred years of precedent, not against the mood of a foreign regulator. Structure is how capital survives its own success.",
+      "Predictability is not administration. It is defense. When governance questions arise — and over long enough horizons, they always arise — they are resolved against two hundred years of precedent, not against the mood of a foreign regulator. Structure is how capital survives its own success.",
     ],
   },
   {
@@ -45,7 +45,7 @@ const ESSAYS = [
     excerpt: "Minority positions observe outcomes. Controlling positions author them.",
     body: [
       "Sixty-four percent of the OKI portfolio is held in controlling stakes. This is the operating principle, not a preference. A minority investor reads the outcome; a controlling owner writes it.",
-      "Control compounds quietly: pricing decisions, capital allocation, management selection, timing. Each lever seems modest in isolation. Across twelve jurisdictions and a generational horizon, the levers multiply one another. That multiplication is the return.",
+      "Control compounds quietly: pricing decisions, capital allocation, management selection, timing. Each lever seems modest in isolation. Across a dozen jurisdictions and decades of patience, the levers multiply one another. That multiplication is the return.",
     ],
   },
   {

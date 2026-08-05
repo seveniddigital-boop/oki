@@ -228,9 +228,9 @@ function TowerInterlude() {
 }
 
 const chapters = [
-  { n: "01", title: "Acquire", text: "High-conviction assets are identified across continents — equity positions, real assets, intellectual property, private credit. We move before consensus forms." },
-  { n: "02", title: "Structure", text: "Every position is held through Delaware holding architecture — liability-insulated, jurisdiction-optimized, engineered for permanence." },
-  { n: "03", title: "Hold", text: "Long-duration control orientation. We do not trade. We do not exit. Ownership compounds; everything else is noise." },
+  { n: "01", title: "Acquire", text: "Conviction before consensus. Positions are taken whole — equity, real assets, intellectual property, private credit, digital networks — and taken to keep." },
+  { n: "02", title: "Structure", text: "Every asset is domiciled under Delaware law, insulated by design and defended by precedent. Jurisdiction is chosen the way generals choose terrain." },
+  { n: "03", title: "Hold", text: "Permanence as policy. Capital that never has to sell ends up owning what others cannot afford to keep." },
 ];
 
 const allocation = [
@@ -265,7 +265,7 @@ export default function Home() {
             />
             <Reveal delay={0.3} className="mt-10 max-w-xl">
               <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-                OKI Inc. is a Delaware C-Corporation organized for the acquisition, structuring, and long-duration ownership of strategic assets across international markets. The corporation operates under a single mandate: disciplined control that compounds across generations.
+                OKI Inc. is a Delaware C-Corporation organized for the acquisition, structuring, and long-duration ownership of strategic assets across international markets. The corporation operates under a single mandate: disciplined control that compounds without expiry.
               </p>
             </Reveal>
           </div>
@@ -368,7 +368,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-[1600px] px-6 py-32 text-center md:px-12 md:py-40">
           <KineticLines
             animate={false}
-            lines={["Quiet power. Long-term ownership.", "Absolute precision."]}
+            lines={["Structure is the moat.", "Time is the multiplier."]}
             lineClassName="font-display text-3xl font-medium leading-[1.1] tracking-tighter text-oki-text md:text-5xl"
           />
         </div>
