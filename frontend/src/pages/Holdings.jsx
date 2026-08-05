@@ -35,7 +35,7 @@ export default function Holdings() {
           style={{ backgroundImage: "url(https://images.unsplash.com/photo-1664353655151-9d94a9170eb0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmUlMjBuaWdodCUyMGRhcmt8ZW58MHx8fHwxNzg1ODEyODQyfDA&ixlib=rb-4.1.0&q=85)" }}
         />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,#050505_2%,transparent_55%)]" />
+        <div className="hero-bottom-fade absolute inset-0" />
         <div className="relative mx-auto max-w-[1600px] px-6 md:px-12">
           <SectionTag index="H/01" label="Holdings & Assets" />
           <KineticLines

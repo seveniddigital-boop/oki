@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 const segments = [
   { label: "Equity Holdings", value: 42, color: "#C5A059" },
   { label: "Strategic Real Assets", value: 28, color: "#991B1B" },
-  { label: "IP & Intangibles", value: 18, color: "rgba(237,237,237,0.5)" },
-  { label: "Private Credit & Special Situations", value: 12, color: "rgba(237,237,237,0.15)" },
+  { label: "IP & Intangibles", value: 18, color: "var(--chart-n1)" },
+  { label: "Private Credit & Special Situations", value: 12, color: "var(--chart-n2)" },
 ];
 
 export default function DonutChart() {
@@ -15,7 +15,7 @@ export default function DonutChart() {
       <div className="mt-8 flex flex-1 flex-col items-center justify-center gap-10 lg:flex-row">
         <div className="relative">
           <svg width="220" height="220" viewBox="0 0 200 200" className="-rotate-90">
-            <circle cx="100" cy="100" r="84" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="14" />
+            <circle cx="100" cy="100" r="84" fill="none" stroke="var(--chart-grid)" strokeWidth="14" />
             {segments.map((s, i) => {
               const start = acc;
               acc += s.value;

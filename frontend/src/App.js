@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -9,7 +10,28 @@ import Strategy from "@/pages/Strategy";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 
+function europeanTheme() {
+  try {
+    const hour = parseInt(
+      new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Berlin", hour: "numeric", hour12: false }).format(new Date()),
+      10
+    );
+    return hour >= 7 && hour < 19 ? "light" : "dark";
+  } catch {
+    return "dark";
+  }
+}
+
 function App() {
+  useEffect(() => {
+    const apply = () => {
+      document.documentElement.dataset.theme = europeanTheme();
+    };
+    apply();
+    const id = setInterval(apply, 60000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <div className="App grain">
       <BrowserRouter>

@@ -61,7 +61,7 @@ function Hero() {
         <div className="hero-grid animate-grid-drift absolute inset-0" />
         <div className="absolute left-1/2 top-1/3 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(197,160,89,0.08)_0%,transparent_55%)]" />
         <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(153,27,27,0.14)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,#050505_6%,transparent_55%)]" />
+        <div className="hero-bottom-fade absolute inset-0" />
       </div>
 
       <motion.div style={{ y: textY, opacity: fade }} className="relative z-0 mt-24 text-center md:mt-16">

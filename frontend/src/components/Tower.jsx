@@ -11,7 +11,7 @@ function WindowLines({ x, y, w, h }) {
   const lines = [];
   for (let lx = x + 7; lx < x + w - 4; lx += 9) {
     lines.push(
-      <line key={lx} x1={lx} y1={y + 6} x2={lx} y2={y + h - 6} stroke="rgba(245,245,245,0.07)" strokeWidth="1.5" />
+      <line key={lx} x1={lx} y1={y + 6} x2={lx} y2={y + h - 6} stroke="var(--tower-windows)" strokeWidth="1.5" />
     );
   }
   return <>{lines}</>;
@@ -22,13 +22,13 @@ export default function Tower({ className = "" }) {
     <svg viewBox="0 0 240 640" className={className} aria-label="OKI tower" data-testid="hero-tower">
       <defs>
         <linearGradient id="towerBody" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#1a1a1a" />
-          <stop offset="50%" stopColor="#101010" />
-          <stop offset="100%" stopColor="#0a0a0a" />
+          <stop offset="0%" style={{ stopColor: "var(--tower-1)" }} />
+          <stop offset="50%" style={{ stopColor: "var(--tower-2)" }} />
+          <stop offset="100%" style={{ stopColor: "var(--tower-3)" }} />
         </linearGradient>
         <linearGradient id="towerFade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#050505" stopOpacity="0" />
-          <stop offset="100%" stopColor="#050505" stopOpacity="1" />
+          <stop offset="0%" style={{ stopColor: "var(--oki-bg)" }} stopOpacity="0" />
+          <stop offset="100%" style={{ stopColor: "var(--oki-bg)" }} stopOpacity="1" />
         </linearGradient>
         <linearGradient id="towerCrimson" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#C62828" />
@@ -43,9 +43,9 @@ export default function Tower({ className = "" }) {
 
       {blocks.map((b, i) => (
         <g key={i}>
-          <rect x={b.x} y={b.y} width={b.w} height={b.h} fill="url(#towerBody)" stroke="rgba(197,160,89,0.3)" strokeWidth="1" />
+          <rect x={b.x} y={b.y} width={b.w} height={b.h} fill="url(#towerBody)" stroke="var(--tower-edge)" strokeWidth="1" />
           <WindowLines {...b} />
-          <line x1={b.x + 1} y1={b.y} x2={b.x + 1} y2={b.y + b.h} stroke="rgba(227,200,136,0.5)" strokeWidth="1.5" />
+          <line x1={b.x + 1} y1={b.y} x2={b.x + 1} y2={b.y + b.h} stroke="var(--tower-rim)" strokeWidth="1.5" />
         </g>
       ))}
 

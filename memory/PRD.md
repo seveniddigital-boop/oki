@@ -28,6 +28,12 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, time-based dual theme)
+- Full light/dark theming via CSS variables: all OKI color tokens, tower colors, chart neutrals, borders, overlays, and grid lines are theme-aware
+- Light theme matches the TikTok reference clip: ivory background (#F2EFE8), black massive headline, white art-deco tower, gold accents
+- Automatic switching based on European time (Europe/Berlin): light 07:00–19:00, dark 19:00–07:00; inline head script prevents theme flash on load; re-checked every 60s; smooth 0.6s color transitions
+- Verified both themes on Home (hero + position section) and Holdings (all charts readable in both)
+
 ## Implemented (2026-08-05, video-inspired hero rebuild)
 - User shared a TikTok reference (empiremetaverse-style: monumental tower rising through giant typography); frames extracted and analyzed
 - Rebuilt the homepage hero in that composition: custom art-deco SVG tower (setback blocks, window lines, gold edge light, crimson accent strip, pulsing spire beacon) rising from the bottom center IN FRONT of massive "OKI / INC." type

@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 const regions = [
   { label: "North America", value: 38, color: "#C5A059" },
   { label: "Europe", value: 27, color: "#991B1B" },
-  { label: "Asia-Pacific", value: 22, color: "rgba(237,237,237,0.5)" },
-  { label: "Emerging Markets", value: 13, color: "rgba(237,237,237,0.15)" },
+  { label: "Asia-Pacific", value: 22, color: "var(--chart-n1)" },
+  { label: "Emerging Markets", value: 13, color: "var(--chart-n2)" },
 ];
 
 const H = 220;
@@ -17,7 +17,7 @@ export default function GeoBars() {
       <div className="mt-8 flex flex-1 items-end">
         <svg viewBox="0 0 480 290" className="w-full">
           {[0.25, 0.5, 0.75, 1].map((f) => (
-            <line key={f} x1="0" x2="480" y1={BASE - H * f} y2={BASE - H * f} stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+            <line key={f} x1="0" x2="480" y1={BASE - H * f} y2={BASE - H * f} stroke="var(--chart-grid)" strokeWidth="1" />
           ))}
           {regions.map((r, i) => {
             const h = (r.value / 40) * H;
@@ -35,7 +35,7 @@ export default function GeoBars() {
                 <motion.text
                   x={x + 28} y={BASE - h - 12}
                   textAnchor="middle"
-                  fill="#F5F5F5"
+                  fill="var(--oki-text)"
                   fontFamily="'JetBrains Mono', monospace"
                   fontSize="15"
                   initial={{ opacity: 0 }}
@@ -54,7 +54,7 @@ export default function GeoBars() {
               </g>
             );
           })}
-          <line x1="0" x2="480" y1={BASE} y2={BASE} stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
+          <line x1="0" x2="480" y1={BASE} y2={BASE} stroke="var(--tower-edge)" strokeWidth="1" />
         </svg>
       </div>
     </div>

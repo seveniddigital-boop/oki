@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const bands = [
   { label: "Controlling Stakes", value: 64, color: "#C5A059", text: "text-oki-black" },
   { label: "Significant Minority", value: 24, color: "#991B1B", text: "text-oki-text" },
-  { label: "Passive Positions", value: 12, color: "rgba(255,255,255,0.1)", text: "text-oki-muted" },
+  { label: "Passive Positions", value: 12, color: "var(--chart-n2)", text: "text-oki-muted" },
 ];
 
 export default function ControlSpectrum() {

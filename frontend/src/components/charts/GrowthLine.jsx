@@ -35,7 +35,7 @@ export default function GrowthLine() {
             </linearGradient>
           </defs>
           {[0.25, 0.5, 0.75, 1].map((f) => (
-            <line key={f} x1={PAD} x2={W - PAD} y1={PAD + (H - PAD * 2) * f} y2={PAD + (H - PAD * 2) * f} stroke="rgba(255,255,255,0.05)" />
+            <line key={f} x1={PAD} x2={W - PAD} y1={PAD + (H - PAD * 2) * f} y2={PAD + (H - PAD * 2) * f} stroke="var(--chart-grid)" />
           ))}
           <motion.path
             d={areaPath} fill="url(#growthFill)"

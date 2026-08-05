@@ -5,6 +5,72 @@
 @tailwind components;
 @tailwind utilities;
 
+:root,
+[data-theme="dark"] {
+    --oki-bg: #050505;
+    --oki-bg-60: rgba(5, 5, 5, 0.6);
+    --oki-bg-80: rgba(5, 5, 5, 0.8);
+    --oki-bg-90: rgba(5, 5, 5, 0.9);
+    --oki-bg-95: rgba(5, 5, 5, 0.95);
+    --oki-surface: #0a0a0a;
+    --oki-elevated: #111111;
+    --oki-text: #f5f5f5;
+    --oki-muted: #a3a3a3;
+    --oki-faint: #737373;
+    --oki-gold: #c5a059;
+    --chart-grid: rgba(255, 255, 255, 0.05);
+    --chart-n1: rgba(237, 237, 237, 0.5);
+    --chart-n2: rgba(237, 237, 237, 0.15);
+    --tower-1: #1a1a1a;
+    --tower-2: #101010;
+    --tower-3: #0a0a0a;
+    --tower-edge: rgba(197, 160, 89, 0.3);
+    --tower-rim: rgba(227, 200, 136, 0.5);
+    --tower-windows: rgba(245, 245, 245, 0.07);
+}
+
+[data-theme="light"] {
+    --oki-bg: #f2efe8;
+    --oki-bg-60: rgba(242, 239, 232, 0.6);
+    --oki-bg-80: rgba(242, 239, 232, 0.85);
+    --oki-bg-90: rgba(242, 239, 232, 0.92);
+    --oki-bg-95: rgba(242, 239, 232, 0.96);
+    --oki-surface: #eae6db;
+    --oki-elevated: #f8f5ee;
+    --oki-text: #0d0d0d;
+    --oki-muted: #4a463e;
+    --oki-faint: #8a8478;
+    --oki-gold: #9a7a3c;
+    --chart-grid: rgba(13, 13, 13, 0.08);
+    --chart-n1: rgba(13, 13, 13, 0.45);
+    --chart-n2: rgba(13, 13, 13, 0.12);
+    --tower-1: #ffffff;
+    --tower-2: #e9e4d8;
+    --tower-3: #d9d2c2;
+    --tower-edge: rgba(13, 13, 13, 0.18);
+    --tower-rim: rgba(154, 122, 60, 0.7);
+    --tower-windows: rgba(13, 13, 13, 0.08);
+}
+
+[data-theme="light"] .border-white\/5 { border-color: rgba(13, 13, 13, 0.06) !important; }
+[data-theme="light"] .border-white\/10 { border-color: rgba(13, 13, 13, 0.1) !important; }
+[data-theme="light"] .border-white\/15 { border-color: rgba(13, 13, 13, 0.15) !important; }
+[data-theme="light"] .border-white\/20 { border-color: rgba(13, 13, 13, 0.2) !important; }
+[data-theme="light"] .border-white\/25 { border-color: rgba(13, 13, 13, 0.25) !important; }
+[data-theme="light"] .bg-white\/5 { background-color: rgba(13, 13, 13, 0.05) !important; }
+[data-theme="light"] .bg-white\/10 { background-color: rgba(13, 13, 13, 0.08) !important; }
+[data-theme="light"] .bg-black\/20 { background-color: rgba(242, 239, 232, 0.25) !important; }
+[data-theme="light"] .bg-black\/30 { background-color: rgba(242, 239, 232, 0.35) !important; }
+[data-theme="light"] .bg-black\/50 { background-color: rgba(242, 239, 232, 0.55) !important; }
+[data-theme="light"] .bg-black\/60 { background-color: rgba(242, 239, 232, 0.65) !important; }
+[data-theme="light"] .bg-black\/70 { background-color: rgba(242, 239, 232, 0.78) !important; }
+[data-theme="light"] .hero-grid {
+    background-image:
+        linear-gradient(rgba(13, 13, 13, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(13, 13, 13, 0.05) 1px, transparent 1px);
+}
+[data-theme="light"] .text-outline { -webkit-text-stroke-color: rgba(13, 13, 13, 0.25); }
+
 @layer base {
     :root {
         --background: 0 0% 2%;
@@ -18,26 +84,27 @@
         @apply border-border;
     }
     html {
-        background-color: #050505;
+        background-color: var(--oki-bg);
     }
     body {
         @apply bg-oki-black text-oki-text font-sans;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
+        transition: background-color 0.6s ease, color 0.6s ease;
     }
     ::selection {
-        background: #991B1B;
-        color: #F5F5F5;
+        background: #991b1b;
+        color: #f5f5f5;
     }
     ::-webkit-scrollbar {
         width: 4px;
     }
     ::-webkit-scrollbar-track {
-        background: #050505;
+        background: var(--oki-bg);
     }
     ::-webkit-scrollbar-thumb {
-        background: #2a2a2a;
+        background: var(--oki-faint);
     }
 }
 
@@ -61,7 +128,7 @@
         color: transparent;
     }
     .text-outline-gold {
-        -webkit-text-stroke: 1px rgba(197, 160, 89, 0.35);
+        -webkit-text-stroke: 1px var(--oki-gold);
         color: transparent;
     }
     .hero-grid {
@@ -69,6 +136,9 @@
             linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
         background-size: 120px 120px;
+    }
+    .hero-bottom-fade {
+        background: linear-gradient(to top, var(--oki-bg) 6%, transparent 55%);
     }
     .grain::after {
         content: "";
