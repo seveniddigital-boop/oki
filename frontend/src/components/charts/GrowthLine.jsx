@@ -22,8 +22,7 @@ const areaPath = `${linePath} L${x(points.length - 1)},${H - PAD} L${PAD},${H - 
 export default function GrowthLine() {
   return (
     <div data-testid="asset-growth-chart" className="flex h-full flex-col">
-      <div className="flex items-baseline justify-between">
-        <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Asset Growth Trajectory</p>
+      <div className="flex items-baseline justify-end">
         <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold">Projected · Indexed 100</p>
       </div>
       <div className="mt-6 flex-1">

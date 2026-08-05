@@ -13,8 +13,7 @@ const BASE = 250;
 export default function GeoBars() {
   return (
     <div data-testid="geographic-control-chart" className="flex h-full flex-col">
-      <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Geographic Control</p>
-      <div className="mt-8 flex flex-1 items-end">
+      <div className="mt-2 flex flex-1 items-end">
         <svg viewBox="0 0 480 290" className="w-full">
           {[0.25, 0.5, 0.75, 1].map((f) => (
             <line key={f} x1="0" x2="480" y1={BASE - H * f} y2={BASE - H * f} stroke="var(--chart-grid)" strokeWidth="1" />

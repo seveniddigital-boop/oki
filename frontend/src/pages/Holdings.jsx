@@ -1,8 +1,40 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import CryptoTicker from "@/components/CryptoTicker";
 import CryptoChart from "@/components/CryptoChart";
+
+function ChartDisclosure({ title, testid, defaultOpen = false, className = "", children }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className={`bg-oki-surface ${className}`}>
+      <button
+        data-testid={testid}
+        onClick={() => setOpen(!open)}
+        className="group flex w-full items-center justify-between px-8 py-6 text-left md:px-12"
+      >
+        <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint transition-colors duration-300 group-hover:text-oki-gold">
+          {title}
+        </span>
+        <ChevronDown className={`h-4 w-4 text-oki-gold transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="px-8 pb-10 md:px-12 md:pb-12">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 import DonutChart from "@/components/charts/DonutChart";
 import GeoBars from "@/components/charts/GeoBars";
 import GrowthLine from "@/components/charts/GrowthLine";
@@ -69,25 +101,15 @@ export default function Holdings() {
 
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12">
         <div className="grid grid-cols-1 gap-px border border-white/10 bg-white/10 lg:grid-cols-2">
-          <Reveal className="bg-oki-surface p-8 md:p-12">
+          <ChartDisclosure title="Global Asset Allocation" testid="disclosure-allocation" defaultOpen>
             <DonutChart />
-          </Reveal>
-          <Reveal delay={0.15} className="relative bg-oki-surface p-8 md:p-12">
-            <div
-              className="pointer-events-none absolute inset-0 opacity-[0.07]"
-              style={{
-                backgroundImage: "url(https://images.unsplash.com/photo-1727610542348-9636c3b65d2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w7NDk1ODB8MHwxfHNlYXJjaHwzfHxkYXJrJTIwZ2xvYmFsJTIwYnVzaW5lc3MlMjBtYXB8ZW58MHx8fHwxNzg1ODExMzU3fDA&ixlib=rb-4.1.0&q=85)",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-            <div className="relative">
-              <GeoBars />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1} className="bg-oki-surface p-8 md:p-12 lg:col-span-2">
+          </ChartDisclosure>
+          <ChartDisclosure title="Geographic Control" testid="disclosure-geographic">
+            <GeoBars />
+          </ChartDisclosure>
+          <ChartDisclosure title="Asset Growth Trajectory" testid="disclosure-growth" className="lg:col-span-2">
             <GrowthLine />
-          </Reveal>
+          </ChartDisclosure>
         </div>
       </section>
 

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X, Sun, Moon } from "lucide-react";
+import { ArrowUpRight, Menu, X, Sun, Moon, Volume2, VolumeX } from "lucide-react";
 import Logo from "@/components/Logo";
+import { isSoundOn, setSound } from "@/utils/clickSound";
 
 const links = [
   { to: "/holdings", label: "Holdings", id: "nav-holdings-link" },
@@ -15,6 +16,7 @@ export default function Nav() {
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState("dark");
+  const [sound, setSoundState] = useState(true);
   const { scrollY } = useScroll();
   const { pathname } = useLocation();
 
@@ -22,7 +24,14 @@ export default function Nav() {
 
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme || "dark");
+    setSoundState(isSoundOn());
   }, []);
+
+  const toggleSound = () => {
+    const next = !sound;
+    setSound(next);
+    setSoundState(next);
+  };
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
@@ -62,6 +71,15 @@ export default function Nav() {
                 <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-oki-gold transition-[width] duration-300 group-hover:w-full" />
               </NavLink>
             ))}
+            <button
+              onClick={toggleSound}
+              data-testid="sound-toggle"
+              aria-label="Toggle click sounds"
+              title="Turn click sounds on or off"
+              className="flex h-9 w-9 items-center justify-center border border-white/15 text-oki-muted transition-colors duration-300 hover:border-oki-gold/60 hover:text-oki-gold"
+            >
+              {sound ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
+            </button>
             <button
               onClick={toggleTheme}
               data-testid="theme-toggle"

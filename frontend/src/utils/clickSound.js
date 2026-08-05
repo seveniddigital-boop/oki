@@ -1,4 +1,14 @@
 let ctx = null;
+let enabled = localStorage.getItem("oki-sound") !== "off";
+
+export function isSoundOn() {
+  return enabled;
+}
+
+export function setSound(on) {
+  enabled = on;
+  localStorage.setItem("oki-sound", on ? "on" : "off");
+}
 
 function getCtx() {
   if (!ctx) {
@@ -11,6 +21,7 @@ function getCtx() {
 }
 
 export function playClick() {
+  if (!enabled) return;
   try {
     const c = getCtx();
     if (!c) return;

@@ -28,6 +28,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, sound toggle + chart hover + disclosures)
+- Sound mute switch in nav (Volume2/VolumeX), persists to localStorage
+- Crypto chart hover: crosshair line + gold dot + tooltip showing exact price and date/time at cursor position
+- Holdings dashboard charts (allocation donut, geographic bars, growth line) now collapse/expand via dropdown buttons with animated height; allocation open by default
+
 ## Implemented (2026-08-05, chart timeframe switcher)
 - 24H / 7D / 30D buttons in the currency chart panel header — active range highlighted in gold, chart refetches and redraws per timeframe (backend days param already supported), price/change/high-low recompute per range
 

@@ -12,8 +12,7 @@ export default function DonutChart() {
   let acc = 0;
   return (
     <div data-testid="allocation-donut-chart" className="flex h-full flex-col">
-      <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Global Asset Allocation</p>
-      <div className="mt-8 flex flex-1 flex-col items-center justify-center gap-10 lg:flex-row">
+      <div className="mt-2 flex flex-1 flex-col items-center justify-center gap-10 lg:flex-row">
         <div className="relative">
           <svg width="220" height="220" viewBox="0 0 200 200" className="-rotate-90">
             <circle cx="100" cy="100" r="84" fill="none" stroke="var(--chart-grid)" strokeWidth="14" />
