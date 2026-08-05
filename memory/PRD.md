@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, UI click sounds)
+- Subtle premium click sound on every button/link press: Web Audio API-generated soft low "thock" + high tick (no audio files, ~0.07 gain), global delegated listener, AudioContext resumed on first gesture per autoplay policy
+
 ## Implemented (2026-08-05, interactive currency charts)
 - Currency chips (Bitcoin / Ethereum / Select L1 Infrastructure) are now buttons — clicking one reveals an animated 7-day price chart for that coin (gold line draw + area fill, current price, 24h-style change, high/low labels, close button); clicking again or the X dismisses it
 - Backend GET /api/crypto-chart proxies CoinGecko market_chart with 5-min per-coin cache, 3-attempt retry on rate limits, and stale fallback

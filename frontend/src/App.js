@@ -7,6 +7,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
+import { playClick } from "@/utils/clickSound";
 import Home from "@/pages/Home";
 import Holdings from "@/pages/Holdings";
 import Strategy from "@/pages/Strategy";
@@ -140,6 +141,14 @@ function App() {
     apply();
     const id = setInterval(apply, 60000);
     return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.target.closest("a, button, [role='button']")) playClick();
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
   }, []);
 
   return (
