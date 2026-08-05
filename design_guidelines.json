@@ -2,115 +2,67 @@
   "theme": "dark",
   "typography": {
     "headings": {
-      "family": "Playfair Display",
-      "style": "serif",
-      "weight": "font-light",
-      "instruction": "Use Playfair Display for all headings to evoke luxury and corporate authority. Ensure tight tracking on large headings."
+      "font": "Cormorant Garamond",
+      "weight": "font-bold",
+      "tracking": "tracking-tight"
     },
     "body": {
-      "family": "IBM Plex Sans",
-      "style": "sans-serif",
-      "weight": "font-light to font-normal",
-      "instruction": "Use IBM Plex Sans for body text to maintain precision, clarity, and a modern corporate feel."
-    },
-    "labels": {
-      "style": "uppercase, tracking-[0.2em], text-xs"
+      "font": "IBM Plex Sans",
+      "weight": "font-normal",
+      "tracking": "tracking-normal"
     }
   },
   "colors": {
-    "primary": "#D4AF37",
-    "primary_description": "Subtle Gold / Brass for luxury accents.",
-    "background": "#050505",
-    "background_description": "Deepest void black for the main background.",
+    "primary": "#C5A059",
+    "secondary": "#991B1B",
+    "background": "#0a0a0a",
     "surface": "#121212",
-    "surface_description": "Slightly elevated dark surface for cards and sections.",
-    "text_primary": "#F5F5F5",
-    "text_secondary": "#A3A3A3",
-    "border": "#262626"
+    "text_primary": "#ffffff",
+    "text_secondary": "#a1a1aa",
+    "border": "rgba(255, 255, 255, 0.1)"
   },
   "visual_enhancers": {
-    "shadows": "Deep ambient shadows to separate dark elements, avoiding harsh outlines.",
-    "borders": "1px solid #262626 for crisp structural division.",
-    "gradients": "Avoid generic gradients. Use subtle radial glows (e.g., from-white/5 to-transparent) to highlight key areas.",
-    "surfaces": "Use glassmorphism (backdrop-blur-xl bg-black/60) with a 1px border-white/10 for sticky headers. DO NOT use completely transparent backgrounds."
+    "surfaces": "Glassmorphism with backdrop-blur-xl and 1px delicate inner stroke (border-white/10) for headers. Cards use flat solid backgrounds with 1px border and hover lift.",
+    "textures": "Subtle grain texture and noise overlays.",
+    "shadows": "Ambient diffuse shadows for depth, high contrast borders."
+  },
+  "grids": {
+    "spacing_scale": "Generous spacing (p-8, p-12)",
+    "bento_grid": "Grid layout with asymmetrical spans, dense for dashboards"
   },
   "layouts": {
-    "spacing": "Generous spacing. Use p-8, p-12, p-24 to let content breathe.",
-    "grids": "Use bento grid protocol. Mode A (The 'Tetris' Grid) for feature sections with wide gaps (gap-8).",
-    "alignment": "Left-align dense text. Asymmetry creates tension and luxury."
+    "header": "Glassmorphism sticky header with z-50, solid bottom border.",
+    "cards": "Flat background, 1px border, hover:-translate-y-1 hover:shadow-lg."
   },
   "motion": {
-    "hover": "Subtle translations (-translate-y-1) and brightness increases.",
-    "transitions": "Use specific properties (transition-colors, transition-transform) with ease-out timing. DO NOT apply transition: all.",
-    "entrance": "Staggered fade and slide up for list items."
+    "hover": "Smooth color and transform transitions. MUST explicitly define hover text colors.",
+    "entrance": "Staggered fade-up for lists.",
+    "accessibility": "Respect prefers-reduced-motion."
   },
   "accessibility": {
-    "contrast": "Ensure minimum 4.5:1 for body text. Use off-white text against deep black.",
-    "focus": "Clear focus rings using primary color (focus:ring-primary).",
+    "contrast": "APCA standard compliance. Explicit hover/focus states.",
     "testing": "All interactive elements MUST include data-testid attribute."
   },
   "components": {
-    "buttons": "Sharp edges (rounded-none) or subtle radii (rounded-sm). Use borders and hover states that imply premium tactile feedback.",
-    "cards": "Flat solid surfaces. No glassmorphism on standard cards. 1px crisp borders."
-  },
-  "media": {
-    "style": "Dark, moody, professional, high-quality photography. No generic blurred backgrounds. Each photo must have a clear, crisp subject.",
-    "overlays": "Use bg-black/50 or bg-black/40 overlay on images to ensure text readability."
-  },
-  "3d_libraries": {
-    "instruction": "Use Framer Motion 3D or TSParticles if atmospheric motion is needed, keeping it subtle for a corporate luxury aesthetic."
+    "general": "Use Shadcn UI for logic, raw HTML/Tailwind for structural layout. Use sonner for toasts.",
+    "buttons": "Sharp edges or pill-shaped with explicit hover states."
   },
   "image_urls": {
-    "dept_equity": {
-      "url": "https://images.unsplash.com/photo-1526642591341-bcfc36ffae2f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwzfHxmaW5hbmNpYWwlMjBkaXN0cmljdCUyMGR1c2t8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark stock exchange / trading floor with glowing market screens, or a sharp dark photo of financial district towers at dusk."
-    },
-    "dept_realassets": {
-      "url": "https://images.unsplash.com/photo-1558120985-abcafafcae16?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxjb25jcmV0ZSUyMGFyY2hpdGVjdHVyZSUyMGRhcmt8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark construction site with tower cranes at night, or brutalist concrete structure."
-    },
-    "dept_ip": {
-      "url": "https://images.unsplash.com/photo-1592659762303-90081d34b277?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxjaXJjdWl0JTIwYm9hcmQlMjBkYXJrfGVufDB8fHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85",
-      "description": "Dark macro of circuit board / server room with depth / laboratory glass."
-    },
-    "dept_credit": {
-      "url": "https://images.unsplash.com/photo-1582139329536-e7284fece509?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxiYW5rJTIwdmF1bHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark luxury bank interior, vault door, or marble-and-brass financial hall."
-    },
-    "strategy_identify": {
-      "url": "https://images.unsplash.com/photo-1725362364605-21960b69d981?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxhZXJpYWwlMjBjaXR5JTIwbmlnaHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark city viewed from above at night with sharp lights (aerial), conveying global scanning."
-    },
-    "strategy_structure": {
-      "url": "https://images.unsplash.com/photo-1565626424178-c699f6601afd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBjb25jcmV0ZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3ODU4OTIzMjZ8MA&ixlib=rb-4.1.0&q=85",
-      "description": "Dark geometric concrete architecture / columns / sharp angles."
-    },
-    "strategy_hold": {
-      "url": "https://images.unsplash.com/photo-1565043534426-8a67ac8671e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxsb25nJTIwZXhwb3N1cmUlMjBza3lzY3JhcGVyJTIwbmlnaHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Long-exposure dark city or a single timeless tower against moving clouds."
-    },
-    "home_band": {
-      "url": "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHwxfHxza3lsaW5lJTIwcGFub3JhbWElMjBkdXNrfGVufDB8fHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85",
-      "description": "Ultra-wide dark skyline panorama at dusk, sharp, cinematic, no readable signage."
+    "dept_crypto": {
+      "url": "https://images.unsplash.com/photo-1623227413711-25ee4388dae3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwxfHxkYXJrJTIwYml0Y29pbiUyMGdvbGR8ZW58MHx8fHwxNzg1ODk5MzE3fDA&ixlib=rb-4.1.0&q=85&w=1600",
+      "description": "Dark, moody, macro shot of a Bitcoin on top of gold nuggets, perfect for institutional crypto luxury.",
+      "category": "Digital Assets & Crypto Holdings Card"
     }
   },
-  "instructions_to_main_agent": [
-    "You are building a luxury corporate website. Avoid generic layouts.",
-    "Prioritize deep blacks and crisp typography.",
-    "Ensure images are implemented exactly as specified with dark overlays if text sits on top.",
-    "Strictly follow the color palette to maintain the moody, professional aesthetic.",
-    "You have .js files not .tsx file, so write components and files in .js (.jsx syntax is fine, but file extension should be .js)."
-  ],
-  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
-    "Avoid generic, 'on distribution' outputs. Make creative, distinctive frontends.",
-    "Do NOT use dark colors as gradients.",
+  "instructions_to_main_agent": "Ensure absolute NO transparent background under headers or overlays. Adhere strictly to the luxury corporate mood (dark tones with gold #C5A059 and crimson #991B1B). Do not use generic AI slop layouts. Avoid generic fonts for headings like Inter.",
+  "universal_guidelines_for_main_agent": [
+    "Do not converge toward generic outputs.",
+    "Do not use dark colors as gradients.",
     "Create depth through layered design elements with z-index hierarchy.",
-    "DO NOT apply universal transitions (e.g. transition: all). Add transitions to specific interactive elements.",
-    "DO NOT center align the app container. Respect human natural reading flow.",
-    "NEVER use AI assistant Emoji characters (e.g. 🤖, 💡, etc.) for icons.",
-    "Every interaction needs micro-animations - hover states, transitions.",
-    "Use 2-3x more spacing than feels comfortable.",
-    "All interactive elements MUST include a data-testid attribute.",
-    "DO NOT use completely transparent backgrounds for headers or overlays that have content under them."
+    "Never apply universal transition: all.",
+    "Do not center align the app container (.App { text-align: center; } is banned).",
+    "Add transitions only for specific interactive elements.",
+    "Do not use AI assistant Emoji characters.",
+    "Add data-testid attributes to all interactive elements."
   ]
 }
