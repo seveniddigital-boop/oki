@@ -4,7 +4,8 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
 import Counter from "@/components/Counter";
-import { KineticLines, Reveal, SectionTag, PhotoReveal } from "@/components/Kinetic";
+import Magnetic from "@/components/Magnetic";
+import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import EditorialMarquee from "@/components/Marquee";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -131,14 +132,16 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.9, duration: 0.9, ease: EASE }}
         >
-          <Link
-            to="/holdings"
-            data-testid="hero-explore-holdings-btn"
-            className="group flex items-center gap-3 whitespace-nowrap rounded-full border border-white/25 bg-oki-black/60 px-8 py-4 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-text backdrop-blur-md transition-colors duration-500 hover:border-oki-gold hover:text-oki-gold"
-          >
-            Explore Holdings
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+          <Magnetic>
+            <Link
+              to="/holdings"
+              data-testid="hero-explore-holdings-btn"
+              className="group flex items-center gap-3 whitespace-nowrap rounded-full border border-white/25 bg-oki-black/60 px-8 py-4 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-text backdrop-blur-md transition-colors duration-500 hover:border-oki-gold hover:text-oki-gold"
+            >
+              Explore Holdings
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </Magnetic>
         </motion.div>
       </div>
 
@@ -176,6 +179,50 @@ function Hero() {
   );
 }
 
+const INTERLUDE_LINES = ["We do not trade.", "We do not exit.", "We own time."];
+
+function InterludeLine({ progress, index, line }) {
+  const s = index / INTERLUDE_LINES.length;
+  const opacity = useTransform(progress, [s + 0.03, s + 0.13, s + 0.25, s + 0.32], [0, 1, 1, 0]);
+  const y = useTransform(progress, [s + 0.03, s + 0.32], [36, -36]);
+  return (
+    <motion.p
+      style={{ opacity, y }}
+      className="absolute inset-x-0 px-6 text-center font-display text-4xl font-medium tracking-tighter text-oki-text md:text-6xl"
+    >
+      {line}
+    </motion.p>
+  );
+}
+
+function TowerInterlude() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
+  return (
+    <section ref={ref} data-testid="tower-interlude" className="relative h-[260vh] border-t border-white/10">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+        <motion.div style={{ y: bgY }} className="absolute inset-x-0 -inset-y-[10%]">
+          <div
+            className="tower-dark absolute inset-0 bg-cover bg-[center_30%]"
+            style={{ backgroundImage: `url(${HERO_DARK})`, filter: "brightness(0.7) saturate(0.8)" }}
+          />
+          <div
+            className="tower-light absolute inset-0 bg-cover bg-[center_30%]"
+            style={{ backgroundImage: `url(${HERO_LIGHT})` }}
+          />
+          <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
+        </motion.div>
+        <div className="relative z-10 h-24 w-full">
+          {INTERLUDE_LINES.map((line, i) => (
+            <InterludeLine key={line} progress={scrollYProgress} index={i} line={line} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const chapters = [
   { n: "01", title: "Acquire", text: "High-conviction assets are identified across continents — equity positions, real assets, intellectual property, private credit. We move before consensus forms." },
   { n: "02", title: "Structure", text: "Every position is held through Delaware holding architecture — liability-insulated, jurisdiction-optimized, engineered for permanence." },
@@ -197,7 +244,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main data-testid="home-page">
+    <motion.main data-testid="home-page" {...pageAnim}>
       <Preloader done={loaded} />
       <Hero />
       <EditorialMarquee />
@@ -303,6 +350,8 @@ export default function Home() {
         </div>
       </section>
 
+      <TowerInterlude />
+
       <section className="relative overflow-hidden border-t border-white/10">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -333,7 +382,7 @@ export default function Home() {
             lines={["The outcome is", "already decided."]}
             lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-7xl"
           />
-          <Reveal delay={0.3} className="mt-12">
+          <Reveal delay={0.3} className="mt-12 flex flex-col items-center justify-center gap-6 md:flex-row">
             <Link
               to="/contact"
               data-testid="home-cta-access-btn"
@@ -345,9 +394,16 @@ export default function Home() {
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </Link>
+            <a
+              href={`${process.env.REACT_APP_BACKEND_URL}/api/deck`}
+              data-testid="home-download-deck-btn"
+              className="border-b border-white/20 pb-1 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-muted transition-colors duration-300 hover:border-oki-text hover:text-oki-text"
+            >
+              Corporate Deck (PDF)
+            </a>
           </Reveal>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

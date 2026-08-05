@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 import { Lock, ArrowUpRight, ShieldCheck, ChevronDown } from "lucide-react";
-import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
+import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic";
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const inputCls =
   "w-full border-b border-white/20 bg-transparent py-4 text-sm text-oki-text placeholder:text-oki-faint focus:border-oki-gold focus:outline-none transition-colors duration-300";
@@ -85,23 +88,34 @@ function CapitalSelect({ value, onChange, error }) {
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [capitalError, setCapitalError] = useState("");
+  const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({ name: "", org: "", email: "", capital: "", message: "" });
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (!form.capital) {
       setCapitalError("Capital range required");
       return;
     }
     setCapitalError("");
-    setSent(true);
+    setSubmitError("");
+    setSending(true);
+    try {
+      await axios.post(`${API}/inquiries`, form);
+      setSent(true);
+    } catch {
+      setSubmitError("Transmission failed. Please retry.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
-    <main data-testid="contact-page">
+    <motion.main data-testid="contact-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -189,14 +203,20 @@ export default function Contact() {
                   <button
                     type="submit"
                     data-testid="contact-submit-button"
-                    className="group relative overflow-hidden border border-oki-gold/50 px-10 py-5 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-gold transition-colors duration-500 hover:text-oki-black"
+                    disabled={sending}
+                    className="group relative overflow-hidden border border-oki-gold/50 px-10 py-5 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-gold transition-colors duration-500 hover:text-oki-black disabled:cursor-wait disabled:opacity-60"
                   >
                     <span className="absolute inset-0 -translate-x-full bg-oki-gold transition-transform duration-500 ease-out group-hover:translate-x-0" />
                     <span className="relative flex items-center gap-2">
-                      Submit Inquiry
+                      {sending ? "Transmitting…" : "Submit Inquiry"}
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </button>
+                  {submitError && (
+                    <p data-testid="contact-submit-error" className="font-mono text-[10px] uppercase tracking-[0.25em] text-oki-crimsonbright">
+                      {submitError}
+                    </p>
+                  )}
                 </motion.form>
               )}
             </AnimatePresence>
@@ -232,6 +252,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

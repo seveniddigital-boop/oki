@@ -1,4 +1,5 @@
-import { KineticLines, Reveal, SectionTag, PhotoReveal } from "@/components/Kinetic";
+import { motion } from "framer-motion";
+import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import ControlSpectrum from "@/components/charts/ControlSpectrum";
 
 const phases = [
@@ -33,7 +34,7 @@ const principles = [
 
 export default function Strategy() {
   return (
-    <main data-testid="strategy-page">
+    <motion.main data-testid="strategy-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -109,6 +110,6 @@ export default function Strategy() {
           <ControlSpectrum />
         </Reveal>
       </section>
-    </main>
+    </motion.main>
   );
 }

@@ -1,4 +1,5 @@
-import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
+import { motion } from "framer-motion";
+import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic";
 
 const leadership = [
   { title: "Office of the Chairman", scope: "Corporate Direction & Capital Allocation" },
@@ -15,7 +16,7 @@ const layers = [
 
 export default function About() {
   return (
-    <main data-testid="about-page">
+    <motion.main data-testid="about-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -120,9 +121,16 @@ export default function About() {
               All corporate filings, service of process, and governance records are maintained at the registered office. OKI Inc. operates in good standing under the Delaware General Corporation Law.
             </p>
             <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.35em] text-oki-gold">Filed · Maintained · Permanent</p>
+            <a
+              href={`${process.env.REACT_APP_BACKEND_URL}/api/deck`}
+              data-testid="about-download-deck-btn"
+              className="group mt-10 inline-flex items-center gap-2 border border-oki-gold/50 px-7 py-4 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-gold transition-colors duration-500 hover:bg-oki-gold hover:text-oki-black"
+            >
+              Download Corporate Deck (PDF)
+            </a>
           </Reveal>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

@@ -1,22 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, Sun, Moon } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const links = [
   { to: "/holdings", label: "Holdings", id: "nav-holdings-link" },
   { to: "/strategy", label: "Strategy", id: "nav-strategy-link" },
   { to: "/about", label: "Architecture", id: "nav-architecture-link" },
+  { to: "/insights", label: "Perspectives", id: "nav-insights-link" },
 ];
 
 export default function Nav() {
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
   const { scrollY } = useScroll();
   const { pathname } = useLocation();
 
   useMotionValueEvent(scrollY, "change", (v) => setVisible(v > 60));
+
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme || "dark");
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    localStorage.setItem("oki-theme", next);
+    document.documentElement.dataset.theme = next;
+    setTheme(next);
+  };
 
   const show = visible || pathname !== "/" || open;
 
@@ -49,6 +62,15 @@ export default function Nav() {
                 <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-oki-gold transition-[width] duration-300 group-hover:w-full" />
               </NavLink>
             ))}
+            <button
+              onClick={toggleTheme}
+              data-testid="theme-toggle"
+              aria-label="Toggle dark and light theme"
+              title="Theme follows European day/night by default — tap to override"
+              className="flex h-9 w-9 items-center justify-center border border-white/15 text-oki-muted transition-colors duration-300 hover:border-oki-gold/60 hover:text-oki-gold"
+            >
+              {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+            </button>
             <Link
               to="/contact"
               data-testid="nav-access-link"

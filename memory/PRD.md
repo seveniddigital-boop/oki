@@ -28,6 +28,17 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, functionality + immersion mega-release)
+- Inquiry storage + email: POST /api/inquiries saves to MongoDB and sends a branded HTML notification email via Emergent managed Resend (verified 202 Accepted). OWNER_EMAIL env var currently set to delivered@resend.dev TEST address — user must provide real email
+- Investor deck PDF: GET /api/deck generates a one-page dark/gold corporate deck (logo, allocation bars, doctrine, registered office) via reportlab; download buttons on Home CTA and About
+- Cinematic page transitions: fade/slide between all routes (AnimatePresence + pageAnim on every page)
+- Traveling tower: 260vh sticky interlude on Home — pinned Empire State with "We do not trade. / We do not exit. / We own time." cycling on scroll
+- Custom cursor: gold ring with spring physics, expands over links/buttons (pointer:fine only); Magnetic wrapper on hero pill CTA
+- Theme toggle: sun/moon button in nav, persists override to localStorage (time-based auto applies when no override)
+- Insights page (/insights): "Perspectives" — 4 expandable essays with header band, added to nav + page meta
+- Contact form wired to live backend with sending/error states
+- Mobile deep pass: verified hero, position, holdings header + charts at 390px — all clean
+
 ## Implemented (2026-08-05, professional upgrade pass)
 - Hero veil lightened (dark 0.26 / light 0.42) and image brightened — building is sharper, no longer blurred out
 - New monochrome logo system per latest brand board: theme-aware mark (gold gradient on dark, black on light), "OKI_INC." underscore wordmark in nav/footer/preloader, monochrome gold favicon

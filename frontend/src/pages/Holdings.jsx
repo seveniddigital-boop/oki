@@ -1,4 +1,5 @@
-import { KineticLines, Reveal, SectionTag, PhotoReveal } from "@/components/Kinetic";
+import { motion } from "framer-motion";
+import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import DonutChart from "@/components/charts/DonutChart";
 import GeoBars from "@/components/charts/GeoBars";
 import GrowthLine from "@/components/charts/GrowthLine";
@@ -32,7 +33,7 @@ const assetClasses = [
 
 export default function Holdings() {
   return (
-    <main data-testid="holdings-page">
+    <motion.main data-testid="holdings-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -98,6 +99,6 @@ export default function Holdings() {
           ))}
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }
