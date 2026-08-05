@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
-import RealTower from "@/components/RealTower";
 import { KineticLines, Reveal, SectionTag } from "@/components/Kinetic";
 import EditorialMarquee from "@/components/Marquee";
 
 const EASE = [0.22, 1, 0.36, 1];
+
+const HERO_DARK =
+  "https://images.unsplash.com/photo-1557137200-fec234cd5740?q=85&w=2000&auto=format&fit=crop";
+const HERO_LIGHT =
+  "https://images.unsplash.com/photo-1533348239637-984bae0f8a5b?q=85&w=2000&auto=format&fit=crop";
 
 function Preloader({ done }) {
   return (
@@ -70,13 +74,30 @@ function Hero() {
       className="relative flex min-h-screen flex-col items-center overflow-hidden"
     >
       <div className="absolute inset-0">
+        <motion.div style={{ y: towerY }} className="absolute inset-x-0 -inset-y-[15%]">
+          <motion.div
+            initial={{ scale: 1.15, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 1.7, duration: 2.2, ease: EASE }}
+            className="relative h-full w-full"
+          >
+            <div
+              className="tower-dark absolute inset-0 bg-cover bg-[center_25%]"
+              style={{ backgroundImage: `url(${HERO_DARK})`, filter: "brightness(0.65) saturate(0.8)" }}
+            />
+            <div
+              className="tower-light absolute inset-0 bg-cover bg-[center_25%]"
+              style={{ backgroundImage: `url(${HERO_LIGHT})`, filter: "brightness(1.05)" }}
+            />
+          </motion.div>
+        </motion.div>
+        <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         <div className="hero-grid animate-grid-drift absolute inset-0" />
-        <div className="absolute left-1/2 top-1/3 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(197,160,89,0.08)_0%,transparent_55%)]" />
-        <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(153,27,27,0.14)_0%,transparent_60%)]" />
+        <div className="hero-top-fade absolute inset-0" />
         <div className="hero-bottom-fade absolute inset-0" />
       </div>
 
-      <motion.div style={{ y: textY, opacity: fade }} className="relative z-0 mt-24 text-center md:mt-16">
+      <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 mt-24 text-center md:mt-16">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,18 +125,6 @@ function Hero() {
           />
         </h1>
       </motion.div>
-
-      <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
-        <motion.div
-          initial={{ y: "55%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          transition={{ delay: 2.1, duration: 1.6, ease: EASE }}
-        >
-          <motion.div style={{ y: towerY }}>
-            <RealTower className="aspect-[2/3] h-[66vh] md:h-[84vh]" />
-          </motion.div>
-        </motion.div>
-      </div>
 
       <div className="absolute bottom-20 left-1/2 z-20 -translate-x-1/2 md:bottom-24">
         <motion.div

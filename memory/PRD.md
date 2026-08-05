@@ -28,6 +28,10 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-05, full-bleed hero background)
+- Hero restructured per user feedback: the building photograph is now a FULL-BLEED background behind the text (no masked card in front), with a theme-aware veil (--hero-veil) plus top/bottom fades so headline and background never interfere
+- Ken-burns entrance (scale 1.15 → 1 with fade) and scroll parallax retained on the background layer; text sits on z-10 above the image
+
 ## Implemented (2026-08-05, real building + cinematic entry)
 - Replaced the SVG tower with REAL photography: Empire State Building at night (dark theme) and B&W daytime shot (light theme, multiply-blended into ivory), zoomed 1.35x so the tower dominates, edges feathered via CSS masks so the building melts into the page background while rising through the "OKI INC." type
 - New preloader: full-screen "looking up between skyscrapers" photograph with slow zoom, theme-aware overlay, gold logo mark + OKI INC. wordmark + tagline reveal, gold progress line
