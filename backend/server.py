@@ -315,6 +315,47 @@ async def crypto_prices():
         raise HTTPException(status_code=502, detail="Price feed unavailable")
 
 
+_chart_cache = {}
+
+@api_router.get("/crypto-chart")
+async def crypto_chart(id: str = "bitcoin", days: int = 7):
+    import time
+    allowed = {"bitcoin", "ethereum", "solana"}
+    if id not in allowed:
+        raise HTTPException(status_code=400, detail="Unsupported asset")
+    days = min(max(days, 1), 30)
+    key = f"{id}:{days}"
+    now = time.time()
+    cached = _chart_cache.get(key)
+    if cached and now - cached["ts"] < 300:
+        return cached["data"]
+    try:
+        import asyncio
+        data = None
+        for attempt in range(3):
+            try:
+                async with httpx.AsyncClient(timeout=20) as http:
+                    resp = await http.get(
+                        f"https://api.coingecko.com/api/v3/coins/{id}/market_chart",
+                        params={"vs_currency": "usd", "days": str(days)},
+                    )
+                resp.raise_for_status()
+                data = {"id": id, "days": days, "prices": resp.json().get("prices", [])}
+                break
+            except Exception:
+                if attempt < 2:
+                    await asyncio.sleep(2)
+        if data is None:
+            raise RuntimeError("all retries failed")
+        _chart_cache[key] = {"data": data, "ts": now}
+        return data
+    except Exception as e:
+        logger.error(f"CoinGecko chart fetch failed: {e}")
+        if cached:
+            return cached["data"]
+        raise HTTPException(status_code=502, detail="Chart feed unavailable")
+
+
 app.include_router(api_router)
 
 app.add_middleware(

@@ -1,6 +1,8 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import CryptoTicker from "@/components/CryptoTicker";
+import CryptoChart from "@/components/CryptoChart";
 import DonutChart from "@/components/charts/DonutChart";
 import GeoBars from "@/components/charts/GeoBars";
 import GrowthLine from "@/components/charts/GrowthLine";
@@ -40,6 +42,8 @@ const assetClasses = [
 ];
 
 export default function Holdings() {
+  const [activeCoin, setActiveCoin] = useState(null);
+
   return (
     <motion.main data-testid="holdings-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
@@ -124,12 +128,30 @@ export default function Holdings() {
                   Digital assets are governed by the same doctrine as every OKI position: acquired with conviction, structured through the Delaware architecture, and held with no intention to sell. Custody is institutional. Keys are distributed. The majority of the position never touches an internet-connected device.
                 </p>
               </Reveal>
-              <Reveal delay={0.3} className="mt-8 flex flex-wrap gap-3">
-                {["Bitcoin", "Ethereum", "Select L1 Infrastructure"].map((c) => (
-                  <span key={c} className="border border-oki-gold/30 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-oki-gold">
-                    {c}
-                  </span>
-                ))}
+              <Reveal delay={0.3} className="mt-8">
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    { label: "Bitcoin", id: "bitcoin" },
+                    { label: "Ethereum", id: "ethereum" },
+                    { label: "Select L1 Infrastructure", id: "solana" },
+                  ].map((c) => (
+                    <button
+                      key={c.id}
+                      data-testid={`chip-${c.id}`}
+                      onClick={() => setActiveCoin(activeCoin === c.id ? null : c.id)}
+                      className={`border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] transition-colors duration-300 ${
+                        activeCoin === c.id
+                          ? "border-oki-gold bg-oki-gold text-oki-black"
+                          : "border-oki-gold/30 text-oki-gold hover:border-oki-gold/70"
+                      }`}
+                    >
+                      {c.label}
+                    </button>
+                  ))}
+                </div>
+                <AnimatePresence>
+                  {activeCoin && <CryptoChart key={activeCoin} coin={activeCoin} onClose={() => setActiveCoin(null)} />}
+                </AnimatePresence>
               </Reveal>
             </div>
             <div className="grid grid-cols-1 gap-px self-start border border-white/10 bg-white/10 sm:grid-cols-2 md:col-span-7">
