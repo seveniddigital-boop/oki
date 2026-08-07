@@ -10,6 +10,8 @@ export default function CryptoSearch({ onSelect }) {
   const [q, setQ] = useState("");
   const [results, setResults] = useState([]);
   const [searching, setSearching] = useState(false);
+  const [searchError, setSearchError] = useState(false);
+  const [nonce, setNonce] = useState(0);
   const ref = useRef(null);
   const debounce = useRef(null);
 
@@ -29,16 +31,18 @@ export default function CryptoSearch({ onSelect }) {
     }
     debounce.current = setTimeout(async () => {
       setSearching(true);
+      setSearchError(false);
       try {
         const { data } = await axios.get(`${API}/crypto-search`, { params: { q } });
         setResults(data.coins || []);
       } catch {
         setResults([]);
+        setSearchError(true);
       }
       setSearching(false);
     }, 350);
     return () => clearTimeout(debounce.current);
-  }, [q]);
+  }, [q, nonce]);
 
   return (
     <div ref={ref} className="relative">
@@ -86,6 +90,15 @@ export default function CryptoSearch({ onSelect }) {
                 <p className="px-4 py-3 font-mono text-[10px] tracking-[0.2em] text-oki-faint">10,000+ ASSETS · TYPE TO BEGIN</p>
               )}
               {searching && <p className="px-4 py-3 font-mono text-[10px] tracking-[0.2em] text-oki-faint">SEARCHING…</p>}
+              {searchError && !searching && (
+                <button
+                  data-testid="crypto-search-retry"
+                  onClick={() => setNonce((n) => n + 1)}
+                  className="w-full px-4 py-3 text-left font-mono text-[10px] tracking-[0.2em] text-oki-gold"
+                >
+                  SEARCH UNAVAILABLE — TAP TO RETRY
+                </button>
+              )}
               {!searching && q.trim().length >= 2 && results.length === 0 && (
                 <p className="px-4 py-3 font-mono text-[10px] tracking-[0.2em] text-oki-faint">NO ASSETS FOUND</p>
               )}

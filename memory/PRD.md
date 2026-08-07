@@ -28,6 +28,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-07, QA + fix round)
+- Light theme hero tower replaced (bright glass skyscraper corner against white sky)
+- Crypto windows hardened: chart panel now shows "Feed unavailable + Retry" instead of infinite loading; search window shows tap-to-retry on failure; prices endpoint gets 3-attempt retry, 120s cache, and graceful empty-200 degradation (no more console 502s)
+- iOS Safari fixes: form inputs bumped to 16px on mobile (stops auto-zoom on focus), viewport-fit=cover, 100dvh support for full-screen sections
+- Added gold scroll-progress bar (fixed top, spring-animated)
+- QA: console sweep clean, mobile 390px crypto search + chart verified, light hero verified
+
 ## Implemented (2026-08-05, crypto search + mobile fixes + system theme)
 - "Select L1 Infrastructure" chip replaced with "Search Assets": a fancy popover window (pulse-dot header, monospace search field, scrollable results with symbol + market-cap rank) — pick any of 10,000+ coins and its chart renders with name, price, timeframes, and hover crosshair. Backend GET /api/crypto-search proxies CoinGecko search (10-min cache, retries); chart endpoint now accepts any valid coin id
 - Mobile bug fix: sound and theme toggle buttons added to the mobile top bar (were desktop-only)

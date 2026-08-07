@@ -21,19 +21,30 @@ const TIMEFRAMES = [
 
 export default function CryptoChart({ coin, name, onClose }) {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(false);
   const [days, setDays] = useState(7);
 
   useEffect(() => {
-    setData(null);
     let mounted = true;
+    setData(null);
+    setError(false);
     axios
       .get(`${API}/crypto-chart`, { params: { id: coin, days } })
       .then(({ data }) => mounted && setData(data))
-      .catch(() => {});
+      .catch(() => mounted && setError(true));
     return () => {
       mounted = false;
     };
   }, [coin, days]);
+
+  const retry = () => {
+    setData(null);
+    setError(false);
+    axios
+      .get(`${API}/crypto-chart`, { params: { id: coin, days } })
+      .then(({ data }) => setData(data))
+      .catch(() => setError(true));
+  };
 
   const chart = useMemo(() => {
     if (!data?.prices?.length) return null;
@@ -174,6 +185,17 @@ export default function CryptoChart({ coin, name, onClose }) {
               <span>H ${chart.max.toLocaleString("en-US", { maximumFractionDigits: 0 })}</span>
             </div>
           </>
+        ) : error ? (
+          <div className="flex h-40 flex-col items-center justify-center gap-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Feed unavailable</p>
+            <button
+              onClick={retry}
+              data-testid="chart-retry"
+              className="border border-oki-gold/40 px-5 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-oki-gold transition-colors duration-300 hover:bg-oki-gold hover:text-oki-black"
+            >
+              Retry
+            </button>
+          </div>
         ) : (
           <div className="flex h-40 items-center justify-center">
             <span className="h-px w-24 animate-pulse-slow bg-oki-gold/50" />

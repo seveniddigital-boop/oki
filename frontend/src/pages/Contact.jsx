@@ -7,7 +7,7 @@ import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const inputCls =
-  "w-full border-b border-white/20 bg-transparent py-4 text-sm text-oki-text placeholder:text-oki-faint focus:border-oki-gold focus:outline-none transition-colors duration-300";
+  "w-full border-b border-white/20 bg-transparent py-4 text-base md:text-sm text-oki-text placeholder:text-oki-faint focus:border-oki-gold focus:outline-none transition-colors duration-300";
 
 const labelCls = "font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint";
 

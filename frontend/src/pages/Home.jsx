@@ -13,7 +13,7 @@ const EASE = [0.22, 1, 0.36, 1];
 const HERO_DARK =
   "https://images.unsplash.com/photo-1593427995298-cad6731716d8?q=85&w=1600&auto=format&fit=crop";
 const HERO_LIGHT =
-  "https://images.unsplash.com/photo-1533348239637-984bae0f8a5b?q=85&w=1600&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1496307653780-42ee777d4833?q=85&w=1600&auto=format&fit=crop";
 const INTERLUDE_DARK =
   "https://images.unsplash.com/photo-1506383631675-0b110111327b?q=85&w=1600&auto=format&fit=crop";
 const INTERLUDE_LIGHT =

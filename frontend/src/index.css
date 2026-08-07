@@ -127,6 +127,11 @@
     select:invalid {
         color: var(--oki-faint);
     }
+    @supports (height: 100dvh) {
+        .min-h-screen {
+            min-height: 100dvh;
+        }
+    }
 }
 
 @layer base {

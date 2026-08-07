@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -125,6 +125,18 @@ function TransitionVeil() {
   );
 }
 
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 25 });
+  return (
+    <motion.div
+      data-testid="scroll-progress"
+      className="fixed left-0 top-0 z-[140] h-0.5 w-full origin-left bg-oki-gold"
+      style={{ scaleX }}
+    />
+  );
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
@@ -164,6 +176,7 @@ function App() {
       <BrowserRouter>
         <RouteMeta />
         <CustomCursor />
+        <ScrollProgress />
         <TransitionVeil />
         <SmoothScroll>
           <Nav />
