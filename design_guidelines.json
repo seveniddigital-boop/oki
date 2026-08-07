@@ -1,84 +1,28 @@
 {
-  "theme": "dark",
-  "typography": {
-    "headings": {
-      "family": "Playfair Display, serif",
-      "strategy": "Expressive and large, tracking-tight, never generic sans like Inter. Use for high-impact storytelling.",
-      "sizes": {
-        "h1": "text-4xl sm:text-5xl lg:text-6xl fluid scaling",
-        "h2": "text-2xl sm:text-3xl lg:text-4xl",
-        "h3": "text-xl sm:text-2xl",
-        "h4": "text-lg sm:text-xl"
-      }
-    },
-    "body": {
-      "family": "Inter, sans-serif",
-      "strategy": "Clean sans for body copy, moderate scales text-base to text-lg."
+  "theme": "LIGHT",
+  "image_urls": {
+    "hero_light_v3": {
+      "url": "https://images.unsplash.com/photo-1496307653780-42ee777d4833?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwzfHx3aGl0ZSUyMG1vZGVybiUyMHNreXNjcmFwZXIlMjBmcm9tJTIwYmVsb3d8ZW58MHx8fHwxNzg2MDYxODE2fDA&ixlib=rb-4.1.0&q=85&w=1600",
+      "description": "bottom view of glass building fading into bright light sky",
+      "category": "hero"
     }
   },
-  "colors": {
-    "archetype": "LUXURY",
-    "base": "Midnight Blue or Deep Emerald, no pure black.",
-    "accents": "Gold or Silver",
-    "backgrounds": "Never use complete transparent background in header, overlays, any surface that has content under it. Use solid or highly blurred semi-transparent backgrounds.",
-    "rules": "Tinted grey rule applies. Contrast checks are mandatory."
-  },
-  "visual enhancers": {
-    "surfaces": "Glassmorphism with heavy blur (backdrop-blur-xl) and 1px inner stroke for headers. Solid backgrounds with crisp borders for cards.",
-    "textures": "Grain overlays and subtle noise to avoid digital flatness."
-  },
-  "component name": "Marketing Hero, Bento Grid Sections",
-  "grids": {
-    "strategy": "The 'Tetris' Grid",
-    "rules": "Asymmetry, wide gaps (gap-8 to gap-12). Direct children only in grid containers."
-  },
-  "layouts": {
-    "spacing": "Generous Spacing Philosophy: use p-8 to p-24.",
-    "alignment": "Optical alignment over geometrical. Left-align dense content. No generic centered layouts."
-  },
-  "motion": {
-    "strategy": "Micro-animations for hover/focus. Smooth state transitions.",
-    "rules": "Do not apply universal 'transition: all'. Explicitly transition transform and opacity."
-  },
-  "accessibility": {
-    "contrast": "APCA contrast calculator preferred. Explicitly set text color on hover.",
-    "data_testid": "All interactive and key informational elements MUST include a `data-testid` attribute (e.g., data-testid='hero-cta-button').",
-    "motion": "Respect prefers-reduced-motion."
-  },
-  "media": {
-    "image_urls": {
-      "hero_dark_new": {
-        "url": "https://images.unsplash.com/photo-1593427995298-cad6731716d8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwzfHxzaW5nbGUlMjBza3lzY3JhcGVyJTIwbmlnaHR8ZW58MHx8fHwxNzg1OTAyMTAwfDA&ixlib=rb-4.1.0&q=85&w=1600",
-        "description": "A dramatic dark photograph of a single iconic skyscraper at night, dark moody sky. Used under a dark veil with huge white OKI INC. text.",
-        "category": "hero"
-      },
-      "hero_light_new": {
-        "url": "https://images.unsplash.com/photo-1515937228207-a2a00c751c3d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwyfHx0YWxsJTIwc2t5c2NyYXBlciUyMG92ZXJjYXN0JTIwZGF5dGltZXxlbnwwfHx8fDE3ODU5MDIxMDB8MA&ixlib=rb-4.1.0&q=85&w=1600",
-        "description": "A bright/overcast daytime photograph of a tall tower, desaturated, centered. Used under an ivory overlay with huge black text.",
-        "category": "hero"
-      }
-    },
-    "rules": "Images must not exceed 80vh on mobile."
-  },
-  "3d libraries": {
-    "recommended": "Framer Motion for 2D parallax. No heavy 3D required for basic hero replacement unless specified."
-  },
+  "typography": {},
+  "colors": {},
+  "visual enhancers": {},
+  "component name": {},
+  "grids": {},
+  "layouts": {},
+  "motion": {},
+  "accessibility": {},
+  "media": {},
+  "3d libraries": {},
   "instructions_to_main_agent": [
-    "Use the provided image_urls for the OKI Inc. homepage hero backgrounds.",
-    "Ensure dark theme gets hero_dark_new and light theme gets hero_light_new.",
-    "Implement huge OKI INC. text matching the hero background contrast constraints.",
-    "Use .js files for React components, not .tsx files.",
-    "Apply data-testid to all actionable UI elements."
+    "Ensure the hero building image sits under an ivory #F2EFE8 overlay with huge BLACK 'OKI INC.' text.",
+    "Do not use complete transparent background in header, overlays, any surface that has content under it.",
+    "You have .js files not .tsx files, so apply guidelines for .js files."
   ],
   "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Avoid generic, 'on distribution' outputs. Make creative, distinctive frontends.",
-    "Create depth through layered design elements with z-index hierarchy.",
-    "Never use complete transparent backgrounds for overlays or headers.",
-    "Do not center align the app container (.App { text-align: center; } is forbidden).",
-    "Use modern pill-shaped or sharp buttons with interaction animations.",
-    "Do not use AI assistant emojis for icons.",
-    "Apply 2-3x more spacing than feels comfortable.",
-    "Use glass-morphism effects with backdrop filters (12-24px blur).",
-    "Never use placeholder image URLs. Use the provided ones."
+    "All interactive and key informational elements MUST include a data-testid attribute to facilitate robust automated testing."
   ]
 }
