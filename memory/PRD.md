@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, contact page → informational)
+- Contact page form removed entirely; page is now pure corporate information: "One office. One line." header, large HQ address block (One World Trade Center, 85th Floor), tap-to-call phone button, At-a-Glance entity card (Entity/Type/Founded/Focus), and three detail cards (Headquarters, Incorporation, Corporate Deck with PDF link); page meta updated
+
 ## Implemented (2026-08-12, market board redesign)
 - MarketBoard rebuilt: labeled Crypto (left) / Stocks (right) columns; heading changed to "One board. Both markets."
 - Prices ⇄ Charts view toggle (segmented control, gold active state): Prices view = BTC panel (price, 24h change, market cap, volume) + ETH/SOL rows + indices cards + equity rows; Charts view = compact selector rail (Crypto/Indices/Equities groups) + embedded MarketChart with timeframes; clicking any cell flips into that asset's chart; X returns to Prices

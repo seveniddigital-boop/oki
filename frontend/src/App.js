@@ -47,7 +47,7 @@ const PAGE_META = {
   "/strategy": ["Strategy — OKI Inc.", "The OKI method: watch continuously, study structure before sentiment, and publish in the open. Attention is the strategy."],
   "/about": ["Corporate Architecture — OKI Inc.", "OKI Inc. is a Delaware C-Corporation headquartered at One World Trade Center, New York. Governance, leadership offices, and headquarters."],
   "/insights": ["Perspectives — OKI Inc.", "Markets, architecture, and the long climb — essays and announcements from OKI Inc."],
-  "/contact": ["Contact — OKI Inc.", "Partnerships, press, and professional inquiries. Every message is read by the corporate office of OKI Inc."],
+  "/contact": ["Contact — OKI Inc.", "One office, one line. Headquarters, phone, and corporate details of OKI Inc. — One World Trade Center, 85th Floor, New York."],
 };
 
 function RouteMeta() {
