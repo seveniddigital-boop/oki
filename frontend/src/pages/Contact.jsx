@@ -67,7 +67,7 @@ export default function Contact() {
                   +1 (212) 220-8443
                 </a>
                 <a
-                  href="mailto:contact@okiinc.global"
+                  href="mailto:contact@okiinc.global?subject=Inquiry%20for%20OKI%20Inc."
                   data-testid="contact-email-link"
                   className="group inline-flex items-center gap-3 border border-white/20 px-7 py-4 font-mono text-sm tracking-[0.15em] text-oki-text transition-colors duration-500 hover:border-oki-gold hover:text-oki-gold"
                 >
@@ -123,7 +123,7 @@ export default function Contact() {
                 </div>
                 <div className="flex justify-between gap-6 text-sm">
                   <span className="text-oki-faint">Email</span>
-                  <a href="mailto:contact@okiinc.global" className="text-right text-oki-gold transition-colors duration-300 hover:text-oki-text">contact@okiinc.global</a>
+                  <a href="mailto:contact@okiinc.global?subject=Inquiry%20for%20OKI%20Inc." className="text-right text-oki-gold transition-colors duration-300 hover:text-oki-text">contact@okiinc.global</a>
                 </div>
               </div>
             </Reveal>

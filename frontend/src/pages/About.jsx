@@ -120,7 +120,7 @@ export default function About() {
             <a href="tel:+12122208443" data-testid="about-phone-link" className="mt-6 inline-block font-mono text-sm tracking-[0.2em] text-oki-gold transition-colors duration-300 hover:text-oki-text">
               +1 (212) 220-8443
             </a>
-            <a href="mailto:contact@okiinc.global" data-testid="about-email-link" className="mt-3 block font-mono text-sm tracking-[0.15em] text-oki-gold transition-colors duration-300 hover:text-oki-text">
+            <a href="mailto:contact@okiinc.global?subject=Inquiry%20for%20OKI%20Inc." data-testid="about-email-link" className="mt-3 block font-mono text-sm tracking-[0.15em] text-oki-gold transition-colors duration-300 hover:text-oki-text">
               contact@okiinc.global
             </a>
           </Reveal>
