@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, MapPin, Landmark, FileText, ArrowUpRight } from "lucide-react";
+import { Phone, Mail, MapPin, Landmark, FileText, ArrowUpRight } from "lucide-react";
 import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic";
 import LazyBg from "@/components/LazyBg";
 
@@ -57,14 +57,24 @@ export default function Contact() {
                 85th Floor, New York,<br />
                 NY 10007
               </p>
-              <a
-                href="tel:+12122208443"
-                data-testid="contact-phone-link"
-                className="group mt-8 inline-flex items-center gap-3 border border-oki-gold/50 px-7 py-4 font-mono text-sm tracking-[0.2em] text-oki-gold transition-colors duration-500 hover:bg-oki-gold hover:text-oki-black"
-              >
-                <Phone className="h-4 w-4" />
-                +1 (212) 220-8443
-              </a>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href="tel:+12122208443"
+                  data-testid="contact-phone-link"
+                  className="group inline-flex items-center gap-3 border border-oki-gold/50 px-7 py-4 font-mono text-sm tracking-[0.2em] text-oki-gold transition-colors duration-500 hover:bg-oki-gold hover:text-oki-black"
+                >
+                  <Phone className="h-4 w-4" />
+                  +1 (212) 220-8443
+                </a>
+                <a
+                  href="mailto:contact@okiinc.global"
+                  data-testid="contact-email-link"
+                  className="group inline-flex items-center gap-3 border border-white/20 px-7 py-4 font-mono text-sm tracking-[0.15em] text-oki-text transition-colors duration-500 hover:border-oki-gold hover:text-oki-gold"
+                >
+                  <Mail className="h-4 w-4" />
+                  contact@okiinc.global
+                </a>
+              </div>
               <p className="mt-8 max-w-md text-sm leading-relaxed text-oki-muted">
                 Corporate communications and press inquiries are handled directly from headquarters. OKI Inc. is incorporated in the State of Delaware and operates in good standing under the Delaware General Corporation Law.
               </p>
@@ -107,9 +117,13 @@ export default function Contact() {
                   <span className="text-oki-faint">Founded</span>
                   <span className="text-right text-oki-text">2026</span>
                 </div>
-                <div className="flex justify-between gap-6 text-sm">
+                <div className="flex justify-between gap-6 border-b border-white/10 pb-4 text-sm">
                   <span className="text-oki-faint">Focus</span>
                   <span className="text-right text-oki-text">Market Intelligence</span>
+                </div>
+                <div className="flex justify-between gap-6 text-sm">
+                  <span className="text-oki-faint">Email</span>
+                  <a href="mailto:contact@okiinc.global" className="text-right text-oki-gold transition-colors duration-300 hover:text-oki-text">contact@okiinc.global</a>
                 </div>
               </div>
             </Reveal>

@@ -103,7 +103,7 @@ async def create_inquiry(input: InquiryCreate):
             <p style="margin:0;color:#F5F5F5;">{inquiry.message}</p>
           </td></tr>
           <tr><td style="padding:20px 40px;border-top:1px solid #2a2a2a;">
-            <p style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:2px;color:#737373;margin:0;">OKI INC. · ONE WORLD TRADE CENTER, 85TH FLOOR, NEW YORK, NY 10007 · +1 (212) 220-8443</p>
+            <p style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:2px;color:#737373;margin:0;">OKI INC. · ONE WORLD TRADE CENTER, 85TH FLOOR, NEW YORK, NY 10007 · +1 (212) 220-8443 · CONTACT@OKIINC.GLOBAL</p>
           </td></tr>
         </table>
       </td></tr>
@@ -250,7 +250,7 @@ async def corporate_deck():
     c.drawString(56, 96, "CORPORATE HEADQUARTERS")
     c.setFillColor(muted)
     c.setFont("Helvetica", 8)
-    c.drawString(56, 82, "One World Trade Center, 85th Floor, New York, NY 10007  ·  +1 (212) 220-8443")
+    c.drawString(56, 82, "One World Trade Center, 85th Floor, New York, NY 10007  ·  +1 (212) 220-8443  ·  contact@okiinc.global")
     c.drawString(56, 70, "Incorporated in the State of Delaware, United States of America")
     c.setFillColor(crimson)
     c.setFont("Helvetica-Bold", 7.5)
