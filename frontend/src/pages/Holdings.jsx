@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Lock, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import CryptoTicker from "@/components/CryptoTicker";
 import CryptoChart from "@/components/CryptoChart";
@@ -64,6 +65,7 @@ const assetClasses = [
     desc: "Senior-secured direct lending and dislocation-driven acquisitions where structure, not sentiment, determines return.",
     tag: "10% of Portfolio",
     img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxiYW5rJTIwdmF1bHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
+    locked: true,
   },
   {
     title: "Digital Assets & Crypto Holdings",
@@ -112,6 +114,9 @@ export default function Holdings() {
             <GrowthLine />
           </ChartDisclosure>
         </div>
+        <p className="mt-6 font-mono text-[9px] uppercase leading-relaxed tracking-[0.25em] text-oki-faint">
+          Allocation figures reflect the corporate mandate structure. Market data: CoinGecko · Charts update continuously · Private positions disclosed under NDA only
+        </p>
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 pb-32 md:px-12">
@@ -125,9 +130,29 @@ export default function Holdings() {
             >
               <PhotoReveal src={a.img} alt={a.title} delay={i * 0.1} className={`w-full border-b border-white/10 ${a.wide ? "h-56" : "h-44"}`} />
               <div className="p-10 md:p-14">
-                <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-gold">{a.tag}</p>
+                <div className="flex items-center justify-between">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-gold">{a.tag}</p>
+                  {a.locked && <Lock className="h-3.5 w-3.5 text-oki-gold" data-testid={`lock-icon-${a.title.replace(/\s+/g, "-").toLowerCase()}`} />}
+                </div>
                 <h3 className="mt-6 font-display text-2xl font-medium tracking-tight text-oki-text md:text-3xl">{a.title}</h3>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-oki-muted">{a.desc}</p>
+                {a.locked ? (
+                  <div className="mt-4 max-w-md">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-crimsonbright">Restricted Position</p>
+                    <p className="mt-3 text-sm leading-relaxed text-oki-muted">
+                      Detailed exposure, counterparties, and terms are disclosed only under executed NDA through the Chief Investment Office.
+                    </p>
+                    <Link
+                      to="/contact"
+                      data-testid="locked-request-access"
+                      className="group mt-5 inline-flex items-center gap-2 border-b border-oki-gold/40 pb-1 font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold transition-colors duration-300 hover:border-oki-gold"
+                    >
+                      Request Access
+                      <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                ) : (
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-oki-muted">{a.desc}</p>
+                )}
                 <div className="mt-8 h-px w-full bg-white/5 transition-colors duration-500 group-hover:bg-oki-gold/30" />
               </div>
             </Reveal>

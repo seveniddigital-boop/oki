@@ -26,12 +26,16 @@ export default function Footer() {
             </div>
           </div>
           <div className="md:col-span-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Registered Office</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Corporate Headquarters</p>
             <p className="mt-6 text-sm leading-relaxed text-oki-muted">
-              16192 Coastal Highway<br />
-              Lewes, Delaware 19958<br />
+              One World Trade Center, 85th Floor<br />
+              New York, NY 10007<br />
               United States of America
             </p>
+            <a href="tel:+12122208443" data-testid="footer-phone-link" className="mt-3 inline-block text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">
+              +1 (212) 220-8443
+            </a>
+            <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.3em] text-oki-faint">Incorporated in Delaware</p>
           </div>
         </div>
         <div className="mt-20 flex flex-col justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">

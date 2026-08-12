@@ -231,12 +231,15 @@ export default function Contact() {
               <p className="absolute bottom-4 left-4 font-mono text-[9px] uppercase tracking-[0.35em] text-white/60">Headquarters — Delaware, USA</p>
             </Reveal>
             <Reveal className="border border-white/10 bg-oki-surface p-10">
-              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Registered Office</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Corporate Headquarters</p>
               <p className="mt-4 text-sm leading-relaxed text-oki-text">
-                16192 Coastal Highway<br />
-                Lewes, Delaware 19958<br />
+                One World Trade Center, 85th Floor<br />
+                New York, NY 10007<br />
                 United States of America
               </p>
+              <a href="tel:+12122208443" data-testid="contact-phone-link" className="mt-3 inline-block text-sm text-oki-gold transition-colors duration-300 hover:text-oki-text">
+                +1 (212) 220-8443
+              </a>
               <div className="my-8 h-px bg-white/10" />
               <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Protocol</p>
               <ul className="mt-4 space-y-3 text-sm text-oki-muted">

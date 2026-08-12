@@ -28,6 +28,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, PDF/donut fixes + lockable positions + HQ change)
+- PDF deck fixed: allocation labels no longer run into bars (label font/spacing reworked), percentage labels given clear separation — verified by document analysis with 100% confidence
+- Donut chart rebuilt from scratch: plain SVG arc paths with CSS-transition drawing (framer-motion was stripping rotations, collapsing all segments into one ring) — verified in both themes
+- Private Credit & Special Situations card is now LOCKED: padlock icon, "Restricted Position" in crimson, NDA disclosure note, "Request Access" link to the contact page
+- Crypto chart panels now include an institutional one-line brief per asset (custom for BTC/ETH/SOL, generic watchlist note for searched coins); methodology footnote added under the dashboard
+- Address changed sitewide to One World Trade Center, 85th Floor, New York, NY 10007 with phone +1 (212) 220-8443 (footer, About, Contact, email template, PDF deck, meta); Delaware kept as incorporation note
+
 ## Implemented (2026-08-07, QA + fix round)
 - Light theme hero tower replaced (bright glass skyscraper corner against white sky)
 - Crypto windows hardened: chart panel now shows "Feed unavailable + Retry" instead of infinite loading; search window shows tap-to-retry on failure; prices endpoint gets 3-attempt retry, 120s cache, and graceful empty-200 degradation (no more console 502s)

@@ -115,7 +115,7 @@ async def create_inquiry(input: InquiryCreate):
             <p style="margin:0;color:#F5F5F5;">{inquiry.message}</p>
           </td></tr>
           <tr><td style="padding:20px 40px;border-top:1px solid #2a2a2a;">
-            <p style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:2px;color:#737373;margin:0;">OKI INC. · 16192 COASTAL HIGHWAY, LEWES, DELAWARE 19958</p>
+            <p style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:2px;color:#737373;margin:0;">OKI INC. · ONE WORLD TRADE CENTER, 85TH FLOOR, NEW YORK, NY 10007 · +1 (212) 220-8443</p>
           </td></tr>
         </table>
       </td></tr>
@@ -217,11 +217,11 @@ async def corporate_deck():
              ("DIGITAL ASSETS & CRYPTO", 16, Color(227/255, 200/255, 136/255)),
              ("IP & INTANGIBLES", 14, Color(0.55, 0.55, 0.55)), ("PRIVATE CREDIT & SPECIAL SITUATIONS", 10, Color(0.28, 0.28, 0.28))]
     y = H - 306
-    bar_x = 200
-    bar_w = W - 56 - bar_x - 40
+    bar_x = 212
+    bar_w = W - 56 - bar_x - 52
     for label, pct, col in alloc:
         c.setFillColor(muted)
-        c.setFont("Helvetica", 7.5)
+        c.setFont("Helvetica", 6.8)
         c.drawString(56, y + 3, label)
         c.setFillColor(Color(0.1, 0.1, 0.1))
         c.rect(bar_x, y, bar_w, 9, stroke=0, fill=1)
@@ -229,7 +229,7 @@ async def corporate_deck():
         c.rect(bar_x, y, bar_w * pct / 50, 9, stroke=0, fill=1)
         c.setFillColor(white)
         c.setFont("Helvetica-Bold", 8)
-        c.drawString(bar_x + bar_w + 8, y + 2, f"{pct}%")
+        c.drawString(bar_x + bar_w + 14, y + 2, f"{pct}%")
         y -= 24
 
     c.setStrokeColor(Color(0.16, 0.16, 0.16))
@@ -268,10 +268,11 @@ async def corporate_deck():
 
     c.setFillColor(white)
     c.setFont("Helvetica-Bold", 9)
-    c.drawString(56, 96, "REGISTERED OFFICE")
+    c.drawString(56, 96, "CORPORATE HEADQUARTERS")
     c.setFillColor(muted)
     c.setFont("Helvetica", 8)
-    c.drawString(56, 82, "16192 Coastal Highway, Lewes, Delaware 19958, United States of America")
+    c.drawString(56, 82, "One World Trade Center, 85th Floor, New York, NY 10007  ·  +1 (212) 220-8443")
+    c.drawString(56, 70, "Incorporated in the State of Delaware, United States of America")
     c.setFillColor(crimson)
     c.setFont("Helvetica-Bold", 7.5)
     c.drawString(56, 60, "SERIOUS CAPITAL AND STRATEGIC CONVERSATIONS ONLY.")

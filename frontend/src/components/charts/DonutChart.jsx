@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const segments = [
   { label: "Equity Holdings", value: 36, color: "#C5A059" },
@@ -8,35 +9,60 @@ const segments = [
   { label: "Private Credit & Special Situations", value: 10, color: "var(--chart-n2)" },
 ];
 
+const CX = 100, CY = 100, R = 84;
+const CIRC = 2 * Math.PI * R;
+const GAP = 1.2;
+
+function polar(angleDeg) {
+  const a = ((angleDeg - 90) * Math.PI) / 180;
+  return [CX + R * Math.cos(a), CY + R * Math.sin(a)];
+}
+
+function arcPath(startPct, endPct) {
+  const [x1, y1] = polar((startPct / 100) * 360);
+  const [x2, y2] = polar((endPct / 100) * 360);
+  const large = endPct - startPct > 50 ? 1 : 0;
+  return `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${R} ${R} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+}
+
 export default function DonutChart() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+
   let acc = 0;
+  const arcs = segments.map((s, i) => {
+    const start = acc + GAP / 2;
+    const end = acc + s.value - GAP / 2;
+    acc += s.value;
+    const len = ((end - start) / 100) * CIRC;
+    return { ...s, d: arcPath(start, end), len, delay: 0.2 + i * 0.22 };
+  });
+
   return (
     <div data-testid="allocation-donut-chart" className="flex h-full flex-col">
-      <div className="mt-2 flex flex-1 flex-col items-center justify-center gap-10 lg:flex-row">
+      <div ref={ref} className="mt-2 flex flex-1 flex-col items-center justify-center gap-10 lg:flex-row">
         <div className="relative">
-          <svg width="220" height="220" viewBox="0 0 200 200" className="-rotate-90">
-            <circle cx="100" cy="100" r="84" fill="none" stroke="var(--chart-grid)" strokeWidth="14" />
-            {segments.map((s, i) => {
-              const start = acc;
-              acc += s.value;
-              return (
-                <motion.circle
-                  key={s.label}
-                  cx="100" cy="100" r="84" fill="none"
-                  stroke={s.color} strokeWidth="14"
-                  pathLength={100}
-                  strokeDasharray="100 100"
-                  initial={{ strokeDashoffset: 100 }}
-                  whileInView={{ strokeDashoffset: 100 - s.value }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.4, delay: 0.2 + i * 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  transform={`rotate(${start * 3.6} 100 100)`}
-                />
-              );
-            })}
+          <svg width="220" height="220" viewBox="0 0 200 200">
+            <circle cx={CX} cy={CY} r={R} fill="none" stroke="var(--chart-grid)" strokeWidth="14" />
+            {arcs.map((a) => (
+              <path
+                key={a.label}
+                d={a.d}
+                fill="none"
+                stroke={a.color}
+                strokeWidth="14"
+                style={{
+                  strokeDasharray: a.len,
+                  strokeDashoffset: inView ? 0 : a.len,
+                  transition: `stroke-dashoffset 1.2s ${a.delay}s cubic-bezier(0.22, 1, 0.36, 1)`,
+                }}
+              />
+            ))}
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="font-display text-3xl font-semibold text-oki-text">100<span className="text-oki-gold">%</span></span>
+            <span className="font-display text-3xl font-semibold text-oki-text">
+              100<span className="text-oki-gold">%</span>
+            </span>
             <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.3em] text-oki-faint">Deployed</span>
           </div>
         </div>

@@ -11,6 +11,12 @@ const COIN_NAMES = {
   solana: "Select L1 · Solana",
 };
 
+const ASSET_BRIEFS = {
+  bitcoin: "The network's reserve asset — held as permanent balance-sheet infrastructure.",
+  ethereum: "The settlement layer for programmable value — held, selectively staked, never leveraged.",
+  solana: "High-throughput network exposure within the digital asset mandate.",
+};
+
 const W = 560, H = 200, PAD = 12;
 
 const TIMEFRAMES = [
@@ -119,6 +125,11 @@ export default function CryptoChart({ coin, name, onClose }) {
         <button onClick={onClose} data-testid="crypto-chart-close" aria-label="Close chart" className="text-oki-faint transition-colors duration-200 hover:text-oki-text">
           <X className="h-3.5 w-3.5" />
         </button>
+      </div>
+      <div className="border-b border-white/10 px-5 py-2.5">
+        <p className="font-mono text-[9px] leading-relaxed tracking-[0.15em] text-oki-faint">
+          {ASSET_BRIEFS[coin] || `${name || coin} — tracked within the digital asset watchlist. Market data via CoinGecko.`}
+        </p>
       </div>
       <div className="p-5">
         {chart ? (

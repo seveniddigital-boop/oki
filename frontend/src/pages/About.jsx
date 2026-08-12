@@ -107,18 +107,21 @@ export default function About() {
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-        <SectionTag index="A/03" label="Registered Office" />
+        <SectionTag index="A/03" label="Corporate Headquarters" />
         <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
           <Reveal>
             <p className="font-display text-3xl font-medium leading-snug tracking-tight text-oki-text md:text-4xl">
-              16192 Coastal Highway<br />
-              Lewes, Delaware 19958<br />
+              One World Trade Center, 85th Floor<br />
+              New York, NY 10007<br />
               <span className="text-oki-muted">United States of America</span>
             </p>
+            <a href="tel:+12122208443" data-testid="about-phone-link" className="mt-6 inline-block font-mono text-sm tracking-[0.2em] text-oki-gold transition-colors duration-300 hover:text-oki-text">
+              +1 (212) 220-8443
+            </a>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="max-w-md text-sm leading-relaxed text-oki-muted">
-              All corporate filings, service of process, and governance records are maintained at the registered office. OKI Inc. operates in good standing under the Delaware General Corporation Law.
+              Corporate communications and investor relations are conducted from the headquarters at One World Trade Center. OKI Inc. is incorporated in the State of Delaware and operates in good standing under the Delaware General Corporation Law.
             </p>
             <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.35em] text-oki-gold">Filed · Maintained · Permanent</p>
             <a
