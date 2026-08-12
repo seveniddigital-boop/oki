@@ -1,0 +1,18 @@
+{
+  "summary": "Backend + frontend E2E test for OKI Inc. pivot (asset-holdings → markets-info platform). Backend pytest suite: 9/9 passed (market-prices returns all 11 items with correct types; market-chart works for both crypto & stock; market-search finds AAPL; inquiries endpoint accepts only {name,org,email,message}, ignores extra 'capital' field, rejects invalid email; PDF deck returns valid application/pdf). Frontend Playwright suite: 39/41 checks passed. All required data-testids present on /markets (market-board, board-btc-panel/price/mcap/volume, board-index-SPX/IXIC/DJI, board-equity-AAPL/MSFT/NVDA/TSLA/AMZN, board-crypto-ETH/SOL). Clicking BTC panel opens MarketChart with timeframe-24H button; clicking board-index-SPX shows 'Index' badge; ticker shows BTC/ETH/SOL/SPX/IXIC/DJI. Chips (bitcoin, ethereum, spx) present. Contact form has NO capital select and submits successfully with contact-success-message. Preloader with 'Global Market Intelligence · Live Public Data' tagline shown on first load. Home subheadline 'Global Markets. One Window. Zero Noise.' present. Nav 'Contact' text present. Deck buttons present on Home & About. Mobile 390px: 0px horizontal overflow. Forbidden-phrase scan (International Asset Holdings / Ownership is the strategy / Investor Access / portfolio / capital range / cold storage / we acquire|own|hold) clean on /, /markets, /strategy, /about, /insights, /contact. The 2 'failed' checks in the run are false-positives caused by test-script matching (Strategy headline is split across two KineticLines DOM elements 'Attention is' + 'the Strategy.', both present; theme toggle stores state on document.documentElement.dataset.theme, not className) — verified in source.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/backend_test.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py market-prices makes 8 sequential Yahoo requests with 0.3s sleep between each (~2.5s+ latency on cache miss). Consider asyncio.gather for parallel fetches to reduce first-hit latency.",
+    "In server.py Inquiry email send failure is silently swallowed — user still gets 200 success. Acceptable UX-wise but log level is good; consider surfacing a subtle warning field to caller if delivery critical.",
+    "MarketBoard.jsx: BTC row uses `items.find(i=>i.symbol==='BTC')` but if the market-prices API returns partial data (only stocks, e.g. CoinGecko outage), the BTC panel silently shows 'Connecting…' forever without a retry indicator."
+  ],
+  "updated_files": ["/app/backend/tests/backend_test.py"],
+  "success_rate": {"backend": "100%", "frontend": "100% (all app functionality verified; the 2 'failed' items were test-script matching issues, not app bugs)"},
+  "seed_data_creation": "Created 2 TEST_-prefixed inquiries (TEST_John/TEST_Corp and TEST_Jane/TEST_Org) via /api/inquiries during test run.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend live-data endpoints (market-prices, market-chart, market-search) hit CoinGecko + Yahoo Finance and are cached 2min server-side. If CoinGecko rate-limits, BTC/ETH/SOL may be temporarily missing from /api/market-prices. Contact form success message testid is 'contact-success-message'. Preloader only shows once per session (sessionStorage 'oki-entered'); clear to re-test. Theme state lives on document.documentElement.dataset.theme (values 'dark'|'light'), not on className. Strategy headline is rendered via KineticLines as two separate DOM lines — match each line separately when asserting."
+}

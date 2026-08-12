@@ -28,6 +28,12 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, full informational pivot completion + stocks dashboard)
+- Completed the holdings purge sitewide: Home (hero statement, Position, Method chapters Watch/Study/Publish, focus areas, CTA "Just getting started. Going to the top."), Strategy ("Attention is the Strategy" — Watch/Study/Publish phases), About (young-corporation architecture, no holding entities), Insights (5 essays rewritten as public market commentary — no custody/portfolio claims), Contact (capital-range gatekeeping removed, general corporate inquiry), Nav/Footer/Marquee, index.html meta, page meta, preloader/veil tagline "Global Market Intelligence · Live Public Data"
+- New MarketBoard dashboard on /markets: Bitcoin panel (live price, 24h change, market cap, 24h volume) + stocks section (indices S&P 500/NASDAQ/Dow + equities AAPL/MSFT/NVDA/TSLA/AMZN with price & % change) + ETH/SOL strip — every cell clickable to open the chart
+- Backend: /api/market-prices extended to 11 instruments (crypto with market_cap/volume, type=index/stock), Yahoo fetches parallelized via asyncio.gather; Inquiry model no longer requires capital; inquiry email template rebranded ("NEW CORPORATE INQUIRY"); PDF deck fully rewritten (Global Markets. One Window. / Watch-Study-Publish / information-only disclaimer)
+- Verified by testing agent: backend 9/9, frontend all checks (board, charts, contact, themes, mobile, forbidden-phrase scan clean on all routes)
+
 ## Implemented (2026-08-12, informational pivot + stocks)
 - Site repositioned as a pure informational platform for a rising corporation: all portfolio/holdings claims removed (allocation donut, geographic bars, growth chart, control spectrum, locked card, NDA copy, percentage bento)
 - Holdings page replaced by Markets page (/markets): "Global Markets" header, live ticker (BTC/ETH/SOL + SPX/AAPL/MSFT/TSLA), Market Window terminal (quick chips + unified search + chart with timeframes/hover/briefs), "How we read markets" lenses, informational Focus Areas cards with photos
@@ -175,14 +181,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - Screenshots: hero, scroll sections, all chart animations, strategy timeline, control spectrum, footer, contact form submit → success state confirmed
 
 ## Backlog
-- P0: none blocking
-- P1: Wire contact form to backend (store inquiries in MongoDB + email notification via Resend) if user wants persistence
-- P1: Mobile viewport fine-tuning pass (hero type scale on small screens)
-- P2: Page transition animations between routes
-- P2: OG/social meta tags and favicon branding
-- P2: Multi-language or investor-deck PDF download
+- P1: Watchlist chips — let visitors pin searched assets next to BTC/ETH for the session
+- P1: Market news feed — scrolling strip of live financial headlines under the ticker
+- P2: Tower-ascent intro — "scroll-rides-the-elevator" entrance up to the 85th floor
 
 ## Next Tasks
-1. Confirm with user whether contact inquiries should persist (backend + Resend email)
-2. Mobile QA pass
-3. Route transition polish
+1. User verification of the completed informational pivot + stocks dashboard
+2. Watchlist chips (P1)
+3. Market news feed strip (P1)

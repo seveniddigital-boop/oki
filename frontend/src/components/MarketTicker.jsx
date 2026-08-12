@@ -42,7 +42,7 @@ export default function MarketTicker() {
       {items.length === 0 && (
         <span className="font-mono text-[10px] tracking-[0.25em] text-oki-faint">CONNECTING…</span>
       )}
-      {items.map((it) => {
+      {items.slice(0, 8).map((it) => {
         const up = it.change >= 0;
         return (
           <span key={it.symbol} data-testid={`ticker-${it.symbol}`} className="flex items-baseline gap-2.5 font-mono text-xs">

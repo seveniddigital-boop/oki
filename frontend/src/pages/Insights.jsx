@@ -8,23 +8,23 @@ const ESSAYS = [
   {
     id: "digital-assets-infrastructure",
     date: "AUG 2026",
-    category: "Capital",
-    title: "Digital Assets, Held Like Infrastructure",
-    excerpt: "Bitcoin and select networks enter the permanent portfolio — with custody, not conviction theater.",
+    category: "Markets",
+    title: "Bitcoin, Read Like Infrastructure",
+    excerpt: "Price is the loudest signal and the least interesting one. How OKI reads the network instead.",
     body: [
-      "OKI Inc. is building a formal digital asset mandate: Bitcoin, Ethereum, and select layer-one infrastructure, studied with the same rigor as any balance-sheet position. When the corporation enters, it will enter with custody — not conviction theater.",
-      "The doctrine does not bend for a new asset class. Custody is institutional, keys are multi-signature and geographically distributed, the majority of the position sits in cold storage, and nothing is leveraged. We do not watch the price. We own the network.",
+      "Most coverage of Bitcoin begins and ends with price. OKI's read starts elsewhere: settlement volume, security budget, developer gravity — the structural signals that describe what the network is, not what it costs.",
+      "This is not advocacy and it is not advice. It is the lens this platform publishes from: infrastructure first, sentiment last. The chart shows the weather; the fundamentals show the climate.",
     ],
   },
   {
     id: "ownership-is-the-strategy",
     date: "JUL 2026",
-    category: "Doctrine",
-    title: "The Case for Never Selling",
-    excerpt: "The argument against fund lives, exit mandates, and the quarterly clock.",
+    category: "Platform",
+    title: "Why We Publish in Public",
+    excerpt: "A young corporation's shortcut to trust: show the work.",
     body: [
-      "Most capital is managed against a clock. Fund lives expire, quarters close, and positions built with care are sold to satisfy a calendar. OKI Inc. was organized to remove the clock from the equation entirely.",
-      "When an asset enters the OKI portfolio, it enters permanently. This is not passivity — it is the most aggressive posture available to capital. Every competitor must eventually sell. We never must. Over decades, that asymmetry compounds into something no quarterly model can replicate.",
+      "OKI Inc. was founded in 2026 with no legacy and no legacy bias. What it has instead is a method — and the willingness to publish it. Every price on this site is live, public, and ungated.",
+      "Transparency is not a marketing posture. It is the strategy. Corporations used to build reputation over decades of private dealing. This one intends to build it in the open, one accurate data point at a time.",
     ],
   },
   {
@@ -34,19 +34,19 @@ const ESSAYS = [
     title: "Why Delaware, Why Always",
     excerpt: "Two centuries of settled corporate law is not a detail. It is the foundation.",
     body: [
-      "Every OKI position is domiciled within a Delaware C-Corporation framework. The choice is deliberate: the Delaware General Corporation Law and the Court of Chancery offer the most predictable corporate jurisprudence in the world.",
-      "Predictability is not administration. It is defense. When governance questions arise — and over long enough horizons, they always arise — they are resolved against two hundred years of precedent, not against the mood of a foreign regulator. Structure is how capital survives its own success.",
+      "OKI Inc. is domiciled within a Delaware C-Corporation framework. The choice is deliberate: the Delaware General Corporation Law and the Court of Chancery offer the most predictable corporate jurisprudence in the world.",
+      "Predictability is not administration. It is defense. When governance questions arise — and over long enough horizons, they always arise — they are resolved against two hundred years of precedent, not against the mood of a foreign regulator. Structure is how a company survives its own success.",
     ],
   },
   {
     id: "compounding-of-control",
     date: "MAY 2026",
-    category: "Capital",
-    title: "The Compounding of Control",
-    excerpt: "Minority positions observe outcomes. Controlling positions author them.",
+    category: "Markets",
+    title: "The Compounding of Attention",
+    excerpt: "An index read once is trivia. Read daily for a decade, it becomes judgment.",
     body: [
-      "The OKI mandate is being written so that control is the default position, not the exception. A minority investor reads the outcome; a controlling owner writes it.",
-      "Control compounds quietly: pricing decisions, capital allocation, management selection, timing. Each lever seems modest in isolation. Across a dozen jurisdictions and decades of patience, the levers multiply one another. That multiplication is the return.",
+      "Markets reward the prepared, and preparation is mostly repetition. The same indices, the same networks, the same questions — asked every session until the answers start arriving before the questions.",
+      "That is the compounding this platform is built on: not leverage, not access, but accumulated understanding — published so anyone can compound alongside.",
     ],
   },
   {
@@ -56,8 +56,8 @@ const ESSAYS = [
     title: "Institutions Endure. Individuals Serve.",
     excerpt: "Authority at OKI Inc. resides in offices, not personalities.",
     body: [
-      "OKI Inc. presents its leadership institutionally — by office, not by photograph. The Chairman, the Chief Investment Office, the General Counsel, the Comptroller: roles with mandates, charters, and succession discipline.",
-      "Personalities are cyclical. Institutions are structural. A corporation engineered to hold assets for generations cannot depend on any single generation of people. The charter outlives the steward. That is the point of the charter.",
+      "OKI Inc. presents its leadership institutionally — by office, not by photograph. The Chairman, the Chief Markets Office, the General Counsel, the Comptroller: roles with mandates, charters, and succession discipline.",
+      "Personalities are cyclical. Institutions are structural. A corporation built to last generations cannot depend on any single generation of people. The charter outlives the steward. That is the point of the charter.",
     ],
   },
 ];
@@ -127,7 +127,7 @@ export default function Insights() {
           />
           <Reveal delay={0.4} className="mt-10 max-w-xl">
             <p className="text-sm leading-relaxed text-oki-muted">
-              Essays and announcements from OKI Inc. on ownership, architecture, and capital discipline. Published when there is something worth saying — not before.
+              Essays and announcements from OKI Inc. on markets, architecture, and the long climb. Published when there is something worth saying — not before.
             </p>
           </Reveal>
         </div>

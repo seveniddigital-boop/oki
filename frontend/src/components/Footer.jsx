@@ -16,10 +16,10 @@ export default function Footer() {
             <LogoMark size={64} />
             <LogoWordmark gold className="mt-6 text-2xl tracking-[0.3em]" />
             <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.4em] text-oki-faint">
-              International Asset Holdings · Strategic Investments
+              Global Market Intelligence · Live Public Data
             </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-oki-faint">
-              A Delaware C-Corporation built for international asset ownership. Quiet power. Long-term control. Absolute precision.
+              A young Delaware C-Corporation publishing a clean, live window into Bitcoin and world equity markets. Just getting started. Going to the top.
             </p>
           </div>
           <div className="md:col-span-3">
@@ -28,7 +28,7 @@ export default function Footer() {
               <Link to="/markets" data-testid="footer-markets-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Market Window</Link>
               <Link to="/strategy" data-testid="footer-strategy-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Strategy</Link>
               <Link to="/about" data-testid="footer-architecture-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Architecture</Link>
-              <Link to="/contact" data-testid="footer-access-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Investor Access</Link>
+              <Link to="/contact" data-testid="footer-access-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Contact</Link>
             </div>
           </div>
           <div className="md:col-span-3">
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
         <div className="mt-20 flex flex-col justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">OKI Inc. · Delaware C-Corporation</p>
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Established for Permanence</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Established 2026 · New York</p>
         </div>
       </div>
     </footer>

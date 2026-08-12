@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import MarketTicker from "@/components/MarketTicker";
+import MarketBoard from "@/components/MarketBoard";
 import MarketChart from "@/components/MarketChart";
 import MarketSearch from "@/components/MarketSearch";
 import LazyBg from "@/components/LazyBg";
@@ -12,35 +13,35 @@ const HEADER_IMG =
 const quick = [
   { label: "Bitcoin", id: "bitcoin", type: "crypto", name: "Bitcoin" },
   { label: "Ethereum", id: "ethereum", type: "crypto", name: "Ethereum" },
-  { label: "S&P 500", id: "^GSPC", type: "stock", name: "S&P 500" },
+  { label: "S&P 500", id: "^GSPC", type: "stock", name: "S&P 500", badge: "Index" },
 ];
 
 const lenses = [
-  { t: "Macro Structure", d: "Interest rates, capital flows, and sovereign policy shape every position before it exists. Structure first." },
+  { t: "Macro Structure", d: "Interest rates, capital flows, and sovereign policy — the weather system every market trades inside. Structure first." },
   { t: "Network Fundamentals", d: "For digital assets: settlement volume, developer gravity, and security budgets — never sentiment." },
-  { t: "Liquidity Cycles", d: "Markets breathe. Entries are studied where liquidity is feared, sized where it returns." },
-  { t: "Risk Architecture", d: "Every scenario is mapped before capital moves. Survival first; compounding follows." },
+  { t: "Liquidity Cycles", d: "Markets breathe. Prices are read where liquidity leaves, and understood where it returns." },
+  { t: "Risk Awareness", d: "Volatility is information, not noise. Every chart here is a map of how the world prices uncertainty." },
 ];
 
 const focusAreas = [
   {
     title: "Equity Markets",
-    note: "Public companies and anchor positions across developed exchanges — studied for durable economics and owner-minded management.",
+    note: "The major indices and the companies that move them — tracked live, every session.",
     img: "https://images.unsplash.com/photo-1526642591341-bcfc36ffae2f?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: "Real Assets",
-    note: "Infrastructure, industrial land, and property in supply-constrained corridors.",
-    img: "https://images.unsplash.com/photo-1558120985-abcafafcae16?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
     title: "Digital Assets",
-    note: "Bitcoin, Ethereum, and select network infrastructure — approached as balance-sheet architecture, not trading.",
+    note: "Bitcoin, Ethereum, and select networks — read as emerging financial infrastructure.",
     img: "https://images.unsplash.com/photo-1623227413711-25ee4388dae3?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: "Private Markets",
-    note: "Direct credit and special situations where structure, not sentiment, determines the outcome.",
+    title: "Global Indices",
+    note: "S&P 500, NASDAQ, and the Dow — the scoreboard of American enterprise.",
+    img: "https://images.unsplash.com/photo-1558120985-abcafafcae16?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    title: "Macro & Commodities",
+    note: "Rates, currencies, and hard assets — the backdrop against which everything is priced.",
     img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1200&auto=format&fit=crop",
   },
 ];
@@ -72,8 +73,25 @@ export default function Markets() {
         <MarketTicker />
       </section>
 
+      <section className="mx-auto max-w-[1600px] px-6 pt-24 md:px-12">
+        <SectionTag index="M/02" label="The Board" />
+        <KineticLines
+          animate={false}
+          lines={["Bitcoin first.", "Stocks beside it."]}
+          lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
+        />
+        <Reveal delay={0.2} className="mt-8 max-w-xl">
+          <p className="text-sm leading-relaxed text-oki-muted">
+            One dashboard, two asset classes. Live Bitcoin statistics alongside the indices and companies that define the session. Select anything to open its chart.
+          </p>
+        </Reveal>
+        <Reveal delay={0.3} className="mt-12">
+          <MarketBoard onSelect={(m) => setActive(m)} />
+        </Reveal>
+      </section>
+
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12">
-        <SectionTag index="M/02" label="The Market Window" />
+        <SectionTag index="M/03" label="The Market Window" />
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
             <KineticLines
@@ -106,7 +124,7 @@ export default function Markets() {
               </div>
               <AnimatePresence>
                 {active && (
-                  <MarketChart key={`${active.type}-${active.id}`} id={active.id} type={active.type} name={active.name} onClose={() => setActive(null)} />
+                  <MarketChart key={`${active.type}-${active.id}`} id={active.id} type={active.type} name={active.name} badge={active.badge} onClose={() => setActive(null)} />
                 )}
               </AnimatePresence>
             </Reveal>
@@ -124,15 +142,15 @@ export default function Markets() {
 
       <section className="border-t border-white/10 bg-oki-surface">
         <div className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-          <SectionTag index="M/03" label="Focus Areas" />
+          <SectionTag index="M/04" label="Focus Areas" />
           <KineticLines
             animate={false}
-            lines={["Where OKI is", "learning to own."]}
+            lines={["What OKI", "watches."]}
             lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
           />
           <Reveal delay={0.2} className="mt-8 max-w-xl">
             <p className="text-sm leading-relaxed text-oki-muted">
-              Four arenas, one standard. OKI Inc. is building its mandate in public — studying each market deeply before a single dollar moves.
+              Four arenas, one standard. OKI Inc. is building its market intelligence in public — studying each market deeply and publishing what it sees.
             </p>
           </Reveal>
           <div className="mt-16 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2">

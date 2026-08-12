@@ -2,9 +2,9 @@ import Marquee from "react-fast-marquee";
 
 const items = [
   "Delaware C-Corporation",
-  "International Asset Holdings",
-  "Strategic Control",
-  "Long-Duration Ownership",
+  "Global Market Intelligence",
+  "Bitcoin · Equities · Indices",
+  "Live Public Data",
   "Quiet Power",
   "Absolute Precision",
 ];

@@ -102,7 +102,7 @@ export default function Nav() {
               data-testid="nav-access-link"
               className="group flex items-center gap-2 border border-white/15 px-5 py-2 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-text transition-colors duration-300 hover:border-oki-gold/60 hover:text-oki-gold"
             >
-              Investor Access
+              Contact
               <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </nav>
@@ -145,7 +145,7 @@ export default function Nav() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 flex flex-col justify-center bg-oki-black/95 px-8 backdrop-blur-xl md:hidden"
           >
-            {[...links, { to: "/contact", label: "Investor Access", id: "mobile-nav-access-link" }].map((l, i) => (
+            {[...links, { to: "/contact", label: "Contact", id: "mobile-nav-access-link" }].map((l, i) => (
               <motion.div
                 key={l.to}
                 initial={{ y: 30, opacity: 0 }}

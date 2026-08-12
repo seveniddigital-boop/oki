@@ -3,16 +3,16 @@ import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic
 import LazyBg from "@/components/LazyBg";
 
 const leadership = [
-  { title: "Office of the Chairman", scope: "Corporate Direction & Capital Allocation" },
-  { title: "Chief Investment Office", scope: "Global Asset Acquisition & Structuring" },
+  { title: "Office of the Chairman", scope: "Corporate Direction & Strategy" },
+  { title: "Chief Markets Office", scope: "Research, Data & Publications" },
   { title: "General Counsel & Corporate Secretary", scope: "Governance, Compliance & Delaware Charter" },
-  { title: "Office of the Comptroller", scope: "Consolidated Reporting & Capital Discipline" },
+  { title: "Office of the Comptroller", scope: "Reporting & Corporate Discipline" },
 ];
 
 const layers = [
-  { label: "OKI Inc.", detail: "Delaware C-Corporation — Ultimate Parent", accent: true },
-  { label: "Holding Entities", detail: "Jurisdiction-Optimized Subsidiaries", accent: false },
-  { label: "Focus Markets", detail: "Equities · Real Assets · Digital · Private Markets", accent: false },
+  { label: "OKI Inc.", detail: "Delaware C-Corporation — The Corporate Seat", accent: true },
+  { label: "Market Intelligence", detail: "Live Data · Research · Publications", accent: false },
+  { label: "Coverage", detail: "Bitcoin · Equities · Indices · Macro", accent: false },
 ];
 
 export default function About() {
@@ -41,15 +41,15 @@ export default function About() {
           <div className="md:col-span-7">
             <KineticLines
               animate={false}
-              lines={["The Delaware C-Corporation is", "the optimal vehicle for", "international asset ownership."]}
+              lines={["A young corporation,", "built in Delaware,", "aimed at the top."]}
               lineClassName="font-display text-3xl font-medium leading-[1.1] tracking-tighter text-oki-text md:text-5xl"
             />
             <Reveal delay={0.3} className="mt-10 max-w-xl space-y-6 text-sm leading-relaxed text-oki-muted">
               <p>
-                OKI Inc. is incorporated in the State of Delaware — the most settled corporate legal environment in the world. Two centuries of case law, a dedicated Court of Chancery, and statutory clarity make it the jurisdiction of record for capital that intends to remain capital.
+                OKI Inc. is incorporated in the State of Delaware — the most settled corporate legal environment in the world. Two centuries of case law, a dedicated Court of Chancery, and statutory clarity make it the jurisdiction of record for companies that intend to last.
               </p>
               <p>
-                From this single corporate seat, the corporation directs holding entities across twelve jurisdictions — each position insulated, each structure deliberate. Governance is centralized. Exposure is not.
+                From its corporate seat in New York, OKI is building a public market-intelligence platform: live Bitcoin data, global equity indices, and commentary — published in the open, from day one. The ambition is not hidden. Neither is the work.
               </p>
             </Reveal>
           </div>
@@ -102,7 +102,7 @@ export default function About() {
           </div>
           <Reveal delay={0.2} className="mt-12 max-w-2xl">
             <p className="text-sm leading-relaxed text-oki-muted">
-              Leadership at OKI Inc. is presented institutionally, by design. Authority resides in offices, not personalities. Capital discipline is enforced by charter, reviewed by counsel, and measured against a generational mandate.
+              Leadership at OKI Inc. is presented institutionally, by design. Authority resides in offices, not personalities. Discipline is enforced by charter, reviewed by counsel, and measured against a generational mandate.
             </p>
           </Reveal>
         </div>

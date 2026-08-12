@@ -5,31 +5,31 @@ import LazyBg from "@/components/LazyBg";
 const phases = [
   {
     n: "01",
-    title: "Identify",
-    subtitle: "High-conviction global assets",
-    text: "We search across markets and eras for assets whose value is structural, not cyclical. Conviction is built slowly and acted on completely. When OKI moves, the analysis is already finished.",
+    title: "Watch",
+    subtitle: "Continuous market observation",
+    text: "Bitcoin, the major indices, and the companies that move them — tracked every session, without interruption. The corporation that sees everything early can afford to move deliberately. Attention is the raw material of every OKI decision.",
     img: "https://images.unsplash.com/photo-1725362364605-21960b69d981?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxhZXJpYWwlMjBjaXR5JTIwbmlnaHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
   {
     n: "02",
-    title: "Structure",
-    subtitle: "Delaware holding architecture",
-    text: "Every acquisition is domiciled within a Delaware C-Corporation framework — liability-insulated, treaty-aware, and jurisdiction-optimized. Structure is not administration. Structure is defense.",
+    title: "Study",
+    subtitle: "Structure before sentiment",
+    text: "Liquidity cycles, network fundamentals, earnings quality, sovereign policy. The analysis is finished before the opinion is voiced. OKI does not react to markets — it reads them.",
     img: "https://images.unsplash.com/photo-1565626424178-c699f6601afd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBjb25jcmV0ZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85",
   },
   {
     n: "03",
-    title: "Hold",
-    subtitle: "Long-duration control orientation",
-    text: "We hold with a generational horizon. No exit mandates, no fund-life pressure, no quarterly theater. Time is the one advantage that cannot be replicated.",
+    title: "Publish",
+    subtitle: "An open window",
+    text: "The same live window OKI reads internally is published on this site — free, ungated, and continuously updated. A young corporation builds trust the old way: by showing its work.",
     img: "https://images.unsplash.com/photo-1565043534426-8a67ac8671e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxsb25nJTIwZXhwb3N1cmUlMjBza3lzY3JhcGVyJTIwbmlnaHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85",
   },
 ];
 
 const principles = [
-  { title: "International Reach", text: "Positions on four continents, directed from a single corporate center of gravity." },
-  { title: "Liability Insulation", text: "Compartmentalized holding structures ensure no single position can compromise the whole." },
-  { title: "Generational Ownership", text: "Capital disciplined to outlast its stewards. Decisions are measured in decades." },
+  { title: "Global Coverage", text: "Markets across every timezone, read from a single desk in New York." },
+  { title: "Public Data Only", text: "Everything on this platform is drawn from public market feeds. No private positions, no hidden books — nothing to disclose." },
+  { title: "Generational Horizon", text: "A young corporation, compounding knowledge for decades. The climb is the strategy." },
 ];
 
 export default function Strategy() {
@@ -47,12 +47,12 @@ export default function Strategy() {
         <div className="relative mx-auto max-w-[1600px] px-6 md:px-12">
           <SectionTag index="S/01" label="Strategy" />
           <KineticLines
-            lines={["Ownership is", "the Strategy."]}
+            lines={["Attention is", "the Strategy."]}
             lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
           />
           <Reveal delay={0.4} className="mt-10 max-w-xl">
             <p className="text-sm leading-relaxed text-oki-muted">
-              Three movements. One doctrine. The OKI approach converts conviction into structure, and structure into permanence.
+              Three disciplines. One direction. The OKI method converts observation into understanding, and understanding into altitude.
             </p>
           </Reveal>
         </div>

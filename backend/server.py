@@ -44,7 +44,6 @@ class InquiryCreate(BaseModel):
     name: str = Field(min_length=1, max_length=200)
     org: str = Field(min_length=1, max_length=200)
     email: EmailStr
-    capital: str = Field(min_length=1, max_length=20)
     message: str = Field(min_length=1, max_length=5000)
 
 class Inquiry(BaseModel):
@@ -53,7 +52,6 @@ class Inquiry(BaseModel):
     name: str
     org: str
     email: EmailStr
-    capital: str
     message: str
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
@@ -79,13 +77,6 @@ async def get_status_checks():
     return status_checks
 
 
-CAPITAL_LABELS = {
-    "10-50": "$10M — $50M",
-    "50-250": "$50M — $250M",
-    "250-1b": "$250M — $1B",
-    "1b+": "$1B+",
-}
-
 @api_router.post("/inquiries", response_model=Inquiry)
 async def create_inquiry(input: InquiryCreate):
     inquiry = Inquiry(**input.model_dump())
@@ -93,14 +84,13 @@ async def create_inquiry(input: InquiryCreate):
     doc['timestamp'] = doc['timestamp'].isoformat()
     await db.inquiries.insert_one(doc)
 
-    capital_label = CAPITAL_LABELS.get(inquiry.capital, inquiry.capital)
     html = f"""
     <table width="100%" cellpadding="0" cellspacing="0" style="background:#0A0A0A;padding:40px 0;">
       <tr><td align="center">
         <table width="560" cellpadding="0" cellspacing="0" style="background:#111111;border:1px solid #2a2a2a;">
           <tr><td style="padding:32px 40px;border-bottom:1px solid #2a2a2a;">
             <span style="font-family:Arial,sans-serif;font-size:18px;letter-spacing:6px;color:#C5A059;font-weight:bold;">OKI_INC.</span>
-            <p style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:3px;color:#737373;margin:8px 0 0;">NEW INVESTOR INQUIRY</p>
+            <p style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:3px;color:#737373;margin:8px 0 0;">NEW CORPORATE INQUIRY</p>
           </td></tr>
           <tr><td style="padding:32px 40px;font-family:Arial,sans-serif;font-size:13px;color:#A3A3A3;line-height:1.8;">
             <p style="margin:0 0 4px;color:#737373;font-size:10px;letter-spacing:2px;">NAME</p>
@@ -109,9 +99,7 @@ async def create_inquiry(input: InquiryCreate):
             <p style="margin:0 0 20px;color:#F5F5F5;">{inquiry.org}</p>
             <p style="margin:0 0 4px;color:#737373;font-size:10px;letter-spacing:2px;">EMAIL</p>
             <p style="margin:0 0 20px;color:#F5F5F5;">{inquiry.email}</p>
-            <p style="margin:0 0 4px;color:#737373;font-size:10px;letter-spacing:2px;">CAPITAL RANGE</p>
-            <p style="margin:0 0 20px;color:#C5A059;">{capital_label}</p>
-            <p style="margin:0 0 4px;color:#737373;font-size:10px;letter-spacing:2px;">NATURE OF INQUIRY</p>
+            <p style="margin:0 0 4px;color:#737373;font-size:10px;letter-spacing:2px;">MESSAGE</p>
             <p style="margin:0;color:#F5F5F5;">{inquiry.message}</p>
           </td></tr>
           <tr><td style="padding:20px 40px;border-top:1px solid #2a2a2a;">
@@ -123,7 +111,7 @@ async def create_inquiry(input: InquiryCreate):
     """
     payload = {
         "to": [OWNER_EMAIL],
-        "subject": f"Investor Inquiry — {inquiry.org} ({capital_label})",
+        "subject": f"Corporate Inquiry — {inquiry.org}",
         "html": html,
         "from_name": EMAIL_FROM_NAME,
         "contact_email": inquiry.email,
@@ -196,24 +184,24 @@ async def corporate_deck():
     c.drawString(mx + 70, my + 8, "OKI_INC.")
     c.setFillColor(faint)
     c.setFont("Helvetica", 5.5)
-    c.drawString(mx + 70, my - 2, "INTERNATIONAL ASSET HOLDINGS  ·  STRATEGIC INVESTMENTS")
+    c.drawString(mx + 70, my - 2, "GLOBAL MARKET INTELLIGENCE  ·  LIVE PUBLIC DATA")
 
     c.setFillColor(white)
     c.setFont("Helvetica-Bold", 30)
-    c.drawString(56, H - 170, "International Asset Holdings.")
-    c.drawString(56, H - 204, "Global Control.")
+    c.drawString(56, H - 170, "Global Markets.")
+    c.drawString(56, H - 204, "One Window.")
     c.setFillColor(muted)
     c.setFont("Helvetica", 9.5)
-    c.drawString(56, H - 232, "We acquire, structure, and hold strategic assets across borders. Ownership is the strategy.")
+    c.drawString(56, H - 232, "A young Delaware corporation publishing a clean, live read of Bitcoin and world equity markets.")
 
     c.setStrokeColor(Color(0.16, 0.16, 0.16))
     c.setLineWidth(0.5)
     c.line(56, H - 262, W - 56, H - 262)
     c.setFillColor(gold)
     c.setFont("Helvetica", 7)
-    c.drawString(56, H - 276, "01  —  FOCUS MARKETS")
+    c.drawString(56, H - 276, "01  —  COVERAGE")
 
-    markets = ["EQUITY MARKETS", "REAL ASSETS & INFRASTRUCTURE", "DIGITAL ASSETS & NETWORKS", "PRIVATE MARKETS & CREDIT"]
+    markets = ["BITCOIN & DIGITAL NETWORKS", "GLOBAL EQUITY INDICES", "MAJOR PUBLIC COMPANIES", "MARKET COMMENTARY"]
     y = H - 306
     for m in markets:
         c.setFillColor(gold)
@@ -227,12 +215,12 @@ async def corporate_deck():
     c.line(56, y - 8, W - 56, y - 8)
     c.setFillColor(gold)
     c.setFont("Helvetica", 7)
-    c.drawString(56, y - 22, "02  —  THE DOCTRINE")
+    c.drawString(56, y - 22, "02  —  THE METHOD")
 
     doctrine = [
-        ("IDENTIFY", "High-conviction global assets.", "We move before consensus forms."),
-        ("STRUCTURE", "Delaware holding architecture.", "Liability-insulated. Jurisdiction-optimized."),
-        ("HOLD", "Long-duration control.", "No exit mandates. Generational horizon."),
+        ("WATCH", "Continuous market observation.", "Every session. Every index. No noise."),
+        ("STUDY", "Structure before sentiment.", "Fundamentals and liquidity, never headlines."),
+        ("PUBLISH", "An open window.", "The same live data, free and ungated."),
     ]
     col_w = (W - 112) / 3
     ty = y - 46
@@ -254,8 +242,8 @@ async def corporate_deck():
     c.drawString(56, ty - 66, "03  —  CORPORATE ARCHITECTURE")
     c.setFillColor(muted)
     c.setFont("Helvetica", 8)
-    c.drawString(56, ty - 84, "OKI Inc. is a Delaware C-Corporation — the optimal vehicle for international asset ownership.")
-    c.drawString(56, ty - 96, "Governance is centralized. Exposure is not. Capital discipline is enforced by charter.")
+    c.drawString(56, ty - 84, "OKI Inc. is a Delaware C-Corporation headquartered in New York — young, disciplined, and building in public.")
+    c.drawString(56, ty - 96, "The platform publishes public market data only. No private positions. Nothing on this page is investment advice.")
 
     c.setFillColor(white)
     c.setFont("Helvetica-Bold", 9)
@@ -266,10 +254,10 @@ async def corporate_deck():
     c.drawString(56, 70, "Incorporated in the State of Delaware, United States of America")
     c.setFillColor(crimson)
     c.setFont("Helvetica-Bold", 7.5)
-    c.drawString(56, 60, "SERIOUS CAPITAL AND STRATEGIC CONVERSATIONS ONLY.")
+    c.drawString(56, 60, "INFORMATION ONLY · NOTHING HERE CONSTITUTES INVESTMENT ADVICE.")
     c.setFillColor(faint)
     c.setFont("Helvetica", 6.5)
-    c.drawRightString(W - 56, 40, "OKI INC. · DELAWARE C-CORPORATION · ESTABLISHED FOR PERMANENCE")
+    c.drawRightString(W - 56, 40, "OKI INC. · DELAWARE C-CORPORATION · ESTABLISHED 2026")
 
     c.showPage()
     c.save()
@@ -312,16 +300,27 @@ async def market_prices():
         async with httpx.AsyncClient(timeout=15) as http:
             resp = await http.get(
                 "https://api.coingecko.com/api/v3/simple/price",
-                params={"ids": "bitcoin,ethereum,solana", "vs_currencies": "usd", "include_24hr_change": "true"},
+                params={
+                    "ids": "bitcoin,ethereum,solana",
+                    "vs_currencies": "usd",
+                    "include_24hr_change": "true",
+                    "include_market_cap": "true",
+                    "include_24hr_vol": "true",
+                },
             )
         resp.raise_for_status()
         cg = resp.json()
         for cid, sym in [("bitcoin", "BTC"), ("ethereum", "ETH"), ("solana", "SOL")]:
             if cid in cg:
-                items.append({"symbol": sym, "name": cid.capitalize(), "price": cg[cid]["usd"], "change": cg[cid].get("usd_24h_change", 0), "type": "crypto"})
+                items.append({
+                    "symbol": sym, "name": cid.capitalize(), "id": cid,
+                    "price": cg[cid]["usd"], "change": cg[cid].get("usd_24h_change", 0),
+                    "market_cap": cg[cid].get("usd_market_cap"), "volume": cg[cid].get("usd_24h_vol"),
+                    "type": "crypto",
+                })
     except Exception as e:
         logger.error(f"CoinGecko fetch failed: {e}")
-    for sym, name in [("^GSPC", "S&P 500"), ("AAPL", "Apple"), ("MSFT", "Microsoft"), ("TSLA", "Tesla")]:
+    async def fetch_equity(sym, name, label, typ):
         try:
             async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
                 resp = await http.get(f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}", params={"range": "1d", "interval": "5m"})
@@ -330,11 +329,24 @@ async def market_prices():
             price = meta.get("regularMarketPrice")
             prev = meta.get("chartPreviousClose") or meta.get("previousClose")
             if price and prev:
-                label = "SPX" if sym == "^GSPC" else sym
-                items.append({"symbol": label, "name": name, "price": price, "change": ((price - prev) / prev) * 100, "type": "stock"})
+                return {"symbol": label, "name": name, "id": sym, "price": price, "change": ((price - prev) / prev) * 100, "type": typ}
         except Exception as e:
             logger.error(f"Yahoo fetch failed for {sym}: {e}")
-        await asyncio.sleep(0.3)
+        return None
+
+    equity_specs = [
+        ("^GSPC", "S&P 500", "SPX", "index"),
+        ("^IXIC", "NASDAQ Composite", "IXIC", "index"),
+        ("^DJI", "Dow Jones", "DJI", "index"),
+        ("AAPL", "Apple", "AAPL", "stock"),
+        ("MSFT", "Microsoft", "MSFT", "stock"),
+        ("NVDA", "NVIDIA", "NVDA", "stock"),
+        ("TSLA", "Tesla", "TSLA", "stock"),
+        ("AMZN", "Amazon", "AMZN", "stock"),
+    ]
+    for result in await asyncio.gather(*(fetch_equity(*spec) for spec in equity_specs)):
+        if result:
+            items.append(result)
     data = {"items": items}
     if items:
         _market_cache["data"] = data

@@ -42,12 +42,12 @@ function currentTheme() {
 }
 
 const PAGE_META = {
-  "/": ["OKI Inc. — International Asset Holdings", "OKI Inc. is a Delaware C-Corporation engineered for international asset ownership. We acquire, structure, and hold strategic assets across borders. Ownership is the strategy."],
-  "/markets": ["Markets — OKI Inc.", "A living view of the markets OKI Inc. studies — public equities, digital assets, and global indices. Search any market and read its trajectory."],
-  "/strategy": ["Strategy — OKI Inc.", "The OKI doctrine: identify high-conviction global assets, structure them through Delaware holding architecture, and hold with long-duration control orientation."],
-  "/about": ["Corporate Architecture — OKI Inc.", "OKI Inc. is a Delaware C-Corporation headquartered at One World Trade Center, New York — the optimal vehicle for international asset ownership. Governance, leadership offices, and headquarters."],
-  "/insights": ["Perspectives — OKI Inc.", "Doctrine, architecture, and capital discipline — essays and announcements from OKI Inc."],
-  "/contact": ["Investor Access — OKI Inc.", "Serious capital and strategic conversations only. All inquiries are reviewed by the Chief Investment Office of OKI Inc."],
+  "/": ["OKI Inc. — Global Market Intelligence", "OKI Inc. is a Delaware C-Corporation publishing a clean, live window into Bitcoin, global indices, and major equities. A young corporation, going to the top."],
+  "/markets": ["Markets — OKI Inc.", "Live Bitcoin data, major indices, and selected equities — a public market window published by OKI Inc. Search any market and read its trajectory."],
+  "/strategy": ["Strategy — OKI Inc.", "The OKI method: watch continuously, study structure before sentiment, and publish in the open. Attention is the strategy."],
+  "/about": ["Corporate Architecture — OKI Inc.", "OKI Inc. is a Delaware C-Corporation headquartered at One World Trade Center, New York. Governance, leadership offices, and headquarters."],
+  "/insights": ["Perspectives — OKI Inc.", "Markets, architecture, and the long climb — essays and announcements from OKI Inc."],
+  "/contact": ["Contact — OKI Inc.", "Partnerships, press, and professional inquiries. Every message is read by the corporate office of OKI Inc."],
 };
 
 function RouteMeta() {
@@ -110,7 +110,7 @@ function TransitionVeil() {
                 <LogoMark size={52} />
                 <LogoWordmark className="text-base tracking-[0.5em]" />
                 <p className="font-mono text-[9px] uppercase tracking-[0.45em] text-oki-faint">
-                  International Asset Holdings · Strategic Investments
+                  Global Market Intelligence · Live Public Data
                 </p>
               </motion.div>
             </div>

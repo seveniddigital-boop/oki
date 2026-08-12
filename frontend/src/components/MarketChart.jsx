@@ -6,10 +6,10 @@ import { TrendingUp, TrendingDown, X } from "lucide-react";
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const ASSET_BRIEFS = {
-  bitcoin: "The network's reserve asset — tracked as permanent balance-sheet infrastructure.",
-  ethereum: "The settlement layer for programmable value — studied, never traded on sentiment.",
-  solana: "High-throughput network exposure under observation within the digital asset mandate.",
-  "^GSPC": "The benchmark of American enterprise — the tide against which every position is measured.",
+  bitcoin: "The original digital network — tracked here as live public market data, not advice.",
+  ethereum: "The settlement layer for programmable value — followed as emerging financial infrastructure.",
+  solana: "A high-throughput network on the OKI watchlist — live data, no noise.",
+  "^GSPC": "The benchmark of American enterprise — the index every session is measured against.",
 };
 
 const W = 560, H = 200, PAD = 12;
@@ -20,7 +20,7 @@ const TIMEFRAMES = [
   { label: "30D", days: 30 },
 ];
 
-export default function MarketChart({ id, type, name, onClose }) {
+export default function MarketChart({ id, type, name, badge, onClose }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const [days, setDays] = useState(7);
@@ -112,7 +112,7 @@ export default function MarketChart({ id, type, name, onClose }) {
               type === "stock" ? "border-oki-crimsonbright/50 text-oki-crimsonbright" : "border-oki-gold/50 text-oki-gold"
             }`}
           >
-            {type === "stock" ? "Stock" : "Crypto"}
+            {badge || (type === "stock" ? "Stock" : "Crypto")}
           </span>
           <div className="flex gap-1">
             {TIMEFRAMES.map((tf) => (
@@ -135,7 +135,7 @@ export default function MarketChart({ id, type, name, onClose }) {
       </div>
       <div className="border-b border-white/10 px-5 py-2.5">
         <p className="font-mono text-[9px] leading-relaxed tracking-[0.15em] text-oki-faint">
-          {ASSET_BRIEFS[id] || `${name} — tracked within the OKI market watchlist. Data: ${type === "stock" ? "Yahoo Finance" : "CoinGecko"}.`}
+          {ASSET_BRIEFS[id] || `${name} — live public data via ${type === "stock" ? "Yahoo Finance" : "CoinGecko"}. Nothing here is investment advice.`}
         </p>
       </div>
       <div className="p-5">

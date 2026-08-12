@@ -47,7 +47,7 @@ function Preloader({ done }) {
               <LogoMark size={52} />
               <LogoWordmark className="text-base tracking-[0.5em]" />
               <p className="font-mono text-[9px] uppercase tracking-[0.45em] text-oki-faint">
-                International Asset Holdings · Strategic Investments
+                Global Market Intelligence · Live Public Data
               </p>
             </motion.div>
           </div>
@@ -142,7 +142,7 @@ function Hero({ instant }) {
           <Magnetic>
             <Link
               to="/markets"
-              data-testid="hero-explore-holdings-btn"
+              data-testid="hero-explore-markets-btn"
               className="group flex items-center gap-3 whitespace-nowrap rounded-full border border-white/25 bg-oki-black/60 px-8 py-4 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-text backdrop-blur-md transition-colors duration-500 hover:border-oki-gold hover:text-oki-gold"
             >
               Explore Markets
@@ -159,17 +159,17 @@ function Hero({ instant }) {
         className="absolute bottom-10 left-6 z-20 hidden max-w-xs md:left-12 lg:block"
       >
         <p className="font-display text-lg font-medium tracking-tight text-oki-text" data-testid="hero-subheadline">
-          International Asset Holdings. Global Control.
+          Global Markets. One Window. Zero Noise.
         </p>
         <p className="mt-2 text-xs leading-relaxed text-oki-muted" data-testid="hero-statement">
-          We acquire, structure, and hold strategic assets across borders. Ownership is the strategy.
+          A young Delaware corporation publishing a clean, live read of Bitcoin and world equity markets. Just getting started. Going to the top.
         </p>
         <Link
           to="/contact"
           data-testid="hero-investor-access-btn"
           className="mt-4 inline-block border-b border-white/20 pb-1 font-mono text-[10px] uppercase tracking-[0.3em] text-oki-muted transition-colors duration-300 hover:border-oki-text hover:text-oki-text"
         >
-          Investor Access
+          Contact
         </Link>
       </motion.div>
 
@@ -232,16 +232,16 @@ function TowerInterlude() {
 }
 
 const chapters = [
-  { n: "01", title: "Acquire", text: "Conviction before consensus. Positions are taken whole — equity, real assets, intellectual property, private credit, digital networks — and taken to keep." },
-  { n: "02", title: "Structure", text: "Every asset is domiciled under Delaware law, insulated by design and defended by precedent. Jurisdiction is chosen the way generals choose terrain." },
-  { n: "03", title: "Hold", text: "Permanence as policy. Capital that never has to sell ends up owning what others cannot afford to keep." },
+  { n: "01", title: "Watch", text: "Every index, every network, every session. The corporation maintains a continuous read of global markets — because attention, compounded daily, is an advantage in itself." },
+  { n: "02", title: "Study", text: "Structure before sentiment. Liquidity cycles, network fundamentals, earnings quality — the analysis is finished before the opinion is voiced." },
+  { n: "03", title: "Publish", text: "The window is open. The same live view OKI reads internally is published here — free, ungated, and built in public on the way to the top." },
 ];
 
 const focusAreas = [
-  { label: "Equity Markets", note: "Public companies & anchor positions", span: "md:col-span-7" },
-  { label: "Real Assets", note: "Infrastructure & property", span: "md:col-span-5" },
-  { label: "Digital Assets", note: "Networks & protocols", span: "md:col-span-5" },
-  { label: "Private Markets", note: "Credit & special situations", span: "md:col-span-7" },
+  { label: "Equity Markets", note: "Indices & major public companies", span: "md:col-span-7" },
+  { label: "Digital Assets", note: "Bitcoin & leading networks", span: "md:col-span-5" },
+  { label: "Global Indices", note: "S&P 500 · NASDAQ · Dow", span: "md:col-span-5" },
+  { label: "Macro & Rates", note: "Policy, liquidity & cycles", span: "md:col-span-7" },
 ];
 
 export default function Home() {
@@ -271,12 +271,12 @@ export default function Home() {
           <div className="md:col-span-7">
             <KineticLines
               animate={false}
-              lines={["A next-generation global holding company,", "being built to own high-value", "assets across continents."]}
+              lines={["A next-generation markets company,", "building the clearest public window", "into Bitcoin and world equities."]}
               lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
             />
             <Reveal delay={0.3} className="mt-10 max-w-xl">
               <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-                OKI Inc. is a Delaware C-Corporation headquartered in New York, organized to become a premier owner of strategic assets across international markets. The mandate is singular: build ownership that compounds without expiry.
+                OKI Inc. is a Delaware C-Corporation headquartered in New York, organized around a single belief: the corporation that reads markets best rises fastest. We publish what we watch — live prices, indices, and commentary — in the open.
               </p>
             </Reveal>
           </div>
@@ -312,14 +312,14 @@ export default function Home() {
               <SectionTag index="02" label="Focus Markets" />
               <KineticLines
                 animate={false}
-                lines={["Where capital", "is aimed."]}
+                lines={["Where attention", "lives."]}
                 lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
               />
             </div>
             <Reveal delay={0.2}>
               <Link
                 to="/markets"
-                data-testid="home-view-holdings-link"
+                data-testid="home-view-markets-link"
                 className="group flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-gold"
               >
                 Open the Market Window
@@ -339,12 +339,12 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 py-32 md:px-12 md:py-44">
-        <SectionTag index="03" label="The Doctrine" />
+        <SectionTag index="03" label="The Method" />
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <KineticLines
               animate={false}
-              lines={["Ownership", "is the", "strategy."]}
+              lines={["Information", "is the", "edge."]}
               lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-5xl"
             />
           </div>
@@ -375,7 +375,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-[1600px] px-6 py-32 text-center md:px-12 md:py-40">
           <KineticLines
             animate={false}
-            lines={["Structure is the moat.", "Time is the multiplier."]}
+            lines={["Clarity is the moat.", "Time is the multiplier."]}
             lineClassName="font-display text-3xl font-medium leading-[1.1] tracking-tighter text-oki-text md:text-5xl"
           />
         </div>
@@ -393,7 +393,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-[1600px] px-6 py-36 text-center md:px-12">
           <KineticLines
             animate={false}
-            lines={["The outcome is", "already decided."]}
+            lines={["Just getting started.", "Going to the top."]}
             lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-7xl"
           />
           <Reveal delay={0.3} className="mt-12 flex flex-col items-center justify-center gap-6 md:flex-row">
@@ -404,7 +404,7 @@ export default function Home() {
             >
               <span className="absolute inset-0 -translate-x-full bg-oki-gold transition-transform duration-500 ease-out group-hover:translate-x-0" />
               <span className="relative flex items-center gap-2">
-                Request Investor Access
+                Start a Conversation
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </Link>
