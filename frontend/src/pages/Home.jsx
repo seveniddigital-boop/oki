@@ -5,6 +5,7 @@ import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
 import Counter from "@/components/Counter";
 import Magnetic from "@/components/Magnetic";
+import LazyBg from "@/components/LazyBg";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import EditorialMarquee from "@/components/Marquee";
 
@@ -15,9 +16,9 @@ const HERO_DARK =
 const HERO_LIGHT =
   "https://images.unsplash.com/photo-1496307653780-42ee777d4833?q=85&w=1600&auto=format&fit=crop";
 const INTERLUDE_DARK =
-  "https://images.unsplash.com/photo-1506383631675-0b110111327b?q=85&w=1600&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1506383631675-0b110111327b?q=80&w=1200&auto=format&fit=crop";
 const INTERLUDE_LIGHT =
-  "https://images.unsplash.com/photo-1490800869828-a00247402454?q=85&w=1600&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1490800869828-a00247402454?q=80&w=1200&auto=format&fit=crop";
 
 function Preloader({ done }) {
   return (
@@ -208,13 +209,14 @@ function TowerInterlude() {
     <section ref={ref} data-testid="tower-interlude" className="relative h-[260vh] border-t border-white/10">
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
         <motion.div style={{ y: bgY }} className="absolute inset-x-0 -inset-y-[10%] will-change-transform">
-          <div
+          <LazyBg
+            src={INTERLUDE_DARK}
             className="tower-dark absolute inset-0 bg-cover bg-[center_30%]"
-            style={{ backgroundImage: `url(${INTERLUDE_DARK})`, filter: "brightness(0.7) saturate(0.8)" }}
+            style={{ filter: "brightness(0.7) saturate(0.8)" }}
           />
-          <div
+          <LazyBg
+            src={INTERLUDE_LIGHT}
             className="tower-light absolute inset-0 bg-cover bg-[center_30%]"
-            style={{ backgroundImage: `url(${INTERLUDE_LIGHT})` }}
           />
           <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         </motion.div>
@@ -367,11 +369,11 @@ export default function Home() {
       <TowerInterlude />
 
       <section className="relative overflow-hidden border-t border-white/10">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1496588152823-86ff7695e68f?q=80&w=1200&auto=format&fit=crop"
           className="absolute inset-0 bg-cover bg-center"
           role="img"
           aria-label="Global skyline at dusk — OKI Inc. international reach"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1496588152823-86ff7695e68f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHwxfHxza3lsaW5lJTIwcGFub3JhbWElMjBkdXNrfGVufDB8fHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85)" }}
         />
         <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         <div className="relative mx-auto max-w-[1600px] px-6 py-32 text-center md:px-12 md:py-40">
@@ -384,9 +386,11 @@ export default function Home() {
       </section>
 
       <section className="relative overflow-hidden border-t border-white/10">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1588312744377-2adfb7b8578a?q=80&w=1200&auto=format&fit=crop"
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1588312744377-2adfb7b8578a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwxfHxkYXJrJTIwc2t5bGluZSUyMHNpbGhvdWV0dGUlMjBuaWdodHxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85)" }}
+          role="img"
+          aria-label="Dark skyline silhouette"
         />
         <div className="absolute inset-0 bg-black/70" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(153,27,27,0.15)_0%,transparent_60%)]" />

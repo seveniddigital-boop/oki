@@ -6,6 +6,7 @@ import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/compo
 import CryptoTicker from "@/components/CryptoTicker";
 import CryptoChart from "@/components/CryptoChart";
 import CryptoSearch from "@/components/CryptoSearch";
+import LazyBg from "@/components/LazyBg";
 
 function ChartDisclosure({ title, testid, defaultOpen = false, className = "", children }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -82,9 +83,9 @@ export default function Holdings() {
   return (
     <motion.main data-testid="holdings-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1664353655151-9d94a9170eb0?q=80&w=1200&auto=format&fit=crop"
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1664353655151-9d94a9170eb0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmUlMjBuaWdodCUyMGRhcmt8ZW58MHx8fHwxNzg1ODEyODQyfDA&ixlib=rb-4.1.0&q=85)" }}
         />
         <div className="absolute inset-0 bg-black/60" />
         <div className="hero-bottom-fade absolute inset-0" />

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic";
+import LazyBg from "@/components/LazyBg";
 
 const leadership = [
   { title: "Office of the Chairman", scope: "Corporate Direction & Capital Allocation" },
@@ -18,11 +19,11 @@ export default function About() {
   return (
     <motion.main data-testid="about-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1565626424178-c699f6601afd?q=80&w=1200&auto=format&fit=crop"
           className="absolute inset-0 bg-cover bg-center"
           role="img"
           aria-label="Geometric concrete corporate architecture"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1565626424178-c699f6601afd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBjb25jcmV0ZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85)" }}
         />
         <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         <div className="hero-bottom-fade absolute inset-0" />
@@ -74,13 +75,9 @@ export default function About() {
       </section>
 
       <section className="relative overflow-hidden border-t border-white/10">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: "url(https://images.unsplash.com/photo-1703639948834-342fc34900f8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHw0fHxtb29keSUyMHRhbGwlMjBkYXJrJTIwdG93ZXIlMjBsb29raW5nJTIwdXB8ZW58MHx8fHwxNzg1ODEyNjIzfDA&ixlib=rb-4.1.0&q=85)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+        <LazyBg
+          src="https://images.unsplash.com/photo-1703639948834-342fc34900f8?q=80&w=1200&auto=format&fit=crop"
+          className="absolute inset-0 opacity-20 bg-cover bg-center"
         />
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative mx-auto max-w-[1600px] px-6 py-32 md:px-12">

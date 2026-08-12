@@ -28,6 +28,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, performance overhaul + signature telemetry)
+- Performance: all heavy section backgrounds now lazy-load via IntersectionObserver (LazyBg, 300px rootMargin) and were downscaled to w=1200/q=80; hero images stay eager+preloaded; film grain disabled on mobile (major scroll-lag source); content-visibility auto utility added; dead code removed (Tower.jsx, RealTower.jsx)
+- New signature element: live telemetry HUD fixed bottom-left on desktop — One World Trade Center coordinates + real-time NYC clock with pulsing gold dot
+- Verified: telemetry ticking live, lazy bands render on scroll, mobile hero clean without grain, console sweep clean
+
 ## Implemented (2026-08-12, six-item polish round)
 - Interlude lines changed to "Think long. / Move wisely. / Leave a legacy."
 - Donut modernized: thinner ring with gaps, hover any legend row (or arc) to highlight the segment — center shows that segment's % and label, siblings dim; legend text overlap fixed (rows wrap cleanly)

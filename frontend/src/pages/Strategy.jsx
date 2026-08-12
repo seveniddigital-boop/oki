@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import ControlSpectrum from "@/components/charts/ControlSpectrum";
+import LazyBg from "@/components/LazyBg";
 
 const phases = [
   {
@@ -36,11 +37,11 @@ export default function Strategy() {
   return (
     <motion.main data-testid="strategy-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1725362364605-21960b69d981?q=80&w=1200&auto=format&fit=crop"
           className="absolute inset-0 bg-cover bg-center"
           role="img"
           aria-label="Aerial view of a global city at night"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1725362364605-21960b69d981?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxhZXJpYWwlMjBjaXR5JTIwbmlnaHR8ZW58MHx8fHwxNzg1ODkyMzI2fDA&ixlib=rb-4.1.0&q=85)" }}
         />
         <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         <div className="hero-bottom-fade absolute inset-0" />
@@ -59,13 +60,9 @@ export default function Strategy() {
       </section>
 
       <section className="relative mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?q=80&w=1200&auto=format&fit=crop"
           className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage: "url(https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxkYXJrJTIwZ2VvbWV0cmljJTIwYXJjaGl0ZWN0dXJlJTIwZ2xhc3MlMjB0b3dlcnxlbnwwfHx8fDE3ODU4MTI2MjN8MA&ixlib=rb-4.1.0&q=85)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
         />
         <div className="relative ml-2 border-l border-white/10 md:ml-6">
           {phases.map((p, i) => (

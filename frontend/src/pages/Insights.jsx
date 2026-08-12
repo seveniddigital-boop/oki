@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic";
+import LazyBg from "@/components/LazyBg";
 
 const ESSAYS = [
   {
@@ -110,11 +111,11 @@ export default function Insights() {
   return (
     <motion.main data-testid="insights-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1496588152823-86ff7695e68f?q=80&w=1200&auto=format&fit=crop"
           className="absolute inset-0 bg-cover bg-center"
           role="img"
           aria-label="Global skyline at dusk"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1496588152823-86ff7695e68f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHwxfHxza3lsaW5lJTIwcGFub3JhbWElMjBkdXNrfGVufDB8fHx8MTc4NTg5MjMyNnww&ixlib=rb-4.1.0&q=85)" }}
         />
         <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         <div className="hero-bottom-fade absolute inset-0" />

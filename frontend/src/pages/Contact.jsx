@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { Lock, ArrowUpRight, ShieldCheck, ChevronDown } from "lucide-react";
 import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic";
+import LazyBg from "@/components/LazyBg";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -117,11 +118,11 @@ export default function Contact() {
   return (
     <motion.main data-testid="contact-page" {...pageAnim}>
       <section className="relative overflow-hidden pb-20 pt-40">
-        <div
+        <LazyBg
+          src="https://images.unsplash.com/photo-1601923112035-3e4819c82317?q=80&w=1200&auto=format&fit=crop"
           className="absolute inset-0 bg-cover bg-center"
           role="img"
           aria-label="Looking up between corporate towers"
-          style={{ backgroundImage: "url(https://images.unsplash.com/photo-1601923112035-3e4819c82317?q=85&w=1600&auto=format&fit=crop)" }}
         />
         <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         <div className="hero-bottom-fade absolute inset-0" />
