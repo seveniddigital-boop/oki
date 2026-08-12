@@ -174,7 +174,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App grain">
+    <div className="App">
       <BrowserRouter>
         <RouteMeta />
         <CustomCursor />

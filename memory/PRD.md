@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, grain removal)
+- Removed the film-grain noise overlay sitewide per user request ("looks like pixels") — cleaner solid backgrounds in both themes
+
 ## Implemented (2026-08-12, refinement round)
 - Footer: giant "OKI INC." outline watermark behind footer content
 - Back-to-top floating gold button (appears after 1.5 viewports)
