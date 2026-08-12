@@ -28,6 +28,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, market board redesign)
+- MarketBoard rebuilt: labeled Crypto (left) / Stocks (right) columns; heading changed to "One board. Both markets."
+- Prices ⇄ Charts view toggle (segmented control, gold active state): Prices view = BTC panel (price, 24h change, market cap, volume) + ETH/SOL rows + indices cards + equity rows; Charts view = compact selector rail (Crypto/Indices/Equities groups) + embedded MarketChart with timeframes; clicking any cell flips into that asset's chart; X returns to Prices
+- MarketChart gained `embedded` mode (borderless, full-height) for in-board rendering; AnimatePresence crossfade between views; verified desktop + 390px mobile (0px overflow, no console errors)
+
 ## Implemented (2026-08-12, full informational pivot completion + stocks dashboard)
 - Completed the holdings purge sitewide: Home (hero statement, Position, Method chapters Watch/Study/Publish, focus areas, CTA "Just getting started. Going to the top."), Strategy ("Attention is the Strategy" — Watch/Study/Publish phases), About (young-corporation architecture, no holding entities), Insights (5 essays rewritten as public market commentary — no custody/portfolio claims), Contact (capital-range gatekeeping removed, general corporate inquiry), Nav/Footer/Marquee, index.html meta, page meta, preloader/veil tagline "Global Market Intelligence · Live Public Data"
 - New MarketBoard dashboard on /markets: Bitcoin panel (live price, 24h change, market cap, 24h volume) + stocks section (indices S&P 500/NASDAQ/Dow + equities AAPL/MSFT/NVDA/TSLA/AMZN with price & % change) + ETH/SOL strip — every cell clickable to open the chart

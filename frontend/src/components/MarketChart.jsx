@@ -20,7 +20,7 @@ const TIMEFRAMES = [
   { label: "30D", days: 30 },
 ];
 
-export default function MarketChart({ id, type, name, badge, onClose }) {
+export default function MarketChart({ id, type, name, badge, onClose, embedded }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const [days, setDays] = useState(7);
@@ -102,7 +102,7 @@ export default function MarketChart({ id, type, name, badge, onClose }) {
       animate={{ opacity: 1, y: 0, height: "auto" }}
       exit={{ opacity: 0, y: 16, height: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="mt-6 overflow-hidden border border-white/10 bg-oki-black"
+      className={embedded ? "h-full overflow-hidden bg-oki-black" : "mt-6 overflow-hidden border border-white/10 bg-oki-black"}
     >
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
         <div className="flex items-center gap-4">

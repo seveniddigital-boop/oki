@@ -77,16 +77,16 @@ export default function Markets() {
         <SectionTag index="M/02" label="The Board" />
         <KineticLines
           animate={false}
-          lines={["Bitcoin first.", "Stocks beside it."]}
+          lines={["One board.", "Both markets."]}
           lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
         />
         <Reveal delay={0.2} className="mt-8 max-w-xl">
           <p className="text-sm leading-relaxed text-oki-muted">
-            One dashboard, two asset classes. Live Bitcoin statistics alongside the indices and companies that define the session. Select anything to open its chart.
+            Crypto on the left, stocks on the right. Flip between live prices and full charts — every cell on the board is selectable.
           </p>
         </Reveal>
         <Reveal delay={0.3} className="mt-12">
-          <MarketBoard onSelect={(m) => setActive(m)} />
+          <MarketBoard />
         </Reveal>
       </section>
 
