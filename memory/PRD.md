@@ -28,6 +28,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, six-item polish round)
+- Interlude lines changed to "Think long. / Move wisely. / Leave a legacy."
+- Donut modernized: thinner ring with gaps, hover any legend row (or arc) to highlight the segment — center shows that segment's % and label, siblings dim; legend text overlap fixed (rows wrap cleanly)
+- Control Spectrum modernized: bands expand vertically on hover with gold frame and inline "Label · %" readout, siblings dim; legend buttons drive the same highlight
+- Footer copyright line removed per request
+- Double-loading bug fixed: entry preloader now plays only on the first visit of the session (sessionStorage); logo clicks show the branded veil once, and the hero animates immediately on return visits (delay compensation)
+
 ## Implemented (2026-08-12, PDF/donut fixes + lockable positions + HQ change)
 - PDF deck fixed: allocation labels no longer run into bars (label font/spacing reworked), percentage labels given clear separation — verified by document analysis with 100% confidence
 - Donut chart rebuilt from scratch: plain SVG arc paths with CSS-transition drawing (framer-motion was stripping rotations, collapsing all segments into one ring) — verified in both themes

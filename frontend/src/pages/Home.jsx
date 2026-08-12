@@ -64,7 +64,8 @@ function Preloader({ done }) {
   );
 }
 
-function Hero() {
+function Hero({ instant }) {
+  const D = (b) => (instant ? Math.max(0, b - 1.7) : b);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const textY = useTransform(scrollYProgress, [0, 1], [0, -160]);
@@ -82,7 +83,7 @@ function Hero() {
           <motion.div
             initial={{ scale: 1.15, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 1.7, duration: 2.2, ease: EASE }}
+            transition={{ delay: D(1.7), duration: 2.2, ease: EASE }}
             className="relative h-full w-full"
           >
             <div
@@ -105,7 +106,7 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 0.9, ease: EASE }}
+          transition={{ delay: D(1.8), duration: 0.9, ease: EASE }}
           className="mb-6 flex items-center justify-center gap-5"
         >
           <LogoMark size={30} />
@@ -119,12 +120,12 @@ function Hero() {
         <h1 className="font-display font-semibold leading-[0.82] tracking-tighter" data-testid="hero-headline">
           <KineticLines
             lines={["OKI"]}
-            delay={1.7}
+            delay={D(1.7)}
             lineClassName="text-[34vw] md:text-[23vw] text-oki-text"
           />
           <KineticLines
             lines={["INC."]}
-            delay={1.85}
+            delay={D(1.85)}
             lineClassName="text-[34vw] md:text-[23vw] text-outline-gold"
           />
         </h1>
@@ -134,7 +135,7 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.9, duration: 0.9, ease: EASE }}
+          transition={{ delay: D(2.9), duration: 0.9, ease: EASE }}
         >
           <Magnetic>
             <Link
@@ -152,7 +153,7 @@ function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.6, duration: 0.9, ease: EASE }}
+        transition={{ delay: D(2.6), duration: 0.9, ease: EASE }}
         className="absolute bottom-10 left-6 z-20 hidden max-w-xs md:left-12 lg:block"
       >
         <p className="font-display text-lg font-medium tracking-tight text-oki-text" data-testid="hero-subheadline">
@@ -173,7 +174,7 @@ function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.2, duration: 1 }}
+        transition={{ delay: D(3.2), duration: 1 }}
         className="absolute bottom-10 right-6 z-20 hidden items-center gap-3 md:right-12 lg:flex"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-oki-faint">Scroll</span>
@@ -183,7 +184,7 @@ function Hero() {
   );
 }
 
-const INTERLUDE_LINES = ["We do not trade.", "We do not exit.", "We own time."];
+const INTERLUDE_LINES = ["Think long.", "Move wisely.", "Leave a legacy."];
 
 function InterludeLine({ progress, index, line }) {
   const s = index / INTERLUDE_LINES.length;
@@ -243,15 +244,23 @@ const allocation = [
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
+  const [entered] = useState(() => sessionStorage.getItem("oki-entered") === "1");
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 1700);
+    if (entered) {
+      setLoaded(true);
+      return;
+    }
+    const t = setTimeout(() => {
+      sessionStorage.setItem("oki-entered", "1");
+      setLoaded(true);
+    }, 1700);
     return () => clearTimeout(t);
-  }, []);
+  }, [entered]);
 
   return (
     <motion.main data-testid="home-page" {...pageAnim}>
-      <Preloader done={loaded} />
-      <Hero />
+      {!entered && <Preloader done={loaded} />}
+      <Hero instant={entered} />
       <EditorialMarquee />
 
       <section className="mx-auto max-w-[1600px] px-6 py-32 md:px-12 md:py-44">
