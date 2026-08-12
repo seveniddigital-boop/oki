@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, Gmail compose links)
+- All email links now open Gmail's compose window directly (new tab, to=contact@okiinc.global, subject pre-filled): Contact page button + At-a-Glance row, Footer, About HQ section; Contact page keeps a "use another mail app" mailto fallback for non-Gmail users
+
 ## Implemented (2026-08-12, corporate email rollout)
 - contact@okiinc.global added sitewide: Contact page (mailto button beside phone + At-a-Glance card row), Footer (under phone), About HQ section, PDF deck contact line, and the inquiry email template footer
 

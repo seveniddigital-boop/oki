@@ -41,7 +41,7 @@ export default function Footer() {
             <a href="tel:+12122208443" data-testid="footer-phone-link" className="mt-3 inline-block text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">
               +1 (212) 220-8443
             </a>
-            <a href="mailto:contact@okiinc.global?subject=Inquiry%20for%20OKI%20Inc." data-testid="footer-email-link" className="mt-2 block text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@okiinc.global&su=Inquiry%20for%20OKI%20Inc." target="_blank" rel="noopener noreferrer" data-testid="footer-email-link" className="mt-2 block text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">
               contact@okiinc.global
             </a>
             <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.3em] text-oki-faint">Incorporated in Delaware</p>
