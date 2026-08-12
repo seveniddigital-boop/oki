@@ -28,6 +28,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, refinement round)
+- Footer: giant "OKI INC." outline watermark behind footer content
+- Back-to-top floating gold button (appears after 1.5 viewports)
+- Hero overline letter-spacing reveal (1.2em → 0.5em couture animation)
+- About architecture diagram: animated gold connector line + "Capital flows downward · Control flows upward" caption
+- Marquee pauses on hover; Escape key closes mobile menu and crypto search window
+
 ## Implemented (2026-08-12, performance overhaul + signature telemetry)
 - Performance: all heavy section backgrounds now lazy-load via IntersectionObserver (LazyBg, 300px rootMargin) and were downscaled to w=1200/q=80; hero images stay eager+preloaded; film grain disabled on mobile (major scroll-lag source); content-visibility auto utility added; dead code removed (Tower.jsx, RealTower.jsx)
 - New signature element: live telemetry HUD fixed bottom-left on desktop — One World Trade Center coordinates + real-time NYC clock with pulsing gold dot

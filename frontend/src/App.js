@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
 import Telemetry from "@/components/Telemetry";
+import BackToTop from "@/components/BackToTop";
 import { playClick } from "@/utils/clickSound";
 import Home from "@/pages/Home";
 import Holdings from "@/pages/Holdings";
@@ -179,6 +180,7 @@ function App() {
         <CustomCursor />
         <ScrollProgress />
         <Telemetry />
+        <BackToTop />
         <TransitionVeil />
         <SmoothScroll>
           <Nav />

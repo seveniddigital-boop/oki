@@ -12,7 +12,7 @@ const items = [
 export default function EditorialMarquee() {
   return (
     <div data-testid="editorial-marquee" className="border-y border-white/10 bg-oki-surface py-5">
-      <Marquee speed={20} gradient={false}>
+      <Marquee speed={20} gradient={false} pauseOnHover>
         {items.map((item, i) => (
           <span key={i} className="mx-8 flex items-center gap-16">
             <span className="font-mono text-xs uppercase tracking-[0.4em] text-oki-faint">{item}</span>

@@ -19,8 +19,15 @@ export default function CryptoSearch({ onSelect }) {
     const close = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
+    const esc = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("mousedown", close);
+      document.removeEventListener("keydown", esc);
+    };
   }, []);
 
   useEffect(() => {

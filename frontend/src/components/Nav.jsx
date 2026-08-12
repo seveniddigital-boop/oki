@@ -27,6 +27,14 @@ export default function Nav() {
     setSoundState(isSoundOn());
   }, []);
 
+  useEffect(() => {
+    const esc = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", esc);
+    return () => document.removeEventListener("keydown", esc);
+  }, []);
+
   const toggleSound = () => {
     const next = !sound;
     setSound(next);

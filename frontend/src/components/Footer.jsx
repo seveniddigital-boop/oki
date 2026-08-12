@@ -3,8 +3,14 @@ import { LogoMark, LogoWordmark } from "@/components/Logo";
 
 export default function Footer() {
   return (
-    <footer data-testid="site-footer" className="relative border-t border-white/10 bg-oki-black">
-      <div className="mx-auto max-w-[1600px] px-6 pb-10 pt-20 md:px-12">
+    <footer data-testid="site-footer" className="relative overflow-hidden border-t border-white/10 bg-oki-black">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[22vw] font-semibold leading-none tracking-tighter text-outline opacity-60"
+      >
+        OKI INC.
+      </div>
+      <div className="relative mx-auto max-w-[1600px] px-6 pb-10 pt-20 md:px-12">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-6">
             <LogoMark size={64} />

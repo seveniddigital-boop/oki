@@ -111,12 +111,15 @@ function Hero({ instant }) {
           className="mb-6 flex items-center justify-center gap-5"
         >
           <LogoMark size={30} />
-          <p
-            className="font-mono text-[11px] uppercase tracking-[0.5em] text-oki-gold"
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "1.2em" }}
+            animate={{ opacity: 1, letterSpacing: "0.5em" }}
+            transition={{ delay: D(1.8), duration: 1.4, ease: EASE }}
+            className="font-mono text-[11px] uppercase text-oki-gold"
             data-testid="hero-overline"
           >
             Delaware C-Corporation
-          </p>
+          </motion.p>
         </motion.div>
         <h1 className="font-display font-semibold leading-[0.82] tracking-tighter" data-testid="hero-headline">
           <KineticLines

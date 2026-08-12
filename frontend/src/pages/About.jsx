@@ -64,10 +64,15 @@ export default function About() {
                   <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-oki-faint">{l.detail}</p>
                 </Reveal>
               ))}
-              <div className="flex justify-center gap-1 bg-oki-black py-3">
-                {[0, 1].map((i) => (
-                  <span key={i} className="h-px w-8 bg-oki-gold/40" />
-                ))}
+              <div className="relative flex justify-center gap-1 bg-oki-black py-6">
+                <motion.span
+                  className="absolute left-1/2 top-0 w-px bg-gradient-to-b from-oki-gold/60 to-transparent"
+                  initial={{ height: 0 }}
+                  whileInView={{ height: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-oki-faint">Capital flows downward · Control flows upward</span>
               </div>
             </div>
           </div>
