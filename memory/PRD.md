@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, HQ photo)
+- Contact page photo panel now shows the real One World Trade Center (upward shot framed by the Oculus wings, moody sky) with caption "One World Trade Center — New York, USA"
+
 ## Implemented (2026-08-12, contact page → informational)
 - Contact page form removed entirely; page is now pure corporate information: "One office. One line." header, large HQ address block (One World Trade Center, 85th Floor), tap-to-call phone button, At-a-Glance entity card (Entity/Type/Founded/Focus), and three detail cards (Headquarters, Incorporation, Corporate Deck with PDF link); page meta updated
 
