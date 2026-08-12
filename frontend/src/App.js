@@ -11,7 +11,7 @@ import Telemetry from "@/components/Telemetry";
 import BackToTop from "@/components/BackToTop";
 import { playClick } from "@/utils/clickSound";
 import Home from "@/pages/Home";
-import Holdings from "@/pages/Holdings";
+import Markets from "@/pages/Markets";
 import Strategy from "@/pages/Strategy";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
@@ -43,7 +43,7 @@ function currentTheme() {
 
 const PAGE_META = {
   "/": ["OKI Inc. — International Asset Holdings", "OKI Inc. is a Delaware C-Corporation engineered for international asset ownership. We acquire, structure, and hold strategic assets across borders. Ownership is the strategy."],
-  "/holdings": ["Holdings & Assets — OKI Inc.", "A consolidated view of the OKI Inc. portfolio: equity holdings, strategic real assets, intellectual property, and private credit — structured for control and held on a generational horizon."],
+  "/markets": ["Markets — OKI Inc.", "A living view of the markets OKI Inc. studies — public equities, digital assets, and global indices. Search any market and read its trajectory."],
   "/strategy": ["Strategy — OKI Inc.", "The OKI doctrine: identify high-conviction global assets, structure them through Delaware holding architecture, and hold with long-duration control orientation."],
   "/about": ["Corporate Architecture — OKI Inc.", "OKI Inc. is a Delaware C-Corporation headquartered at One World Trade Center, New York — the optimal vehicle for international asset ownership. Governance, leadership offices, and headquarters."],
   "/insights": ["Perspectives — OKI Inc.", "Doctrine, architecture, and capital discipline — essays and announcements from OKI Inc."],
@@ -145,7 +145,7 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/holdings" element={<Holdings />} />
+        <Route path="/markets" element={<Markets />} />
         <Route path="/strategy" element={<Strategy />} />
         <Route path="/about" element={<About />} />
         <Route path="/insights" element={<Insights />} />

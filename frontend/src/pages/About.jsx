@@ -12,7 +12,7 @@ const leadership = [
 const layers = [
   { label: "OKI Inc.", detail: "Delaware C-Corporation — Ultimate Parent", accent: true },
   { label: "Holding Entities", detail: "Jurisdiction-Optimized Subsidiaries", accent: false },
-  { label: "Operating Assets", detail: "Equity · Real Assets · IP · Private Credit", accent: false },
+  { label: "Focus Markets", detail: "Equities · Real Assets · Digital · Private Markets", accent: false },
 ];
 
 export default function About() {

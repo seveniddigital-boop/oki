@@ -6,7 +6,7 @@ import Logo from "@/components/Logo";
 import { isSoundOn, setSound } from "@/utils/clickSound";
 
 const links = [
-  { to: "/holdings", label: "Holdings", id: "nav-holdings-link" },
+  { to: "/markets", label: "Markets", id: "nav-markets-link" },
   { to: "/strategy", label: "Strategy", id: "nav-strategy-link" },
   { to: "/about", label: "Architecture", id: "nav-architecture-link" },
   { to: "/insights", label: "Perspectives", id: "nav-insights-link" },

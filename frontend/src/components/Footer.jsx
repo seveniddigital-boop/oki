@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="md:col-span-3">
             <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Navigate</p>
             <div className="mt-6 flex flex-col gap-3">
-              <Link to="/holdings" data-testid="footer-holdings-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Holdings & Assets</Link>
+              <Link to="/markets" data-testid="footer-markets-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Market Window</Link>
               <Link to="/strategy" data-testid="footer-strategy-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Strategy</Link>
               <Link to="/about" data-testid="footer-architecture-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Architecture</Link>
               <Link to="/contact" data-testid="footer-access-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Investor Access</Link>

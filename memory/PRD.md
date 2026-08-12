@@ -28,6 +28,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, informational pivot + stocks)
+- Site repositioned as a pure informational platform for a rising corporation: all portfolio/holdings claims removed (allocation donut, geographic bars, growth chart, control spectrum, locked card, NDA copy, percentage bento)
+- Holdings page replaced by Markets page (/markets): "Global Markets" header, live ticker (BTC/ETH/SOL + SPX/AAPL/MSFT/TSLA), Market Window terminal (quick chips + unified search + chart with timeframes/hover/briefs), "How we read markets" lenses, informational Focus Areas cards with photos
+- Search window now covers stocks AND crypto: backend /api/market-search merges Yahoo Finance (equities/ETFs/indices) + CoinGecko; /api/market-chart serves both with timeframe mapping; /api/market-prices unified ticker feed; type badges (STOCK crimson / CRYPTO gold)
+- Honest starting-corporation voice: stats now Founded 2026 / New York / Delaware; position copy "being built to own"; Perspectives essays de-claimed; PDF deck allocation bars replaced with Focus Markets list
+- Nav/Footer/Home links renamed to Markets; /holdings route removed; old chart components deleted
+
 ## Implemented (2026-08-12, grain removal)
 - Removed the film-grain noise overlay sitewide per user request ("looks like pixels") — cleaner solid backgrounds in both themes
 

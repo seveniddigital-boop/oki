@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
-import Counter from "@/components/Counter";
 import Magnetic from "@/components/Magnetic";
 import LazyBg from "@/components/LazyBg";
-import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
-import EditorialMarquee from "@/components/Marquee";
+import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";import EditorialMarquee from "@/components/Marquee";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -143,11 +141,11 @@ function Hero({ instant }) {
         >
           <Magnetic>
             <Link
-              to="/holdings"
+              to="/markets"
               data-testid="hero-explore-holdings-btn"
               className="group flex items-center gap-3 whitespace-nowrap rounded-full border border-white/25 bg-oki-black/60 px-8 py-4 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-text backdrop-blur-md transition-colors duration-500 hover:border-oki-gold hover:text-oki-gold"
             >
-              Explore Holdings
+              Explore Markets
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Magnetic>
@@ -239,12 +237,11 @@ const chapters = [
   { n: "03", title: "Hold", text: "Permanence as policy. Capital that never has to sell ends up owning what others cannot afford to keep." },
 ];
 
-const allocation = [
-  { label: "Equity Holdings", value: "36%", span: "md:col-span-5" },
-  { label: "Strategic Real Assets", value: "24%", span: "md:col-span-7" },
-  { label: "Digital Assets & Crypto", value: "16%", span: "md:col-span-4" },
-  { label: "IP & Intangibles", value: "14%", span: "md:col-span-4" },
-  { label: "Private Credit & Special Situations", value: "10%", span: "md:col-span-4" },
+const focusAreas = [
+  { label: "Equity Markets", note: "Public companies & anchor positions", span: "md:col-span-7" },
+  { label: "Real Assets", note: "Infrastructure & property", span: "md:col-span-5" },
+  { label: "Digital Assets", note: "Networks & protocols", span: "md:col-span-5" },
+  { label: "Private Markets", note: "Credit & special situations", span: "md:col-span-7" },
 ];
 
 export default function Home() {
@@ -274,12 +271,12 @@ export default function Home() {
           <div className="md:col-span-7">
             <KineticLines
               animate={false}
-              lines={["A next-generation global holding company,", "engineered to control high-value assets", "across continents."]}
+              lines={["A next-generation global holding company,", "being built to own high-value", "assets across continents."]}
               lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
             />
             <Reveal delay={0.3} className="mt-10 max-w-xl">
               <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-                OKI Inc. is a Delaware C-Corporation organized for the acquisition, structuring, and long-duration ownership of strategic assets across international markets. The corporation operates under a single mandate: disciplined control that compounds without expiry.
+                OKI Inc. is a Delaware C-Corporation headquartered in New York, organized to become a premier owner of strategic assets across international markets. The mandate is singular: build ownership that compounds without expiry.
               </p>
             </Reveal>
           </div>
@@ -296,16 +293,12 @@ export default function Home() {
         </div>
         <div className="mt-16 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-3">
           {[
-            { k: "Continents", n: 4 },
-            { k: "Jurisdictions", n: 12 },
-            { k: "Time Horizon", v: "Generational" },
+            { k: "Founded", v: "2026" },
+            { k: "Headquarters", v: "New York" },
+            { k: "Incorporated", v: "Delaware" },
           ].map((s, i) => (
             <Reveal key={s.k} delay={i * 0.12} className="bg-oki-surface p-10">
-              {s.n ? (
-                <Counter to={s.n} className="font-display text-4xl font-semibold tracking-tight text-oki-gold md:text-5xl" />
-              ) : (
-                <p className="font-display text-4xl font-semibold tracking-tight text-oki-gold md:text-5xl">{s.v}</p>
-              )}
+              <p className="font-display text-4xl font-semibold tracking-tight text-oki-gold md:text-5xl">{s.v}</p>
               <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">{s.k}</p>
             </Reveal>
           ))}
@@ -316,29 +309,29 @@ export default function Home() {
         <div className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <SectionTag index="02" label="Holdings Preview" />
+              <SectionTag index="02" label="Focus Markets" />
               <KineticLines
                 animate={false}
-                lines={["Where capital", "is deployed."]}
+                lines={["Where capital", "is aimed."]}
                 lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
               />
             </div>
             <Reveal delay={0.2}>
               <Link
-                to="/holdings"
+                to="/markets"
                 data-testid="home-view-holdings-link"
                 className="group flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-gold"
               >
-                Full Holdings Dashboard
+                Open the Market Window
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
             </Reveal>
           </div>
           <div className="mt-16 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-12">
-            {allocation.map((a, i) => (
+            {focusAreas.map((a, i) => (
               <Reveal key={a.label} delay={i * 0.1} className={`${a.span} card-glow group bg-oki-black p-10 transition-colors duration-500 hover:bg-oki-elevated`}>
-                <p className="font-display text-5xl font-semibold tracking-tighter text-oki-text transition-colors duration-500 group-hover:text-oki-gold md:text-6xl">{a.value}</p>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">{a.label}</p>
+                <p className="font-display text-3xl font-semibold tracking-tighter text-oki-text transition-colors duration-500 group-hover:text-oki-gold md:text-4xl">{a.label}</p>
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">{a.note}</p>
               </Reveal>
             ))}
           </div>

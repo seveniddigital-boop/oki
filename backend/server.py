@@ -211,26 +211,17 @@ async def corporate_deck():
     c.line(56, H - 262, W - 56, H - 262)
     c.setFillColor(gold)
     c.setFont("Helvetica", 7)
-    c.drawString(56, H - 276, "01  —  GLOBAL ASSET ALLOCATION")
+    c.drawString(56, H - 276, "01  —  FOCUS MARKETS")
 
-    alloc = [("EQUITY HOLDINGS", 36, gold), ("STRATEGIC REAL ASSETS", 24, crimson),
-             ("DIGITAL ASSETS & CRYPTO", 16, Color(227/255, 200/255, 136/255)),
-             ("IP & INTANGIBLES", 14, Color(0.55, 0.55, 0.55)), ("PRIVATE CREDIT & SPECIAL SITUATIONS", 10, Color(0.28, 0.28, 0.28))]
+    markets = ["EQUITY MARKETS", "REAL ASSETS & INFRASTRUCTURE", "DIGITAL ASSETS & NETWORKS", "PRIVATE MARKETS & CREDIT"]
     y = H - 306
-    bar_x = 212
-    bar_w = W - 56 - bar_x - 52
-    for label, pct, col in alloc:
-        c.setFillColor(muted)
-        c.setFont("Helvetica", 6.8)
-        c.drawString(56, y + 3, label)
-        c.setFillColor(Color(0.1, 0.1, 0.1))
-        c.rect(bar_x, y, bar_w, 9, stroke=0, fill=1)
-        c.setFillColor(col)
-        c.rect(bar_x, y, bar_w * pct / 50, 9, stroke=0, fill=1)
+    for m in markets:
+        c.setFillColor(gold)
+        c.rect(56, y, 6, 6, stroke=0, fill=1)
         c.setFillColor(white)
-        c.setFont("Helvetica-Bold", 8)
-        c.drawString(bar_x + bar_w + 14, y + 2, f"{pct}%")
-        y -= 24
+        c.setFont("Helvetica", 9)
+        c.drawString(72, y + 1, m)
+        y -= 26
 
     c.setStrokeColor(Color(0.16, 0.16, 0.16))
     c.line(56, y - 8, W - 56, y - 8)
@@ -290,94 +281,135 @@ async def corporate_deck():
     )
 
 
-_crypto_cache = {"data": None, "ts": 0.0}
+_chart_cache = {}
+_search_cache = {}
+_market_cache = {"data": None, "ts": 0.0}
 
-@api_router.get("/crypto-prices")
-async def crypto_prices():
-    import time
+YAHOO_HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+
+
+async def _yahoo_chart_prices(symbol, range_, interval):
+    async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
+        resp = await http.get(
+            f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}",
+            params={"range": range_, "interval": interval},
+        )
+    resp.raise_for_status()
+    result = resp.json()["chart"]["result"][0]
+    ts = result.get("timestamp", [])
+    closes = result["indicators"]["quote"][0]["close"]
+    return [[t * 1000, c] for t, c in zip(ts, closes) if c is not None]
+
+
+@api_router.get("/market-prices")
+async def market_prices():
+    import time, asyncio
     now = time.time()
-    if _crypto_cache["data"] and now - _crypto_cache["ts"] < 120:
-        return _crypto_cache["data"]
+    if _market_cache["data"] and now - _market_cache["ts"] < 120:
+        return _market_cache["data"]
+    items = []
     try:
-        import asyncio
-        data = None
-        for attempt in range(3):
-            try:
-                async with httpx.AsyncClient(timeout=15) as http:
-                    resp = await http.get(
-                        "https://api.coingecko.com/api/v3/simple/price",
-                        params={"ids": "bitcoin,ethereum,solana", "vs_currencies": "usd", "include_24hr_change": "true"},
-                    )
-                resp.raise_for_status()
-                data = resp.json()
-                break
-            except Exception:
-                if attempt < 2:
-                    await asyncio.sleep(2)
-        if data is None:
-            raise RuntimeError("all retries failed")
-        _crypto_cache["data"] = data
-        _crypto_cache["ts"] = now
-        return data
+        async with httpx.AsyncClient(timeout=15) as http:
+            resp = await http.get(
+                "https://api.coingecko.com/api/v3/simple/price",
+                params={"ids": "bitcoin,ethereum,solana", "vs_currencies": "usd", "include_24hr_change": "true"},
+            )
+        resp.raise_for_status()
+        cg = resp.json()
+        for cid, sym in [("bitcoin", "BTC"), ("ethereum", "ETH"), ("solana", "SOL")]:
+            if cid in cg:
+                items.append({"symbol": sym, "name": cid.capitalize(), "price": cg[cid]["usd"], "change": cg[cid].get("usd_24h_change", 0), "type": "crypto"})
     except Exception as e:
         logger.error(f"CoinGecko fetch failed: {e}")
-        if _crypto_cache["data"]:
-            return _crypto_cache["data"]
-        return {}
+    for sym, name in [("^GSPC", "S&P 500"), ("AAPL", "Apple"), ("MSFT", "Microsoft"), ("TSLA", "Tesla")]:
+        try:
+            async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
+                resp = await http.get(f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}", params={"range": "1d", "interval": "5m"})
+            resp.raise_for_status()
+            meta = resp.json()["chart"]["result"][0]["meta"]
+            price = meta.get("regularMarketPrice")
+            prev = meta.get("chartPreviousClose") or meta.get("previousClose")
+            if price and prev:
+                label = "SPX" if sym == "^GSPC" else sym
+                items.append({"symbol": label, "name": name, "price": price, "change": ((price - prev) / prev) * 100, "type": "stock"})
+        except Exception as e:
+            logger.error(f"Yahoo fetch failed for {sym}: {e}")
+        await asyncio.sleep(0.3)
+    data = {"items": items}
+    if items:
+        _market_cache["data"] = data
+        _market_cache["ts"] = now
+    elif _market_cache["data"]:
+        return _market_cache["data"]
+    return data
 
 
 _chart_cache = {}
 _search_cache = {}
 
-@api_router.get("/crypto-search")
-async def crypto_search(q: str = ""):
-    import time, asyncio
-    q = q.strip().lower()
+@api_router.get("/market-search")
+async def market_search(q: str = ""):
+    import time
+    q = q.strip()
     if len(q) < 2:
-        return {"coins": []}
+        return {"results": []}
+    key = q.lower()
     now = time.time()
-    cached = _search_cache.get(q)
+    cached = _search_cache.get(key)
     if cached and now - cached["ts"] < 600:
         return cached["data"]
-    data = None
-    for attempt in range(3):
-        try:
-            async with httpx.AsyncClient(timeout=15) as http:
-                resp = await http.get("https://api.coingecko.com/api/v3/search", params={"query": q})
-            resp.raise_for_status()
-            coins = [
-                {"id": c["id"], "name": c["name"], "symbol": c["symbol"], "rank": c.get("market_cap_rank")}
-                for c in resp.json().get("coins", [])[:12]
-            ]
-            data = {"coins": coins}
-            break
-        except Exception:
-            if attempt < 2:
-                await asyncio.sleep(2)
-    if data is None:
-        if cached:
-            return cached["data"]
-        raise HTTPException(status_code=502, detail="Search feed unavailable")
-    _search_cache[q] = {"data": data, "ts": now}
+    results = []
+    try:
+        async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
+            resp = await http.get(
+                "https://query1.finance.yahoo.com/v1/finance/search",
+                params={"q": q, "quotesCount": 6, "newsCount": 0, "listsCount": 0},
+            )
+        resp.raise_for_status()
+        for qt in resp.json().get("quotes", []):
+            if qt.get("quoteType") in ("EQUITY", "ETF", "INDEX") and qt.get("symbol"):
+                results.append({
+                    "id": qt["symbol"],
+                    "name": qt.get("shortname") or qt.get("longname") or qt["symbol"],
+                    "symbol": qt["symbol"],
+                    "type": "stock",
+                    "rank": None,
+                })
+    except Exception as e:
+        logger.error(f"Yahoo search failed: {e}")
+    try:
+        async with httpx.AsyncClient(timeout=15) as http:
+            resp = await http.get("https://api.coingecko.com/api/v3/search", params={"query": key})
+        resp.raise_for_status()
+        for c in resp.json().get("coins", [])[:6]:
+            results.append({"id": c["id"], "name": c["name"], "symbol": c["symbol"], "type": "crypto", "rank": c.get("market_cap_rank")})
+    except Exception as e:
+        logger.error(f"CoinGecko search failed: {e}")
+    data = {"results": results[:12]}
+    _search_cache[key] = {"data": data, "ts": now}
     return data
 
-@api_router.get("/crypto-chart")
-async def crypto_chart(id: str = "bitcoin", days: int = 7):
-    import time
-    import re
-    if not re.fullmatch(r"[a-z0-9-]{1,50}", id):
-        raise HTTPException(status_code=400, detail="Unsupported asset")
+@api_router.get("/market-chart")
+async def market_chart(type: str = "crypto", id: str = "bitcoin", days: int = 7):
+    import time, asyncio, re
     days = min(max(days, 1), 30)
-    key = f"{id}:{days}"
+    key = f"{type}:{id}:{days}"
     now = time.time()
     cached = _chart_cache.get(key)
     if cached and now - cached["ts"] < 300:
         return cached["data"]
-    try:
-        import asyncio
-        data = None
-        for attempt in range(3):
-            try:
+    data = None
+    for attempt in range(3):
+        try:
+            if type == "stock":
+                if not re.fullmatch(r"[A-Za-z0-9.^=-]{1,12}", id):
+                    raise HTTPException(status_code=400, detail="Unsupported symbol")
+                range_, interval = {1: ("1d", "5m"), 7: ("5d", "30m"), 30: ("1mo", "1d")}[days]
+                prices = await _yahoo_chart_prices(id, range_, interval)
+                data = {"id": id, "days": days, "prices": prices}
+            else:
+                if not re.fullmatch(r"[a-z0-9-]{1,50}", id):
+                    raise HTTPException(status_code=400, detail="Unsupported asset")
                 async with httpx.AsyncClient(timeout=20) as http:
                     resp = await http.get(
                         f"https://api.coingecko.com/api/v3/coins/{id}/market_chart",
@@ -385,19 +417,18 @@ async def crypto_chart(id: str = "bitcoin", days: int = 7):
                     )
                 resp.raise_for_status()
                 data = {"id": id, "days": days, "prices": resp.json().get("prices", [])}
-                break
-            except Exception:
-                if attempt < 2:
-                    await asyncio.sleep(2)
-        if data is None:
-            raise RuntimeError("all retries failed")
-        _chart_cache[key] = {"data": data, "ts": now}
-        return data
-    except Exception as e:
-        logger.error(f"CoinGecko chart fetch failed: {e}")
+            break
+        except HTTPException:
+            raise
+        except Exception:
+            if attempt < 2:
+                await asyncio.sleep(2)
+    if data is None:
         if cached:
             return cached["data"]
         raise HTTPException(status_code=502, detail="Chart feed unavailable")
+    _chart_cache[key] = {"data": data, "ts": now}
+    return data
 
 
 app.include_router(api_router)

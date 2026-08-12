@@ -12,7 +12,7 @@ const ESSAYS = [
     title: "Digital Assets, Held Like Infrastructure",
     excerpt: "Bitcoin and select networks enter the permanent portfolio — with custody, not conviction theater.",
     body: [
-      "OKI Inc. now holds digital assets as a formal allocation: sixteen percent of the portfolio, concentrated in Bitcoin, Ethereum, and select layer-one infrastructure. The position is not a trade. It is balance-sheet architecture for a century in which value increasingly settles on open networks.",
+      "OKI Inc. is building a formal digital asset mandate: Bitcoin, Ethereum, and select layer-one infrastructure, studied with the same rigor as any balance-sheet position. When the corporation enters, it will enter with custody — not conviction theater.",
       "The doctrine does not bend for a new asset class. Custody is institutional, keys are multi-signature and geographically distributed, the majority of the position sits in cold storage, and nothing is leveraged. We do not watch the price. We own the network.",
     ],
   },
@@ -45,7 +45,7 @@ const ESSAYS = [
     title: "The Compounding of Control",
     excerpt: "Minority positions observe outcomes. Controlling positions author them.",
     body: [
-      "Sixty-four percent of the OKI portfolio is held in controlling stakes. This is the operating principle, not a preference. A minority investor reads the outcome; a controlling owner writes it.",
+      "The OKI mandate is being written so that control is the default position, not the exception. A minority investor reads the outcome; a controlling owner writes it.",
       "Control compounds quietly: pricing decisions, capital allocation, management selection, timing. Each lever seems modest in isolation. Across a dozen jurisdictions and decades of patience, the levers multiply one another. That multiplication is the return.",
     ],
   },

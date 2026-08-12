@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
-import ControlSpectrum from "@/components/charts/ControlSpectrum";
 import LazyBg from "@/components/LazyBg";
 
 const phases = [
@@ -99,13 +98,6 @@ export default function Strategy() {
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-        <SectionTag index="S/03" label="Position of Control" />
-        <Reveal>
-          <ControlSpectrum />
-        </Reveal>
       </section>
     </motion.main>
   );
