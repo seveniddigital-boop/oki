@@ -28,6 +28,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## Implemented (2026-08-12, HQ photo theme pair)
+- Contact HQ photo panel is now theme-aware (tower-dark/tower-light pattern): dark theme shows One WTC illuminated at night between dark towers; light theme shows One WTC in daylight from the harbor under clear sky — verified switching in both themes
+
 ## Implemented (2026-08-12, HQ photo)
 - Contact page photo panel now shows the real One World Trade Center (upward shot framed by the Oculus wings, moody sky) with caption "One World Trade Center — New York, USA"
 
