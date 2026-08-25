@@ -31,6 +31,9 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 ## PIVOT NOTE (binding — UPDATED 2026-06)
 REPOSITIONED (user-confirmed reversal): OKI Inc. is now an international investment & strategic holdings corporation with a digital-first acquisition MANDATE. Acquisition/ownership language IS allowed. STILL FORBIDDEN: fabricated portfolio companies, AUM, transaction values, performance figures, fake office locations. Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
 
+## Implemented (2026-06 fork, mobile nav always visible — self-tested at 390px)
+- Nav.jsx: matchMedia(max-width:767px) tracked; on mobile the header no longer hides at scroll 0 on the homepage (show = isMobile || visible || pathname !== "/" || open); desktop scroll-reveal behavior unchanged
+
 ## Implemented (2026-06 fork, 50/50 PE rebalance + de-duplication pass — self-tested via screenshots + curl)
 - User feedback: too digital-focused, info repeated across sections → rebalanced to real Blackstone-style PE profile (acquire/hold/manage operating businesses + real assets + digital, ~50/50), de-duplicated copy sitewide
 - "digital-first" purged everywhere (0 occurrences); each concept now appears once in its natural home

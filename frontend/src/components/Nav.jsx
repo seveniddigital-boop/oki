@@ -19,10 +19,19 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState("dark");
   const [sound, setSoundState] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
   const { pathname } = useLocation();
 
   useMotionValueEvent(scrollY, "change", (v) => setVisible(v > 60));
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme || "dark");
@@ -50,7 +59,7 @@ export default function Nav() {
     setTheme(next);
   };
 
-  const show = visible || pathname !== "/" || open;
+  const show = isMobile || visible || pathname !== "/" || open;
 
   return (
     <>
