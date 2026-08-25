@@ -31,6 +31,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 ## PIVOT NOTE (binding — UPDATED 2026-06)
 REPOSITIONED (user-confirmed reversal): OKI Inc. is now an international investment & strategic holdings corporation with a digital-first acquisition MANDATE. Acquisition/ownership language IS allowed. STILL FORBIDDEN: fabricated portfolio companies, AUM, transaction values, performance figures, fake office locations. Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
 
+## Implemented (2026-06 fork, footer platform links fix — self-tested via playwright)
+- User reported footer Platform links "not working" (they navigated to /markets top with no visible effect). Fixed with hash anchors: Live Board → /markets#board, Asset Search → /markets#window, Working Charts → /markets#charts (MarketBoard now accepts initialView prop + remounts on hash, opens Charts view directly); deck link now target=_blank
+- SmoothScroll.jsx: hash-aware — Lenis scrolls to the anchored element (offset -90, 650ms delay for page transition) instead of resetting to top; Markets sections carry ids board/charts/window
+- Verified: clicks land scrolled on the right section, charts view active for #charts, deck opens new tab
+
 ## Implemented (2026-06 fork, mobile nav always visible — self-tested at 390px)
 - Nav.jsx: matchMedia(max-width:767px) tracked; on mobile the header no longer hides at scroll 0 on the homepage (show = isMobile || visible || pathname !== "/" || open); desktop scroll-reveal behavior unchanged
 

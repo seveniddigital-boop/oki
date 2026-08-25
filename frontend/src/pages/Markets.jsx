@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import MarketTicker from "@/components/MarketTicker";
@@ -49,6 +50,7 @@ const focusAreas = [
 
 export default function Markets() {
   const [active, setActive] = useState(null);
+  const { hash } = useLocation();
 
   return (
     <motion.main data-testid="markets-page" {...pageAnim}>
@@ -77,7 +79,7 @@ export default function Markets() {
         <MarketTicker />
       </section>
 
-      <section className="mx-auto max-w-[1600px] px-6 pt-24 md:px-12">
+      <section id="board" className="mx-auto max-w-[1600px] px-6 pt-24 md:px-12">
         <SectionTag index="M/02" label="The Board" />
         <KineticLines
           animate={false}
@@ -90,11 +92,13 @@ export default function Markets() {
           </p>
         </Reveal>
         <Reveal delay={0.3} className="mt-12">
-          <MarketBoard />
+          <div id="charts">
+            <MarketBoard key={hash || "default"} initialView={hash === "#charts" ? "charts" : "prices"} />
+          </div>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12">
+      <section id="window" className="mx-auto max-w-[1600px] px-6 py-24 md:px-12">
         <SectionTag index="M/03" label="The Market Window" />
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-5">

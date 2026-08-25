@@ -11,9 +11,9 @@ const nav = [
 ];
 
 const plat = [
-  { to: "/markets", label: "Live Board", id: "footer-plat-board-link" },
-  { to: "/markets", label: "Asset Search", id: "footer-plat-search-link" },
-  { to: "/markets", label: "Working Charts", id: "footer-plat-charts-link" },
+  { to: "/markets#board", label: "Live Board", id: "footer-plat-board-link" },
+  { to: "/markets#window", label: "Asset Search", id: "footer-plat-search-link" },
+  { to: "/markets#charts", label: "Working Charts", id: "footer-plat-charts-link" },
 ];
 
 export default function Footer() {
@@ -57,6 +57,8 @@ export default function Footer() {
               ))}
               <a
                 href={`${process.env.REACT_APP_BACKEND_URL}/api/deck`}
+                target="_blank"
+                rel="noopener noreferrer"
                 data-testid="footer-deck-link"
                 className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold"
               >

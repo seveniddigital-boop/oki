@@ -101,9 +101,9 @@ function SelectorRow({ it, active, onSelect }) {
   );
 }
 
-export default function MarketBoard() {
+export default function MarketBoard({ initialView = "prices" }) {
   const items = useMarketItems();
-  const [view, setView] = useState("prices");
+  const [view, setView] = useState(initialView);
   const [selectedId, setSelectedId] = useState("bitcoin");
 
   const crypto = items.filter((i) => i.type === "crypto");

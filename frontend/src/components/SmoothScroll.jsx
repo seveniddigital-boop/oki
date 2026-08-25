@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 let lenis = null;
 
 export default function SmoothScroll({ children }) {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     lenis = new Lenis({ duration: 1.15, smoothWheel: true });
@@ -23,9 +23,19 @@ export default function SmoothScroll({ children }) {
   }, []);
 
   useEffect(() => {
+    if (hash) {
+      const t = setTimeout(() => {
+        const el = document.getElementById(hash.slice(1));
+        if (el) {
+          if (lenis) lenis.scrollTo(el, { offset: -90 });
+          else el.scrollIntoView();
+        }
+      }, 650);
+      return () => clearTimeout(t);
+    }
     if (lenis) lenis.scrollTo(0, { immediate: true });
     else window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return children;
 }
