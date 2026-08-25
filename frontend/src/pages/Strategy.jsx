@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import { KineticLines, Reveal, SectionTag, PhotoReveal, pageAnim } from "@/components/Kinetic";
 import LazyBg from "@/components/LazyBg";
 
@@ -58,32 +60,33 @@ export default function Strategy() {
         </div>
       </section>
 
-      <section className="relative mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-        <LazyBg
-          src="https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?q=80&w=1200&auto=format&fit=crop"
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        />
-        <div className="relative ml-2 border-l border-white/10 md:ml-6">
-          {phases.map((p, i) => (
-            <Reveal key={p.n} delay={i * 0.12} className="relative pb-24 pl-10 last:pb-0 md:pl-16">
-              <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rotate-45 border border-oki-gold bg-oki-black" />
-              <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-                <div className="flex-1">
-                  <p className="font-mono text-sm tracking-[0.3em] text-oki-gold">{p.n}</p>
-                  <h3 className="mt-4 font-display text-4xl font-medium tracking-tighter text-oki-text md:text-6xl">{p.title}</h3>
-                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-faint">{p.subtitle}</p>
-                  <p className="mt-6 max-w-2xl text-sm leading-relaxed text-oki-muted md:text-base">{p.text}</p>
-                </div>
+      <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12 md:py-32">
+        {phases.map((p, i) => (
+          <Reveal key={p.n} className="group relative border-t border-white/10 py-16 first:border-t-0 first:pt-0 md:py-24">
+            <span
+              aria-hidden="true"
+              className="text-outline pointer-events-none absolute right-0 top-8 select-none font-display text-[7rem] font-semibold leading-none transition-opacity duration-700 group-hover:opacity-50 md:top-12 md:text-[13rem]"
+            >
+              {p.n}
+            </span>
+            <div className={`relative grid grid-cols-1 gap-10 lg:grid-cols-12 ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
+              <div className="lg:col-span-7 lg:[direction:ltr]">
+                <p className="font-mono text-sm tracking-[0.3em] text-oki-gold">{p.n}</p>
+                <h3 className="mt-4 font-display text-4xl font-medium tracking-tighter text-oki-text md:text-7xl">{p.title}</h3>
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-faint">{p.subtitle}</p>
+                <p className="mt-8 max-w-2xl text-sm leading-relaxed text-oki-muted md:text-base">{p.text}</p>
+              </div>
+              <div className="lg:col-span-5 lg:[direction:ltr]">
                 <PhotoReveal
                   src={p.img}
                   alt={`${p.title} — ${p.subtitle}`}
-                  delay={0.2 + i * 0.1}
-                  className="h-48 w-full shrink-0 border border-white/10 lg:w-80"
+                  delay={0.15}
+                  className="h-56 w-full border border-white/10 md:h-80"
                 />
               </div>
-            </Reveal>
-          ))}
-        </div>
+            </div>
+          </Reveal>
+        ))}
       </section>
 
       <section className="border-t border-white/10 bg-oki-surface">
@@ -97,6 +100,16 @@ export default function Strategy() {
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.3} className="mt-16">
+            <Link
+              to="/markets"
+              data-testid="strategy-open-markets-link"
+              className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-oki-gold"
+            >
+              See the method live — open the board
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </motion.main>

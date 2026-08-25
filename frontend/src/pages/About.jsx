@@ -15,6 +15,13 @@ const layers = [
   { label: "Coverage", detail: "Bitcoin · Equities · Indices · Macro", accent: false },
 ];
 
+const record = [
+  { y: "2026", t: "Incorporated", d: "Chartered as a C-Corporation under the Delaware General Corporation Law." },
+  { y: "2026", t: "Corporate seat established", d: "Headquarters set at One World Trade Center, 85th Floor, New York." },
+  { y: "2026", t: "The window opens", d: "Live market platform published — Bitcoin, indices, and equities, free and ungated." },
+  { y: "Ahead", t: "The climb continues", d: "Coverage deepens, publications expand. The direction has not changed: up." },
+];
+
 export default function About() {
   return (
     <motion.main data-testid="about-page" {...pageAnim}>
@@ -79,6 +86,29 @@ export default function About() {
         </div>
       </section>
 
+      <section data-testid="about-record-section" className="border-t border-white/10 bg-oki-surface">
+        <div className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
+          <SectionTag index="A/02" label="The Record" />
+          <KineticLines
+            animate={false}
+            lines={["Short history.", "Long intent."]}
+            lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
+          />
+          <div className="mt-16 border-t border-white/10">
+            {record.map((r, i) => (
+              <Reveal key={`${r.y}-${r.t}`} delay={i * 0.1} className="group grid grid-cols-1 gap-4 border-b border-white/10 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
+                <span className={`font-mono text-sm tracking-[0.3em] md:col-span-2 ${r.y === "Ahead" ? "text-oki-gold" : "text-oki-faint"}`}>{r.y}</span>
+                <span className="flex items-center gap-4 md:col-span-4">
+                  <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rotate-45 border border-oki-gold bg-transparent transition-colors duration-300 group-hover:bg-oki-gold" />
+                  <span className="font-display text-xl font-medium tracking-tight text-oki-text transition-colors duration-300 group-hover:text-oki-gold md:text-2xl">{r.t}</span>
+                </span>
+                <span className="text-sm leading-relaxed text-oki-muted md:col-span-6">{r.d}</span>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="relative overflow-hidden border-t border-white/10">
         <LazyBg
           src="https://images.unsplash.com/photo-1703639948834-342fc34900f8?q=80&w=1200&auto=format&fit=crop"
@@ -86,7 +116,7 @@ export default function About() {
         />
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-          <SectionTag index="A/02" label="Governance" />
+          <SectionTag index="A/03" label="Governance" />
           <KineticLines
             animate={false}
             lines={["Institutions endure.", "Individuals serve."]}
@@ -109,7 +139,7 @@ export default function About() {
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-        <SectionTag index="A/03" label="Corporate Headquarters" />
+        <SectionTag index="A/04" label="Corporate Headquarters" />
         <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
           <Reveal>
             <p className="font-display text-3xl font-medium leading-snug tracking-tight text-oki-text md:text-4xl">

@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Menu, X, Sun, Moon, Volume2, VolumeX } from "lucide-react";
 import Logo from "@/components/Logo";
+import { BtcMini } from "@/components/LiveMini";
 import { isSoundOn, setSound } from "@/utils/clickSound";
 
 const links = [
@@ -79,6 +80,7 @@ export default function Nav() {
                 <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-oki-gold transition-[width] duration-300 group-hover:w-full" />
               </NavLink>
             ))}
+            <BtcMini className="hidden xl:flex" />
             <button
               onClick={toggleSound}
               data-testid="sound-toggle"
@@ -162,6 +164,25 @@ export default function Nav() {
                 </NavLink>
               </motion.div>
             ))}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.5 }}
+              className="mt-10 space-y-2"
+            >
+              <a href="tel:+12122208443" data-testid="mobile-nav-phone" className="block font-mono text-xs tracking-[0.2em] text-oki-muted">
+                +1 (212) 220-8443
+              </a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@okiinc.global&su=Inquiry%20for%20OKI%20Inc."
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="mobile-nav-email"
+                className="block font-mono text-xs tracking-[0.15em] text-oki-gold"
+              >
+                contact@okiinc.global
+              </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

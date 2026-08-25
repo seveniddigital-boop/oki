@@ -1,6 +1,20 @@
 import { Link } from "react-router-dom";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
 
+const nav = [
+  { to: "/markets", label: "Market Window", id: "footer-markets-link" },
+  { to: "/strategy", label: "Strategy", id: "footer-strategy-link" },
+  { to: "/about", label: "Architecture", id: "footer-architecture-link" },
+  { to: "/insights", label: "Perspectives", id: "footer-insights-link" },
+  { to: "/contact", label: "Contact", id: "footer-access-link" },
+];
+
+const plat = [
+  { to: "/markets", label: "Live Board", id: "footer-plat-board-link" },
+  { to: "/markets", label: "Asset Search", id: "footer-plat-search-link" },
+  { to: "/markets", label: "Working Charts", id: "footer-plat-charts-link" },
+];
+
 export default function Footer() {
   return (
     <footer data-testid="site-footer" className="relative overflow-hidden border-t border-white/10 bg-oki-black">
@@ -12,7 +26,7 @@ export default function Footer() {
       </div>
       <div className="relative mx-auto max-w-[1600px] px-6 pb-10 pt-20 md:px-12">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
-          <div className="md:col-span-6">
+          <div className="md:col-span-5">
             <LogoMark size={64} />
             <LogoWordmark gold className="mt-6 text-2xl tracking-[0.3em]" />
             <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.4em] text-oki-faint">
@@ -22,13 +36,31 @@ export default function Footer() {
               A young Delaware C-Corporation publishing a clean, live window into Bitcoin and world equity markets. Just getting started. Going to the top.
             </p>
           </div>
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Navigate</p>
             <div className="mt-6 flex flex-col gap-3">
-              <Link to="/markets" data-testid="footer-markets-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Market Window</Link>
-              <Link to="/strategy" data-testid="footer-strategy-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Strategy</Link>
-              <Link to="/about" data-testid="footer-architecture-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Architecture</Link>
-              <Link to="/contact" data-testid="footer-access-link" className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">Contact</Link>
+              {nav.map((l) => (
+                <Link key={l.id} to={l.to} data-testid={l.id} className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="md:col-span-2">
+            <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Platform</p>
+            <div className="mt-6 flex flex-col gap-3">
+              {plat.map((l) => (
+                <Link key={l.id} to={l.to} data-testid={l.id} className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold">
+                  {l.label}
+                </Link>
+              ))}
+              <a
+                href={`${process.env.REACT_APP_BACKEND_URL}/api/deck`}
+                data-testid="footer-deck-link"
+                className="text-sm text-oki-muted transition-colors duration-300 hover:text-oki-gold"
+              >
+                Corporate Deck (PDF)
+              </a>
             </div>
           </div>
           <div className="md:col-span-3">
@@ -47,9 +79,11 @@ export default function Footer() {
             <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.3em] text-oki-faint">Incorporated in Delaware</p>
           </div>
         </div>
-        <div className="mt-20 flex flex-col justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">OKI Inc. · Delaware C-Corporation</p>
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Established 2026 · New York</p>
+        <div className="mt-20 flex flex-col justify-between gap-4 border-t border-white/5 pt-8 lg:flex-row">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">OKI Inc. · Delaware C-Corporation · Established 2026, New York</p>
+          <p className="max-w-xl font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-oki-faint">
+            Market data via CoinGecko &amp; Yahoo Finance · Delayed where applicable · Nothing on this site constitutes investment advice
+          </p>
         </div>
       </div>
     </footer>

@@ -1,28 +1,155 @@
 {
-  "theme": "LIGHT",
-  "image_urls": {
-    "hero_light_v3": {
-      "url": "https://images.unsplash.com/photo-1496307653780-42ee777d4833?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwzfHx3aGl0ZSUyMG1vZGVybiUyMHNreXNjcmFwZXIlMjBmcm9tJTIwYmVsb3d8ZW58MHx8fHwxNzg2MDYxODE2fDA&ixlib=rb-4.1.0&q=85&w=1600",
-      "description": "bottom view of glass building fading into bright light sky",
-      "category": "hero"
+  "theme": "Hybrid Dark/Light - Default to Dark 'Obsidian'. Brutalist, Premium, Futuristic, Minimal.",
+  "brand_identity": {
+    "tone": "Quiet dominance, confident, minimal, intimidating, no hype words.",
+    "tagline": "Just getting started. Going to the top.",
+    "company_facts": {
+      "name": "OKI Inc.",
+      "type": "Delaware C-Corporation",
+      "founded": "2026",
+      "hq": "One World Trade Center 85th Floor New York NY 10007",
+      "phone": "+1 (212) 220-8443",
+      "email": "contact@okiinc.global"
+    },
+    "constraints": [
+      "NEVER claim OKI holds assets, portfolios, or cold storage.",
+      "Pure informational markets platform.",
+      "Email links must open Gmail compose directly (https://mail.google.com/mail/?view=cm&fs=1&to=contact@okiinc.global&su=Inquiry)",
+      "Contact page has NO forms. Informational only.",
+      "DO NOT MAKE THIS WEBSITE LOOK AI-GENERATED."
+    ]
+  },
+  "typography": {
+    "fonts": {
+      "headings": "Clash Display (Variable or bold/black weights with tight tracking)",
+      "body": "Satoshi (Clean, legible, medium weights)",
+      "mono": "JetBrains Mono (Used for all tickers, live data, micro-copy, UI labels)"
+    },
+    "scale": {
+      "h1": "text-5xl sm:text-7xl lg:text-8xl tracking-tighter uppercase leading-none",
+      "h2": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight",
+      "h3": "text-2xl sm:text-3xl lg:text-4xl tracking-tight",
+      "body": "text-base lg:text-lg leading-relaxed text-balance",
+      "mono_label": "text-xs tracking-[0.2em] uppercase"
+    },
+    "rules": [
+      "NO generic font fallbacks for headings. No Inter or Roboto.",
+      "Use JetBrains Mono for data points to contrast with Satoshi body.",
+      "Massive contrast between H1 and body text.",
+      "Optical alignment is strictly enforced."
+    ]
+  },
+  "colors": {
+    "primary": {
+      "charcoal": "#050505",
+      "ivory": "#F2EFE8",
+      "gold": "#C5A059"
+    },
+    "dark_theme": {
+      "background": "#050505",
+      "surface": "#0a0a0a",
+      "border": "#1a1a1a",
+      "text_primary": "#F2EFE8",
+      "text_secondary": "#888888",
+      "accent": "#C5A059"
+    },
+    "light_theme": {
+      "background": "#F2EFE8",
+      "surface": "#EAE5D9",
+      "border": "#D5CEBD",
+      "text_primary": "#050505",
+      "text_secondary": "#555555",
+      "accent": "#C5A059"
+    },
+    "rules": [
+      "Tinted Grey Rule: Dark backgrounds are slightly warm to match the gold accent.",
+      "Gold (#C5A059) is for highlights, 1px borders, subtle glows, and hover states. Never massive blocks of gold.",
+      "Avoid default Tailwind colors unless explicitly styled for market data (e.g., market up/down)."
+    ]
+  },
+  "layouts": {
+    "general": [
+      "Strict Swiss Grid with deliberate asymmetry.",
+      "High density for Markets terminal, massive negative space for marketing sections.",
+      "Use 'Grid Borders' - visible 1px borders (#1a1a1a or #D5CEBD) on containers to create the 'architectural' feel.",
+      "Avoid standard 'Bootstrap' column centering."
+    ],
+    "spacing": {
+      "generous": "p-8 md:p-16 lg:p-24 for marketing sections.",
+      "dense": "p-2 md:p-4 for terminal/data UI."
     }
   },
-  "typography": {},
-  "colors": {},
-  "visual enhancers": {},
-  "component name": {},
-  "grids": {},
-  "layouts": {},
-  "motion": {},
-  "accessibility": {},
-  "media": {},
-  "3d libraries": {},
-  "instructions_to_main_agent": [
-    "Ensure the hero building image sits under an ivory #F2EFE8 overlay with huge BLACK 'OKI INC.' text.",
-    "Do not use complete transparent background in header, overlays, any surface that has content under it.",
-    "You have .js files not .tsx files, so apply guidelines for .js files."
+  "visual_enhancers": {
+    "textures": "Subtle noise/grain overlay on the entire site (pointer-events-none, fixed, opacity-20).",
+    "borders": "1px sharp borders everywhere. 0px border-radius (sharp edges only).",
+    "glassmorphism": "Used only for the sticky minimal navigation and HUD elements. No muddy transparency. High blur (backdrop-blur-xl), slight saturation, 1px sharp inner border.",
+    "cursor": "Custom minimal cursor (e.g., small gold dot or inverted blend mode circle) that expands on hoverables.",
+    "theme_toggle": "System-aware light/dark toggle seamlessly integrated into navigation."
+  },
+  "motion": {
+    "scroll": "Lenis smooth scroll is MANDATORY. High momentum, premium feel.",
+    "page_transitions": "Black veil wipe or dissolve on route changes (Framer Motion).",
+    "micro_interactions": [
+      "Magnetic buttons for primary CTAs.",
+      "Hover text reveals (staggered characters).",
+      "Click sounds (subtle UI ticks, like a high-end terminal).",
+      "Subtle parallax on images and background elements.",
+      "Progress bar on scroll."
+    ]
+  },
+  "3d_libraries": {
+    "hero_element": "React Three Fiber (R3F) + Drei. A slow-rotating, dark monolithic geometric shape (like an obsidian obelisk or brutalist architecture piece) or an abstract WebGL globe reflecting market data.",
+    "performance": "Ensure <Suspense> is used. Must not block main thread. Keep GPU-friendly transforms."
+  },
+  "components": {
+    "navigation": "Sticky, transparent at top, transforms to glassmorphism on scroll. Minimal items. Premium full-screen mobile menu.",
+    "hero": "Cinematic. Massive H1, R3F 3D element, live NYC telemetry HUD overlay (time, coordinates, market status).",
+    "markets_board": "Split board 'Crypto | Stocks'. JetBrains Mono heavy. High density. Toggle for Prices/Charts. Unified search.",
+    "strategy_blocks": "Watch -> Study -> Publish doctrine. Editorial scroll-triggered transitions. 'Attention is the Strategy'.",
+    "about_hq": "Architecture of the corp (Delaware C-Corp). One World Trade Center focus. Timeline and key facts. No fabricated numbers.",
+    "insights_essays": "5 Expandable accordions containing market commentary.",
+    "contact": "No form. Tap-to-call. Gmail compose button. Day/Night aware 1WTC photo. Downloadable corporate PDF deck."
+  },
+  "media": {
+    "image_urls": {
+      "one_wtc_hero": {
+        "url": "https://images.unsplash.com/photo-1597776619944-2fd1fec24a18?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwxfHxvbmUlMjB3b3JsZCUyMHRyYWRlJTIwY2VudGVyJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4NzYxNzk4MXww&ixlib=rb-4.1.0&q=85",
+        "description": "Dramatic low angle shot of One World Trade Center. Use in Hero or Contact page.",
+        "category": "architecture"
+      },
+      "brutalist_abstract": {
+        "url": "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA4Mzl8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhcmslMjBtb25vbGl0aGljJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4NzYxNzk4OHww&ixlib=rb-4.1.0&q=85",
+        "description": "Black and white abstract brutalist structure. Use in About or Strategy sections.",
+        "category": "abstract"
+      },
+      "market_data": {
+        "url": "https://images.unsplash.com/photo-1689732888407-310424e3a372?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGZpbmFuY2lhbCUyMGNoYXJ0JTIwZGF0YSUyMGRhcmt8ZW58MHx8fHwxNzg3NjE3OTkzfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Dark candlestick chart. Use in Insights or Markets page background.",
+        "category": "data"
+      }
+    }
+  },
+  "accessibility": [
+    "Semantic HTML elements strictly enforced (main, section, article, nav).",
+    "Heading hierarchy must be strictly logical (H1 -> H2 -> H3).",
+    "Focus states must be highly visible.",
+    "Contrast ratios must pass APCA standards.",
+    "Add aria-hidden='true' to all purely decorative elements."
   ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "All interactive and key informational elements MUST include a data-testid attribute to facilitate robust automated testing."
-  ]
+  "testing": {
+    "data_testid_rules": "All interactive and key informational elements MUST include a `data-testid` attribute using kebab-case and role-based naming (e.g., `data-testid='markets-toggle-button'`)."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "USE .jsx EXTENSION FOR ALL REACT COMPONENTS. Do NOT use .tsx.",
+    "NEVER use generic AI assistant Emoji characters.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "DO NOT apply universal transition (e.g., `transition: all`). Target specific properties.",
+    "DO NOT center align the app container. Optical alignment is key.",
+    "Zero border radius globally (sharp edges) to maintain the brutalist premium aesthetic.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Do NOT use complete transparent backgrounds in headers or overlays that sit above content.",
+    "Ensure SEO best practices (Meta tags, OG tags, semantic HTML) are implemented."
+  ],
+  "instructions_to_main_agent": "You are building a high-end corporate identity platform mixed with a live market terminal. This is an Awwwards-level execution. Prioritize framer-motion animations, sharp typography, 1px borders, and a stark minimal palette. Integrate the provided Three.js/3D concepts elegantly without sacrificing performance. Ensure the email button strictly uses the Gmail compose link as specified. The contact page has no form. The overall feel is 'quiet dominance'."
 }

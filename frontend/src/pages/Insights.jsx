@@ -62,7 +62,7 @@ const ESSAYS = [
   },
 ];
 
-function Essay({ essay, open, onToggle }) {
+function Essay({ essay, idx, open, onToggle }) {
   return (
     <div className="border-b border-white/10">
       <button
@@ -71,7 +71,9 @@ function Essay({ essay, open, onToggle }) {
         className="group flex w-full items-center justify-between gap-6 py-8 text-left"
       >
         <div className="flex flex-1 flex-col gap-3 md:flex-row md:items-baseline md:gap-10">
-          <span className="w-28 shrink-0 font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">{essay.date}</span>
+          <span className="w-28 shrink-0 font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">
+            <span className={open ? "text-oki-gold" : ""}>{String(idx + 1).padStart(2, "0")}</span> · {essay.date}
+          </span>
           <div>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold">{essay.category}</span>
             <h3 className="mt-1 font-display text-xl font-medium tracking-tight text-oki-text transition-colors duration-300 group-hover:text-oki-gold md:text-2xl">
@@ -134,9 +136,13 @@ export default function Insights() {
       </section>
 
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12">
+        <div className="flex items-baseline justify-between pb-6">
+          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-oki-faint">Index of Essays</p>
+          <p className="font-mono text-[10px] tracking-[0.3em] text-oki-gold">{String(ESSAYS.length).padStart(2, "0")} Published</p>
+        </div>
         <div className="border-t border-white/10">
-          {ESSAYS.map((e) => (
-            <Essay key={e.id} essay={e} open={openId === e.id} onToggle={() => setOpenId(openId === e.id ? null : e.id)} />
+          {ESSAYS.map((e, i) => (
+            <Essay key={e.id} essay={e} idx={i} open={openId === e.id} onToggle={() => setOpenId(openId === e.id ? null : e.id)} />
           ))}
         </div>
       </section>

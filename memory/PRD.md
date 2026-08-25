@@ -28,6 +28,22 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
+## PIVOT NOTE (binding)
+Site is a PURE INFORMATIONAL markets platform — NO holding/portfolio/custody claims ever. Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
+
+## Implemented (2026-06 fork, Awwwards premium transformation pass — tested 100%, iteration_2.json)
+- User brief: complete premium redesign ("BRUTAL. PREMIUM. MODERN... DO NOT LOOK AI-GENERATED"); choices: keep 6 pages + gold/charcoal/ivory identity, adapt Services/HowItWorks/WhyUs/FAQ to OKI's reality, designer's-choice depth/3D, keep both themes
+- Signature hero: live canvas "Data Skyline" (DataSkyline.jsx — bars from real BTC 30d feed, mouse glow, theme-aware, IO-paused, fallback pattern) + hero HUD (NYSE status + live BTC) under the OKI INC. monument type
+- Live BTC mini-ticker in desktop nav (LiveMini.jsx, xl+); mobile menu carries phone + Gmail links
+- Home restructure: 01 Position (4-cell facts strip) → 02 The Platform (4 interactive rows + hover-swapped sticky preview panel) → 03 Why OKI (4 edge cards) → 04 The Method (sticky heading + outline numerals) → interlude → 05 FAQ (FAQ.jsx, 5 items incl. no-advice + contact) → CTA; repetitive quote band removed
+- Strategy: editorial chapters w/ 13rem outline numerals, alternating images, link to /markets
+- About: new "The Record" timeline (A/02), renumbered A/03 Governance, A/04 HQ
+- Insights: essays numbered 01–05 + "05 Published" counter
+- Footer: Platform column (Board/Search/Charts/Deck), Perspectives link, data-source + no-advice disclaimer
+- SEO: robots.txt, sitemap.xml (okiinc.global), og:image, twitter:card, JSON-LD Corporation schema, duplicate title removed; focus-visible gold outlines
+- Regression clean: markets board/chips/search/charts, contact, both themes, mobile 390px, forbidden-phrase scan
+
+
 ## Implemented (2026-08-12, Gmail compose links)
 - All email links now open Gmail's compose window directly (new tab, to=contact@okiinc.global, subject pre-filled): Contact page button + At-a-Glance row, Footer, About HQ section; Contact page keeps a "use another mail app" mailto fallback for non-Gmail users
 
@@ -203,9 +219,11 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 ## Backlog
 - P1: Watchlist chips — let visitors pin searched assets next to BTC/ETH for the session
 - P1: Market news feed — scrolling strip of live financial headlines under the ticker
-- P2: Tower-ascent intro — "scroll-rides-the-elevator" entrance up to the 85th floor
+- P2: Chart compare — overlay two assets on one chart
+- P2: Hero HQ photo pair (real One WTC night/day) on homepage hero
+- P3: Tower-ascent intro — "scroll-rides-the-elevator" entrance up to the 85th floor
 
 ## Next Tasks
-1. User verification of the completed informational pivot + stocks dashboard
+1. User verification of the premium transformation pass
 2. Watchlist chips (P1)
 3. Market news feed strip (P1)
