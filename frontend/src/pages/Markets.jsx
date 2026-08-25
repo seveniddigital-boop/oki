@@ -178,7 +178,7 @@ export default function Markets() {
             ))}
           </div>
           <p className="mt-8 font-mono text-[9px] uppercase leading-relaxed tracking-[0.25em] text-oki-faint">
-            Market data: CoinGecko · Yahoo Finance — delayed where applicable · Nothing on this page constitutes investment advice
+            Live public market data — delayed where applicable · Nothing on this page constitutes investment advice
           </p>
         </div>
       </section>

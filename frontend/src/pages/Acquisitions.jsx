@@ -11,7 +11,7 @@ const AREAS = [
   { n: "03", title: "Digital & Online Assets", text: "Internet-based operations — platforms, e-commerce, communities, and scalable digital properties.", img: "https://images.unsplash.com/photo-1689732888407-310424e3a372?q=80&w=1200&auto=format&fit=crop" },
   { n: "04", title: "Brands & Intellectual Property", text: "Brands, media, licensing, and commercially valuable IP.", img: "https://images.unsplash.com/photo-1723023505659-fde32810e0d1?q=80&w=1200&auto=format&fit=crop" },
   { n: "05", title: "Real Estate & Real Assets", text: "Strategic real estate and selected tangible assets where appropriate.", img: "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?q=80&w=1200&auto=format&fit=crop" },
-  { n: "06", title: "Strategic Holdings", text: "Minority or majority interests in businesses with strong long-term potential.", img: "https://images.unsplash.com/photo-1703639948834-342fc34900f8?q=80&w=1200&auto=format&fit=crop" },
+  { n: "06", title: "Strategic Investments & Holdings", text: "Minority and majority investments in businesses with strong long-term potential.", img: "https://images.unsplash.com/photo-1703639948834-342fc34900f8?q=80&w=1200&auto=format&fit=crop" },
 ];
 
 const CRITERIA = [
@@ -30,7 +30,7 @@ const PROCESS = [
   { n: "02", t: "Initial Review", d: "Fundamentals first: revenue quality, market position, defensibility, and fit with the mandate. Most opportunities end here." },
   { n: "03", t: "Due Diligence", d: "Financial, operational, technical, and legal examination. The analysis is finished before any commitment is voiced." },
   { n: "04", t: "Structuring", d: "Terms, governance, and corporate architecture — engineered under Delaware law for clean, durable ownership." },
-  { n: "05", t: "Acquisition", d: "Deliberate execution. Private, patient capital moving on the schedule the work sets — not the market's mood." },
+  { n: "05", t: "Acquisition or Investment", d: "Deliberate execution — controlling ownership or a minority position. Private, patient capital moving on the schedule the work sets — not the market's mood." },
   { n: "06", t: "Growth & Management", d: "Ownership is where the work begins: modernization, operational discipline, and long-term development." },
 ];
 
@@ -122,12 +122,12 @@ export default function Acquisitions() {
         <div className="relative mx-auto max-w-[1600px] px-6 md:px-12">
           <SectionTag index="AQ/01" label="The Mandate" />
           <KineticLines
-            lines={["Acquiring Assets.", "Building Value."]}
-            lineClassName="font-display text-5xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
+            lines={["Acquisitions &", "Investments."]}
+            lineClassName="font-display text-5xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-8xl"
           />
           <Reveal delay={0.4} className="mt-10 max-w-2xl">
             <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-              OKI Inc. acquires businesses and assets, and manages them as a long-term owner. The mandate is evenly weighted across the real and digital economy: established operating companies, technology and online operations, brands and intellectual property, real assets, and strategic holdings — acquired to be held, managed, and compounded.
+              OKI Inc. acquires and invests in businesses and assets — from controlling ownership to minority positions — and manages them as a long-term owner. The mandate is evenly weighted across the real and digital economy: established operating companies, technology and online operations, brands and intellectual property, real assets, and strategic positions — held, managed, and compounded.
             </p>
           </Reveal>
         </div>

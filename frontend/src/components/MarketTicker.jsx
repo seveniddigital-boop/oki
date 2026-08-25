@@ -56,7 +56,7 @@ export default function MarketTicker() {
         );
       })}
       <span className="ml-auto hidden font-mono text-[9px] uppercase tracking-[0.25em] text-oki-faint md:block">
-        CoinGecko · Yahoo Finance · 60s refresh
+        Live Feed · 60s Refresh
       </span>
     </div>
   );

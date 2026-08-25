@@ -184,7 +184,7 @@ async def corporate_deck():
     c.drawString(mx + 70, my + 8, "OKI_INC.")
     c.setFillColor(faint)
     c.setFont("Helvetica", 5.5)
-    c.drawString(mx + 70, my - 2, "PRIVATE CAPITAL  ·  STRATEGIC ACQUISITIONS  ·  MARKET INTELLIGENCE")
+    c.drawString(mx + 70, my - 2, "INTERNATIONAL HOLDINGS & INVESTMENTS  ·  PRIVATE CAPITAL")
 
     c.setFillColor(white)
     c.setFont("Helvetica-Bold", 30)
@@ -192,7 +192,7 @@ async def corporate_deck():
     c.drawString(56, H - 204, "Long-Term Ownership.")
     c.setFillColor(muted)
     c.setFont("Helvetica", 9.5)
-    c.drawString(56, H - 232, "An international investment and strategic holdings corporation - acquiring, holding, and managing businesses and assets.")
+    c.drawString(56, H - 232, "An international holdings and investments corporation - acquiring, investing in, and managing for the long term.")
 
     c.setStrokeColor(Color(0.16, 0.16, 0.16))
     c.setLineWidth(0.5)

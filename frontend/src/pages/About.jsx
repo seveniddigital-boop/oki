@@ -2,13 +2,6 @@ import { motion } from "framer-motion";
 import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic";
 import LazyBg from "@/components/LazyBg";
 
-const leadership = [
-  { title: "Office of the Chairman", scope: "Corporate Direction & Strategy" },
-  { title: "Chief Markets Office", scope: "Research, Data & Publications" },
-  { title: "General Counsel & Corporate Secretary", scope: "Governance, Compliance & Delaware Charter" },
-  { title: "Office of the Comptroller", scope: "Reporting & Corporate Discipline" },
-];
-
 const layers = [
   { label: "OKI Inc.", detail: "Delaware C-Corporation — The Corporate Seat", accent: true },
   { label: "Strategic Holdings", detail: "Acquisitions · Ownership · Development", accent: false },
@@ -58,7 +51,7 @@ export default function About() {
                 OKI Inc. is incorporated in the State of Delaware — the most settled corporate legal environment in the world. Two centuries of case law, a dedicated Court of Chancery, and statutory clarity make it the jurisdiction of record for companies that intend to last.
               </p>
               <p>
-                From its corporate seat in New York, OKI operates as an investment and strategic holdings corporation — acquiring interests in businesses and assets across the real and digital economy, and managing them for the long term. The ambition is not hidden. Neither is the work.
+                From its corporate seat in New York, OKI operates as a holdings and investments corporation — acquiring and investing in businesses and assets across the real and digital economy, and managing them for the long term. The ambition is not hidden. Neither is the work.
               </p>
             </Reveal>
           </div>
@@ -118,25 +111,26 @@ export default function About() {
         />
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative mx-auto max-w-[1600px] px-6 py-32 md:px-12">
-          <SectionTag index="A/03" label="Governance" />
+          <SectionTag index="A/03" label="Governance & Discretion" />
           <KineticLines
             animate={false}
             lines={["Institutions endure.", "Individuals serve."]}
             lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
           />
           <div className="mt-16 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2">
-            {leadership.map((l, i) => (
-              <Reveal key={l.title} delay={i * 0.1} className="bg-oki-black/90 p-10">
-                <h3 className="font-display text-lg font-medium tracking-tight text-oki-text">{l.title}</h3>
-                <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">{l.scope}</p>
-              </Reveal>
-            ))}
+            <Reveal data-testid="governance-privacy-card" className="bg-oki-black/90 p-10 md:p-12">
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold">Governance by Charter</p>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-oki-muted">
+                Authority at OKI resides in offices, not personalities. Roles are defined by charter, reviewed by counsel, and measured against a generational mandate — under the Delaware General Corporation Law.
+              </p>
+            </Reveal>
+            <Reveal delay={0.12} data-testid="governance-privacy-card" className="bg-oki-black/90 p-10 md:p-12">
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-gold">Privacy by Policy</p>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-oki-muted">
+                OKI does not publish the names of its officers, counterparties, or advisers. Corporate matters are disclosed privately, in the course of business. Discretion is not secrecy — it is professionalism.
+              </p>
+            </Reveal>
           </div>
-          <Reveal delay={0.2} className="mt-12 max-w-2xl">
-            <p className="text-sm leading-relaxed text-oki-muted">
-              Leadership at OKI Inc. is presented institutionally, by design. Authority resides in offices, not personalities. Discipline is enforced by charter, reviewed by counsel, and measured against a generational mandate.
-            </p>
-          </Reveal>
         </div>
       </section>
 

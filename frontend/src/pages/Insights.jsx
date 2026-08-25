@@ -67,7 +67,7 @@ const ESSAYS = [
     title: "Institutions Endure. Individuals Serve.",
     excerpt: "Authority at OKI Inc. resides in offices, not personalities.",
     body: [
-      "OKI Inc. presents its leadership institutionally — by office, not by photograph. The Chairman, the Chief Markets Office, the General Counsel, the Comptroller: roles with mandates, charters, and succession discipline.",
+      "OKI Inc. presents itself institutionally — the corporation speaks, not individuals. Roles carry mandates, charters, and succession discipline; names are disclosed privately, in the course of business.",
       "Personalities are cyclical. Institutions are structural. A corporation built to last generations cannot depend on any single generation of people. The charter outlives the steward. That is the point of the charter.",
     ],
   },

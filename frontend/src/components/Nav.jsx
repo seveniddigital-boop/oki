@@ -7,7 +7,7 @@ import { BtcMini } from "@/components/LiveMini";
 import { isSoundOn, setSound } from "@/utils/clickSound";
 
 const links = [
-  { to: "/acquisitions", label: "Acquisitions", id: "nav-acquisitions-link" },
+  { to: "/acquisitions", label: "Investments", id: "nav-acquisitions-link" },
   { to: "/markets", label: "Intelligence", id: "nav-markets-link" },
   { to: "/strategy", label: "Strategy", id: "nav-strategy-link" },
   { to: "/about", label: "Architecture", id: "nav-architecture-link" },

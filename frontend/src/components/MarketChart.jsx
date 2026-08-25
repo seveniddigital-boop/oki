@@ -135,7 +135,7 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
       </div>
       <div className="border-b border-white/10 px-5 py-2.5">
         <p className="font-mono text-[9px] leading-relaxed tracking-[0.15em] text-oki-faint">
-          {ASSET_BRIEFS[id] || `${name} — live public data via ${type === "stock" ? "Yahoo Finance" : "CoinGecko"}. Nothing here is investment advice.`}
+          {ASSET_BRIEFS[id] || `${name} — live public market data. Nothing here is investment advice.`}
         </p>
       </div>
       <div className="p-5">

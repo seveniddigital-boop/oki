@@ -1,0 +1,28 @@
+{
+  "summary": "Final polish pass on repositioned OKI Inc. — full frontend regression + privacy scan + backend spot-checks. ALL success criteria met. Privacy scan CLEAN across all 7 routes (/, /acquisitions, /markets, /strategy, /about, /insights, /contact) — zero occurrences of CoinGecko, Yahoo, Chairman, Chief Markets, General Counsel, Comptroller, CEO, CFO in rendered text. Investments identity fully applied: nav-acquisitions-link label = 'INVESTMENTS', Acquisitions H1 renders 'Acquisitions & Investments.' (Kinetic split), area 06 'Strategic Investments & Holdings' present, process step 05 'Acquisition or Investment' present, hero overline 'International Holdings & Investments' rendered on Home, home 'Built around acquiring, investing in, and managing' present. FAQ on Home has exactly 5 items (faq-toggle-0 through 4): Q1 'What is OKI Inc.?', Q2 'What does OKI acquire or invest in?', Q3 'Does OKI publish its portfolio, performance, or leadership?' — opens to answer starting 'No. By policy…', Q4 'Is anything on this site investment advice?', Q5 'How do I propose an opportunity?'. About page: Governance & Discretion section rendered with 2 cards (Governance by Charter + Privacy by Policy); no leadership office cards; architecture layers, HQ block (phone/email/deck), address 'One World Trade Center' all present. Attribution replacements verified: MarketTicker 'Live Feed · 60s Refresh' present on Home + Markets, 'Live public market data' present on Markets. SEO head verified on /: title 'OKI Inc. — International Holdings & Investments', canonical https://okiinc.global/, robots 'index, follow', og:url present, JSON-LD contains 'holdings and investments'. Footer anchor links from Home: footer-plat-board-link → /markets#board (scrolls board section to top=119px, inView=true), footer-plat-charts-link → /markets#charts (board-chart-view present after click), footer-plat-search-link → /markets#window; footer-deck-link target=_blank. Footer contains 'Investments' link + tagline 'International Holdings & Investments · Private Capital'. Theme toggle works (light↔dark via document.documentElement.dataset.theme). MOBILE 390px: nav fixed and visible at scroll 0 (top=0, opacity=1, display=block); mobile menu opens with 5 links + Contact + phone/email; ZERO horizontal overflow on all 7 routes; mobile-nav-access-link testid resolves correctly (Nav.jsx guard confirmed). Backend: /api/deck 200 application/pdf, /api/market-prices 200, /robots.txt 200, /sitemap.xml 200. Zero console errors on desktop and mobile across all routes (filtered posthog/coingecko-502).",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Kinetic.jsx Reveal component previously dropped extra props (data-testid) — fixed by spreading `...rest` onto motion.div so any test-id/aria attributes flow through. This was blocking the required 'governance-privacy-card' testid from appearing in DOM.",
+    "About.jsx only applied data-testid='governance-privacy-card' to the second card (Privacy by Policy). Per spec both cards ('Governance by Charter' + 'Privacy by Policy') share the testid — added it to the first Reveal too so a single query returns exactly 2 cards.",
+    "index.html sets a static <title> but per-route titles (e.g., 'Market Intelligence — OKI Inc.' on /markets) override it via react-helmet or similar. Root '/' correctly shows 'OKI Inc. — International Holdings & Investments'.",
+    "Preloader is session-scoped (sessionStorage 'oki-entered'). Automated agents must seed this key before first navigation to avoid flaky selector waits."
+  ],
+  "updated_files": [
+    "/app/frontend/src/components/Kinetic.jsx (Reveal now forwards ...rest props incl. data-testid)",
+    "/app/frontend/src/pages/About.jsx (added data-testid='governance-privacy-card' to the 'Governance by Charter' card)"
+  ],
+  "success_rate": { "backend": "100%", "frontend": "100%" },
+  "test_credentials": "N/A — public site",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "This is the final polish pass and it is CLEAN. Privacy scan (no CoinGecko/Yahoo/officer titles) verified on all 7 routes via document.body.textContent. FAQ lives on Home only (5 items, testid pattern faq-toggle-N — NOT faq-item-N). Governance card testid now present twice on /about after Kinetic.Reveal fix. Footer platform anchors (#board / #window / #charts) all work — #charts opens board in CHARTS view. Mobile nav always visible on mobile (isMobile short-circuit). Preloader dismissal: seed sessionStorage['oki-entered']='1' before first navigation. Note: page-level titles override root title; check root '/' for the corporate title assertion.",
+  "rca of the issue": "Two small testability defects were found and fixed here: (1) Kinetic.Reveal did not spread its remaining props, so `data-testid='governance-privacy-card'` was silently dropped by React — fixed by adding `...rest` to the component signature and spreading onto the underlying motion.div. (2) About.jsx only applied that testid to one of the two governance cards; added it to the first card so the query returns 2 as spec'd. No other regressions found in this pass."
+}

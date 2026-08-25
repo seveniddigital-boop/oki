@@ -153,7 +153,7 @@ function Hero({ instant }) {
             className="font-mono text-[11px] uppercase text-oki-gold"
             data-testid="hero-overline"
           >
-            International Strategic Holdings
+            International Holdings &amp; Investments
           </motion.p>
         </motion.div>
         <h1 className="font-display font-semibold leading-[0.82] tracking-tighter" data-testid="hero-headline">
@@ -200,7 +200,7 @@ function Hero({ instant }) {
           Strategic Capital. Global Assets. Long-Term Ownership.
         </p>
         <p className="mt-2 text-xs leading-relaxed text-oki-muted" data-testid="hero-statement">
-          An international investment and strategic holdings corporation — acquiring, holding, and managing businesses and assets for the long term.
+          An international holdings and investments corporation — acquiring, investing in, and managing businesses and assets for the long term.
         </p>
         <Link
           to="/contact"
@@ -286,7 +286,7 @@ function MandateSection() {
       <div className="mx-auto max-w-[1600px] px-6 py-32 md:px-12 md:py-44">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <SectionTag index="02" label="The Mandate" />
+            <SectionTag index="02" label="Acquisitions & Investments" />
             <KineticLines
               animate={false}
               lines={["Own what", "compounds."]}
@@ -526,12 +526,12 @@ export default function Home() {
           <div className="md:col-span-7">
             <KineticLines
               animate={false}
-              lines={["A corporation organized around", "acquiring, holding, and managing", "businesses and assets."]}
+              lines={["Built around acquiring,", "investing in, and managing", "businesses and assets."]}
               lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
             />
             <Reveal delay={0.3} className="mt-10 max-w-xl">
               <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-                OKI Inc. acquires controlling and minority interests across the real and digital economy — established operating companies, real assets, technology, and online operations — and manages them as a permanent owner. Founded in 2026 and incorporated in Delaware, it pairs institutional discipline with a founder's pace.
+                OKI Inc. acquires and invests across the real and digital economy — controlling ownership where conviction is highest, minority positions where partnership serves better — and manages what it owns as a permanent holder. Founded in 2026 and incorporated in Delaware, it pairs institutional discipline with a founder's pace.
               </p>
             </Reveal>
           </div>

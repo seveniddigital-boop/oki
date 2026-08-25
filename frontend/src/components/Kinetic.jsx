@@ -32,7 +32,7 @@ export function KineticLines({ lines, className = "", lineClassName = "", delay 
   );
 }
 
-export function Reveal({ children, className = "", delay = 0, y = 24 }) {
+export function Reveal({ children, className = "", delay = 0, y = 24, ...rest }) {
   return (
     <motion.div
       className={className}
@@ -40,6 +40,7 @@ export function Reveal({ children, className = "", delay = 0, y = 24 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-8%" }}
       transition={{ duration: 0.9, ease: EASE, delay }}
+      {...rest}
     >
       {children}
     </motion.div>

@@ -5,7 +5,7 @@ const items = [
   "Strategic Acquisitions",
   "Long-Term Ownership",
   "Own · Hold · Manage",
-  "Global Perspective",
+  "International Investments",
   "Delaware C-Corporation",
 ];
 

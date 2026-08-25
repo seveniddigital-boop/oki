@@ -28,8 +28,15 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
-## PIVOT NOTE (binding — UPDATED 2026-06)
-REPOSITIONED (user-confirmed reversal): OKI Inc. is now an international investment & strategic holdings corporation with a digital-first acquisition MANDATE. Acquisition/ownership language IS allowed. STILL FORBIDDEN: fabricated portfolio companies, AUM, transaction values, performance figures, fake office locations. Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
+## PIVOT NOTE (binding — FINAL identity 2026-06)
+OKI Inc. = INTERNATIONAL HOLDINGS & INVESTMENTS corporation (PE-style: acquires AND invests in businesses/assets, holds and manages them; balanced real + digital economy). STILL FORBIDDEN: fabricated portfolio companies, AUM, transaction values, performance figures, fake offices. PRIVACY RULES: no officer/leadership titles anywhere (no Chairman/CEO/CFO), no data-source attributions visible (no CoinGecko/Yahoo mentions in UI — say "live public market data"). Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
+
+## Implemented (2026-06 fork, investments identity + privacy + cross-device polish — tested 100%, iteration_4.json)
+- Identity finalized: "International Holdings & Investments" — nav/footer label "Investments" (/acquisitions route), page H1 "Acquisitions & Investments.", area 06 "Strategic Investments & Holdings", process step 05 "Acquisition or Investment", hero overline + statement, Home position "Built around acquiring, investing in, and managing", meta/OG/JSON-LD/title/PDF deck all updated
+- Privacy pass: leadership/office cards REMOVED from About — replaced by "Governance & Discretion" (2 cards: Governance by Charter / Privacy by Policy, testid governance-privacy-card); Insights essay de-titled; FAQ item 3 now covers portfolio+performance+leadership non-disclosure ("by policy")
+- Attribution purge: all CoinGecko/Yahoo mentions removed from UI (ticker → "Live Feed · 60s Refresh", board/markets/footer → "Live public market data"); FAQ data-source item removed (now 5 items)
+- SEO/browser: canonical link, meta robots, og:url, prefers-reduced-motion CSS; verified mobile 390px zero overflow on all 7 routes, both themes, zero console errors
+- Testing agent fixes accepted: Kinetic Reveal now forwards ...rest props (data-testid passthrough); privacy scan clean on all 7 routes; 100% backend + 100% frontend
 
 ## Implemented (2026-06 fork, footer platform links fix — self-tested via playwright)
 - User reported footer Platform links "not working" (they navigated to /markets top with no visible effect). Fixed with hash anchors: Live Board → /markets#board, Asset Search → /markets#window, Working Charts → /markets#charts (MarketBoard now accepts initialView prop + remounts on hash, opens Charts view directly); deck link now target=_blank

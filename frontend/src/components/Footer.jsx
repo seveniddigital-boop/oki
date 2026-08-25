@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
 
 const nav = [
-  { to: "/acquisitions", label: "Acquisitions", id: "footer-acquisitions-link" },
+  { to: "/acquisitions", label: "Investments", id: "footer-acquisitions-link" },
   { to: "/markets", label: "Intelligence", id: "footer-markets-link" },
   { to: "/strategy", label: "Strategy", id: "footer-strategy-link" },
   { to: "/about", label: "Architecture", id: "footer-architecture-link" },
@@ -31,7 +31,7 @@ export default function Footer() {
             <LogoMark size={64} />
             <LogoWordmark gold className="mt-6 text-2xl tracking-[0.3em]" />
             <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.4em] text-oki-faint">
-              Private Capital · Strategic Acquisitions · Market Intelligence
+              International Holdings &amp; Investments · Private Capital
             </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-oki-faint">
               An international corporation built around ownership — operating companies, real assets, and digital platforms, acquired and managed for the long term. Just getting started. Going to the top.
@@ -85,7 +85,7 @@ export default function Footer() {
         <div className="mt-20 flex flex-col justify-between gap-4 border-t border-white/5 pt-8 lg:flex-row">
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">OKI Inc. · Delaware C-Corporation · Established 2026, New York</p>
           <p className="max-w-xl font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-oki-faint">
-            Market data via CoinGecko &amp; Yahoo Finance · Delayed where applicable · Nothing on this site constitutes investment advice
+            Live public market data · Delayed where applicable · Nothing on this site constitutes investment advice
           </p>
         </div>
       </div>

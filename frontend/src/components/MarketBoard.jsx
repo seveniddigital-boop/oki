@@ -246,7 +246,7 @@ export default function MarketBoard({ initialView = "prices" }) {
               </div>
             </div>
             <p className="border-t border-white/10 px-6 py-4 font-mono text-[9px] uppercase leading-relaxed tracking-[0.25em] text-oki-faint">
-              Yahoo Finance · CoinGecko — delayed where applicable · Information only
+              Live public market data — delayed where applicable · Information only
             </p>
           </motion.div>
         ) : (

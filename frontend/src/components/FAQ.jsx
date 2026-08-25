@@ -7,31 +7,25 @@ const ITEMS = [
   {
     q: "What is OKI Inc.?",
     a: (
-      <>An emerging international investment and strategic holdings corporation — a Delaware C-Corporation founded in 2026, headquartered at One World Trade Center, New York. It acquires, holds, and manages businesses and assets across the real and digital economy.</>
+      <>An international holdings and investments corporation — a Delaware C-Corporation founded in 2026, headquartered at One World Trade Center, New York. It acquires, invests in, holds, and manages businesses and assets across the real and digital economy.</>
     ),
   },
   {
-    q: "What does OKI acquire?",
+    q: "What does OKI acquire or invest in?",
     a: (
-      <>Established operating businesses, technology and software companies, digital platforms and online assets, brands and intellectual property, strategic real estate, and minority or majority strategic holdings. The full criteria and process are published on the Acquisitions page.</>
+      <>Established operating businesses, technology and software companies, digital platforms and online assets, brands and intellectual property, strategic real estate, and minority or majority strategic positions. The full criteria and process are published on the Investments page.</>
     ),
   },
   {
-    q: "Does OKI publish its portfolio or performance?",
+    q: "Does OKI publish its portfolio, performance, or leadership?",
     a: (
-      <>No. OKI Inc. does not publish portfolio contents, transaction values, assets under management, or performance figures — and it will not fabricate them. What it publishes is the mandate, the criteria, and the discipline.</>
+      <>No. By policy, OKI does not publish portfolio contents, transaction values, performance figures, or the names of its officers and counterparties. Corporate matters are disclosed privately, in the course of business.</>
     ),
   },
   {
     q: "Is anything on this site investment advice?",
     a: (
       <>No. The market data and commentary published here are informational. OKI Inc. does not manage outside money, sell financial products, or advise on positions.</>
-    ),
-  },
-  {
-    q: "Where does the market data come from?",
-    a: (
-      <>Digital-asset data arrives via CoinGecko; equities and indices via Yahoo Finance. Feeds refresh continuously and may be delayed where the source requires it. Sources are named on every board.</>
     ),
   },
   {
