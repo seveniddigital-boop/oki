@@ -1,28 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { useMarketItem } from "@/lib/marketStore";
 
 export function useBtc() {
-  const [btc, setBtc] = useState(null);
-  useEffect(() => {
-    let on = true;
-    const load = () =>
-      axios
-        .get(`${API}/market-prices`)
-        .then(({ data }) => {
-          const b = data?.items?.find((i) => i.symbol === "BTC");
-          if (on && b) setBtc(b);
-        })
-        .catch(() => {});
-    load();
-    const id = setInterval(load, 60000);
-    return () => {
-      on = false;
-      clearInterval(id);
-    };
-  }, []);
-  return btc;
+  return useMarketItem("BTC");
 }
 
 export function nyseStatus() {

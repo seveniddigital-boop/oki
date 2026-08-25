@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
@@ -10,13 +10,15 @@ import { LogoMark, LogoWordmark } from "@/components/Logo";
 import Telemetry from "@/components/Telemetry";
 import BackToTop from "@/components/BackToTop";
 import { playClick } from "@/utils/clickSound";
-import Home from "@/pages/Home";
-import Markets from "@/pages/Markets";
-import Acquisitions from "@/pages/Acquisitions";
-import Strategy from "@/pages/Strategy";
-import About from "@/pages/About";
-import Contact from "@/pages/Contact";
-import Insights from "@/pages/Insights";
+import PerfMonitor from "@/components/PerfMonitor";
+
+const Home = lazy(() => import("@/pages/Home"));
+const Markets = lazy(() => import("@/pages/Markets"));
+const Acquisitions = lazy(() => import("@/pages/Acquisitions"));
+const Strategy = lazy(() => import("@/pages/Strategy"));
+const About = lazy(() => import("@/pages/About"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const Insights = lazy(() => import("@/pages/Insights"));
 
 function europeanTheme() {
   try {
@@ -144,17 +146,19 @@ function ScrollProgress() {
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/acquisitions" element={<Acquisitions />} />
-        <Route path="/markets" element={<Markets />} />
-        <Route path="/strategy" element={<Strategy />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/insights" element={<Insights />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={<div data-testid="route-fallback" style={{ minHeight: "100vh", backgroundColor: "var(--oki-bg)" }} />}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/acquisitions" element={<Acquisitions />} />
+          <Route path="/markets" element={<Markets />} />
+          <Route path="/strategy" element={<Strategy />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/insights" element={<Insights />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   );
 }
 
@@ -184,6 +188,7 @@ function App() {
         <ScrollProgress />
         <Telemetry />
         <BackToTop />
+        <PerfMonitor />
         <TransitionVeil />
         <SmoothScroll>
           <Nav />

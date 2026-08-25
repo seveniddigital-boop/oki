@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { TrendingUp, TrendingDown, ArrowUpRight, LayoutGrid, LineChart } from "lucide-react";
 import MarketChart from "@/components/MarketChart";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { useMarketData } from "@/lib/marketStore";
 
 const fmtPrice = (p) =>
   p >= 1000
@@ -30,28 +28,6 @@ function Change({ value }) {
       {up ? "+" : "−"}{Math.abs(value).toFixed(2)}%
     </span>
   );
-}
-
-function useMarketItems() {
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    let mounted = true;
-    const load = async () => {
-      try {
-        const { data } = await axios.get(`${API}/market-prices`);
-        if (mounted && data?.items) setItems(data.items);
-      } catch {
-        /* keep last known prices */
-      }
-    };
-    load();
-    const id = setInterval(load, 60000);
-    return () => {
-      mounted = false;
-      clearInterval(id);
-    };
-  }, []);
-  return items;
 }
 
 function ViewToggle({ view, onChange }) {
@@ -102,7 +78,7 @@ function SelectorRow({ it, active, onSelect }) {
 }
 
 export default function MarketBoard({ initialView = "prices" }) {
-  const items = useMarketItems();
+  const { items } = useMarketData();
   const [view, setView] = useState(initialView);
   const [selectedId, setSelectedId] = useState("bitcoin");
 

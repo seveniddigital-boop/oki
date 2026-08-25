@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, TrendingDown, X } from "lucide-react";
+import { chartKey, getCachedChart, setCachedChart } from "@/lib/chartCache";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -21,31 +21,36 @@ const TIMEFRAMES = [
 ];
 
 export default function MarketChart({ id, type, name, badge, onClose, embedded }) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(() => getCachedChart(chartKey(type, id, 7)));
   const [error, setError] = useState(false);
   const [days, setDays] = useState(7);
-
-  const load = () => {
-    setData(null);
-    setError(false);
-    axios
-      .get(`${API}/market-chart`, { params: { id, type, days } })
-      .then(({ data }) => setData(data))
-      .catch(() => setError(true));
-  };
+  const [reloadNonce, setReloadNonce] = useState(0);
 
   useEffect(() => {
-    let mounted = true;
+    const key = chartKey(type, id, days);
+    const cached = getCachedChart(key);
+    if (cached) {
+      setData(cached);
+      setError(false);
+      return undefined;
+    }
     setData(null);
     setError(false);
-    axios
-      .get(`${API}/market-chart`, { params: { id, type, days } })
-      .then(({ data }) => mounted && setData(data))
-      .catch(() => mounted && setError(true));
-    return () => {
-      mounted = false;
-    };
-  }, [id, type, days]);
+    const ctrl = new AbortController();
+    fetch(`${API}/market-chart?id=${encodeURIComponent(id)}&type=${type}&days=${days}`, { signal: ctrl.signal })
+      .then((r) => {
+        if (!r.ok) throw new Error("chart");
+        return r.json();
+      })
+      .then((d) => {
+        setCachedChart(key, d);
+        setData(d);
+      })
+      .catch((e) => {
+        if (e.name !== "AbortError") setError(true);
+      });
+    return () => ctrl.abort();
+  }, [id, type, days, reloadNonce]);
 
   const chart = useMemo(() => {
     if (!data?.prices?.length) return null;
@@ -53,8 +58,12 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
     const step = Math.max(1, Math.floor(raw.length / 72));
     const pts = raw.filter((_, i) => i % step === 0).map((p) => ({ t: p[0], v: p[1] }));
     const values = pts.map((p) => p.v);
-    const min = Math.min(...values);
-    const max = Math.max(...values);
+    let min = Infinity;
+    let max = -Infinity;
+    for (const v of values) {
+      if (v < min) min = v;
+      if (v > max) max = v;
+    }
     const range = max - min || 1;
     const x = (i) => PAD + (i * (W - PAD * 2)) / (pts.length - 1);
     const y = (v) => H - PAD - ((v - min) / range) * (H - PAD * 2);
@@ -66,21 +75,49 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
   }, [data]);
 
   const [hover, setHover] = useState(null);
+  const svgRef = useRef(null);
+  const rectRef = useRef(null);
+  const rafRef = useRef(0);
+
+  // Cache the SVG rect on pointer entry / resize instead of measuring every move.
+  const cacheRect = () => {
+    rectRef.current = svgRef.current?.getBoundingClientRect() || null;
+  };
+
+  useEffect(() => {
+    const invalidate = () => {
+      rectRef.current = null;
+    };
+    window.addEventListener("resize", invalidate);
+    return () => {
+      window.removeEventListener("resize", invalidate);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   const onMove = (e) => {
     if (!chart) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const svgX = ((e.clientX - rect.left) / rect.width) * W;
-    let best = 0;
-    let bd = Infinity;
-    chart.pts.forEach((_, i) => {
-      const d = Math.abs(chart.x(i) - svgX);
-      if (d < bd) {
-        bd = d;
-        best = i;
-      }
+    if (!rectRef.current) cacheRect();
+    const rect = rectRef.current;
+    if (!rect) return;
+    const clientX = e.clientX;
+    if (rafRef.current) return; // coalesce to one update per frame
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = 0;
+      const n = chart.pts.length;
+      const svgX = ((clientX - rect.left) / rect.width) * W;
+      let idx = Math.round(((svgX - PAD) / (W - PAD * 2)) * (n - 1));
+      idx = Math.max(0, Math.min(n - 1, idx));
+      setHover(idx);
     });
-    setHover(best);
+  };
+
+  const onLeave = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    }
+    setHover(null);
   };
 
   const formatTime = (t) =>
@@ -149,7 +186,14 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
               </span>
             </div>
             <div className="relative">
-              <svg viewBox={`0 0 ${W} ${H}`} className="w-full cursor-crosshair" onMouseMove={onMove} onMouseLeave={() => setHover(null)}>
+              <svg
+                ref={svgRef}
+                viewBox={`0 0 ${W} ${H}`}
+                className="w-full cursor-crosshair"
+                onMouseEnter={cacheRect}
+                onMouseMove={onMove}
+                onMouseLeave={onLeave}
+              >
                 <defs>
                   <linearGradient id={`chartFill-${id}`} x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#C5A059" stopOpacity="0.2" />
@@ -175,7 +219,7 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
                   animate={{ pathLength: 1 }}
                   transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
                 />
-                {hover !== null && (
+                {hover !== null && chart.pts[hover] && (
                   <g data-testid="chart-crosshair">
                     <line
                       x1={chart.x(hover)} y1={PAD} x2={chart.x(hover)} y2={H - PAD}
@@ -185,7 +229,7 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
                   </g>
                 )}
               </svg>
-              {hover !== null && (
+              {hover !== null && chart.pts[hover] && (
                 <div
                   data-testid="chart-tooltip"
                   className="pointer-events-none absolute top-0 -translate-x-1/2 whitespace-nowrap border border-oki-gold/30 bg-oki-black px-3 py-1.5 font-mono text-[10px] tracking-wide text-oki-text"
@@ -205,7 +249,7 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
           <div className="flex h-40 flex-col items-center justify-center gap-4">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Feed unavailable</p>
             <button
-              onClick={load}
+              onClick={() => setReloadNonce((n) => n + 1)}
               data-testid="chart-retry"
               className="border border-oki-gold/40 px-5 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-oki-gold transition-colors duration-300 hover:bg-oki-gold hover:text-oki-black"
             >

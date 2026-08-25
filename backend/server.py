@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -7,6 +7,9 @@ import os
 import logging
 import httpx
 import io
+import json
+import asyncio
+import time
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List
@@ -273,6 +276,35 @@ _chart_cache = {}
 _search_cache = {}
 _market_cache = {"data": None, "ts": 0.0}
 
+
+class PriceHub:
+    """Fan-out queues for connected WebSocket clients (bounded — no growing backlog)."""
+
+    def __init__(self):
+        self.queues = set()
+
+    def connect(self):
+        q = asyncio.Queue(maxsize=8)
+        self.queues.add(q)
+        return q
+
+    def disconnect(self, q):
+        self.queues.discard(q)
+
+    def broadcast(self, message):
+        for q in list(self.queues):
+            try:
+                q.put_nowait(message)
+            except asyncio.QueueFull:
+                try:
+                    q.get_nowait()
+                    q.put_nowait(message)
+                except Exception:
+                    pass
+
+
+hub = PriceHub()
+
 YAHOO_HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
 
 
@@ -289,12 +321,8 @@ async def _yahoo_chart_prices(symbol, range_, interval):
     return [[t * 1000, c] for t, c in zip(ts, closes) if c is not None]
 
 
-@api_router.get("/market-prices")
-async def market_prices():
-    import time, asyncio
-    now = time.time()
-    if _market_cache["data"] and now - _market_cache["ts"] < 120:
-        return _market_cache["data"]
+async def fetch_market_snapshot():
+    """Single upstream fetch shared by every client (REST fallback + WebSocket)."""
     items = []
     try:
         async with httpx.AsyncClient(timeout=15) as http:
@@ -320,6 +348,7 @@ async def market_prices():
                 })
     except Exception as e:
         logger.error(f"CoinGecko fetch failed: {e}")
+
     async def fetch_equity(sym, name, label, typ):
         try:
             async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
@@ -347,21 +376,93 @@ async def market_prices():
     for result in await asyncio.gather(*(fetch_equity(*spec) for spec in equity_specs)):
         if result:
             items.append(result)
-    data = {"items": items}
+
     if items:
-        _market_cache["data"] = data
-        _market_cache["ts"] = now
-    elif _market_cache["data"]:
+        # Merge by symbol against the last-known snapshot so a partial upstream
+        # failure (e.g. CoinGecko 429) preserves prior values instead of evicting them.
+        order = ["BTC", "ETH", "SOL", "SPX", "IXIC", "DJI", "AAPL", "MSFT", "NVDA", "TSLA", "AMZN"]
+        merged = {it["symbol"]: it for it in (_market_cache["data"] or {}).get("items", [])}
+        for it in items:
+            merged[it["symbol"]] = it
+        ordered = [merged[s] for s in order if s in merged]
+        ordered += [it for s, it in merged.items() if s not in order]
+        _market_cache["data"] = {"items": ordered}
+        _market_cache["ts"] = time.time()
+    return _market_cache["data"] or {"items": items}
+
+
+@api_router.get("/market-prices")
+async def market_prices(response: Response):
+    """REST fallback for clients where the WebSocket feed cannot connect."""
+    response.headers["Cache-Control"] = "public, max-age=15, stale-while-revalidate=60"
+    now = time.time()
+    if _market_cache["data"] and now - _market_cache["ts"] < 120:
         return _market_cache["data"]
-    return data
+    return await fetch_market_snapshot()
 
 
-_chart_cache = {}
-_search_cache = {}
+@app.websocket("/api/ws/prices")
+async def ws_prices(websocket: WebSocket):
+    await websocket.accept()
+    q = hub.connect()
+    snap = _market_cache["data"] or await fetch_market_snapshot()
+    try:
+        q.put_nowait({"type": "snapshot", "ts": time.time(), "items": (snap or {}).get("items", [])})
+    except Exception:
+        pass
+
+    async def sender():
+        while True:
+            msg = await q.get()
+            await websocket.send_json(msg)
+
+    async def receiver():
+        while True:
+            raw = await websocket.receive_text()
+            try:
+                data = json.loads(raw)
+            except Exception:
+                data = {}
+            if data.get("type") == "ping":
+                try:
+                    q.put_nowait({"type": "pong", "ts": time.time()})
+                except Exception:
+                    pass
+
+    send_task = asyncio.create_task(sender())
+    recv_task = asyncio.create_task(receiver())
+    try:
+        await asyncio.wait({send_task, recv_task}, return_when=asyncio.FIRST_COMPLETED)
+    except WebSocketDisconnect:
+        pass
+    except Exception as e:
+        logger.error(f"WebSocket error: {e}")
+    finally:
+        send_task.cancel()
+        recv_task.cancel()
+        hub.disconnect(q)
+
+
+async def market_poller():
+    """One server-side poller (~60s) fans the latest snapshot out to all clients."""
+    while True:
+        try:
+            snap = await fetch_market_snapshot()
+            if snap and snap.get("items"):
+                hub.broadcast({"type": "update", "ts": time.time(), "items": snap["items"]})
+        except Exception as e:
+            logger.error(f"Market poller error: {e}")
+        await asyncio.sleep(60)
+
+
+@app.on_event("startup")
+async def _start_market_poller():
+    asyncio.create_task(market_poller())
+
 
 @api_router.get("/market-search")
-async def market_search(q: str = ""):
-    import time
+async def market_search(response: Response, q: str = ""):
+    response.headers["Cache-Control"] = "public, max-age=300"
     q = q.strip()
     if len(q) < 2:
         return {"results": []}
@@ -402,8 +503,9 @@ async def market_search(q: str = ""):
     return data
 
 @api_router.get("/market-chart")
-async def market_chart(type: str = "crypto", id: str = "bitcoin", days: int = 7):
-    import time, asyncio, re
+async def market_chart(response: Response, type: str = "crypto", id: str = "bitcoin", days: int = 7):
+    import re
+    response.headers["Cache-Control"] = "public, max-age=120, stale-while-revalidate=600"
     days = min(max(days, 1), 30)
     key = f"{type}:{id}:{days}"
     now = time.time()

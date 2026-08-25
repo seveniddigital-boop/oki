@@ -1,29 +1,8 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { TrendingUp, TrendingDown } from "lucide-react";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { useMarketData } from "@/lib/marketStore";
 
 export default function MarketTicker() {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    let mounted = true;
-    const load = async () => {
-      try {
-        const { data } = await axios.get(`${API}/market-prices`);
-        if (mounted && data?.items) setItems(data.items);
-      } catch {
-        /* keep last known prices */
-      }
-    };
-    load();
-    const id = setInterval(load, 60000);
-    return () => {
-      mounted = false;
-      clearInterval(id);
-    };
-  }, []);
+  const { items } = useMarketData();
 
   const fmt = (p) =>
     p >= 1000
@@ -56,7 +35,7 @@ export default function MarketTicker() {
         );
       })}
       <span className="ml-auto hidden font-mono text-[9px] uppercase tracking-[0.25em] text-oki-faint md:block">
-        Live Feed · 60s Refresh
+        Live Feed · Streaming
       </span>
     </div>
   );

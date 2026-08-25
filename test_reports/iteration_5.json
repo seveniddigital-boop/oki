@@ -1,0 +1,34 @@
+{
+  "summary": "WebSocket push architecture + shared marketStore + perf pass verified. Backend: 12/12 pytest green (root, /api/market-prices 11-item shape incl. crypto market_cap/volume, /api/market-chart crypto+stock+repeat-cache+days=30, /api/market-search apple returns AAPL, /api/ws/prices snapshot 11 items + ping/pong via wss:// external URL, inquiries CRUD, /api/deck PDF). Frontend (external URL): WebSocket ticker populates within seconds — NO 'CONNECTING…' stuck state; ticker text contains BTC/ETH/SOL/SPX/IXIC/DJI/AAPL/MSFT prices and shows 'LIVE FEED · STREAMING'. Board renders BTC panel (board-btc-price=$80,935 etc.), AAPL equity row present, view toggle (prices↔chart) works, timeframe-30D switches series without errors, chips (chip-bitcoin/ethereum/spx) present, market-search-input returns 12 results and selecting one opens its chart. nav-btc-ticker populates with live BTC. Home /: hero global-network canvas rendered. Perf-monitor GATING correct: ABSENT on plain load, PRESENT on ?perf=1 with perf-fps + perf-feed showing 'FEED LIVE'. All 7 routes (/, /acquisitions, /markets, /strategy, /about, /insights, /contact) render with no permanent route-fallback, all body_len>1900. ZERO console errors (filtered the intentional ERR_ABORTED on unmount as documented). One backend bug found: partial upstream failure (CoinGecko 429) overwrites cached snapshot with equities-only, evicting last-known BTC/ETH/SOL instead of merging — violates stated 'keeps last-known values' contract.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/market-prices & WS /api/ws/prices snapshot", "issue": "fetch_market_snapshot() unconditionally overwrites _market_cache['data'] whenever any items were fetched. If CoinGecko returns 429 (rate-limited) but Yahoo succeeds, cached BTC/ETH/SOL are evicted and the snapshot degrades to 8 items (equities only) instead of preserving last-known crypto values. Observed live during test: {'SPX','IXIC','DJI','AAPL','MSFT','NVDA','TSLA','AMZN'} only — recovered on next successful poll. Frontend still worked because ticker/board tolerate partial sets, but this contradicts the design goal in the prompt: 'the app keeps last-known values and falls back gracefully.'"}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_websocket.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "server.py fetch_market_snapshot(): merge new items into last cached snapshot per-symbol instead of replacing wholesale, so a CoinGecko 429 does not evict the last-known BTC/ETH/SOL prices. Recommended: build merged = {sym: item for item in prev} then overwrite with newly-fetched items keyed by symbol; only publish if at least one crypto AND one equity present, or always publish merged view."
+  ],
+  "critical_code_review_comments": [
+    "server.py fetch_market_snapshot(): overwrites cache on partial success (see minor bug above). Fix: symbol-keyed merge.",
+    "server.py ws_prices(): the initial snapshot is pushed via q.put_nowait but the queue is per-connection (from hub.connect()) — good. However if _market_cache['data'] is None on the very first connection before the poller has run, ws_prices() awaits fetch_market_snapshot() inline which can delay the accept()→first-frame by up to 15s×N upstreams under a cold start; consider seeding cache on startup event before opening the WS route.",
+    "marketStore.js REST fallback triggers after 3 WS failures — good. Ensure exponential backoff resets on successful ping/pong so intermittent flaps don't permanently degrade to REST.",
+    "chartCache.js LRU should include a TTL bound alongside size bound to avoid serving very stale intraday series after long tab dwell."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_websocket.py (new — wss:// snapshot+ping/pong + chart cache tests)"
+  ],
+  "success_rate": {"backend": "100% (12/12 after CG recovered; 1 design bug on graceful degradation flagged)", "frontend": "100%"},
+  "test_credentials": "N/A — no auth",
+  "seed_data_creation": "None (inquiries POST creates TEST_-prefixed records — pre-existing behavior)",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "WebSocket /api/ws/prices works end-to-end through ingress (wss://). Frontend marketStore consumes it and populates ticker/board/nav-mini within ~2s. Perf-monitor gated by ?perf=1 or localStorage 'oki-perf'=1 — verify testid ONLY on those triggers. When CoinGecko rate-limits (429), backend currently drops BTC/ETH/SOL from the snapshot (see minor bug); the frontend handles this gracefully but the design promised last-known persistence. Re-run pytest after CG cooldown if you see intermittent shape failures — they are NOT a WS regression.",
+  "rca of the issue": "fetch_market_snapshot() in server.py assembles a fresh `items` list each call, then does `if items: _market_cache['data'] = {'items': items}`. When CoinGecko returns 429 the crypto append block is skipped entirely (caught by except) but Yahoo equities still populate `items`, so the truthy check passes and the cache is REPLACED with equities-only. Reproduction: hammer /api/market-chart?type=crypto&id=bitcoin until CG returns 429 (~10 calls in a minute), then immediately GET /api/market-prices — response.items drops from 11 to 8. Mitigation: merge by symbol against the previous cache before assignment, or gate the cache replacement on `len(crypto_items) > 0 AND len(equity_items) > 0`."
+}

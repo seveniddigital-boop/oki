@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { getPerfTier, prefersReducedMotion, isCoarsePointer } from "@/lib/perf";
 
 function hexA(hex, a) {
   let h = hex.replace("#", "");
@@ -50,11 +51,20 @@ export default function GlobalNetwork({ className = "" }) {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return undefined;
     const ctx = canvas.getContext("2d");
-    const dots = fibSphere(620);
+
+    const reduced = prefersReducedMotion();
+    const tier = getPerfTier();
+    const coarse = isCoarsePointer();
+    const dotCount = tier === "low" ? 300 : tier === "mid" ? 460 : 620;
+    const dprCap = tier === "low" ? 1 : tier === "mid" ? 1.5 : 2;
+    const parallax = !coarse && !reduced;
+
+    const dots = fibSphere(dotCount);
     const hubs = HUBS.map(ll2v);
-    let raf;
+    let raf = 0;
+    let running = false;
     let visible = true;
     const start = performance.now();
 
@@ -66,34 +76,18 @@ export default function GlobalNetwork({ className = "" }) {
       };
     };
     let colors = readColors();
-    const mo = new MutationObserver(() => {
-      colors = readColors();
-    });
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
     const fit = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
       canvas.width = canvas.offsetWidth * dpr;
       canvas.height = canvas.offsetHeight * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-    fit();
-    window.addEventListener("resize", fit);
-
-    const io = new IntersectionObserver(([e]) => {
-      visible = e.isIntersecting;
-    });
-    io.observe(canvas);
-
-    const onMove = (e) => {
-      mouseRef.current = { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight };
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
 
     const rot = (v, ry, rx) => {
       const [x, y, z] = v;
       const cy = Math.cos(ry), sy = Math.sin(ry);
-      let x1 = x * cy - z * sy;
+      const x1 = x * cy - z * sy;
       let z1 = x * sy + z * cy;
       const cx = Math.cos(rx), sx = Math.sin(rx);
       const y1 = y * cx - z1 * sx;
@@ -101,17 +95,15 @@ export default function GlobalNetwork({ className = "" }) {
       return [x1, y1, z1];
     };
 
-    const draw = (now) => {
-      raf = requestAnimationFrame(draw);
-      if (!visible) return;
+    const drawFrame = (now) => {
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
-      const t = (now - start) / 1000;
+      const t = reduced ? 0 : (now - start) / 1000;
       const R = (Math.min(w, h) / 2) * 0.9;
       const cx = w / 2;
       const cy = h / 2;
-      const ry = t * 0.07 + (mouseRef.current.x - 0.5) * 0.5;
-      const rx = -0.28 + (mouseRef.current.y - 0.5) * 0.25;
+      const ry = t * 0.07 + (parallax ? (mouseRef.current.x - 0.5) * 0.5 : 0);
+      const rx = -0.28 + (parallax ? (mouseRef.current.y - 0.5) * 0.25 : 0);
       ctx.clearRect(0, 0, w, h);
 
       ctx.strokeStyle = hexA(colors.text, 0.07);
@@ -181,14 +173,67 @@ export default function GlobalNetwork({ className = "" }) {
         ctx.stroke();
       });
     };
-    raf = requestAnimationFrame(draw);
+
+    const tick = (now) => {
+      raf = requestAnimationFrame(tick);
+      drawFrame(now);
+    };
+    const startLoop = () => {
+      if (running || reduced) return;
+      running = true;
+      raf = requestAnimationFrame(tick);
+    };
+    const stopLoop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+      raf = 0;
+    };
+    const evaluate = () => {
+      if (reduced) {
+        drawFrame(0);
+        return;
+      }
+      if (visible && !document.hidden) startLoop();
+      else stopLoop();
+    };
+
+    fit();
+
+    const ro = new ResizeObserver(() => {
+      fit();
+      if (reduced) drawFrame(0);
+    });
+    ro.observe(canvas);
+
+    const io = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      evaluate();
+    });
+    io.observe(canvas);
+
+    const mo = new MutationObserver(() => {
+      colors = readColors();
+      if (reduced) drawFrame(0);
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+    const onMove = (e) => {
+      mouseRef.current = { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight };
+    };
+    if (parallax) window.addEventListener("mousemove", onMove, { passive: true });
+
+    const onVisibility = () => evaluate();
+    document.addEventListener("visibilitychange", onVisibility);
+
+    evaluate();
 
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", fit);
-      window.removeEventListener("mousemove", onMove);
+      stopLoop();
+      ro.disconnect();
       io.disconnect();
       mo.disconnect();
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
