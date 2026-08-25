@@ -43,8 +43,8 @@ function currentTheme() {
 }
 
 const PAGE_META = {
-  "/": ["OKI Inc. — International Investment & Strategic Holdings", "OKI Inc. is an international investment and strategic holdings corporation with a digital-first mandate — identifying, acquiring, and developing valuable businesses and assets. Strategic capital. Global assets. Long-term ownership."],
-  "/acquisitions": ["Acquisitions — OKI Inc.", "The OKI mandate: digital businesses, technology, brands & IP, online assets, real estate, and strategic holdings. Criteria, process, and portfolio philosophy — stated plainly."],
+  "/": ["OKI Inc. — International Investment & Strategic Holdings", "OKI Inc. is an international investment and strategic holdings corporation — acquiring, holding, and managing businesses and assets, from operating companies and real assets to technology and digital platforms."],
+  "/acquisitions": ["Acquisitions — OKI Inc.", "The OKI mandate: operating businesses, technology, digital and online assets, brands & IP, real estate, and strategic holdings. Criteria, process, and portfolio philosophy — stated plainly."],
   "/markets": ["Market Intelligence — OKI Inc.", "The research arm behind the acquisition mandate: live Bitcoin data, major indices, and selected equities — published openly by OKI Inc."],
   "/strategy": ["Strategy — OKI Inc.", "The OKI method: watch continuously, study structure before sentiment, and publish in the open. Attention is the strategy."],
   "/about": ["Corporate Architecture — OKI Inc.", "OKI Inc. is a Delaware C-Corporation headquartered at One World Trade Center, New York. Governance, leadership offices, and headquarters."],

@@ -34,7 +34,7 @@ export default function Footer() {
               Private Capital · Strategic Acquisitions · Market Intelligence
             </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-oki-faint">
-              An international investment and strategic holdings corporation with a digital-first mandate — identifying, acquiring, and developing valuable businesses and assets. Just getting started. Going to the top.
+              An international corporation built around ownership — operating companies, real assets, and digital platforms, acquired and managed for the long term. Just getting started. Going to the top.
             </p>
           </div>
           <div className="md:col-span-2">
@@ -83,7 +83,7 @@ export default function Footer() {
         <div className="mt-20 flex flex-col justify-between gap-4 border-t border-white/5 pt-8 lg:flex-row">
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">OKI Inc. · Delaware C-Corporation · Established 2026, New York</p>
           <p className="max-w-xl font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-oki-faint">
-            Market data via CoinGecko &amp; Yahoo Finance · Delayed where applicable · Nothing on this site constitutes investment advice · OKI Inc. does not publish portfolio contents or performance figures
+            Market data via CoinGecko &amp; Yahoo Finance · Delayed where applicable · Nothing on this site constitutes investment advice
           </p>
         </div>
       </div>

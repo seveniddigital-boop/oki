@@ -12,8 +12,8 @@ const ESSAYS = [
     title: "The Mandate: Acquire, Improve, Compound",
     excerpt: "OKI's turn from watching markets to owning what they price.",
     body: [
-      "OKI Inc. was built watching markets — every session, every index, in public. That discipline was never the destination; it was the training. The mandate it produced is simple: identify high-potential assets and businesses, acquire them deliberately, and develop them over the long term.",
-      "The corporation does not publish portfolio contents, transaction values, or performance figures — and it will not fabricate them. What it publishes is the doctrine: fundamentals over stories, digital scalability over fashion, ownership over exit. Acquire, improve, scale, compound.",
+      "OKI Inc. was built watching markets — every session, every index, in public. That discipline was never the destination; it was the training. The mandate it produced is simple: identify high-potential businesses and assets — operating companies, real assets, technology, digital operations — acquire them deliberately, and manage them as a permanent owner.",
+      "The corporation does not publish portfolio contents, transaction values, or performance figures — and it will not fabricate them. What it publishes is the doctrine: fundamentals over stories, durability over fashion, ownership over exit. Acquire, improve, scale, compound.",
     ],
   },
   {

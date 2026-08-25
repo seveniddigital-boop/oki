@@ -6,11 +6,11 @@ import { KineticLines, Reveal, SectionTag, pageAnim } from "@/components/Kinetic
 import LazyBg from "@/components/LazyBg";
 
 const AREAS = [
-  { n: "01", title: "Digital Businesses", text: "Online companies, software businesses, digital platforms and internet-based operations.", img: "https://images.unsplash.com/photo-1558120985-abcafafcae16?q=80&w=1200&auto=format&fit=crop" },
-  { n: "02", title: "Technology", text: "Technology businesses, software, infrastructure and emerging technologies.", img: "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?q=80&w=1200&auto=format&fit=crop" },
-  { n: "03", title: "Brands & IP", text: "Brands, digital intellectual property, media and commercially valuable IP.", img: "https://images.unsplash.com/photo-1723023505659-fde32810e0d1?q=80&w=1200&auto=format&fit=crop" },
-  { n: "04", title: "Online Assets", text: "Digital properties, websites, platforms, communities and other scalable digital assets.", img: "https://images.unsplash.com/photo-1689732888407-310424e3a372?q=80&w=1200&auto=format&fit=crop" },
-  { n: "05", title: "Real Estate & Physical", text: "Strategic real estate and selected tangible assets where appropriate.", img: "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?q=80&w=1200&auto=format&fit=crop" },
+  { n: "01", title: "Operating Businesses", text: "Established private companies with durable cash flow — services, distribution, consumer, and industrial operations.", img: "https://images.unsplash.com/photo-1565626424178-c699f6601afd?q=80&w=1200&auto=format&fit=crop" },
+  { n: "02", title: "Technology & Software", text: "Software companies, technology businesses, and the infrastructure beneath them.", img: "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?q=80&w=1200&auto=format&fit=crop" },
+  { n: "03", title: "Digital & Online Assets", text: "Internet-based operations — platforms, e-commerce, communities, and scalable digital properties.", img: "https://images.unsplash.com/photo-1689732888407-310424e3a372?q=80&w=1200&auto=format&fit=crop" },
+  { n: "04", title: "Brands & Intellectual Property", text: "Brands, media, licensing, and commercially valuable IP.", img: "https://images.unsplash.com/photo-1723023505659-fde32810e0d1?q=80&w=1200&auto=format&fit=crop" },
+  { n: "05", title: "Real Estate & Real Assets", text: "Strategic real estate and selected tangible assets where appropriate.", img: "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?q=80&w=1200&auto=format&fit=crop" },
   { n: "06", title: "Strategic Holdings", text: "Minority or majority interests in businesses with strong long-term potential.", img: "https://images.unsplash.com/photo-1703639948834-342fc34900f8?q=80&w=1200&auto=format&fit=crop" },
 ];
 
@@ -18,7 +18,7 @@ const CRITERIA = [
   "Strong fundamentals",
   "Growth potential",
   "Strategic value",
-  "Digital scalability",
+  "Scalability",
   "Sustainable cash generation",
   "Brand potential",
   "Operational upside",
@@ -26,7 +26,7 @@ const CRITERIA = [
 ];
 
 const PROCESS = [
-  { n: "01", t: "Opportunity Identification", d: "Continuous scanning across markets, industries, and digital channels. Most opportunities are found before they are offered." },
+  { n: "01", t: "Opportunity Identification", d: "Continuous scanning across industries, markets, and networks. Most opportunities are found before they are offered." },
   { n: "02", t: "Initial Review", d: "Fundamentals first: revenue quality, market position, defensibility, and fit with the mandate. Most opportunities end here." },
   { n: "03", t: "Due Diligence", d: "Financial, operational, technical, and legal examination. The analysis is finished before any commitment is voiced." },
   { n: "04", t: "Structuring", d: "Terms, governance, and corporate architecture — engineered under Delaware law for clean, durable ownership." },
@@ -48,7 +48,7 @@ const VALUE = [
 const PILLARS = [
   { title: "Long-Term Ownership", text: "Sustainable value creation over short-term speculation. Assets are acquired to be held, improved, and compounded." },
   { title: "Strategic Growth", text: "Acquired businesses are developed — improved, scaled, and expanded beyond what they could reach alone." },
-  { title: "Diversification", text: "Exposure built across multiple industries and asset classes, weighted toward digital scalability." },
+  { title: "Diversification", text: "Exposure built across operating businesses, real assets, and digital operations — balanced by design." },
   { title: "Operational Value Creation", text: "Technology, strategy, capital, and management applied directly — ownership is never passive." },
 ];
 
@@ -127,7 +127,7 @@ export default function Acquisitions() {
           />
           <Reveal delay={0.4} className="mt-10 max-w-2xl">
             <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-              OKI Inc. identifies high-potential opportunities, acquires valuable assets and businesses, and develops them through strategic long-term ownership. The mandate is digital-first and industry-agnostic: software, brands, intellectual property, online assets, selected real estate, and strategic holdings — wherever durable value can be owned and compounded.
+              OKI Inc. acquires businesses and assets, and manages them as a long-term owner. The mandate is evenly weighted across the real and digital economy: established operating companies, technology and online operations, brands and intellectual property, real assets, and strategic holdings — acquired to be held, managed, and compounded.
             </p>
           </Reveal>
         </div>

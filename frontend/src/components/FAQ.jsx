@@ -7,13 +7,13 @@ const ITEMS = [
   {
     q: "What is OKI Inc.?",
     a: (
-      <>An emerging international investment and strategic holdings corporation — a Delaware C-Corporation founded in 2026, headquartered at One World Trade Center, New York. It identifies, acquires, and develops valuable assets and businesses, with a digital-first mandate, and publishes its market intelligence openly.</>
+      <>An emerging international investment and strategic holdings corporation — a Delaware C-Corporation founded in 2026, headquartered at One World Trade Center, New York. It acquires, holds, and manages businesses and assets across the real and digital economy.</>
     ),
   },
   {
     q: "What does OKI acquire?",
     a: (
-      <>Digital businesses, technology companies, brands and intellectual property, online assets, selected real estate, and strategic holdings — minority or majority interests in businesses with strong long-term potential. The full mandate, criteria, and process are published on the Acquisitions page.</>
+      <>Established operating businesses, technology and software companies, digital platforms and online assets, brands and intellectual property, strategic real estate, and minority or majority strategic holdings. The full criteria and process are published on the Acquisitions page.</>
     ),
   },
   {

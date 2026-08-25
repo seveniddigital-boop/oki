@@ -192,7 +192,7 @@ async def corporate_deck():
     c.drawString(56, H - 204, "Long-Term Ownership.")
     c.setFillColor(muted)
     c.setFont("Helvetica", 9.5)
-    c.drawString(56, H - 232, "An international investment and strategic holdings corporation with a digital-first acquisition mandate.")
+    c.drawString(56, H - 232, "An international investment and strategic holdings corporation - acquiring, holding, and managing businesses and assets.")
 
     c.setStrokeColor(Color(0.16, 0.16, 0.16))
     c.setLineWidth(0.5)
@@ -201,7 +201,7 @@ async def corporate_deck():
     c.setFont("Helvetica", 7)
     c.drawString(56, H - 276, "01  —  THE MANDATE")
 
-    markets = ["DIGITAL BUSINESSES & ONLINE ASSETS", "TECHNOLOGY & SOFTWARE", "BRANDS & INTELLECTUAL PROPERTY", "REAL ESTATE & STRATEGIC HOLDINGS"]
+    markets = ["OPERATING BUSINESSES & COMPANIES", "TECHNOLOGY & DIGITAL OPERATIONS", "BRANDS & INTELLECTUAL PROPERTY", "REAL ASSETS & STRATEGIC HOLDINGS"]
     y = H - 306
     for m in markets:
         c.setFillColor(gold)

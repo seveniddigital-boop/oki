@@ -200,7 +200,7 @@ function Hero({ instant }) {
           Strategic Capital. Global Assets. Long-Term Ownership.
         </p>
         <p className="mt-2 text-xs leading-relaxed text-oki-muted" data-testid="hero-statement">
-          An international investment and strategic holdings corporation — identifying, acquiring, and developing valuable businesses and assets with a digital-first mandate.
+          An international investment and strategic holdings corporation — acquiring, holding, and managing businesses and assets for the long term.
         </p>
         <Link
           to="/contact"
@@ -273,15 +273,11 @@ function TowerInterlude() {
 }
 
 const areas = [
-  { n: "01", title: "Digital Businesses", desc: "Online companies, software businesses, digital platforms and internet-based operations.", img: "https://images.unsplash.com/photo-1558120985-abcafafcae16?q=80&w=1200&auto=format&fit=crop" },
-  { n: "02", title: "Technology", desc: "Technology businesses, software, infrastructure and emerging technologies.", img: "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?q=80&w=1200&auto=format&fit=crop" },
-  { n: "03", title: "Brands & IP", desc: "Brands, digital intellectual property, media and commercially valuable IP.", img: "https://images.unsplash.com/photo-1723023505659-fde32810e0d1?q=80&w=1200&auto=format&fit=crop" },
-  { n: "04", title: "Online Assets", desc: "Digital properties, websites, platforms, communities and other scalable digital assets.", img: "https://images.unsplash.com/photo-1689732888407-310424e3a372?q=80&w=1200&auto=format&fit=crop" },
-  { n: "05", title: "Real Estate & Physical", desc: "Strategic real estate and selected tangible assets where appropriate.", img: "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?q=80&w=1200&auto=format&fit=crop" },
-  { n: "06", title: "Strategic Holdings", desc: "Minority or majority interests in businesses with strong long-term potential.", img: "https://images.unsplash.com/photo-1703639948834-342fc34900f8?q=80&w=1200&auto=format&fit=crop" },
+  { n: "01", title: "Private Businesses", desc: "Established operating companies acquired, held, and managed for the long term.", img: "https://images.unsplash.com/photo-1565626424178-c699f6601afd?q=80&w=1200&auto=format&fit=crop" },
+  { n: "02", title: "Technology & Digital", desc: "Software companies, platforms, and internet-based operations.", img: "https://images.unsplash.com/photo-1689732888407-310424e3a372?q=80&w=1200&auto=format&fit=crop" },
+  { n: "03", title: "Real Assets", desc: "Strategic real estate and selected tangible holdings.", img: "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?q=80&w=1200&auto=format&fit=crop" },
+  { n: "04", title: "Brands & IP", desc: "Brands, media, and commercially valuable intellectual property.", img: "https://images.unsplash.com/photo-1723023505659-fde32810e0d1?q=80&w=1200&auto=format&fit=crop" },
 ];
-
-const targets = ["SaaS", "E-Commerce", "Websites", "Platforms", "Communities", "Software", "Digital Brands", "Content", "IP", "Infrastructure"];
 
 function MandateSection() {
   const [hovered, setHovered] = useState(0);
@@ -355,24 +351,16 @@ function MandateSection() {
             </Reveal>
           </div>
         </div>
-        <Reveal delay={0.2} className="mt-14 flex flex-wrap items-center gap-3 border border-white/10 bg-oki-black p-6 md:p-8">
-          <span className="mr-2 font-mono text-[9px] uppercase tracking-[0.35em] text-oki-gold">Digital-First Targets</span>
-          {targets.map((t) => (
-            <span key={t} className="border border-white/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-oki-muted transition-colors duration-300 hover:border-oki-gold/50 hover:text-oki-gold">
-              {t}
-            </span>
-          ))}
-        </Reveal>
       </div>
     </section>
   );
 }
 
 const doctrine = [
-  { n: "D/01", title: "Ownership", text: "Assets are acquired to be held, improved, and compounded — not flipped. The exit is not the plan; the asset is.", span: "md:col-span-7" },
+  { n: "D/01", title: "Ownership", text: "Businesses and assets are acquired to be held and managed — not flipped. The exit is not the plan; the asset is.", span: "md:col-span-7" },
   { n: "D/02", title: "Strategy", text: "Structure before sentiment. Every acquisition begins with the analysis already finished.", span: "md:col-span-5" },
   { n: "D/03", title: "Capital", text: "Private, patient, and deliberate. Capital moves when the work says so — never when the crowd does.", span: "md:col-span-5" },
-  { n: "D/04", title: "Growth", text: "Acquired businesses are developed — modernized, scaled, and taken further than they could go alone.", span: "md:col-span-7" },
+  { n: "D/04", title: "Growth", text: "What is acquired is operated — modernized, scaled, and taken further than it could go alone.", span: "md:col-span-7" },
 ];
 
 function DoctrineSection() {
@@ -469,7 +457,7 @@ function GlobalSection() {
             />
             <Reveal delay={0.2} className="mt-10 max-w-xl space-y-6">
               <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-                The mandate is not bound to one market or one geography. Opportunities are evaluated wherever durable value lives — across industries, timezones, and jurisdictions. Digital assets in particular carry no borders; neither does the search.
+                The mandate is not bound to one market or one geography. Operating businesses, real assets, and digital operations are weighed with the same discipline — wherever durable value lives.
               </p>
               <p className="text-sm leading-relaxed text-oki-muted">
                 The corporate seat is New York. The perspective is global.
@@ -508,7 +496,7 @@ const facts = [
   { k: "Founded", v: "2026" },
   { k: "Headquarters", v: "New York" },
   { k: "Incorporated", v: "Delaware" },
-  { k: "Mandate", v: "Digital-First" },
+  { k: "Model", v: "Own & Operate" },
 ];
 
 export default function Home() {
@@ -538,12 +526,12 @@ export default function Home() {
           <div className="md:col-span-7">
             <KineticLines
               animate={false}
-              lines={["An international investment", "and strategic holdings corporation,", "built digital-first."]}
+              lines={["A corporation organized around", "acquiring, holding, and managing", "businesses and assets."]}
               lineClassName="font-display text-4xl font-medium leading-[1.05] tracking-tighter text-oki-text md:text-6xl"
             />
             <Reveal delay={0.3} className="mt-10 max-w-xl">
               <p className="text-sm leading-relaxed text-oki-muted md:text-base">
-                OKI Inc. identifies high-potential opportunities, acquires valuable assets and businesses, and develops them through strategic long-term ownership. Founded in 2026 and incorporated in Delaware, the corporation pairs private-capital discipline with a modern, digital-first mentality — ambition stated plainly, progress built in public.
+                OKI Inc. acquires controlling and minority interests across the real and digital economy — established operating companies, real assets, technology, and online operations — and manages them as a permanent owner. Founded in 2026 and incorporated in Delaware, it pairs institutional discipline with a founder's pace.
               </p>
             </Reveal>
           </div>

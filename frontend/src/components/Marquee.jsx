@@ -4,7 +4,7 @@ const items = [
   "Private Capital",
   "Strategic Acquisitions",
   "Long-Term Ownership",
-  "Digital-First Mandate",
+  "Own · Hold · Manage",
   "Global Perspective",
   "Delaware C-Corporation",
 ];

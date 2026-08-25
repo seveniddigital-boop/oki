@@ -20,7 +20,7 @@ const record = [
   { y: "2026", t: "Incorporated", d: "Chartered as a C-Corporation under the Delaware General Corporation Law." },
   { y: "2026", t: "Corporate seat established", d: "Headquarters set at One World Trade Center, 85th Floor, New York." },
   { y: "2026", t: "The window opens", d: "Live market platform published — Bitcoin, indices, and equities, free and ungated." },
-  { y: "2026", t: "The mandate published", d: "Acquisition doctrine stated in the open: digital businesses, technology, brands, IP, and strategic holdings." },
+  { y: "2026", t: "The mandate published", d: "Acquisition doctrine stated in the open: operating businesses, technology, brands, real assets, and strategic holdings." },
   { y: "Ahead", t: "The climb continues", d: "First acquisitions, deeper coverage, wider mandate. The direction has not changed: up." },
 ];
 
@@ -58,7 +58,7 @@ export default function About() {
                 OKI Inc. is incorporated in the State of Delaware — the most settled corporate legal environment in the world. Two centuries of case law, a dedicated Court of Chancery, and statutory clarity make it the jurisdiction of record for companies that intend to last.
               </p>
               <p>
-                From its corporate seat in New York, OKI operates as an investment and strategic holdings corporation with a digital-first mandate — identifying, acquiring, and developing valuable assets and businesses, while publishing its market intelligence in the open. The ambition is not hidden. Neither is the work.
+                From its corporate seat in New York, OKI operates as an investment and strategic holdings corporation — acquiring interests in businesses and assets across the real and digital economy, and managing them for the long term. The ambition is not hidden. Neither is the work.
               </p>
             </Reveal>
           </div>

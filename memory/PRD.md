@@ -31,6 +31,13 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 ## PIVOT NOTE (binding — UPDATED 2026-06)
 REPOSITIONED (user-confirmed reversal): OKI Inc. is now an international investment & strategic holdings corporation with a digital-first acquisition MANDATE. Acquisition/ownership language IS allowed. STILL FORBIDDEN: fabricated portfolio companies, AUM, transaction values, performance figures, fake office locations. Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
 
+## Implemented (2026-06 fork, 50/50 PE rebalance + de-duplication pass — self-tested via screenshots + curl)
+- User feedback: too digital-focused, info repeated across sections → rebalanced to real Blackstone-style PE profile (acquire/hold/manage operating businesses + real assets + digital, ~50/50), de-duplicated copy sitewide
+- "digital-first" purged everywhere (0 occurrences); each concept now appears once in its natural home
+- Home: statement/position rewritten around "acquiring, holding, and managing"; facts "Mandate: Digital-First" → "Model: Own & Operate"; Mandate section condensed to 4 DISTINCT groups (Private Businesses / Technology & Digital / Real Assets / Brands & IP — mandate-row-0..3) so it no longer duplicates the Acquisitions page's 6 areas; digital-targets chip wall removed; Doctrine + Global Presence copy rebalanced
+- Acquisitions: 6 areas rebalanced (01 Operating Businesses, 02 Technology & Software, 03 Digital & Online Assets, 04 Brands & IP, 05 Real Estate & Real Assets, 06 Strategic Holdings); criterion "Digital scalability"→"Scalability"; process step 1 + Diversification pillar neutralized
+- FAQ items 1-2, Footer (desc varied vs hero, portfolio phrase removed from disclaimer to de-dupe), Marquee ("Own · Hold · Manage"), About, Insights essay, PAGE_META, index.html meta/OG/JSON-LD, PDF deck all rebalanced; deck verified 200 application/pdf
+
 ## Implemented (2026-06 fork, investment-corporation repositioning — tested, iteration_3.json, 1 minor bug fixed)
 - User choices: restore acquisition/ownership positioning (no fake numbers); keep markets terminal reframed as "Market Intelligence" (demoted); NEW 7th page /acquisitions (Strategy kept as-is); hero = GlobalNetwork globe, DataSkyline moved to Markets header
 - NEW GlobalNetwork.jsx: canvas rotating dot-globe (fibonacci sphere, 8 unlabeled hub nodes, animated great-circle arcs + pulses, mouse parallax, theme-aware, IO-paused) — used in Home hero + Global Presence section
