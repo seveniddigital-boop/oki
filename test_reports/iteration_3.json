@@ -1,0 +1,33 @@
+{
+  "summary": "Frontend regression + honesty scan for repositioned OKI Inc. (holdings/acquisition mandate). Backend spot-checks OK. All 7 routes load with 0 console errors. New Acquisitions page verified end-to-end (6 area panels expanding on hover, 8 criteria C/01-C/08, 6 process steps 01-06, value band + 8 V/01-V/08 capability cells, disclosure text present, Gmail propose CTA valid). Nav order Acquisitions/Intelligence/Strategy/Architecture/Perspectives verified; nav BTC ticker visible at 1920. Home hero shows GlobalNetwork canvas + Explore the Mandate button navigates to /acquisitions; second GlobalNetwork present in Global Presence section (2 total). 6 mandate rows, 6 FAQ items, mandate preview, home-view-mandate/open-terminal/method-strategy links all present. Markets page: DataSkyline in header, terminal chips + ticker all present, title 'Market Intelligence — OKI Inc.', 'research arm' copy present. Strategy: 'Published Intelligence' principle present, no 'nothing to disclose' phrase. About: 4 architecture layers, phone/email/deck buttons OK, mentions investment+strategic holdings. Insights: mandate essay first (essay-toggle-the-mandate), '06 Published' counter. Footer: acquisitions-link first, markets-link labeled 'Intelligence', disclaimer contains 'does not publish portfolio contents'. Honesty scan across all pages found NO fabricated $/billions/AUM/portfolio-company claims. Mobile 390px: no horizontal overflow on Home or Acquisitions; mobile stacked acquisition-areas visible; nav-menu-toggle opens mobile menu. Dark theme visually applied (screenshots verified) on both Home and Acquisitions. Backend: /api/deck returns 200 application/pdf, /sitemap.xml returns 200 with 7 <loc> entries including /acquisitions.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Nav.jsx (mobile menu Contact link)",
+        "issue": "Mobile Contact menu item gets data-testid='mobile-mobile-nav-access-link' instead of the expected 'mobile-nav-access-link'. Root cause at Nav.jsx line ~160: `l.id.replace(\"nav-\", \"mobile-nav-\")` is applied to the Contact entry whose id is already 'mobile-nav-access-link'. String.replace() replaces the first occurrence of 'nav-' inside that string (at index 7), producing 'mobile-mobile-nav-access-link'. Fix: special-case the contact entry to keep its id as-is (e.g., `l.id.startsWith('mobile-') ? l.id : l.id.replace('nav-', 'mobile-nav-')`).",
+        "selector": "[data-testid=\"mobile-nav-access-link\"]",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix Nav.jsx mobile Contact link testid (see ui_bugs[0]); trivial one-line change so playwright regressions can find mobile-nav-access-link."
+  ],
+  "critical_code_review_comments": [
+    "Nav.jsx uses `.replace('nav-','mobile-nav-')` on l.id which double-prefixes when l.id already starts with 'mobile-nav-' (Contact entry). Minor but bites automated tests.",
+    "Home.jsx / Acquisitions.jsx are working correctly; no data leaks. Honesty scan clean.",
+    "sessionStorage 'oki-entered' preloader dismissal works but the preloader still briefly reappears on route changes in some cases; not a blocker."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "100%", "frontend": "98%" },
+  "test_credentials": "N/A — public site",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Iteration_3 verified the full repositioning. Only one minor testid regression in Nav.jsx (mobile Contact link double-prefix). All 7 routes, 2 GlobalNetwork canvases on Home, and the new /acquisitions page (panels/criteria/process/value/pillars/disclosure/propose-btn) work. Honesty scan clean across all routes. When testing theme toggle, note that dark mode is applied but NOT via `document.documentElement.classList.contains('dark')` — check computed background/screenshot instead.",
+  "rca of the issue": "Nav.jsx spreads `[...links, { to: '/contact', label: 'Contact', id: 'mobile-nav-access-link' }]` then does `l.id.replace('nav-', 'mobile-nav-')` uniformly. The Contact entry's id already begins with 'mobile-nav-' so the first substring 'nav-' (inside 'mobile-nav-access-link' at position 7) gets replaced, yielding 'mobile-mobile-nav-access-link'. Repro: viewport 390x844 → open Home → scroll → click [data-testid='nav-menu-toggle'] → inspect Contact link. Mitigation: guard the replace, e.g. `const tid = l.id.startsWith('mobile-') ? l.id : l.id.replace('nav-','mobile-nav-');`"
+}

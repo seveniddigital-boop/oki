@@ -28,8 +28,16 @@ Build a high-end, dark-themed, attention-grabbing corporate website for OKI Inc.
 - About: Delaware C-Corp architecture, institutional leadership (titles only), registered address
 - Contact: minimal front-end-only form with encrypted-inquiry motif
 
-## PIVOT NOTE (binding)
-Site is a PURE INFORMATIONAL markets platform — NO holding/portfolio/custody claims ever. Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
+## PIVOT NOTE (binding — UPDATED 2026-06)
+REPOSITIONED (user-confirmed reversal): OKI Inc. is now an international investment & strategic holdings corporation with a digital-first acquisition MANDATE. Acquisition/ownership language IS allowed. STILL FORBIDDEN: fabricated portfolio companies, AUM, transaction values, performance figures, fake office locations. Gmail-compose email links sitewide. Theme-aware photography via .tower-dark/.tower-light.
+
+## Implemented (2026-06 fork, investment-corporation repositioning — tested, iteration_3.json, 1 minor bug fixed)
+- User choices: restore acquisition/ownership positioning (no fake numbers); keep markets terminal reframed as "Market Intelligence" (demoted); NEW 7th page /acquisitions (Strategy kept as-is); hero = GlobalNetwork globe, DataSkyline moved to Markets header
+- NEW GlobalNetwork.jsx: canvas rotating dot-globe (fibonacci sphere, 8 unlabeled hub nodes, animated great-circle arcs + pulses, mouse parallax, theme-aware, IO-paused) — used in Home hero + Global Presence section
+- NEW /acquisitions page: header "Acquiring Assets. Building Value."; 6 flex-grow expanding area panels (Digital Businesses/Technology/Brands & IP/Online Assets/Real Estate/Strategic Holdings); 8 acquisition criteria; 6-step process timeline (Identify→Review→Diligence→Structuring→Acquisition→Growth) w/ animated gold line; Acquire→Improve→Scale→Compound band + 8 value-creation cells; 4 portfolio-philosophy pillars; honest disclosure strip; "Propose an Opportunity" Gmail CTA
+- Home repositioned: overline "International Strategic Holdings", subheadline "Strategic Capital. Global Assets. Long-Term Ownership.", pill "Explore the Mandate"→/acquisitions; sections: 01 Position → 02 The Mandate (6 rows + sticky preview + digital-first target chips) → 03 Operating Doctrine (Ownership/Strategy/Capital/Growth) → 04 Market Intelligence (embedded live MarketTicker) → 05 Global Presence (globe panel + Seat/Charter/Reach) → interlude → 06 FAQ (6 items incl. "What does OKI acquire?" / "Does OKI publish portfolio?" No) → CTA
+- Nav: Acquisitions/Intelligence/Strategy/Architecture/Perspectives; Markets page header now "Market Intelligence." + DataSkyline; Strategy principle → "Published Intelligence"; About layers 4-tier + record row "The mandate published"; Insights +1 essay "The Mandate: Acquire, Improve, Compound" (06 Published); Footer/Marquee/meta/JSON-LD/sitemap(+/acquisitions)/PDF deck all repositioned
+- Fixed: mobile Contact testid double-prefix in Nav.jsx (iteration_3 finding)
 
 ## Implemented (2026-06 fork, Awwwards premium transformation pass — tested 100%, iteration_2.json)
 - User brief: complete premium redesign ("BRUTAL. PREMIUM. MODERN... DO NOT LOOK AI-GENERATED"); choices: keep 6 pages + gold/charcoal/ivory identity, adapt Services/HowItWorks/WhyUs/FAQ to OKI's reality, designer's-choice depth/3D, keep both themes

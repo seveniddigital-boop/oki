@@ -5,6 +5,7 @@ import MarketTicker from "@/components/MarketTicker";
 import MarketBoard from "@/components/MarketBoard";
 import MarketChart from "@/components/MarketChart";
 import MarketSearch from "@/components/MarketSearch";
+import DataSkyline from "@/components/DataSkyline";
 import LazyBg from "@/components/LazyBg";
 
 const HEADER_IMG =
@@ -55,15 +56,18 @@ export default function Markets() {
         <LazyBg src={HEADER_IMG} className="absolute inset-0 bg-cover bg-center" role="img" aria-label="New York skyline at night" />
         <div className="absolute inset-0" style={{ backgroundColor: "var(--hero-veil)" }} />
         <div className="hero-bottom-fade absolute inset-0" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[20vh]">
+          <DataSkyline />
+        </div>
         <div className="relative mx-auto max-w-[1600px] px-6 md:px-12">
-          <SectionTag index="M/01" label="Markets" />
+          <SectionTag index="M/01" label="Market Intelligence" />
           <KineticLines
-            lines={["Global", "Markets."]}
+            lines={["Market", "Intelligence."]}
             lineClassName="font-display text-6xl font-semibold leading-[0.9] tracking-tighter text-oki-text md:text-9xl"
           />
           <Reveal delay={0.4} className="mt-10 max-w-xl">
             <p className="text-sm leading-relaxed text-oki-muted">
-              A living view of the markets OKI Inc. studies — public equities, digital networks, and the indices that price them. Updated continuously.
+              The research arm behind the acquisition mandate. A living view of the markets OKI Inc. studies — public equities, digital networks, and the indices that price them. Updated continuously.
             </p>
           </Reveal>
         </div>

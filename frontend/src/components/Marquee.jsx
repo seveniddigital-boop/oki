@@ -1,12 +1,12 @@
 import Marquee from "react-fast-marquee";
 
 const items = [
+  "Private Capital",
+  "Strategic Acquisitions",
+  "Long-Term Ownership",
+  "Digital-First Mandate",
+  "Global Perspective",
   "Delaware C-Corporation",
-  "Global Market Intelligence",
-  "Bitcoin · Equities · Indices",
-  "Live Public Data",
-  "Quiet Power",
-  "Absolute Precision",
 ];
 
 export default function EditorialMarquee() {

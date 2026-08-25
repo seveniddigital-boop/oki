@@ -7,7 +7,8 @@ import { BtcMini } from "@/components/LiveMini";
 import { isSoundOn, setSound } from "@/utils/clickSound";
 
 const links = [
-  { to: "/markets", label: "Markets", id: "nav-markets-link" },
+  { to: "/acquisitions", label: "Acquisitions", id: "nav-acquisitions-link" },
+  { to: "/markets", label: "Intelligence", id: "nav-markets-link" },
   { to: "/strategy", label: "Strategy", id: "nav-strategy-link" },
   { to: "/about", label: "Architecture", id: "nav-architecture-link" },
   { to: "/insights", label: "Perspectives", id: "nav-insights-link" },
@@ -156,7 +157,7 @@ export default function Nav() {
               >
                 <NavLink
                   to={l.to}
-                  data-testid={l.id.replace("nav-", "mobile-nav-")}
+                  data-testid={l.id.startsWith("mobile-") ? l.id : l.id.replace("nav-", "mobile-nav-")}
                   onClick={() => setOpen(false)}
                   className="block border-b border-white/10 py-6 font-display text-3xl font-medium tracking-tight text-oki-text"
                 >

@@ -30,7 +30,7 @@ const phases = [
 
 const principles = [
   { title: "Global Coverage", text: "Markets across every timezone, read from a single desk in New York." },
-  { title: "Public Data Only", text: "Everything on this platform is drawn from public market feeds. No private positions, no hidden books — nothing to disclose." },
+  { title: "Published Intelligence", text: "The market view behind OKI's decisions is published openly. The data is public; the discipline is the edge." },
   { title: "Generational Horizon", text: "A young corporation, compounding knowledge for decades. The climb is the strategy." },
 ];
 
@@ -54,7 +54,7 @@ export default function Strategy() {
           />
           <Reveal delay={0.4} className="mt-10 max-w-xl">
             <p className="text-sm leading-relaxed text-oki-muted">
-              Three disciplines. One direction. The OKI method converts observation into understanding, and understanding into altitude.
+              Three disciplines. One direction. The OKI method converts observation into understanding, and understanding into acquisition-grade conviction.
             </p>
           </Reveal>
         </div>

@@ -184,24 +184,24 @@ async def corporate_deck():
     c.drawString(mx + 70, my + 8, "OKI_INC.")
     c.setFillColor(faint)
     c.setFont("Helvetica", 5.5)
-    c.drawString(mx + 70, my - 2, "GLOBAL MARKET INTELLIGENCE  ·  LIVE PUBLIC DATA")
+    c.drawString(mx + 70, my - 2, "PRIVATE CAPITAL  ·  STRATEGIC ACQUISITIONS  ·  MARKET INTELLIGENCE")
 
     c.setFillColor(white)
     c.setFont("Helvetica-Bold", 30)
-    c.drawString(56, H - 170, "Global Markets.")
-    c.drawString(56, H - 204, "One Window.")
+    c.drawString(56, H - 170, "Strategic Capital.")
+    c.drawString(56, H - 204, "Long-Term Ownership.")
     c.setFillColor(muted)
     c.setFont("Helvetica", 9.5)
-    c.drawString(56, H - 232, "A young Delaware corporation publishing a clean, live read of Bitcoin and world equity markets.")
+    c.drawString(56, H - 232, "An international investment and strategic holdings corporation with a digital-first acquisition mandate.")
 
     c.setStrokeColor(Color(0.16, 0.16, 0.16))
     c.setLineWidth(0.5)
     c.line(56, H - 262, W - 56, H - 262)
     c.setFillColor(gold)
     c.setFont("Helvetica", 7)
-    c.drawString(56, H - 276, "01  —  COVERAGE")
+    c.drawString(56, H - 276, "01  —  THE MANDATE")
 
-    markets = ["BITCOIN & DIGITAL NETWORKS", "GLOBAL EQUITY INDICES", "MAJOR PUBLIC COMPANIES", "MARKET COMMENTARY"]
+    markets = ["DIGITAL BUSINESSES & ONLINE ASSETS", "TECHNOLOGY & SOFTWARE", "BRANDS & INTELLECTUAL PROPERTY", "REAL ESTATE & STRATEGIC HOLDINGS"]
     y = H - 306
     for m in markets:
         c.setFillColor(gold)
@@ -215,12 +215,12 @@ async def corporate_deck():
     c.line(56, y - 8, W - 56, y - 8)
     c.setFillColor(gold)
     c.setFont("Helvetica", 7)
-    c.drawString(56, y - 22, "02  —  THE METHOD")
+    c.drawString(56, y - 22, "02  —  THE PROCESS")
 
     doctrine = [
-        ("WATCH", "Continuous market observation.", "Every session. Every index. No noise."),
-        ("STUDY", "Structure before sentiment.", "Fundamentals and liquidity, never headlines."),
-        ("PUBLISH", "An open window.", "The same live data, free and ungated."),
+        ("IDENTIFY", "Opportunity and review.", "Fundamentals first. Always."),
+        ("ACQUIRE", "Diligence and structure.", "Deliberate, private, patient."),
+        ("DEVELOP", "Growth and management.", "Improve. Scale. Compound."),
     ]
     col_w = (W - 112) / 3
     ty = y - 46
@@ -243,7 +243,7 @@ async def corporate_deck():
     c.setFillColor(muted)
     c.setFont("Helvetica", 8)
     c.drawString(56, ty - 84, "OKI Inc. is a Delaware C-Corporation headquartered in New York — young, disciplined, and building in public.")
-    c.drawString(56, ty - 96, "The platform publishes public market data only. No private positions. Nothing on this page is investment advice.")
+    c.drawString(56, ty - 96, "The corporation does not publish portfolio contents or performance figures. Nothing here is investment advice.")
 
     c.setFillColor(white)
     c.setFont("Helvetica-Bold", 9)

@@ -6,6 +6,17 @@ import LazyBg from "@/components/LazyBg";
 
 const ESSAYS = [
   {
+    id: "the-mandate",
+    date: "SEP 2026",
+    category: "Doctrine",
+    title: "The Mandate: Acquire, Improve, Compound",
+    excerpt: "OKI's turn from watching markets to owning what they price.",
+    body: [
+      "OKI Inc. was built watching markets — every session, every index, in public. That discipline was never the destination; it was the training. The mandate it produced is simple: identify high-potential assets and businesses, acquire them deliberately, and develop them over the long term.",
+      "The corporation does not publish portfolio contents, transaction values, or performance figures — and it will not fabricate them. What it publishes is the doctrine: fundamentals over stories, digital scalability over fashion, ownership over exit. Acquire, improve, scale, compound.",
+    ],
+  },
+  {
     id: "digital-assets-infrastructure",
     date: "AUG 2026",
     category: "Markets",

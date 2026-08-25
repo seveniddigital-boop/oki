@@ -7,13 +7,25 @@ const ITEMS = [
   {
     q: "What is OKI Inc.?",
     a: (
-      <>A Delaware C-Corporation founded in 2026, headquartered at One World Trade Center, New York. It builds and publishes a live market-intelligence platform covering Bitcoin, global indices, and major equities — in the open, from day one.</>
+      <>An emerging international investment and strategic holdings corporation — a Delaware C-Corporation founded in 2026, headquartered at One World Trade Center, New York. It identifies, acquires, and develops valuable assets and businesses, with a digital-first mandate, and publishes its market intelligence openly.</>
+    ),
+  },
+  {
+    q: "What does OKI acquire?",
+    a: (
+      <>Digital businesses, technology companies, brands and intellectual property, online assets, selected real estate, and strategic holdings — minority or majority interests in businesses with strong long-term potential. The full mandate, criteria, and process are published on the Acquisitions page.</>
+    ),
+  },
+  {
+    q: "Does OKI publish its portfolio or performance?",
+    a: (
+      <>No. OKI Inc. does not publish portfolio contents, transaction values, assets under management, or performance figures — and it will not fabricate them. What it publishes is the mandate, the criteria, and the discipline.</>
     ),
   },
   {
     q: "Is anything on this site investment advice?",
     a: (
-      <>No. Everything published here is public market data and commentary. OKI Inc. does not manage money, sell financial products, or advise on positions. The window is informational — how you read it is yours.</>
+      <>No. The market data and commentary published here are informational. OKI Inc. does not manage outside money, sell financial products, or advise on positions.</>
     ),
   },
   {
@@ -23,22 +35,16 @@ const ITEMS = [
     ),
   },
   {
-    q: "Do I need an account to use the platform?",
-    a: (
-      <>No. The window is open by design — no sign-ups, no paywall, no gate. Every price, chart, and essay on this site is free and ungated.</>
-    ),
-  },
-  {
-    q: "How do I reach the corporation?",
+    q: "How do I propose an opportunity?",
     a: (
       <>
-        One office, one line. Call{" "}
+        Directly. Call{" "}
         <a href="tel:+12122208443" data-testid="faq-phone-link" className="text-oki-gold underline-offset-4 transition-colors duration-300 hover:underline">
           +1 (212) 220-8443
         </a>{" "}
         or write to{" "}
         <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@okiinc.global&su=Inquiry%20for%20OKI%20Inc."
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@okiinc.global&su=Acquisition%20Opportunity%20for%20OKI%20Inc."
           target="_blank"
           rel="noopener noreferrer"
           data-testid="faq-email-link"
@@ -46,7 +52,7 @@ const ITEMS = [
         >
           contact@okiinc.global
         </a>
-        . The contact page carries the full corporate record.
+        . Serious, well-prepared opportunities are read first.
       </>
     ),
   },
@@ -94,7 +100,7 @@ export default function FAQ() {
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <div className="md:sticky md:top-32">
-              <SectionTag index="05" label="Straight Answers" />
+              <SectionTag index="06" label="Straight Answers" />
               <KineticLines
                 animate={false}
                 lines={["Asked.", "Answered."]}
@@ -102,7 +108,7 @@ export default function FAQ() {
               />
               <Reveal delay={0.2} className="mt-8 max-w-xs">
                 <p className="text-sm leading-relaxed text-oki-muted">
-                  No fine print, no hedging. What this platform is, and what it is not.
+                  No fine print, no hedging. What this corporation is, and what it is not.
                 </p>
               </Reveal>
             </div>

@@ -12,6 +12,7 @@ import BackToTop from "@/components/BackToTop";
 import { playClick } from "@/utils/clickSound";
 import Home from "@/pages/Home";
 import Markets from "@/pages/Markets";
+import Acquisitions from "@/pages/Acquisitions";
 import Strategy from "@/pages/Strategy";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
@@ -42,11 +43,12 @@ function currentTheme() {
 }
 
 const PAGE_META = {
-  "/": ["OKI Inc. — Global Market Intelligence", "OKI Inc. is a Delaware C-Corporation publishing a clean, live window into Bitcoin, global indices, and major equities. A young corporation, going to the top."],
-  "/markets": ["Markets — OKI Inc.", "Live Bitcoin data, major indices, and selected equities — a public market window published by OKI Inc. Search any market and read its trajectory."],
+  "/": ["OKI Inc. — International Investment & Strategic Holdings", "OKI Inc. is an international investment and strategic holdings corporation with a digital-first mandate — identifying, acquiring, and developing valuable businesses and assets. Strategic capital. Global assets. Long-term ownership."],
+  "/acquisitions": ["Acquisitions — OKI Inc.", "The OKI mandate: digital businesses, technology, brands & IP, online assets, real estate, and strategic holdings. Criteria, process, and portfolio philosophy — stated plainly."],
+  "/markets": ["Market Intelligence — OKI Inc.", "The research arm behind the acquisition mandate: live Bitcoin data, major indices, and selected equities — published openly by OKI Inc."],
   "/strategy": ["Strategy — OKI Inc.", "The OKI method: watch continuously, study structure before sentiment, and publish in the open. Attention is the strategy."],
   "/about": ["Corporate Architecture — OKI Inc.", "OKI Inc. is a Delaware C-Corporation headquartered at One World Trade Center, New York. Governance, leadership offices, and headquarters."],
-  "/insights": ["Perspectives — OKI Inc.", "Markets, architecture, and the long climb — essays and announcements from OKI Inc."],
+  "/insights": ["Perspectives — OKI Inc.", "Essays on ownership, markets, and corporate architecture from OKI Inc."],
   "/contact": ["Contact — OKI Inc.", "One office, one line. Headquarters, phone, and corporate details of OKI Inc. — One World Trade Center, 85th Floor, New York."],
 };
 
@@ -110,7 +112,7 @@ function TransitionVeil() {
                 <LogoMark size={52} />
                 <LogoWordmark className="text-base tracking-[0.5em]" />
                 <p className="font-mono text-[9px] uppercase tracking-[0.45em] text-oki-faint">
-                  Global Market Intelligence · Live Public Data
+                  Private Capital · Strategic Acquisitions · Long-Term Value
                 </p>
               </motion.div>
             </div>
@@ -145,6 +147,7 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/acquisitions" element={<Acquisitions />} />
         <Route path="/markets" element={<Markets />} />
         <Route path="/strategy" element={<Strategy />} />
         <Route path="/about" element={<About />} />
