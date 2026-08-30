@@ -20,37 +20,76 @@ const TIMEFRAMES = [
   { label: "30D", days: 30 },
 ];
 
-export default function MarketChart({ id, type, name, badge, onClose, embedded }) {
+export default function MarketChart({ id, type, name, badge, symbol, onClose, embedded }) {
   const [data, setData] = useState(() => getCachedChart(chartKey(type, id, 7)));
-  const [error, setError] = useState(false);
+  // phase: loading | ready | reconnecting | unavailable
+  const [phase, setPhase] = useState(data ? "ready" : "loading");
   const [days, setDays] = useState(7);
   const [reloadNonce, setReloadNonce] = useState(0);
+  const retryRef = useRef({ n: 0, timer: 0 });
 
   useEffect(() => {
     const key = chartKey(type, id, days);
     const cached = getCachedChart(key);
+    const ctrl = new AbortController();
+    let cancelled = false;
+    retryRef.current.n = 0;
+
+    const scheduleRetry = () => {
+      const r = retryRef.current;
+      if (r.n >= 4) {
+        setPhase((p) => (data ? "ready" : "unavailable"));
+        return;
+      }
+      r.n += 1;
+      setPhase((p) => (getCachedChart(key) ? "ready" : "reconnecting"));
+      const delay = Math.min(8000, 1500 * r.n);
+      clearTimeout(r.timer);
+      r.timer = setTimeout(() => {
+        if (!cancelled) run();
+      }, delay);
+    };
+
+    const run = () => {
+      const params = new URLSearchParams({ id, type, days: String(days) });
+      if (symbol) params.set("symbol", symbol);
+      fetch(`${API}/market-chart?${params.toString()}`, { signal: ctrl.signal })
+        .then((r) => {
+          if (!r.ok) throw new Error("http");
+          return r.json();
+        })
+        .then((d) => {
+          if (cancelled) return;
+          if (d && Array.isArray(d.prices) && d.prices.length) {
+            setCachedChart(key, d);
+            setData(d);
+            setPhase("ready");
+            retryRef.current.n = 0;
+          } else {
+            scheduleRetry(); // structured "unavailable" — auto-recover
+          }
+        })
+        .catch((e) => {
+          if (cancelled || e.name === "AbortError") return;
+          scheduleRetry();
+        });
+    };
+
     if (cached) {
       setData(cached);
-      setError(false);
-      return undefined;
+      setPhase("ready");
+    } else {
+      setData(null);
+      setPhase("loading");
+      run();
     }
-    setData(null);
-    setError(false);
-    const ctrl = new AbortController();
-    fetch(`${API}/market-chart?id=${encodeURIComponent(id)}&type=${type}&days=${days}`, { signal: ctrl.signal })
-      .then((r) => {
-        if (!r.ok) throw new Error("chart");
-        return r.json();
-      })
-      .then((d) => {
-        setCachedChart(key, d);
-        setData(d);
-      })
-      .catch((e) => {
-        if (e.name !== "AbortError") setError(true);
-      });
-    return () => ctrl.abort();
-  }, [id, type, days, reloadNonce]);
+
+    return () => {
+      cancelled = true;
+      ctrl.abort();
+      clearTimeout(retryRef.current.timer);
+    };
+  }, [id, type, days, symbol, reloadNonce]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const chart = useMemo(() => {
     if (!data?.prices?.length) return null;
@@ -79,7 +118,6 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
   const rectRef = useRef(null);
   const rafRef = useRef(0);
 
-  // Cache the SVG rect on pointer entry / resize instead of measuring every move.
   const cacheRect = () => {
     rectRef.current = svgRef.current?.getBoundingClientRect() || null;
   };
@@ -101,7 +139,7 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
     const rect = rectRef.current;
     if (!rect) return;
     const clientX = e.clientX;
-    if (rafRef.current) return; // coalesce to one update per frame
+    if (rafRef.current) return;
     rafRef.current = requestAnimationFrame(() => {
       rafRef.current = 0;
       const n = chart.pts.length;
@@ -131,6 +169,7 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
       : p.toLocaleString("en-US", { maximumFractionDigits: 2 });
 
   const up = (chart?.change ?? 0) >= 0;
+  const stale = data?.status === "stale";
 
   return (
     <motion.div
@@ -151,6 +190,11 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
           >
             {badge || (type === "stock" ? "Stock" : "Crypto")}
           </span>
+          {stale && (
+            <span data-testid="chart-stale-tag" className="font-mono text-[8px] uppercase tracking-[0.2em] text-oki-faint">
+              · Delayed
+            </span>
+          )}
           <div className="flex gap-1">
             {TIMEFRAMES.map((tf) => (
               <button
@@ -245,9 +289,9 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
               <span>H ${fmt(chart.max)}</span>
             </div>
           </>
-        ) : error ? (
-          <div className="flex h-40 flex-col items-center justify-center gap-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Feed unavailable</p>
+        ) : phase === "unavailable" ? (
+          <div data-testid="chart-unavailable" className="flex h-40 flex-col items-center justify-center gap-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-oki-faint">Market data temporarily unavailable</p>
             <button
               onClick={() => setReloadNonce((n) => n + 1)}
               data-testid="chart-retry"
@@ -257,8 +301,11 @@ export default function MarketChart({ id, type, name, badge, onClose, embedded }
             </button>
           </div>
         ) : (
-          <div className="flex h-40 items-center justify-center">
+          <div data-testid="chart-loading" className="flex h-40 flex-col items-center justify-center gap-3">
             <span className="h-px w-24 animate-pulse-slow bg-oki-gold/50" />
+            {phase === "reconnecting" && (
+              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-oki-faint">Reconnecting…</p>
+            )}
           </div>
         )}
       </div>

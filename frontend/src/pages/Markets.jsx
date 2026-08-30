@@ -13,8 +13,8 @@ const HEADER_IMG =
   "https://images.unsplash.com/photo-1664353655151-9d94a9170eb0?q=80&w=1200&auto=format&fit=crop";
 
 const quick = [
-  { label: "Bitcoin", id: "bitcoin", type: "crypto", name: "Bitcoin" },
-  { label: "Ethereum", id: "ethereum", type: "crypto", name: "Ethereum" },
+  { label: "Bitcoin", id: "bitcoin", type: "crypto", name: "Bitcoin", symbol: "BTC" },
+  { label: "Ethereum", id: "ethereum", type: "crypto", name: "Ethereum", symbol: "ETH" },
   { label: "S&P 500", id: "^GSPC", type: "stock", name: "S&P 500", badge: "Index" },
 ];
 
@@ -132,7 +132,7 @@ export default function Markets() {
               </div>
               <AnimatePresence>
                 {active && (
-                  <MarketChart key={`${active.type}-${active.id}`} id={active.id} type={active.type} name={active.name} badge={active.badge} onClose={() => setActive(null)} />
+                  <MarketChart key={`${active.type}-${active.id}`} id={active.id} type={active.type} name={active.name} badge={active.badge} symbol={active.symbol} onClose={() => setActive(null)} />
                 )}
               </AnimatePresence>
             </Reveal>

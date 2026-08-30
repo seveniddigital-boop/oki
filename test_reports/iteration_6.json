@@ -1,0 +1,39 @@
+{
+  "summary": "P0 'FEED UNAVAILABLE' fix verified end-to-end. Backend: 31/31 pytest green including new /api/market-chart P0 suite — Coinbase-first crypto returns status:'ok' with non-empty prices for bitcoin/ethereum/solana and long-tail dogecoin/cardano/ripple/litecoin/polkadot (with & without ?symbol=). Unknown coin (id=notarealcoinxyz) returns HTTP 200 {status:'unavailable', prices:[]} — never 502. Stock charts (AAPL, ^GSPC × days=1/7/30) return ok. /api/market-prices returns full 11-symbol set (BTC,ETH,SOL,SPX,IXIC,DJI,AAPL,MSFT,NVDA,TSLA,AMZN). WebSocket snapshot+ping/pong still green. Frontend (external URL): Market search flow renders live SVG chart with data for dogecoin, cardano, and ripple (via 'xrp' query — see note). Board chart view rapid-click ETH→SOL→AAPL→NVDA→BTC settles on market-chart-bitcoin (no stale winner, no duplicate). Rapid timeframe toggle on BTC ends on the last-clicked timeframe with a populated SVG. Ticker status shows 'LIVE · US MARKETS CLOSED' (correct for test time). Quick chips (bitcoin/ethereum/spx) each open a populated chart. All 7 routes render (body_len ≥ 1959). perf-monitor gating correct (absent normally, present with ?perf=1 showing FEED LIVE). Zero uncaught console errors / pageerrors. Mobile 390px /markets and / have no horizontal overflow.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/market-search?q=ripple", "issue": "Query 'ripple' does not surface the CoinGecko id=ripple crypto — returns only stock ETPs (ARXRP.SW, ECXRP.AS, 21Shares Ripple ETPs). Users must type 'xrp' to reach the ripple crypto. Search relevance issue only; the /api/market-chart?id=ripple endpoint itself works (returns 168 points). Consider indexing common asset names as aliases."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_market_chart_p0.py",
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_websocket.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "OPTIONAL/LOW: Improve /api/market-search relevance so typing 'ripple' surfaces id=ripple crypto (currently only reachable via 'xrp')."
+  ],
+  "critical_code_review_comments": [
+    "MarketChart.jsx scheduleRetry(): retry cap n>=4 is reasonable; on final failure with no cached data phase becomes 'unavailable' and Retry (chart-retry) resets via reloadNonce — verified path exists (couldn't force live because providers were healthy).",
+    "MarketChart.jsx uses AbortController + cancelled flag on unmount — good; the rapid-click test confirms no stale request wins.",
+    "server.py: /api/market-chart never returned 502 across the entire long-tail matrix (verified via 9 parametrized long-tail cases). Coinbase-first + CoinGecko fallback + structured 'unavailable' JSON is solid.",
+    "Prior iteration_5 minor bug (fetch_market_snapshot wholesale overwrite on CoinGecko 429) — /api/market-prices returned full 11-symbol set during this run, so either the merge was fixed or CG was healthy; unable to reproduce today. Recommend leaving the merge-by-symbol recommendation open."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_market_chart_p0.py (new — P0 chart resilience suite, 18 parametrized cases)"
+  ],
+  "success_rate": {"backend": "100% (31/31)", "frontend": "100% on all P0 acceptance flows"},
+  "test_credentials": "N/A — no auth",
+  "seed_data_creation": "None new (inquiries tests create TEST_-prefixed records as before)",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "P0 chart fix is stable. New pytest file /app/backend/tests/test_market_chart_p0.py covers Coinbase-first crypto (common + long-tail), unknown-coin never-502 contract, and stock chart timeframes. Frontend rapid-click race condition is fixed — verified board-chart selector cycling settles on the last-clicked asset. Only outstanding item: search query 'ripple' doesn't return the ripple crypto (id=ripple) — this is a search relevance nit, not a chart failure.",
+  "rca of the issue": "N/A — no new critical bugs. The only nit (ripple search) is a symbol-aliasing gap in /api/market-search: it appears to match against stock names first and doesn't fall back to CoinGecko id/name aliases for the query 'ripple'. Reproduction: curl '/api/market-search?q=ripple' returns 4 stock ETPs and zero crypto entries; curl '/api/market-search?q=xrp' correctly returns id=ripple,symbol=XRP,type=crypto,rank=4. Mitigation: extend the crypto search index with common natural-language names (e.g. 'ripple' -> XRP, 'ether' -> ETH) or query CoinGecko /search as a fallback when zero crypto results are found."
+}

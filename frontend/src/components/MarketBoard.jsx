@@ -262,6 +262,7 @@ export default function MarketBoard({ initialView = "prices" }) {
                     type={selected.type === "crypto" ? "crypto" : "stock"}
                     name={selected.name}
                     badge={selected.type === "index" ? "Index" : undefined}
+                    symbol={selected.symbol}
                     onClose={() => setView("prices")}
                     embedded
                   />

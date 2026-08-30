@@ -321,6 +321,113 @@ async def _yahoo_chart_prices(symbol, range_, interval):
     return [[t * 1000, c] for t, c in zip(ts, closes) if c is not None]
 
 
+# CoinGecko id -> Coinbase base symbol. Coinbase is keyless with high rate limits
+# and is used as the PRIMARY crypto chart source; CoinGecko is the long-tail fallback.
+COINBASE_BASE = {
+    "bitcoin": "BTC", "ethereum": "ETH", "solana": "SOL", "dogecoin": "DOGE",
+    "cardano": "ADA", "ripple": "XRP", "litecoin": "LTC", "chainlink": "LINK",
+    "polkadot": "DOT", "avalanche-2": "AVAX", "stellar": "XLM", "bitcoin-cash": "BCH",
+    "uniswap": "UNI", "aave": "AAVE", "cosmos": "ATOM", "ethereum-classic": "ETC",
+    "filecoin": "FIL", "internet-computer": "ICP", "near": "NEAR", "aptos": "APT",
+    "arbitrum": "ARB", "optimism": "OP", "the-graph": "GRT", "maker": "MKR",
+    "shiba-inu": "SHIB", "polygon": "MATIC", "sui": "SUI", "algorand": "ALGO",
+    "tezos": "XTZ", "hedera-hashgraph": "HBAR", "render-token": "RNDR",
+}
+
+
+# Instant, always-available search index for popular coins so crypto results
+# surface immediately even when CoinGecko search is rate-limited. Every id here
+# maps to a Coinbase base above, so the chart resolves via the keyless source.
+POPULAR_CRYPTO = [
+    {"id": "bitcoin", "name": "Bitcoin", "symbol": "BTC", "rank": 1},
+    {"id": "ethereum", "name": "Ethereum", "symbol": "ETH", "rank": 2},
+    {"id": "ripple", "name": "XRP", "symbol": "XRP", "rank": 4},
+    {"id": "solana", "name": "Solana", "symbol": "SOL", "rank": 5},
+    {"id": "dogecoin", "name": "Dogecoin", "symbol": "DOGE", "rank": 8},
+    {"id": "cardano", "name": "Cardano", "symbol": "ADA", "rank": 9},
+    {"id": "shiba-inu", "name": "Shiba Inu", "symbol": "SHIB", "rank": 11},
+    {"id": "avalanche-2", "name": "Avalanche", "symbol": "AVAX", "rank": 12},
+    {"id": "polygon", "name": "Polygon", "symbol": "MATIC", "rank": 14},
+    {"id": "chainlink", "name": "Chainlink", "symbol": "LINK", "rank": 15},
+    {"id": "polkadot", "name": "Polkadot", "symbol": "DOT", "rank": 16},
+    {"id": "sui", "name": "Sui", "symbol": "SUI", "rank": 17},
+    {"id": "bitcoin-cash", "name": "Bitcoin Cash", "symbol": "BCH", "rank": 18},
+    {"id": "near", "name": "NEAR Protocol", "symbol": "NEAR", "rank": 19},
+    {"id": "litecoin", "name": "Litecoin", "symbol": "LTC", "rank": 20},
+    {"id": "hedera-hashgraph", "name": "Hedera", "symbol": "HBAR", "rank": 21},
+    {"id": "stellar", "name": "Stellar", "symbol": "XLM", "rank": 22},
+    {"id": "uniswap", "name": "Uniswap", "symbol": "UNI", "rank": 24},
+    {"id": "aptos", "name": "Aptos", "symbol": "APT", "rank": 25},
+    {"id": "internet-computer", "name": "Internet Computer", "symbol": "ICP", "rank": 26},
+    {"id": "ethereum-classic", "name": "Ethereum Classic", "symbol": "ETC", "rank": 27},
+    {"id": "cosmos", "name": "Cosmos", "symbol": "ATOM", "rank": 28},
+    {"id": "render-token", "name": "Render", "symbol": "RNDR", "rank": 29},
+    {"id": "aave", "name": "Aave", "symbol": "AAVE", "rank": 30},
+    {"id": "filecoin", "name": "Filecoin", "symbol": "FIL", "rank": 35},
+    {"id": "algorand", "name": "Algorand", "symbol": "ALGO", "rank": 38},
+    {"id": "arbitrum", "name": "Arbitrum", "symbol": "ARB", "rank": 40},
+    {"id": "optimism", "name": "Optimism", "symbol": "OP", "rank": 42},
+    {"id": "the-graph", "name": "The Graph", "symbol": "GRT", "rank": 45},
+    {"id": "maker", "name": "Maker", "symbol": "MKR", "rank": 50},
+    {"id": "tezos", "name": "Tezos", "symbol": "XTZ", "rank": 48},
+]
+
+
+def _stock_range(days):
+    if days <= 1:
+        return ("1d", "5m")
+    if days <= 7:
+        return ("5d", "30m")
+    return ("1mo", "1d")
+
+
+async def _coinbase_candles(base, days):
+    from datetime import datetime as _dt, timezone as _tz
+    if days <= 1:
+        gran = 300
+    elif days <= 7:
+        gran = 3600
+    else:
+        gran = 21600
+    end = time.time()
+    start = end - days * 86400
+    async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
+        resp = await http.get(
+            f"https://api.exchange.coinbase.com/products/{base}-USD/candles",
+            params={
+                "granularity": gran,
+                "start": _dt.fromtimestamp(start, _tz.utc).isoformat(),
+                "end": _dt.fromtimestamp(end, _tz.utc).isoformat(),
+            },
+        )
+    resp.raise_for_status()
+    rows = resp.json()  # [[time, low, high, open, close, volume], ...] newest first
+    pts = [[int(r[0]) * 1000, r[4]] for r in rows if isinstance(r, list) and len(r) >= 5]
+    pts.sort(key=lambda p: p[0])
+    return pts
+
+
+async def _yahoo_spark(symbols):
+    """One call returns every symbol — drastically reduces Yahoo rate-limit hits."""
+    async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
+        resp = await http.get(
+            "https://query1.finance.yahoo.com/v7/finance/spark",
+            params={"symbols": ",".join(symbols), "range": "1d", "interval": "5m"},
+        )
+    resp.raise_for_status()
+    out = {}
+    for r in resp.json().get("spark", {}).get("result", []):
+        try:
+            m = r["response"][0]["meta"]
+            price = m.get("regularMarketPrice")
+            prev = m.get("chartPreviousClose") or m.get("previousClose")
+            if price and prev:
+                out[r["symbol"]] = (price, ((price - prev) / prev) * 100)
+        except Exception:
+            continue
+    return out
+
+
 async def fetch_market_snapshot():
     """Single upstream fetch shared by every client (REST fallback + WebSocket)."""
     items = []
@@ -349,20 +456,6 @@ async def fetch_market_snapshot():
     except Exception as e:
         logger.error(f"CoinGecko fetch failed: {e}")
 
-    async def fetch_equity(sym, name, label, typ):
-        try:
-            async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
-                resp = await http.get(f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}", params={"range": "1d", "interval": "5m"})
-            resp.raise_for_status()
-            meta = resp.json()["chart"]["result"][0]["meta"]
-            price = meta.get("regularMarketPrice")
-            prev = meta.get("chartPreviousClose") or meta.get("previousClose")
-            if price and prev:
-                return {"symbol": label, "name": name, "id": sym, "price": price, "change": ((price - prev) / prev) * 100, "type": typ}
-        except Exception as e:
-            logger.error(f"Yahoo fetch failed for {sym}: {e}")
-        return None
-
     equity_specs = [
         ("^GSPC", "S&P 500", "SPX", "index"),
         ("^IXIC", "NASDAQ Composite", "IXIC", "index"),
@@ -373,9 +466,35 @@ async def fetch_market_snapshot():
         ("TSLA", "Tesla", "TSLA", "stock"),
         ("AMZN", "Amazon", "AMZN", "stock"),
     ]
-    for result in await asyncio.gather(*(fetch_equity(*spec) for spec in equity_specs)):
-        if result:
-            items.append(result)
+
+    quotes = {}
+    try:
+        quotes = await _yahoo_spark([s[0] for s in equity_specs])
+    except Exception as e:
+        logger.error(f"Yahoo spark failed: {e}")
+
+    if quotes:
+        for sym, name, label, typ in equity_specs:
+            if sym in quotes:
+                price, change = quotes[sym]
+                items.append({"symbol": label, "name": name, "id": sym, "price": price, "change": change, "type": typ})
+    else:
+        async def fetch_equity(sym, name, label, typ):
+            try:
+                async with httpx.AsyncClient(timeout=15, headers=YAHOO_HEADERS) as http:
+                    resp = await http.get(f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}", params={"range": "1d", "interval": "5m"})
+                resp.raise_for_status()
+                meta = resp.json()["chart"]["result"][0]["meta"]
+                price = meta.get("regularMarketPrice")
+                prev = meta.get("chartPreviousClose") or meta.get("previousClose")
+                if price and prev:
+                    return {"symbol": label, "name": name, "id": sym, "price": price, "change": ((price - prev) / prev) * 100, "type": typ}
+            except Exception as e:
+                logger.error(f"Yahoo fetch failed for {sym}: {e}")
+            return None
+        for result in await asyncio.gather(*(fetch_equity(*spec) for spec in equity_specs)):
+            if result:
+                items.append(result)
 
     if items:
         # Merge by symbol against the last-known snapshot so a partial upstream
@@ -503,7 +622,7 @@ async def market_search(response: Response, q: str = ""):
     return data
 
 @api_router.get("/market-chart")
-async def market_chart(response: Response, type: str = "crypto", id: str = "bitcoin", days: int = 7):
+async def market_chart(response: Response, type: str = "crypto", id: str = "bitcoin", days: int = 7, symbol: str = ""):
     import re
     response.headers["Cache-Control"] = "public, max-age=120, stale-while-revalidate=600"
     days = min(max(days, 1), 30)
@@ -512,37 +631,57 @@ async def market_chart(response: Response, type: str = "crypto", id: str = "bitc
     cached = _chart_cache.get(key)
     if cached and now - cached["ts"] < 300:
         return cached["data"]
-    data = None
-    for attempt in range(3):
-        try:
-            if type == "stock":
-                if not re.fullmatch(r"[A-Za-z0-9.^=-]{1,12}", id):
-                    raise HTTPException(status_code=400, detail="Unsupported symbol")
-                range_, interval = {1: ("1d", "5m"), 7: ("5d", "30m"), 30: ("1mo", "1d")}[days]
+
+    prices = None
+    if type == "stock":
+        if not re.fullmatch(r"[A-Za-z0-9.^=-]{1,12}", id):
+            raise HTTPException(status_code=400, detail="Unsupported symbol")
+        range_, interval = _stock_range(days)
+        for attempt in range(3):
+            try:
                 prices = await _yahoo_chart_prices(id, range_, interval)
-                data = {"id": id, "days": days, "prices": prices}
-            else:
-                if not re.fullmatch(r"[a-z0-9-]{1,50}", id):
-                    raise HTTPException(status_code=400, detail="Unsupported asset")
-                async with httpx.AsyncClient(timeout=20) as http:
-                    resp = await http.get(
-                        f"https://api.coingecko.com/api/v3/coins/{id}/market_chart",
-                        params={"vs_currency": "usd", "days": str(days)},
-                    )
-                resp.raise_for_status()
-                data = {"id": id, "days": days, "prices": resp.json().get("prices", [])}
-            break
-        except HTTPException:
-            raise
-        except Exception:
+                if prices:
+                    break
+            except Exception:
+                pass
             if attempt < 2:
-                await asyncio.sleep(2)
-    if data is None:
-        if cached:
-            return cached["data"]
-        raise HTTPException(status_code=502, detail="Chart feed unavailable")
-    _chart_cache[key] = {"data": data, "ts": now}
-    return data
+                await asyncio.sleep(1.5)
+    else:
+        if not re.fullmatch(r"[a-z0-9-]{1,60}", id):
+            raise HTTPException(status_code=400, detail="Unsupported asset")
+        base = (symbol or COINBASE_BASE.get(id, "")).strip().upper()
+        if base and re.fullmatch(r"[A-Z0-9]{1,15}", base):
+            try:
+                prices = await _coinbase_candles(base, days)
+            except Exception:
+                prices = None
+        if not prices:
+            for attempt in range(3):
+                try:
+                    async with httpx.AsyncClient(timeout=20) as http:
+                        resp = await http.get(
+                            f"https://api.coingecko.com/api/v3/coins/{id}/market_chart",
+                            params={"vs_currency": "usd", "days": str(days)},
+                        )
+                    resp.raise_for_status()
+                    prices = resp.json().get("prices", [])
+                    if prices:
+                        break
+                except Exception:
+                    pass
+                if attempt < 2:
+                    await asyncio.sleep(1.5)
+
+    if prices:
+        data = {"id": id, "days": days, "prices": prices, "status": "ok"}
+        _chart_cache[key] = {"data": data, "ts": now}
+        return data
+    # Never hard-fail: serve stale data if we have any, else a structured recoverable state.
+    if cached:
+        stale = dict(cached["data"])
+        stale["status"] = "stale"
+        return stale
+    return {"id": id, "days": days, "prices": [], "status": "unavailable", "reason": "rate_limited"}
 
 
 app.include_router(api_router)

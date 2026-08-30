@@ -1,13 +1,26 @@
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { useMarketData } from "@/lib/marketStore";
+import { nyseStatus } from "@/components/LiveMini";
 
 export default function MarketTicker() {
-  const { items } = useMarketData();
+  const { items, status } = useMarketData();
 
   const fmt = (p) =>
     p >= 1000
       ? Math.round(p).toLocaleString("en-US")
       : p.toLocaleString("en-US", { maximumFractionDigits: 2 });
+
+  let label = "LIVE FEED · STREAMING";
+  let dot = "bg-oki-gold";
+  if (status === "reconnecting" || status === "connecting") {
+    label = "RECONNECTING…";
+    dot = "bg-oki-crimsonbright";
+  } else if (status === "offline") {
+    label = "OFFLINE · RETRYING";
+    dot = "bg-oki-crimsonbright";
+  } else if (status === "live") {
+    label = nyseStatus() ? "LIVE · US MARKETS OPEN" : "LIVE · US MARKETS CLOSED";
+  }
 
   return (
     <div
@@ -15,7 +28,7 @@ export default function MarketTicker() {
       className="mb-12 flex flex-wrap items-center gap-x-10 gap-y-3 border border-white/10 bg-oki-black px-6 py-4"
     >
       <span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.3em] text-oki-faint">
-        <span className="h-1.5 w-1.5 animate-pulse-slow rounded-full bg-oki-gold" />
+        <span className={`h-1.5 w-1.5 animate-pulse-slow rounded-full ${dot}`} />
         Live Markets
       </span>
       {items.length === 0 && (
@@ -34,8 +47,8 @@ export default function MarketTicker() {
           </span>
         );
       })}
-      <span className="ml-auto hidden font-mono text-[9px] uppercase tracking-[0.25em] text-oki-faint md:block">
-        Live Feed · Streaming
+      <span data-testid="ticker-status" className="ml-auto hidden font-mono text-[9px] uppercase tracking-[0.25em] text-oki-faint md:block">
+        {label}
       </span>
     </div>
   );

@@ -49,7 +49,7 @@ export default function DataSkyline({ className = "" }) {
       };
     }
     const ctrl = new AbortController();
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/market-chart?id=bitcoin&type=crypto&days=30`, { signal: ctrl.signal })
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/market-chart?id=bitcoin&type=crypto&days=30&symbol=BTC`, { signal: ctrl.signal })
       .then((r) => r.json())
       .then((d) => {
         if (!on) return;

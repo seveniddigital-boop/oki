@@ -114,7 +114,7 @@ export default function MarketSearch({ onSelect }) {
                   key={`${r.type}-${r.id}`}
                   data-testid={`market-result-${r.id}`}
                   onClick={() => {
-                    onSelect({ id: r.id, name: r.name, type: r.type });
+                    onSelect({ id: r.id, name: r.name, type: r.type, symbol: r.symbol });
                     setOpen(false);
                     setQ("");
                     setResults([]);
